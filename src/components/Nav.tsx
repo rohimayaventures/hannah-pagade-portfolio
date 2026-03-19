@@ -1,24 +1,48 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 export default function Nav() {
   return (
-    <nav className="border-b border-gold/30 bg-obsidian text-cream">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+    <nav
+      style={{
+        backgroundColor: 'var(--obsidian)',
+        borderBottom: '1px solid rgba(200, 169, 110, 0.15)',
+        position: 'sticky',
+        top: 0,
+        zIndex: 50,
+      }}
+      className="w-full px-8 md:px-16 py-5"
+    >
+      <div className="max-w-6xl mx-auto flex items-center justify-between">
         <Link
           href="/"
-          className="font-display text-lg tracking-wide text-cream hover:text-gold"
+          style={{
+            fontFamily: 'Georgia, serif',
+            color: 'var(--cream)',
+            fontSize: '16px',
+            textDecoration: 'none',
+            letterSpacing: '-0.01em',
+          }}
         >
           Hannah Pagade
         </Link>
-
-        <Link
-          href="/about"
-          className="font-body text-sm text-mid-gray transition-colors hover:text-gold"
-        >
-          About
-        </Link>
+        <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
+          <Link
+            href="/about"
+            style={{
+              fontFamily: 'Arial, sans-serif',
+              color: 'var(--cream)',
+              fontSize: '13px',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              opacity: 0.6,
+            }}
+          >
+            About
+          </Link>
+        </div>
       </div>
     </nav>
-  );
+  )
 }
 

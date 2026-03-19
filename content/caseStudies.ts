@@ -86,10 +86,10 @@ export const caseStudies: CaseStudy[] = [
     embedUrl: "",
     featured: false,
     order: 5,
-    slug: "starz-concept",
-    title: "STARZ Concept",
+    slug: "project-moonfire",
+    title: "Project Moonfire",
     subtitle:
-      "A product design concept for the STARZ streaming platform. Interaction design, information architecture, and visual systems.",
+      "A streaming platform UX concept. Interaction design, information architecture, and visual systems for a premium content experience.",
     tags: ["product-design", "ux-research", "figma"],
     embedType: "figma",
     liveUrl: "",

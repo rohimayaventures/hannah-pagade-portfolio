@@ -1,14 +1,21 @@
-type TagChipProps = {
-  tag: string;
-};
-
-export default function TagChip({ tag }: TagChipProps) {
+export default function TagChip({ tag }: { tag: string }) {
   return (
     <span
-      className="inline-flex rounded-full bg-cream px-3 py-1 text-sm text-obsidian"
+      style={{
+        fontFamily: 'Arial, sans-serif',
+        fontSize: '11px',
+        letterSpacing: '0.06em',
+        textTransform: 'uppercase',
+        color: 'var(--mid-gray)',
+        backgroundColor: 'var(--cream-dark)',
+        border: '1px solid var(--light-gray)',
+        borderRadius: '2px',
+        padding: '3px 8px',
+        display: 'inline-block',
+      }}
     >
       {tag}
     </span>
-  );
+  )
 }
 

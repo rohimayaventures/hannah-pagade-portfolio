@@ -1,30 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --obsidian: #080C14;
+  --gold: #C8A96E;
+  --cream: #F4EFE6;
+  --cream-dark: #EAE3D8;
+  --mid-gray: #6B7280;
+  --light-gray: #E5E0D8;
+  --white: #FFFFFF;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--cream);
+  color: var(--obsidian);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Headings use the Meridian Oracle display font. */
 h1, h2, h3, h4, h5, h6 {
-  font-family: Georgia, "Times New Roman", serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: normal;
+  letter-spacing: -0.02em;
 }
