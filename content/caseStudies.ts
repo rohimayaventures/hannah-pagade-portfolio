@@ -11,70 +11,92 @@ export type CaseStudy = {
   featured: boolean;
   embedType: EmbedType;
   embedUrl: string;
+  liveUrl: string;
   status: CaseStudyStatus;
+  processAngle: string;
 };
 
-// Placeholder `coverImage` for now. Card visuals will be updated later.
+// `coverImage` and embed publish URLs are placeholders until final assets/links are added.
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "orixlink",
-    title: "OrixLink AI",
-    subtitle: "Universal triage and diagnosis for any symptom, any person",
-    tags: ["clinical-ai", "product", "full-stack"],
-    coverImage: "",
-    order: 1,
     featured: true,
-    embedType: "mixed",
+    order: 1,
+    slug: "orixlink-ai",
+    title: "OrixLink AI",
+    subtitle:
+      "Universal clinical triage and diagnosis. Any symptom, any person, no prior diagnosis required.",
+    tags: ["clinical-ai", "product-design", "full-stack"],
+    embedType: "live",
     embedUrl: "https://orixlink.vercel.app",
+    liveUrl: "https://orixlink.vercel.app",
     status: "live",
+    coverImage: "",
+    processAngle:
+      "Built end to end on Claude API, Next.js, Tailwind v4, Supabase, and Vercel. Includes a production refusal protocol designed around compartment syndrome false-negative risk.",
   },
   {
-    slug: "starz-concept",
-    title: "STARZ Concept",
-    subtitle: "A product design concept for streaming discovery and subscriber experience",
-    tags: ["product-design", "consumer", "entertainment"],
-    coverImage: "",
     order: 2,
     featured: false,
-    embedType: "figma",
-    embedUrl: "",
-    status: "concept",
+    slug: "ai-lab",
+    title: "AI Lab",
+    subtitle:
+      "Four live AI consoles spanning computer vision, RAG, clinical triage, and voice sales.",
+    tags: ["ai-product", "full-stack", "product-design"],
+    embedType: "live",
+    embedUrl: "https://moonlitstudios.com/ai-lab",
+    liveUrl: "https://moonlitstudios.com/ai-lab",
+    status: "live",
+    coverImage: "",
+    processAngle:
+      "Gryffindor, Ravenclaw, Hufflepuff, and Slytherin themed consoles. Each demo is a distinct AI modality built and deployed independently.",
   },
   {
-    slug: "meridian-oracle",
-    title: "Meridian Oracle Design System",
-    subtitle: "A design system built for clinical AI products and brand work",
-    tags: ["design-system", "brand", "tokens"],
-    coverImage: "",
     order: 3,
     featured: false,
     embedType: "figma",
     embedUrl: "",
+    liveUrl: "",
     status: "in-progress",
+    slug: "meridian-oracle",
+    title: "Meridian Oracle Design System",
+    subtitle:
+      "A full design system built for clinical AI products. Obsidian, gold, and cream with Georgia and Arial type pairing.",
+    tags: ["design-systems", "product-design", "brand"],
+    coverImage: "",
+    processAngle:
+      "Token-based color system, typography scale, component library, and documentation. Figma publish pending.",
   },
   {
-    slug: "two-peaks-chai",
-    title: "Two Peaks Chai Co.",
-    subtitle: "Brand identity and ecommerce for a Denver-Mumbai wellness chai brand",
-    tags: ["brand", "ecommerce", "product-design"],
-    coverImage: "",
+    featured: false,
     order: 4,
-    featured: false,
-    embedType: "mixed",
-    embedUrl: "",
+    slug: "clinical-triage-dashboard",
+    title: "Clinical Triage Dashboard",
+    subtitle:
+      "Live triage dashboard demo built for acute care and post-acute settings.",
+    tags: ["clinical-ai", "product-design", "ux-research"],
+    embedType: "live",
+    embedUrl: "https://moonlitstudios.com",
+    liveUrl: "https://moonlitstudios.com",
     status: "live",
+    coverImage: "",
+    processAngle:
+      "Designed from 15 years of acute rehab and post-acute operations. Built to surface what charge nurses actually need, not what EHR vendors assume they need.",
   },
   {
-    slug: "eclipselink",
-    title: "EclipseLink AI",
-    subtitle: "Hospital handoff intelligence that cuts 45-minute handoffs to under 9 minutes",
-    tags: ["clinical-ai", "research", "methodology"],
-    coverImage: "",
-    order: 5,
-    featured: false,
-    embedType: "loom",
     embedUrl: "",
-    status: "in-progress",
+    featured: false,
+    order: 5,
+    slug: "starz-concept",
+    title: "STARZ Concept",
+    subtitle:
+      "A product design concept for the STARZ streaming platform. Interaction design, information architecture, and visual systems.",
+    tags: ["product-design", "ux-research", "figma"],
+    embedType: "figma",
+    liveUrl: "",
+    status: "concept",
+    coverImage: "",
+    processAngle:
+      "Concept not yet built. Figma file in progress. This case study will be updated with embed URL once the Figma publish is complete.",
   },
 ];
 
@@ -88,3 +110,9 @@ export function getCaseStudyBySlug(slug: string) {
   return caseStudies.find((c) => c.slug === slug);
 }
 
+// FLEX MECHANIC: To reorder without a rebuild, change the `order` field values above.
+// featured: true forces full-width treatment on the homepage grid.
+//
+// STARZ application order: STARZ (1, featured), Meridian Oracle (2), Clinical Triage (3), OrixLink (4), AI Lab (5)
+// Sully.ai / clinical AI order: OrixLink (1, featured), Clinical Triage (2), AI Lab (3), Meridian Oracle (4), STARZ (5)
+// Default launch order: OrixLink (1, featured), AI Lab (2), Meridian Oracle (3), Clinical Triage (4), STARZ (5)
