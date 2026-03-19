@@ -43,8 +43,8 @@ export const caseStudies: CaseStudy[] = [
       "Four live AI consoles spanning computer vision, RAG, clinical triage, and voice sales.",
     tags: ["ai-product", "full-stack", "product-design"],
     embedType: "live",
-    embedUrl: "https://moonlitstudios.com/ai-lab",
-    liveUrl: "https://moonlitstudios.com/ai-lab",
+    embedUrl: "https://www.moonlstudios.com/ai-lab",
+    liveUrl: "https://www.moonlstudios.com/ai-lab",
     status: "live",
     coverImage: "",
     processAngle:
