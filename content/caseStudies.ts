@@ -75,8 +75,8 @@ export const caseStudies: CaseStudy[] = [
       "Live triage dashboard demo built for acute care and post-acute settings.",
     tags: ["clinical-ai", "product-design", "ux-research"],
     embedType: "live",
-    embedUrl: "https://moonlitstudios.com",
-    liveUrl: "https://moonlitstudios.com",
+    embedUrl: "https://www.moonlstudios.com",
+    liveUrl: "https://www.moonlstudios.com",
     status: "live",
     coverImage: "",
     processAngle:
