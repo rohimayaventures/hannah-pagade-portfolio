@@ -1,5 +1,12 @@
 import Layout from "@/components/Layout";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About | Hannah Pagade",
+  description:
+    "UX strategist and conversational AI designer — dialogue systems, intent architecture, and high-stakes conversational UX.",
+};
 
 export default function AboutPage() {
   return (
@@ -38,39 +45,34 @@ export default function AboutPage() {
           <li>• Enterprise-scale application design and delivery</li>
         </ul>
 
-        <h2 id="contact" className="mt-12 font-display text-2xl text-cream">
-          Contact
+        <h2 className="mt-12 font-display text-2xl text-cream">
+          Get in touch
         </h2>
-        <div className="mt-6 flex flex-col gap-3 font-body text-cream/90">
+        <p className="mt-4 font-body text-cream/90">
+          Use the{" "}
+          <Link href="/contact" className="text-gold underline hover:no-underline">
+            contact form
+          </Link>{" "}
+          to reach me, or connect on{" "}
           <a
-            href="mailto:hannah.pagade@gmail.com"
-            className="transition-opacity hover:opacity-80"
-          >
-            hannah.pagade@gmail.com
-          </a>
-          <a
-            href="tel:+19107894647"
-            className="transition-opacity hover:opacity-80"
-          >
-            (910) 789-4647
-          </a>
-          <a
-            href="https://linkedin.com/in/hannah-pagade"
+            href="https://www.linkedin.com/in/hannah-pagade"
             target="_blank"
             rel="noreferrer"
-            className="transition-opacity hover:opacity-80"
+            className="text-gold underline hover:no-underline"
           >
             LinkedIn
           </a>
+          . You can also explore{" "}
           <a
             href="https://orixlink.vercel.app"
             target="_blank"
             rel="noreferrer"
-            className="transition-opacity hover:opacity-80"
+            className="text-gold underline hover:no-underline"
           >
-            OrixLink AI (live product)
-          </a>
-        </div>
+            OrixLink AI
+          </a>{" "}
+          (live product).
+        </p>
 
         <div className="mt-12">
           <Link

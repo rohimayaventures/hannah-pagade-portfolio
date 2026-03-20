@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hannah Pagade — Portfolio
 
-## Getting Started
+Next.js portfolio for UX strategy and conversational AI design work.
 
-First, run the development server:
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Contact form (production)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The `/contact` page posts to `/api/contact`. Configure **one** of these in Vercel (or `.env.local` locally):
 
-## Learn More
+**Resend** (recommended if you have a verified sending domain):
 
-To learn more about Next.js, take a look at the following resources:
+- `CONTACT_TO_EMAIL` — where inquiries are delivered
+- `RESEND_API_KEY` — from [Resend](https://resend.com)
+- `RESEND_FROM_EMAIL` — e.g. `Hannah Pagade <hello@yourdomain.com>`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Gmail** (optional; sends from your Gmail via App Password):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `CONTACT_TO_EMAIL`
+- `GMAIL_USER`
+- `GMAIL_APP_PASSWORD` — [Google App Passwords](https://myaccount.google.com/apppasswords)
 
-## Deploy on Vercel
+If both Gmail and Resend are set, Gmail is used first.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Copy `.env.example` to `.env.local` and fill in values. **Do not commit** `.env` or `.env.local`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy
+
+Deploy on [Vercel](https://vercel.com). Add the same environment variables in the project settings.

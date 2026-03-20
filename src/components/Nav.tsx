@@ -33,14 +33,14 @@ export default function Nav() {
             About
           </Link>
           <Link
-            href="/about#contact"
+            href="/contact"
             className="text-[13px] font-[family-name:Arial,sans-serif] uppercase tracking-widest no-underline opacity-70 transition-opacity hover:opacity-100"
             style={{ color: "var(--cream)" }}
           >
             Contact
           </Link>
           <a
-            href="https://linkedin.com/in/hannah-pagade"
+            href="https://www.linkedin.com/in/hannah-pagade"
             target="_blank"
             rel="noreferrer"
             className="text-[13px] font-[family-name:Arial,sans-serif] uppercase tracking-widest no-underline opacity-70 transition-opacity hover:opacity-100"

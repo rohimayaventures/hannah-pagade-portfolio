@@ -40,14 +40,14 @@ export default function Hero() {
             View Work
           </Link>
           <Link
-            href="/about#contact"
+            href="/contact"
             className="inline-flex items-center rounded-sm border border-light-gray px-5 py-3 text-sm font-[family-name:Arial,sans-serif] uppercase tracking-widest transition-colors hover:border-gold hover:text-gold"
             style={{ color: "var(--cream)", borderColor: "rgba(244,239,230,0.4)" }}
           >
             Contact
           </Link>
           <a
-            href="https://linkedin.com/in/hannah-pagade"
+            href="https://www.linkedin.com/in/hannah-pagade"
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center px-5 py-3 text-sm font-[family-name:Arial,sans-serif] uppercase tracking-widest opacity-80 transition-opacity hover:opacity-100"
