@@ -1,6 +1,14 @@
 import GoldRule from "./GoldRule";
 
-export default function ProcessSection() {
+type ProcessSectionProps = {
+  steps: [string, string, string];
+  impactLine?: string;
+};
+
+export default function ProcessSection({
+  steps,
+  impactLine,
+}: ProcessSectionProps) {
   return (
     <section className="mt-12">
       <div className="flex items-end justify-between gap-6">
@@ -10,9 +18,6 @@ export default function ProcessSection() {
           </h2>
           <GoldRule />
         </div>
-        <div className="text-sm font-body text-mid-gray">
-          Placeholder content zone
-        </div>
       </div>
 
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -21,8 +26,7 @@ export default function ProcessSection() {
             Step 1
           </div>
           <div className="mt-3 font-body text-mid-gray">
-            TODO: Add discovery/constraints section for each case
-            study.
+            {steps[0]}
           </div>
         </div>
         <div className="rounded-xl border border-light-gray bg-white/5 p-6">
@@ -30,7 +34,7 @@ export default function ProcessSection() {
             Step 2
           </div>
           <div className="mt-3 font-body text-mid-gray">
-            TODO: Add design/system/product iteration details.
+            {steps[1]}
           </div>
         </div>
         <div className="rounded-xl border border-light-gray bg-white/5 p-6">
@@ -38,10 +42,21 @@ export default function ProcessSection() {
             Step 3
           </div>
           <div className="mt-3 font-body text-mid-gray">
-            TODO: Add outcomes/impact and what shipped.
+            {steps[2]}
           </div>
         </div>
       </div>
+
+      {impactLine ? (
+        <div className="mt-8 rounded-xl border border-light-gray bg-white/5 p-6">
+          <div className="font-display text-lg text-cream">
+            Impact
+          </div>
+          <p className="mt-3 font-body text-mid-gray">
+            {impactLine}
+          </p>
+        </div>
+      ) : null}
     </section>
   );
 }

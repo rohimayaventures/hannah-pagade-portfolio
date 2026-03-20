@@ -5,14 +5,12 @@ import { CaseStudy } from '../../content/caseStudies'
 
 const statusLabel: Record<string, string> = {
   live: 'Live',
-  'in-progress': 'In Progress',
-  concept: 'Concept',
+  'coming-soon': 'Coming Soon',
 }
 
 const statusDot: Record<string, string> = {
   live: '#4ade80',
-  'in-progress': '#C8A96E',
-  concept: '#9ca3af',
+  'coming-soon': '#C8A96E',
 }
 
 export default function CaseStudyCard({ study }: { study: CaseStudy }) {

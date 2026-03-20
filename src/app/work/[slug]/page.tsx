@@ -21,6 +21,7 @@ export default function CaseStudyPage({
 }) {
   const study = getCaseStudyBySlug(params.slug);
   if (!study) notFound();
+  const isComingSoon = study.status === "coming-soon";
 
   return (
     <Layout>
@@ -33,12 +34,33 @@ export default function CaseStudyPage({
         <CaseStudyHero caseStudy={study} />
 
         <div className="mx-auto max-w-6xl px-4 pb-16 pt-10">
-          <EmbedBlock
-            embedType={study.embedType}
-            embedUrl={study.embedUrl}
-            title={study.title}
-          />
-          <ProcessSection />
+          {isComingSoon ? (
+            <section className="rounded-xl border border-light-gray bg-white/5 p-8">
+              <h2 className="font-display text-2xl text-cream">
+                In Progress
+              </h2>
+              <p className="mt-4 max-w-3xl font-body text-mid-gray">
+                {study.projectDescription}
+              </p>
+              <div className="mt-6 inline-flex items-center rounded-full border border-gold px-4 py-2 text-sm font-body text-gold">
+                This project is currently in development.
+              </div>
+            </section>
+          ) : (
+            <>
+              <EmbedBlock
+                embedType={study.embedType}
+                embedUrl={study.embedUrl}
+                title={study.title}
+              />
+              {study.processSteps ? (
+                <ProcessSection
+                  steps={study.processSteps}
+                  impactLine={study.impactLine}
+                />
+              ) : null}
+            </>
+          )}
           <NextStudyCard current={study} />
         </div>
       </article>

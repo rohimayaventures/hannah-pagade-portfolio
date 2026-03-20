@@ -26,7 +26,6 @@ export default function EmbedBlock({
 
   useEffect(() => {
     if (!resolvedUrl) return;
-    setIframeStatus("loading");
 
     // If the iframe doesn't load within a short window, show a fallback button.
     const t = window.setTimeout(() => {
