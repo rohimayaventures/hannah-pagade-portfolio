@@ -6,6 +6,7 @@ export default function CaseStudyGrid() {
 
   return (
     <section
+      id="work"
       style={{ backgroundColor: 'var(--cream)' }}
       className="w-full px-8 md:px-16 py-20"
     >

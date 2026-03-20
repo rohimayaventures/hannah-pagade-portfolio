@@ -1,48 +1,55 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Nav() {
   return (
     <nav
+      className="sticky top-0 z-50 w-full px-8 py-5 md:px-16"
       style={{
-        backgroundColor: 'var(--obsidian)',
-        borderBottom: '1px solid rgba(200, 169, 110, 0.15)',
-        position: 'sticky',
-        top: 0,
-        zIndex: 50,
+        backgroundColor: "var(--obsidian)",
+        borderBottom: "1px solid rgba(200, 169, 110, 0.15)",
       }}
-      className="w-full px-8 md:px-16 py-5"
     >
-      <div className="max-w-6xl mx-auto flex items-center justify-between">
+      <div className="mx-auto flex max-w-6xl items-center justify-between">
         <Link
           href="/"
-          style={{
-            fontFamily: 'Georgia, serif',
-            color: 'var(--cream)',
-            fontSize: '16px',
-            textDecoration: 'none',
-            letterSpacing: '-0.01em',
-          }}
+          className="text-base font-[family-name:Georgia,serif] no-underline tracking-tight transition-opacity hover:opacity-90"
+          style={{ color: "var(--cream)" }}
         >
           Hannah Pagade
         </Link>
-        <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
+        <div className="flex items-center gap-8">
+          <Link
+            href="/#work"
+            className="text-[13px] font-[family-name:Arial,sans-serif] uppercase tracking-widest no-underline opacity-70 transition-opacity hover:opacity-100"
+            style={{ color: "var(--cream)" }}
+          >
+            Work
+          </Link>
           <Link
             href="/about"
-            style={{
-              fontFamily: 'Arial, sans-serif',
-              color: 'var(--cream)',
-              fontSize: '13px',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              opacity: 0.6,
-            }}
+            className="text-[13px] font-[family-name:Arial,sans-serif] uppercase tracking-widest no-underline opacity-70 transition-opacity hover:opacity-100"
+            style={{ color: "var(--cream)" }}
           >
             About
           </Link>
+          <Link
+            href="/about#contact"
+            className="text-[13px] font-[family-name:Arial,sans-serif] uppercase tracking-widest no-underline opacity-70 transition-opacity hover:opacity-100"
+            style={{ color: "var(--cream)" }}
+          >
+            Contact
+          </Link>
+          <a
+            href="https://linkedin.com/in/hannah-pagade"
+            target="_blank"
+            rel="noreferrer"
+            className="text-[13px] font-[family-name:Arial,sans-serif] uppercase tracking-widest no-underline opacity-70 transition-opacity hover:opacity-100"
+            style={{ color: "var(--cream)" }}
+          >
+            LinkedIn
+          </a>
         </div>
       </div>
     </nav>
-  )
+  );
 }
-

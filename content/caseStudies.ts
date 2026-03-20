@@ -19,6 +19,14 @@ export type CaseStudy = {
   processSteps?: [string, string, string];
   impactLine?: string;
   processAngle: string;
+  /** Short summary for card view (scan-friendly). */
+  cardSummary?: string;
+  /** Role on the project (e.g. "Conversation UX Lead") */
+  role?: string;
+  /** Timeline (e.g. "2025 — Present") */
+  timeline?: string;
+  /** One-line outcome for recruiter scan */
+  keyOutcome?: string;
 };
 
 export const caseStudies: CaseStudy[] = [
@@ -48,6 +56,11 @@ export const caseStudies: CaseStudy[] = [
       "OrixLink AI is positioned at the highest-risk moment in the diagnostic process: before the physician encounter, when a patient or caregiver is trying to decide whether this is an emergency or something that can wait until Monday. Getting that decision wrong costs lives. The research agrees, and so does everyone who has worked a clinical floor.",
     processAngle:
       "Built end to end on Claude API, Next.js, Tailwind v4, Supabase, and Vercel. Includes a production refusal protocol designed around compartment syndrome false-negative risk.",
+    cardSummary:
+      "Universal clinical triage. Any symptom, any person. Structured differential, urgency tiers, refusal protocol.",
+    role: "Conversation UX Lead & Prompt Architect",
+    timeline: "2025 — Present",
+    keyOutcome: "Live product with structured differential, urgency tiers, and production refusal protocol",
   },
   {
     featured: false,
@@ -76,6 +89,11 @@ export const caseStudies: CaseStudy[] = [
       "This project exists because discharge instructions written at a 12th-grade reading level do not help a patient who reads at a 5th-grade level, speaks Haitian Creole at home, and is scared. That gap is preventable with a two-second API call. The research agrees.",
     processAngle:
       "Built around health equity constraints with eight-language output, low-friction input modes, and AI verification for omission checking.",
+    cardSummary:
+      "Patient document translation. Eight languages, three reading levels. Urgent items surfaced first.",
+    role: "Product & Conversation Design",
+    timeline: "2025 — Present",
+    keyOutcome: "Eight-language translation with AI verification and shareable sessions",
   },
   {
     order: 3,

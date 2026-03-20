@@ -30,6 +30,13 @@ export default function CaseStudyHero({
             </p>
           </div>
 
+          {(caseStudy.role || caseStudy.timeline) && (
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 font-body text-sm text-mid-gray">
+              {caseStudy.role && <span>{caseStudy.role}</span>}
+              {caseStudy.timeline && <span>{caseStudy.timeline}</span>}
+            </div>
+          )}
+
           <div className="flex flex-wrap gap-2">
             {caseStudy.tags.map((tag) => (
               <TagChip key={tag} tag={tag} />

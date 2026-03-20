@@ -14,6 +14,7 @@ export default function EmbedBlock({
   embedUrl,
   title,
 }: EmbedBlockProps) {
+  void embedType; // Reserved for future embed-type-specific UI
   const [iframeStatus, setIframeStatus] = useState<
     "idle" | "loading" | "loaded" | "blocked"
   >("idle");
@@ -39,11 +40,11 @@ export default function EmbedBlock({
     return (
       <section className="rounded-xl border border-light-gray bg-white/5 p-6">
         <div className="font-display text-xl text-cream">
-          Embed placeholder
+          Live demo
         </div>
         <div className="mt-2 font-body text-mid-gray">
-          This case study uses embed type <span>{embedType}</span>. The
-          `embedUrl` will be added later.
+          A live embed for this project will be available when the demo is
+          published.
         </div>
       </section>
     );
@@ -53,7 +54,7 @@ export default function EmbedBlock({
     <section className="rounded-xl border border-light-gray bg-white/5 p-0">
       <div className="flex items-center justify-between gap-4 border-b border-light-gray px-6 py-4">
         <div className="font-body text-sm text-mid-gray">
-          Embed ({embedType}) - {title}
+          Live demo — {title}
         </div>
 
         {iframeStatus === "blocked" ? (

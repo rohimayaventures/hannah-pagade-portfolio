@@ -1,10 +1,10 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Layout from "@/components/Layout";
 import CaseStudyHero from "@/components/CaseStudyHero";
 import EmbedBlock from "@/components/EmbedBlock";
 import ProcessSection from "@/components/ProcessSection";
 import NextStudyCard from "@/components/NextStudyCard";
-import MetaTag from "@/components/MetaTag";
 import {
   caseStudies,
   getCaseStudyBySlug,
@@ -12,6 +12,20 @@ import {
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const study = getCaseStudyBySlug(params.slug);
+  if (!study)
+    return { title: "Not Found | Hannah Pagade" };
+  return {
+    title: `${study.title} | Hannah Pagade`,
+    description: study.subtitle,
+  };
 }
 
 export default function CaseStudyPage({
@@ -25,11 +39,6 @@ export default function CaseStudyPage({
 
   return (
     <Layout>
-      <MetaTag
-        title={`${study.title} | Hannah Pagade`}
-        description={study.subtitle}
-      />
-
       <article className="bg-obsidian text-cream">
         <CaseStudyHero caseStudy={study} />
 

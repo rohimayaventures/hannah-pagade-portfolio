@@ -1,53 +1,37 @@
-'use client'
-import { useRouter } from 'next/navigation'
-import Image from 'next/image'
-import TagChip from './TagChip'
-import { CaseStudy } from '../../content/caseStudies'
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import TagChip from "./TagChip";
+import type { CaseStudy } from "@/content/caseStudies";
 
 const statusLabel: Record<string, string> = {
-  live: 'Live',
-  'coming-soon': 'Coming Soon',
-}
+  live: "Live",
+  "coming-soon": "Coming Soon",
+};
 
 const statusDot: Record<string, string> = {
-  live: '#4ade80',
-  'coming-soon': '#C8A96E',
-}
+  live: "#4ade80",
+  "coming-soon": "#C8A96E",
+};
 
 export default function CaseStudyCard({ study }: { study: CaseStudy }) {
-  const router = useRouter()
+  const summary = study.cardSummary ?? study.subtitle;
+  const displaySummary =
+    summary.length > 120 ? `${summary.slice(0, 120).trim()}…` : summary;
 
   return (
-    <div
-      onClick={() => router.push(`/work/${study.slug}`)}
+    <Link
+      href={`/work/${study.slug}`}
+      className="group block overflow-hidden rounded-sm border transition-all duration-200 hover:border-gold hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
       style={{
-        backgroundColor: 'var(--white)',
-        borderColor: 'var(--light-gray)',
-        cursor: 'pointer',
-        transition: 'all 0.2s ease',
-      }}
-      className="group border rounded-sm overflow-hidden hover:shadow-lg"
-      onMouseEnter={(e) => {
-        ;(e.currentTarget as HTMLDivElement).style.borderColor =
-          'var(--gold)'
-        ;(e.currentTarget as HTMLDivElement).style.transform =
-          'translateY(-2px)'
-      }}
-      onMouseLeave={(e) => {
-        ;(e.currentTarget as HTMLDivElement).style.borderColor =
-          'var(--light-gray)'
-        ;(e.currentTarget as HTMLDivElement).style.transform =
-          'translateY(0)'
+        backgroundColor: "var(--white)",
+        borderColor: "var(--light-gray)",
       }}
     >
-      {/* Cover image area */}
       <div
-        style={{
-          backgroundColor: 'var(--obsidian)',
-          height: '200px',
-          position: 'relative',
-        }}
-        className="w-full overflow-hidden"
+        className="relative h-[200px] w-full overflow-hidden"
+        style={{ backgroundColor: "var(--obsidian)" }}
       >
         {study.coverImage ? (
           <Image
@@ -55,102 +39,88 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
             alt={study.title}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: "cover" }}
           />
         ) : (
           <div
+            className="flex h-full w-full items-end p-5"
             style={{
-              width: '100%',
-              height: '100%',
-              background: `linear-gradient(135deg, var(--obsidian) 0%, #0f1623 60%, #1a1f2e 100%)`,
-              display: 'flex',
-              alignItems: 'flex-end',
-              padding: '20px',
+              background:
+                "linear-gradient(135deg, var(--obsidian) 0%, #0f1623 60%, #1a1f2e 100%)",
             }}
           >
             <span
+              className="text-[48px] leading-none tracking-tight opacity-30"
               style={{
-                fontFamily: 'Georgia, serif',
-                color: 'var(--gold)',
-                opacity: 0.3,
-                fontSize: '48px',
-                lineHeight: 1,
-                letterSpacing: '-0.04em',
+                fontFamily: "Georgia, serif",
+                color: "var(--gold)",
+                letterSpacing: "-0.04em",
               }}
             >
               {study.title.charAt(0)}
             </span>
           </div>
         )}
-        {/* Status badge */}
         <div
+          className="absolute right-3 top-3 flex items-center gap-1.5 rounded-sm border px-2.5 py-1"
           style={{
-            position: 'absolute',
-            top: '12px',
-            right: '12px',
-            backgroundColor: 'rgba(8, 12, 20, 0.85)',
-            border: '1px solid rgba(200, 169, 110, 0.3)',
-            borderRadius: '2px',
-            padding: '4px 10px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
+            backgroundColor: "rgba(8, 12, 20, 0.85)",
+            borderColor: "rgba(200, 169, 110, 0.3)",
           }}
         >
           <div
+            className="h-1.5 w-1.5 shrink-0 rounded-full"
             style={{
-              width: '6px',
-              height: '6px',
-              borderRadius: '50%',
-              backgroundColor:
-                statusDot[study.status] || '#9ca3af',
+              backgroundColor: statusDot[study.status] ?? "#9ca3af",
             }}
           />
           <span
-            style={{
-              fontFamily: 'Arial, sans-serif',
-              fontSize: '10px',
-              letterSpacing: '0.08em',
-              color: 'var(--cream)',
-              textTransform: 'uppercase',
-            }}
+            className="text-[10px] font-[family-name:Arial,sans-serif] uppercase tracking-wider"
+            style={{ color: "var(--cream)" }}
           >
-            {statusLabel[study.status] || study.status}
+            {statusLabel[study.status] ?? study.status}
           </span>
         </div>
       </div>
 
-      {/* Card body */}
-      <div style={{ padding: '20px 24px 24px' }}>
+      <div className="p-5 pt-5">
+        {(study.role || study.timeline) && (
+          <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-0 font-body text-xs text-mid-gray">
+            {study.role && <span>{study.role}</span>}
+            {study.role && study.timeline && (
+              <span aria-hidden className="opacity-50">
+                ·
+              </span>
+            )}
+            {study.timeline && <span>{study.timeline}</span>}
+          </div>
+        )}
         <h3
+          className="mb-2 text-xl leading-snug"
           style={{
-            fontFamily: 'Georgia, serif',
-            color: 'var(--obsidian)',
-            fontSize: '20px',
-            marginBottom: '8px',
-            lineHeight: 1.2,
+            fontFamily: "Georgia, serif",
+            color: "var(--obsidian)",
           }}
         >
           {study.title}
         </h3>
+        {study.keyOutcome && (
+          <p className="mb-2 font-body text-sm font-medium text-obsidian/90">
+            {study.keyOutcome}
+          </p>
+        )}
         <p
-          style={{
-            fontFamily: 'Arial, sans-serif',
-            color: 'var(--mid-gray)',
-            fontSize: '14px',
-            lineHeight: 1.6,
-            marginBottom: '16px',
-          }}
+          className="mb-4 font-body text-sm leading-relaxed"
+          style={{ color: "var(--mid-gray)" }}
         >
-          {study.subtitle}
+          {displaySummary}
         </p>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+        <div className="flex flex-wrap gap-1.5">
           {study.tags.map((tag) => (
             <TagChip key={tag} tag={tag} />
           ))}
         </div>
       </div>
-    </div>
-  )
+    </Link>
+  );
 }
-

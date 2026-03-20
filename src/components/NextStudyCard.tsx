@@ -19,7 +19,7 @@ export default function NextStudyCard({
   return (
     <section className="mt-14 rounded-xl border border-light-gray bg-white/5 p-6">
       <div className="font-display text-xl text-cream">
-        Next case study (placeholder)
+        Next Project
       </div>
 
       <div className="mt-4">

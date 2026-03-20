@@ -1,35 +1,62 @@
+import Link from "next/link";
+
 export default function Hero() {
   return (
     <section
-      style={{ backgroundColor: 'var(--obsidian)' }}
-      className="w-full px-8 md:px-16 pt-24 pb-20"
+      className="w-full px-8 pt-24 pb-20 md:px-16"
+      style={{ backgroundColor: "var(--obsidian)" }}
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-4xl">
         <p
-          style={{ color: 'var(--gold)', fontFamily: 'Arial, sans-serif' }}
-          className="text-xs tracking-widest uppercase mb-6 opacity-80"
+          className="mb-6 text-xs font-[family-name:Arial,sans-serif] uppercase tracking-[0.2em] opacity-80"
+          style={{ color: "var(--gold)" }}
         >
           Hannah Pagade
         </p>
         <h1
-          style={{ color: 'var(--cream)', fontFamily: 'Georgia, serif' }}
-          className="text-5xl md:text-7xl leading-tight mb-6"
+          className="mb-6 text-5xl leading-tight md:text-7xl"
+          style={{ color: "var(--cream)", fontFamily: "Georgia, serif" }}
         >
-          Where the<br />
-          <em style={{ color: 'var(--gold)' }}>Work Speaks</em>
+          UX Strategist & Conversational AI Designer
         </h1>
-        <div
-          style={{ backgroundColor: 'var(--gold)' }}
-          className="w-16 h-px mb-8 opacity-60"
-        />
         <p
-          style={{ color: 'var(--cream)', fontFamily: 'Arial, sans-serif' }}
-          className="text-lg md:text-xl leading-relaxed max-w-xl opacity-80"
+          className="mb-8 max-w-2xl text-lg leading-relaxed opacity-90 md:text-xl"
+          style={{ color: "var(--cream)", fontFamily: "Arial, sans-serif" }}
         >
-          Healthcare operations leader. Clinical AI builder. Product designer.
+          Multi-turn dialogue systems, intent architecture, and role-adaptive
+          flows for high-stakes environments. Shipped OrixLink AI and
+          HealthLiteracy AI. 15 years healthcare operations.
         </p>
+        <div
+          className="mb-10 h-px w-16 opacity-60"
+          style={{ backgroundColor: "var(--gold)" }}
+        />
+        <div className="flex flex-wrap gap-4">
+          <Link
+            href="/#work"
+            className="inline-flex items-center rounded-sm border border-gold px-5 py-3 text-sm font-[family-name:Arial,sans-serif] uppercase tracking-widest transition-colors hover:bg-gold hover:text-obsidian"
+            style={{ color: "var(--gold)" }}
+          >
+            View Work
+          </Link>
+          <Link
+            href="/about#contact"
+            className="inline-flex items-center rounded-sm border border-light-gray px-5 py-3 text-sm font-[family-name:Arial,sans-serif] uppercase tracking-widest transition-colors hover:border-gold hover:text-gold"
+            style={{ color: "var(--cream)", borderColor: "rgba(244,239,230,0.4)" }}
+          >
+            Contact
+          </Link>
+          <a
+            href="https://linkedin.com/in/hannah-pagade"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center px-5 py-3 text-sm font-[family-name:Arial,sans-serif] uppercase tracking-widest opacity-80 transition-opacity hover:opacity-100"
+            style={{ color: "var(--cream)" }}
+          >
+            LinkedIn →
+          </a>
+        </div>
       </div>
     </section>
   );
 }
-
