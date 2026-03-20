@@ -1,5 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import TagChip from './TagChip'
 import { CaseStudy } from '../../content/caseStudies'
 
@@ -49,10 +50,12 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
         className="w-full overflow-hidden"
       >
         {study.coverImage ? (
-          <img
+          <Image
             src={study.coverImage}
             alt={study.title}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            style={{ objectFit: 'cover' }}
           />
         ) : (
           <div
