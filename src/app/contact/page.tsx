@@ -4,9 +4,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact | Hannah Pagade",
+  title: "Contact",
   description:
-    "Get in touch about UX strategy, conversational AI design, or collaboration.",
+    "Get in touch about product, UX strategy, conversational AI design, or collaboration.",
 };
 
 export default function ContactPage() {

@@ -105,7 +105,7 @@ An early iteration used grade-level labels (5th Grade, 8th Grade, College). Thes
 **Core product:**
 - Three input methods: paste text, upload PDF (server-side extraction via pdf-parse), voice input (Web Speech API)
 - Reading level selector: Simple, Clear, Complete
-- Eight-language output: English, Spanish, Haitian Creole, Portuguese, French, Mandarin, Vietnamese, Tagalog
+- Twelve-language output: English, Spanish, Haitian Creole, Portuguese, French, Mandarin, Vietnamese, Tagalog, Korean, Arabic, Hindi, Russian
 - Urgent item cards rendered above the translation body, surfacing follow-up appointments, medication changes, and return precautions
 - Side-by-side view: original clinical document left panel, plain-language translation right panel
 - Copy to clipboard and shareable URL generation via Supabase-persisted sessions
@@ -126,7 +126,7 @@ An early iteration used grade-level labels (5th Grade, 8th Grade, College). Thes
 
 **AI architecture decisions.** The two-call pipeline (translate, then verify) and the structured JSON output design demonstrate understanding of how to constrain LLM behavior for clinical contexts. This is not a chatbot. It is a deterministic document processing pipeline with AI as the processing engine.
 
-**Health equity as a product value, not a feature.** Eight languages were included at launch rather than starting with English only. Voice input was built at launch rather than deferred. Reading level was made accessible via descriptive labels rather than grade levels. Each of these decisions required explicit prioritization against faster-to-ship alternatives.
+**Health equity as a product value, not a feature.** Twelve languages were included at launch rather than starting with English only. Voice input was built at launch rather than deferred. Reading level was made accessible via descriptive labels rather than grade levels. Each of these decisions required explicit prioritization against faster-to-ship alternatives.
 
 **Separation of concerns in prompt engineering.** The system prompt is maintained as a standalone TypeScript module (lib/system-prompt.ts) rather than inline in the API route. The verification prompt is a separate system prompt with different constraints. This reflects production-grade thinking about prompt versioning and auditability.
 
@@ -180,7 +180,7 @@ All citations are peer-reviewed or from federal health agencies. For use in port
 Live
 
 ### Project description (short, for card view)
-HealthLiteracy AI translates discharge summaries, lab results, and clinical notes into plain language a patient can actually use. Paste, upload a PDF, or speak. Choose Simple, Clear, or Complete. Eight languages. Urgent action items surfaced as visual cards before the translation body.
+HealthLiteracy AI translates discharge summaries, lab results, and clinical notes into plain language a patient can actually use. Paste, upload a PDF, or speak. Choose Simple, Clear, or Complete. Twelve languages. Urgent action items surfaced as visual cards before the translation body.
 
 ### Problem statement (for case study hero)
 88% of Americans have less-than-proficient health literacy. The average discharge summary is written at a 9th or 10th grade reading level. The average patient reads at an 8th grade level at best — often lower — and may not read English at home. Patients who understand their discharge instructions are 30% less likely to be readmitted. That gap is a product problem.
@@ -189,10 +189,10 @@ HealthLiteracy AI translates discharge summaries, lab results, and clinical note
 I did not need to conduct user research for this project. I have conducted it for 15 years on every shift. The constraints were clear before the first line of code: no login, no setup, urgent items at the top, built-in translation in the languages my actual patients speak. The tool had to serve patients who might be scared, tired, medicated, or not literate in English — all at once.
 
 ### Process Step 2 — Design and Build
-The core product decision was the Claude system prompt. Translation is easy. A translation that a nurse would trust to hand to a patient requires specific constraints: every medical term explained in the same sentence, urgent items returned as a structured array separate from the translation body, attribution language that prevents the tool from being read as a diagnosis, and a verification pass that checks its own work for omissions. The eight-language requirement and voice input were built at launch, not deferred, because the population this serves is not well-served by English-only MVP thinking.
+The core product decision was the Claude system prompt. Translation is easy. A translation that a nurse would trust to hand to a patient requires specific constraints: every medical term explained in the same sentence, urgent items returned as a structured array separate from the translation body, attribution language that prevents the tool from being read as a diagnosis, and a verification pass that checks its own work for omissions. Twelve languages and voice input were built at launch, not deferred, because the population this serves is not well-served by English-only MVP thinking.
 
 ### Process Step 3 — What shipped
-A free, no-login patient document translation tool with three input methods, eight languages, three reading levels, urgent item cards, side-by-side view, copy and share, and a built-in AI verification pass that checks the translation against the original for omissions. Deployed on Vercel, sessions persisted in Supabase, built on Next.js 15 and the Claude API.
+A free, no-login patient document translation tool with three input methods, twelve languages, three reading levels, urgent item cards, side-by-side view, copy and share, and a built-in AI verification pass that checks the translation against the original for omissions. Deployed on Vercel, sessions persisted in Supabase, built on Next.js 15 and the Claude API.
 
 ### Impact line (closing statement)
 This project exists because discharge instructions written at a 12th-grade reading level do not help a patient who reads at a 5th-grade level, speaks Haitian Creole at home, and is scared. That gap is preventable with a two-second API call. The research agrees.

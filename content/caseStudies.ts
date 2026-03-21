@@ -69,7 +69,7 @@ export const caseStudies: CaseStudy[] = [
     title: "HealthLiteracy AI",
     tagline: "Your medical records, in your language.",
     subtitle:
-      "HealthLiteracy AI translates discharge summaries, lab results, and clinical notes into plain language a patient can actually use. Paste, upload a PDF, or speak. Choose Simple, Clear, or Complete. Eight languages. Urgent action items surfaced as visual cards before the translation body.",
+      "HealthLiteracy AI translates discharge summaries, lab results, and clinical notes into plain language a patient can actually use. Paste, upload a PDF, or speak. Choose Simple, Clear, or Complete. Twelve languages. Urgent action items surfaced as visual cards before the translation body.",
     tags: ["HEALTH-EQUITY", "AI-PRODUCT", "FULL-STACK"],
     embedType: "live",
     embedUrl: "https://health-literacy-ai.vercel.app",
@@ -77,23 +77,23 @@ export const caseStudies: CaseStudy[] = [
     status: "live",
     coverImage: "",
     projectDescription:
-      "HealthLiteracy AI translates discharge summaries, lab results, and clinical notes into plain language a patient can actually use. Paste, upload a PDF, or speak. Choose Simple, Clear, or Complete. Eight languages. Urgent action items surfaced as visual cards before the translation body.",
+      "HealthLiteracy AI translates discharge summaries, lab results, and clinical notes into plain language a patient can actually use. Paste, upload a PDF, or speak. Choose Simple, Clear, or Complete. Twelve languages. Urgent action items surfaced as visual cards before the translation body.",
     problemStatement:
       "88% of Americans have less-than-proficient health literacy. The average discharge summary is written at a 9th or 10th grade reading level. The average patient reads at an 8th grade level at best — often lower — and may not read English at home. Patients who understand their discharge instructions are 30% less likely to be readmitted. That gap is a product problem.",
     processSteps: [
       "I did not need to conduct user research for this project. I have conducted it for 15 years on every shift. The constraints were clear before the first line of code: no login, no setup, urgent items at the top, built-in translation in the languages my actual patients speak. The tool had to serve patients who might be scared, tired, medicated, or not literate in English — all at once.",
-      "The core product decision was the Claude system prompt. Translation is easy. A translation that a nurse would trust to hand to a patient requires specific constraints: every medical term explained in the same sentence, urgent items returned as a structured array separate from the translation body, attribution language that prevents the tool from being read as a diagnosis, and a verification pass that checks its own work for omissions. The eight-language requirement and voice input were built at launch, not deferred, because the population this serves is not well-served by English-only MVP thinking.",
-      "A free, no-login patient document translation tool with three input methods, eight languages, three reading levels, urgent item cards, side-by-side view, copy and share, and a built-in AI verification pass that checks the translation against the original for omissions. Deployed on Vercel, sessions persisted in Supabase, built on Next.js 15 and the Claude API.",
+      "The core product decision was the Claude system prompt. Translation is easy. A translation that a nurse would trust to hand to a patient requires specific constraints: every medical term explained in the same sentence, urgent items returned as a structured array separate from the translation body, attribution language that prevents the tool from being read as a diagnosis, and a verification pass that checks its own work for omissions. Twelve languages and voice input were built at launch, not deferred, because the population this serves is not well-served by English-only MVP thinking.",
+      "A free, no-login patient document translation tool with three input methods, twelve languages, three reading levels, urgent item cards, side-by-side view, copy and share, and a built-in AI verification pass that checks the translation against the original for omissions. Deployed on Vercel, sessions persisted in Supabase, built on Next.js 15 and the Claude API.",
     ],
     impactLine:
       "This project exists because discharge instructions written at a 12th-grade reading level do not help a patient who reads at a 5th-grade level, speaks Haitian Creole at home, and is scared. That gap is preventable with a two-second API call. The research agrees.",
     processAngle:
-      "Built around health equity constraints with eight-language output, low-friction input modes, and AI verification for omission checking.",
+      "Built around health equity constraints with twelve-language output, low-friction input modes, and AI verification for omission checking.",
     cardSummary:
-      "Patient document translation. Eight languages, three reading levels. Urgent items surfaced first.",
+      "Patient document translation. Twelve languages, three reading levels. Urgent items surfaced first.",
     role: "Product & Conversation Design",
     timeline: "2025 — Present",
-    keyOutcome: "Eight-language translation with AI verification and shareable sessions",
+    keyOutcome: "Twelve-language translation with AI verification and shareable sessions",
   },
   {
     order: 3,

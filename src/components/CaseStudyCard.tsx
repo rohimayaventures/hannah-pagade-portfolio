@@ -23,7 +23,7 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
   return (
     <Link
       href={`/work/${study.slug}`}
-      className="group block overflow-hidden rounded-sm border transition-all duration-200 hover:border-gold hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+      className="group block overflow-hidden rounded-md border shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-gold/80 hover:shadow-[0_20px_50px_-20px_rgba(8,12,20,0.25),0_0_0_1px_rgba(200,169,110,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
       style={{
         backgroundColor: "var(--white)",
         borderColor: "var(--light-gray)",

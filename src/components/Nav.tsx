@@ -3,11 +3,7 @@ import Link from "next/link";
 export default function Nav() {
   return (
     <nav
-      className="sticky top-0 z-50 w-full px-8 py-5 md:px-16"
-      style={{
-        backgroundColor: "var(--obsidian)",
-        borderBottom: "1px solid rgba(200, 169, 110, 0.15)",
-      }}
+      className="sticky top-0 z-50 w-full border-b border-gold/15 bg-obsidian/85 px-8 py-5 backdrop-blur-md supports-[backdrop-filter]:bg-obsidian/70 md:px-16"
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between">
         <Link

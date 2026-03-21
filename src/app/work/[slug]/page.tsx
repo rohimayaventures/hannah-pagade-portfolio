@@ -20,10 +20,9 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const study = getCaseStudyBySlug(params.slug);
-  if (!study)
-    return { title: "Not Found | Hannah Pagade" };
+  if (!study) return { title: "Not Found" };
   return {
-    title: `${study.title} | Hannah Pagade`,
+    title: study.title,
     description: study.subtitle,
   };
 }

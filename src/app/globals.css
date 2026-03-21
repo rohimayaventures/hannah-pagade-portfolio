@@ -31,3 +31,83 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
   letter-spacing: -0.02em;
 }
+
+/* Hero motion & gradient text */
+@keyframes hp-orb-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.55;
+  }
+  40% {
+    transform: translate(24px, -18px) scale(1.06);
+    opacity: 0.85;
+  }
+  70% {
+    transform: translate(-16px, 12px) scale(0.98);
+    opacity: 0.65;
+  }
+}
+
+@keyframes hp-orb-drift-reverse {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-28px, 20px) scale(1.08);
+    opacity: 0.8;
+  }
+}
+
+.hp-orb-a {
+  animation: hp-orb-drift 22s ease-in-out infinite;
+}
+
+.hp-orb-b {
+  animation: hp-orb-drift-reverse 26s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hp-orb-a,
+  .hp-orb-b {
+    animation: none;
+    opacity: 0.45;
+  }
+}
+
+.hero-gradient-text {
+  background: linear-gradient(
+    115deg,
+    #e8d4a8 0%,
+    var(--gold) 35%,
+    #f0e6d2 55%,
+    var(--gold) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: hp-shimmer 10s ease-in-out infinite;
+}
+
+@keyframes hp-shimmer {
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-gradient-text {
+    animation: none;
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    color: var(--gold);
+  }
+}
