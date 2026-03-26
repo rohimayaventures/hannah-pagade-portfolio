@@ -13,7 +13,7 @@ export default function CaseStudyHero({
 
   return (
     <header className="w-full bg-obsidian">
-      <div className="mx-auto max-w-6xl px-4 py-14">
+      <div className="mx-auto max-w-6xl px-6 py-12 sm:px-8 md:py-14">
         <div className="flex flex-col gap-6">
           <div>
             {caseStudy.tagline ? (
@@ -21,11 +21,11 @@ export default function CaseStudyHero({
                 {caseStudy.tagline}
               </p>
             ) : null}
-            <h1 className="font-display text-4xl leading-tight text-cream md:text-6xl">
+            <h1 className="font-display text-3xl leading-tight text-cream sm:text-4xl md:text-6xl">
               {caseStudy.title}
             </h1>
             <GoldRule />
-            <p className="mt-6 max-w-3xl font-body text-lg text-cream/80 md:text-2xl">
+            <p className="mt-6 max-w-3xl font-body text-base text-cream/80 sm:text-lg md:text-2xl">
               {caseStudy.problemStatement ?? caseStudy.subtitle}
             </p>
           </div>

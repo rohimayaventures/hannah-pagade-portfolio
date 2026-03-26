@@ -9,7 +9,7 @@ export default function Footer() {
         backgroundColor: "var(--obsidian)",
       }}
     >
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-8 md:flex-row md:items-start md:justify-between md:px-16">
+      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 sm:px-8 md:flex-row md:items-start md:justify-between md:px-16">
         <div>
           <p
             className="font-display text-base tracking-tight"
@@ -44,7 +44,7 @@ export default function Footer() {
           </a>
         </nav>
       </div>
-      <div className="mx-auto mt-10 max-w-6xl border-t border-cream/10 px-8 pt-8 md:px-16">
+      <div className="mx-auto mt-10 max-w-6xl border-t border-cream/10 px-6 pt-8 sm:px-8 md:px-16">
         <p className="font-body text-xs text-cream/70">
           © {new Date().getFullYear()} Hannah Pagade. All rights reserved.
         </p>

@@ -41,7 +41,7 @@ export default function CaseStudyPage({
       <article className="bg-obsidian text-cream">
         <CaseStudyHero caseStudy={study} />
 
-        <div className="mx-auto max-w-6xl px-4 pb-16 pt-10">
+        <div className="mx-auto max-w-6xl px-6 pb-16 pt-10 sm:px-8">
           {isComingSoon ? (
             <section className="rounded-xl border border-gold/20 bg-white/5 p-8">
               <h2 className="font-display text-2xl text-cream">

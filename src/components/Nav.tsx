@@ -14,7 +14,7 @@ export default function Nav() {
 
   return (
     <nav
-      className="sticky top-0 z-50 w-full px-8 py-5 md:px-16"
+      className="sticky top-0 z-50 w-full px-6 py-4 sm:px-8 sm:py-5 md:px-16"
       style={{
         backgroundColor: "var(--obsidian)",
         borderBottom: "1px solid rgba(200, 169, 110, 0.15)",

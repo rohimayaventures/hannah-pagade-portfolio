@@ -22,7 +22,7 @@ export default function Hero() {
 
   return (
     <section
-      className="hero-shell relative w-full overflow-hidden px-8 pt-24 pb-24 md:px-16 md:pb-28"
+      className="hero-shell relative w-full overflow-hidden px-6 pt-20 pb-20 sm:px-8 sm:pt-24 sm:pb-24 md:px-16 md:pb-28"
       style={{ backgroundColor: "var(--obsidian)" }}
       onMouseMove={onMove}
       onMouseLeave={() => setGlow({ x: 50, y: 45 })}
@@ -70,19 +70,19 @@ export default function Hero() {
           Hannah Pagade
         </p>
         <h1
-          className="mb-3 font-display text-4xl leading-[1.08] tracking-tight md:text-6xl lg:text-7xl"
+          className="mb-3 font-display text-3xl leading-[1.08] tracking-tight sm:text-4xl md:text-6xl lg:text-7xl"
           style={{ color: "var(--cream)" }}
         >
           Product &amp; UX Strategist
         </h1>
         <p
-          className="mb-6 font-display text-3xl leading-tight tracking-tight md:text-5xl lg:text-6xl"
+          className="mb-6 font-display text-2xl leading-tight tracking-tight sm:text-3xl md:text-5xl lg:text-6xl"
         >
           <span className="hero-gradient-text">Conversational AI</span>
           <span style={{ color: "var(--cream)" }}> designer</span>
         </p>
         <p
-          className="mb-8 max-w-2xl font-body text-lg leading-relaxed opacity-90 md:text-xl"
+          className="mb-8 max-w-2xl font-body text-base leading-relaxed opacity-90 sm:text-lg md:text-xl"
           style={{ color: "var(--cream)" }}
         >
           From discovery and prioritization to shipped AI products: multi-turn
@@ -117,10 +117,10 @@ export default function Hero() {
               "linear-gradient(90deg, var(--gold), rgba(200, 169, 110, 0.15))",
           }}
         />
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-3 sm:gap-4">
           <Link
             href="/#work"
-            className="hero-cta-primary inline-flex items-center rounded-sm border px-6 py-3.5 text-sm font-body uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(200,169,110,0.55)]"
+            className="hero-cta-primary inline-flex items-center rounded-sm border px-5 py-3 text-[13px] font-body uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(200,169,110,0.55)] sm:px-6 sm:py-3.5 sm:text-sm"
             style={{
               borderColor: "var(--gold)",
               backgroundColor: "var(--gold)",
@@ -131,7 +131,7 @@ export default function Hero() {
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center rounded-sm border px-6 py-3.5 text-sm font-body uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5"
+            className="inline-flex items-center rounded-sm border px-5 py-3 text-[13px] font-body uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 sm:px-6 sm:py-3.5 sm:text-sm"
             style={{
               borderColor: "rgba(244,239,230,0.65)",
               backgroundColor: "rgba(8, 12, 20, 0.92)",
@@ -144,7 +144,7 @@ export default function Hero() {
             href="https://www.linkedin.com/in/hannah-pagade"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center rounded-sm border px-6 py-3.5 text-sm font-body uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5"
+            className="inline-flex items-center rounded-sm border px-5 py-3 text-[13px] font-body uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 sm:px-6 sm:py-3.5 sm:text-sm"
             style={{
               borderColor: "rgba(200, 169, 110, 0.45)",
               color: "var(--cream)",
