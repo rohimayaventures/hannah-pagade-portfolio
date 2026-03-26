@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "Hannah Kraulik Pagade — Conversational AI, Product & UX Strategy";
+  "Hannah Kraulik Pagade, Rohimaya Health AI, live conversational AI products";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const runtime = "edge";
@@ -85,7 +85,7 @@ export default function OgImage() {
             display: "flex",
           }}
         >
-          Conversational AI · Product and UX · Shipped work you can try
+          LPN · Founder, Rohimaya Health AI · Live products you can try
         </div>
 
         {/* Projects */}

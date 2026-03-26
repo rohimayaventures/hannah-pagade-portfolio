@@ -52,7 +52,7 @@ export default function Nav() {
           </a>
         </div>
 
-        {/* Hamburger button — mobile only */}
+        {/* Hamburger: mobile only */}
         <button
           onClick={() => setOpen((v) => !v)}
           className="relative z-50 flex h-11 w-11 flex-col items-center justify-center gap-[5px] md:hidden"

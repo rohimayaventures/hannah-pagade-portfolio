@@ -73,7 +73,7 @@ export default function EmbedBlock({
           className="font-body text-sm"
           style={{ color: "rgba(244, 239, 230, 0.8)" }}
         >
-          Live demo — {title}
+          Live demo: {title}
         </div>
 
         {iframeStatus === "blocked" ? (

@@ -30,10 +30,10 @@ const siteUrl =
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://hannahkraulikpagade.com");
 
 const defaultTitle =
-  "Hannah Kraulik Pagade | Conversational AI, Product & UX Strategy";
+  "Hannah Kraulik Pagade | Rohimaya Health AI, Live AI Products, Conversational Design";
 
 const defaultDescription =
-  "Shipped conversational AI: OrixLink AI, HealthLiteracy AI, ClearChannel by Vestara. Product, conversation design, and implementation.";
+  "LPN, founder of Rohimaya Health AI. Live products: OrixLink AI (triage.rohimaya.ai), HealthLiteracy AI (literacy.rohimaya.ai), ClearChannel. MS AI/ML at CU Boulder in progress. Portfolio: hannahkraulikpagade.com.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

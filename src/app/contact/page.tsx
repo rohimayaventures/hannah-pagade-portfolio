@@ -53,7 +53,7 @@ export default function ContactPage() {
               className="mb-8 max-w-2xl font-body text-lg leading-relaxed opacity-90"
               style={{ color: "var(--cream)" }}
             >
-              Interested in working together? Send a message — I&apos;ll
+              Interested in working together? Send a message. I&apos;ll
               respond from my inbox. For a faster connection, you can also reach
               me on LinkedIn.
             </p>

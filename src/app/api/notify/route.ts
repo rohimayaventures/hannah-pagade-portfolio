@@ -94,15 +94,15 @@ async function sendVisitorConfirmation(
           In the meantime, feel free to explore the live products:
         </p>
         <ul style="font-size: 15px; line-height: 2;">
-          <li><a href="https://triage.rohimaya.ai" style="color: #C8A96E;">OrixLink AI</a> — universal clinical triage</li>
-          <li><a href="https://literacy.rohimaya.ai" style="color: #C8A96E;">HealthLiteracy AI</a> — medical document translation</li>
-          <li><a href="https://clearchannel-vestara.vercel.app" style="color: #C8A96E;">ClearChannel by Vestara</a> — conversational design lab</li>
+          <li><a href="https://triage.rohimaya.ai" style="color: #C8A96E;">OrixLink AI</a>: universal triage (triage.rohimaya.ai)</li>
+          <li><a href="https://literacy.rohimaya.ai" style="color: #C8A96E;">HealthLiteracy AI</a>: discharge translation (literacy.rohimaya.ai)</li>
+          <li><a href="https://clearchannel-vestara.vercel.app" style="color: #C8A96E;">ClearChannel by Vestara</a>: NLU routing lab</li>
         </ul>
         <p style="font-size: 16px; line-height: 1.7;">Talk soon,</p>
         <p style="font-size: 16px; line-height: 1.7; margin-top: 0;">
           <strong>Hannah Kraulik Pagade</strong><br/>
           <span style="color: #888; font-size: 14px;">
-            Founder, Rohimaya Health AI | Pagade Ventures<br/>
+            LPN, PAM Health Rehabilitation Hospital of Westminster | Founder, Rohimaya Health AI<br/>
             <a href="https://hannahkraulikpagade.com" style="color: #C8A96E;">hannahkraulikpagade.com</a>
           </span>
         </p>

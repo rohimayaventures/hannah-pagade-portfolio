@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Conversational AI and product design. Live work: OrixLink AI, HealthLiteracy AI, ClearChannel by Vestara.",
+    "Hannah Kraulik Pagade, LPN and founder of Rohimaya Health AI. Live AI products: OrixLink AI, HealthLiteracy AI, ClearChannel. MS AI/ML at CU Boulder (in progress). hannahkraulikpagade.com.",
 };
 
 const productSkills = [
@@ -47,6 +47,7 @@ const techStack = [
   "Vercel",
   "Python",
   "Figma",
+  "Cursor",
 ];
 
 export default function AboutPage() {
@@ -87,15 +88,60 @@ export default function AboutPage() {
           </FadeIn>
           <FadeIn delay={100}>
             <p className="mt-8 max-w-2xl font-body text-lg leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.9)" }}>
-              I design and ship conversational AI products: dialogue systems,
-              intent architecture, and multi-turn flows where mistakes are
-              costly. The work on this site is the best record of how I think
-              and build.
+              I&apos;m a Licensed Practical Nurse at PAM Health Rehabilitation
+              Hospital of Westminster in Westminster, Colorado. I&apos;m also
+              the founder of Rohimaya Health AI, where I design and build live AI
+              products with working URLs, not mockups. I work in Cursor and ship
+              with the Claude API. I&apos;m pursuing an MS in Artificial
+              Intelligence and Machine Learning at CU Boulder, expected 2026
+              (in progress, not completed). I co-founded Two Peaks Chai Co. with
+              my husband Prasad: an artisan chai brand here in Westminster, rooted
+              in my Southern US roots and his Mumbai heritage.
             </p>
           </FadeIn>
           <FadeIn delay={200}>
             <p className="mt-6 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.75)" }}>
-              Three live products in production right now:{" "}
+              Portfolio:{" "}
+              <a
+                href="https://hannahkraulikpagade.com"
+                className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                style={{ color: "var(--gold)" }}
+              >
+                hannahkraulikpagade.com
+              </a>
+              . LinkedIn:{" "}
+              <a
+                href="https://www.linkedin.com/in/hannah-pagade"
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                style={{ color: "var(--gold)" }}
+              >
+                linkedin.com/in/hannah-pagade
+              </a>
+              .
+            </p>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* What I built */}
+      <section
+        className="w-full px-6 py-16 sm:px-8 md:px-16"
+        style={{ backgroundColor: "#0a0f18" }}
+      >
+        <div className="mx-auto max-w-3xl">
+          <FadeIn>
+            <h2 className="font-display text-2xl" style={{ color: "var(--cream)" }}>
+              What I built and shipped
+            </h2>
+            <div
+              className="mt-3 h-px w-10 opacity-50"
+              style={{ backgroundColor: "var(--gold)" }}
+            />
+          </FadeIn>
+          <FadeIn delay={100}>
+            <p className="mt-8 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.85)" }}>
               <a
                 href="https://triage.rohimaya.ai"
                 target="_blank"
@@ -105,7 +151,11 @@ export default function AboutPage() {
               >
                 OrixLink AI
               </a>{" "}
-              (clinical triage and diagnosis),{" "}
+              at triage.rohimaya.ai: a universal triage and diagnosis tool built
+              on the Claude API. Any symptom, any person, no prior diagnosis
+              required.
+            </p>
+            <p className="mt-5 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.85)" }}>
               <a
                 href="https://literacy.rohimaya.ai"
                 target="_blank"
@@ -115,7 +165,11 @@ export default function AboutPage() {
               >
                 HealthLiteracy AI
               </a>{" "}
-              (patient document translation across 12 languages), and{" "}
+              at literacy.rohimaya.ai: a free patient-facing tool that translates
+              clinical discharge documents into plain language at three reading
+              levels across 12 languages.
+            </p>
+            <p className="mt-5 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.85)" }}>
               <a
                 href="https://clearchannel-vestara.vercel.app"
                 target="_blank"
@@ -125,15 +179,16 @@ export default function AboutPage() {
               >
                 ClearChannel by Vestara
               </a>{" "}
-              (enterprise NLU routing for financial services). Each one is
-              documented as a case study here, from problem framing through what
-              shipped.
+              at clearchannel-vestara.vercel.app: an enterprise NLU routing
+              simulator for a fictional financial services firm, with IVR,
+              chatbot, and agent assist channel handling. Built with 18-intent NLU
+              architecture and OpenAI voice integration.
             </p>
           </FadeIn>
         </div>
       </section>
 
-      {/* Story — work-first; no invented biography */}
+      {/* My background */}
       <section
         className="w-full px-6 py-16 sm:px-8 md:px-16"
         style={{ backgroundColor: "#0a0f18" }}
@@ -141,7 +196,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-3xl">
           <FadeIn>
             <h2 className="font-display text-2xl" style={{ color: "var(--cream)" }}>
-              Beyond the demos
+              My background
             </h2>
             <div
               className="mt-3 h-px w-10 opacity-50"
@@ -149,18 +204,44 @@ export default function AboutPage() {
             />
           </FadeIn>
           <FadeIn delay={100}>
-            <p className="mt-8 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.8)" }}>
-              I am not using this page to compress a whole career into a few
-              paragraphs. If you want to understand how I work, start with the
-              case studies and the live products. They show the problems I care
-              about, how I structure conversations and systems, and what I ship.
+            <p className="mt-8 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.85)" }}>
+              I have 15 years of healthcare operations leadership across acute
+              care, post-acute rehabilitation, and senior living, and 15 years
+              bedside and in operations. Real employers include Amberwood Post
+              Acute Rehabilitation, Center at Northridge, and a senior living
+              facility in Denver. I managed 130+ staff, achieved $1.2M in cost
+              savings through workflow optimization, and maintained 96%
+              regulatory audit success rates.
+            </p>
+            <p className="mt-6 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.85)" }}>
+              I did not come from a product whiteboard. I came from the floor.
+              Those 15 years were field research.
             </p>
           </FadeIn>
-          <FadeIn delay={200}>
-            <p className="mt-6 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.8)" }}>
-              If you are hiring or exploring a collaboration and need the fuller
-              picture of my background and fit for a role, the right next step is
-              a conversation. Use the{" "}
+        </div>
+      </section>
+
+      {/* Role targets */}
+      <section
+        className="w-full px-6 py-16 sm:px-8 md:px-16"
+        style={{ backgroundColor: "#0c1119" }}
+      >
+        <div className="mx-auto max-w-3xl">
+          <FadeIn>
+            <h2 className="font-display text-2xl" style={{ color: "var(--cream)" }}>
+              What I&apos;m looking for
+            </h2>
+            <div
+              className="mt-3 h-px w-10 opacity-50"
+              style={{ backgroundColor: "var(--gold)" }}
+            />
+          </FadeIn>
+          <FadeIn delay={100}>
+            <p className="mt-8 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.85)" }}>
+              I&apos;m targeting AI Product Manager, Head of Product,
+              Conversational UX Strategist, Conversational AI Designer, and
+              Founding PM roles. I&apos;m open to relocation. If this sounds like
+              a fit, use the{" "}
               <Link
                 href="/contact"
                 className="underline underline-offset-4 transition-opacity hover:opacity-90"
@@ -178,43 +259,8 @@ export default function AboutPage() {
               >
                 LinkedIn
               </a>
-              , and I will respond with context that matches what you actually
-              need.
+              .
             </p>
-          </FadeIn>
-          <FadeIn delay={300}>
-            <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
-              <div>
-                <p
-                  className="font-body text-xs uppercase tracking-widest"
-                  style={{ color: "var(--gold)", opacity: 0.7 }}
-                >
-                  Education
-                </p>
-                <p className="mt-2 font-body text-sm leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.9)" }}>
-                  MS, Artificial Intelligence &amp; Machine Learning
-                  <br />
-                  <span style={{ color: "rgba(244, 239, 230, 0.6)" }}>
-                    University of Colorado Boulder — Expected 2026
-                  </span>
-                </p>
-              </div>
-              <div>
-                <p
-                  className="font-body text-xs uppercase tracking-widest"
-                  style={{ color: "var(--gold)", opacity: 0.7 }}
-                >
-                  Location
-                </p>
-                <p className="mt-2 font-body text-sm leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.9)" }}>
-                  Westminster, CO
-                  <br />
-                  <span style={{ color: "rgba(244, 239, 230, 0.6)" }}>
-                    Open to SF, remote, and hybrid
-                  </span>
-                </p>
-              </div>
-            </div>
           </FadeIn>
         </div>
       </section>
@@ -222,7 +268,7 @@ export default function AboutPage() {
       {/* Skills sections */}
       <section
         className="w-full px-6 py-16 sm:px-8 md:px-16"
-        style={{ backgroundColor: "#0c1119" }}
+        style={{ backgroundColor: "#0a0f18" }}
       >
         <div className="mx-auto max-w-3xl">
           <FadeIn>

@@ -21,8 +21,8 @@ export default function Footer() {
             className="mt-2 max-w-xs font-body text-sm leading-relaxed"
             style={{ color: "rgba(244, 239, 230, 0.7)" }}
           >
-            Product &amp; UX strategist. Conversational AI design for
-            high-stakes environments.
+            I build live AI products. Conversational design for high-stakes
+            environments. hannahkraulikpagade.com
           </p>
         </div>
         <nav

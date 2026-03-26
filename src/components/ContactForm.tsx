@@ -63,7 +63,7 @@ export default function ContactForm() {
           className="font-body text-lg leading-relaxed"
           style={{ color: "var(--cream)" }}
         >
-          Thanks — your message was sent. I&apos;ll get back to you soon.
+          Thanks. Your message was sent. I&apos;ll get back to you soon.
         </p>
         <button
           type="button"
