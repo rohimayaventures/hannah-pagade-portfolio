@@ -83,7 +83,7 @@ export default function AboutPage() {
             />
           </FadeIn>
           <FadeIn delay={100}>
-            <p className="mt-8 max-w-2xl font-body text-lg leading-relaxed text-cream/90">
+            <p className="mt-8 max-w-2xl font-body text-lg leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.9)" }}>
               AI product manager, conversational UX strategist, and builder. I
               take products from zero to one and design the conversation systems,
               intent architectures, and multi-turn flows that make AI work in
@@ -91,7 +91,7 @@ export default function AboutPage() {
             </p>
           </FadeIn>
           <FadeIn delay={200}>
-            <p className="mt-6 max-w-2xl font-body text-cream/75 leading-relaxed">
+            <p className="mt-6 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.75)" }}>
               Three live products in production right now:{" "}
               <a
                 href="https://triage.rohimaya.ai"
@@ -141,7 +141,7 @@ export default function AboutPage() {
             />
           </FadeIn>
           <FadeIn delay={100}>
-            <p className="mt-8 max-w-2xl font-body text-cream/80 leading-relaxed">
+            <p className="mt-8 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.8)" }}>
               I spent 15 years in enterprise operations and healthcare leadership
               across acute care, rehabilitation, and post-acute settings. I led
               EHR implementations, care coordination platform rollouts, and
@@ -152,7 +152,7 @@ export default function AboutPage() {
             </p>
           </FadeIn>
           <FadeIn delay={200}>
-            <p className="mt-6 max-w-2xl font-body text-cream/80 leading-relaxed">
+            <p className="mt-6 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.8)" }}>
               I left the bedside to build the products that should have existed
               all along. Now I design conversational AI systems, intent
               architectures, and multi-turn dialogue flows for healthcare,
@@ -170,10 +170,10 @@ export default function AboutPage() {
                 >
                   Education
                 </p>
-                <p className="mt-2 font-body text-sm text-cream/90 leading-relaxed">
+                <p className="mt-2 font-body text-sm leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.9)" }}>
                   MS, Artificial Intelligence &amp; Machine Learning
                   <br />
-                  <span className="text-cream/60">
+                  <span style={{ color: "rgba(244, 239, 230, 0.6)" }}>
                     University of Colorado Boulder — Expected 2026
                   </span>
                 </p>
@@ -185,10 +185,10 @@ export default function AboutPage() {
                 >
                   Location
                 </p>
-                <p className="mt-2 font-body text-sm text-cream/90 leading-relaxed">
+                <p className="mt-2 font-body text-sm leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.9)" }}>
                   Westminster, CO
                   <br />
-                  <span className="text-cream/60">
+                  <span style={{ color: "rgba(244, 239, 230, 0.6)" }}>
                     Open to SF, remote, and hybrid
                   </span>
                 </p>
@@ -291,7 +291,7 @@ export default function AboutPage() {
               className="mt-3 h-px w-10 opacity-50"
               style={{ backgroundColor: "var(--gold)" }}
             />
-            <p className="mt-6 max-w-2xl font-body text-cream/90 leading-relaxed">
+            <p className="mt-6 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.9)" }}>
               Use the{" "}
               <Link
                 href="/contact"
@@ -337,7 +337,7 @@ export default function AboutPage() {
               </a>
               .
             </p>
-            <p className="mt-4 font-body text-sm text-cream/50 italic">
+            <p className="mt-4 font-body text-sm italic" style={{ color: "rgba(244, 239, 230, 0.5)" }}>
               Resume available on request.
             </p>
           </FadeIn>

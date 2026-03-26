@@ -117,7 +117,7 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
           {study.title}
         </h3>
         {study.keyOutcome && (
-          <p className="mb-2 font-body text-sm font-medium text-obsidian/90">
+          <p className="mb-2 font-body text-sm font-medium" style={{ color: "rgba(8, 12, 20, 0.9)" }}>
             {study.keyOutcome}
           </p>
         )}

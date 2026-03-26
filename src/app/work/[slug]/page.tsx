@@ -43,11 +43,20 @@ export default function CaseStudyPage({
 
         <div className="mx-auto max-w-6xl px-6 pb-16 pt-10 sm:px-8">
           {isComingSoon ? (
-            <section className="rounded-xl border border-gold/20 bg-white/5 p-8">
+            <section
+              className="rounded-xl p-8"
+              style={{
+                border: "1px solid rgba(200, 169, 110, 0.2)",
+                backgroundColor: "rgba(255, 255, 255, 0.05)",
+              }}
+            >
               <h2 className="font-display text-2xl text-cream">
                 In Progress
               </h2>
-              <p className="mt-4 max-w-3xl font-body text-cream/80">
+              <p
+                className="mt-4 max-w-3xl font-body"
+                style={{ color: "rgba(244, 239, 230, 0.8)" }}
+              >
                 {study.projectDescription}
               </p>
               <div className="mt-6 inline-flex items-center rounded-full border border-gold px-4 py-2 text-sm font-body text-gold">

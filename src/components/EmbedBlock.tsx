@@ -14,13 +14,12 @@ export default function EmbedBlock({
   embedUrl,
   title,
 }: EmbedBlockProps) {
-  void embedType; // Reserved for future embed-type-specific UI
+  void embedType;
   const [iframeStatus, setIframeStatus] = useState<
     "idle" | "loading" | "loaded" | "blocked"
   >("idle");
 
   const resolvedUrl = useMemo(() => {
-    // For now, `mixed` uses `embedUrl` as the primary embed.
     if (!embedUrl) return "";
     return embedUrl;
   }, [embedUrl]);
@@ -28,7 +27,6 @@ export default function EmbedBlock({
   useEffect(() => {
     if (!resolvedUrl) return;
 
-    // If the iframe doesn't load within a short window, show a fallback button.
     const t = window.setTimeout(() => {
       setIframeStatus((s) => (s === "loaded" ? "loaded" : "blocked"));
     }, 3500);
@@ -38,11 +36,20 @@ export default function EmbedBlock({
 
   if (!resolvedUrl) {
     return (
-      <section className="rounded-xl border border-gold/20 bg-white/5 p-6">
+      <section
+        className="rounded-xl p-6"
+        style={{
+          border: "1px solid rgba(200, 169, 110, 0.2)",
+          backgroundColor: "rgba(255, 255, 255, 0.05)",
+        }}
+      >
         <div className="font-display text-xl text-cream">
           Live demo
         </div>
-        <div className="mt-2 font-body text-cream/80">
+        <div
+          className="mt-2 font-body"
+          style={{ color: "rgba(244, 239, 230, 0.8)" }}
+        >
           A live embed for this project will be available when the demo is
           published.
         </div>
@@ -51,9 +58,21 @@ export default function EmbedBlock({
   }
 
   return (
-    <section className="rounded-xl border border-gold/20 bg-white/5 p-0">
-      <div className="flex items-center justify-between gap-4 border-b border-gold/20 px-6 py-4">
-        <div className="font-body text-sm text-cream/80">
+    <section
+      className="rounded-xl p-0"
+      style={{
+        border: "1px solid rgba(200, 169, 110, 0.2)",
+        backgroundColor: "rgba(255, 255, 255, 0.05)",
+      }}
+    >
+      <div
+        className="flex items-center justify-between gap-4 px-6 py-4"
+        style={{ borderBottom: "1px solid rgba(200, 169, 110, 0.2)" }}
+      >
+        <div
+          className="font-body text-sm"
+          style={{ color: "rgba(244, 239, 230, 0.8)" }}
+        >
           Live demo — {title}
         </div>
 
@@ -74,7 +93,10 @@ export default function EmbedBlock({
           <div className="font-display text-xl text-cream">
             Embed blocked
           </div>
-          <div className="mt-2 font-body text-cream/80">
+          <div
+            className="mt-2 font-body"
+            style={{ color: "rgba(244, 239, 230, 0.8)" }}
+          >
             Your browser may be blocking this iframe. Use the button above
             to open the source link.
           </div>
@@ -92,4 +114,3 @@ export default function EmbedBlock({
     </section>
   );
 }
-

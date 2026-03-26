@@ -17,7 +17,13 @@ export default function NextStudyCard({
   if (!next) return null;
 
   return (
-    <section className="mt-14 rounded-xl border border-gold/20 bg-white/5 p-6">
+    <section
+      className="mt-14 rounded-xl p-6"
+      style={{
+        border: "1px solid rgba(200, 169, 110, 0.2)",
+        backgroundColor: "rgba(255, 255, 255, 0.05)",
+      }}
+    >
       <div className="font-display text-xl text-cream">
         Next Project
       </div>
@@ -32,7 +38,10 @@ export default function NextStudyCard({
               <div className="font-display text-2xl text-cream">
                 {next.title}
               </div>
-              <div className="mt-2 font-body text-cream/80">
+              <div
+                className="mt-2 font-body"
+                style={{ color: "rgba(244, 239, 230, 0.8)" }}
+              >
                 {next.subtitle}
               </div>
             </div>
@@ -52,4 +61,3 @@ export default function NextStudyCard({
     </section>
   );
 }
-

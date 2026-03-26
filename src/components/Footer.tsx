@@ -17,35 +17,58 @@ export default function Footer() {
           >
             Hannah Pagade
           </p>
-          <p className="mt-2 max-w-xs font-body text-sm text-cream/70">
-            Product & UX strategist. Conversational AI design for high-stakes environments.
+          <p
+            className="mt-2 max-w-xs font-body text-sm leading-relaxed"
+            style={{ color: "rgba(244, 239, 230, 0.7)" }}
+          >
+            Product &amp; UX strategist. Conversational AI design for
+            high-stakes environments.
           </p>
         </div>
         <nav
-          className="flex flex-wrap gap-x-8 gap-y-3 font-body text-[13px] uppercase tracking-widest text-cream/85"
+          className="flex flex-wrap gap-x-8 gap-y-3 font-body text-[13px] uppercase tracking-widest"
           aria-label="Footer"
         >
-          <Link href="/#work" className="transition-opacity hover:opacity-100">
+          <Link
+            href="/#work"
+            className="no-underline transition-opacity hover:opacity-100"
+            style={{ color: "rgba(244, 239, 230, 0.85)" }}
+          >
             Work
           </Link>
-          <Link href="/about" className="transition-opacity hover:opacity-100">
+          <Link
+            href="/about"
+            className="no-underline transition-opacity hover:opacity-100"
+            style={{ color: "rgba(244, 239, 230, 0.85)" }}
+          >
             About
           </Link>
-          <Link href="/contact" className="transition-opacity hover:opacity-100">
+          <Link
+            href="/contact"
+            className="no-underline transition-opacity hover:opacity-100"
+            style={{ color: "rgba(244, 239, 230, 0.85)" }}
+          >
             Contact
           </Link>
           <a
             href="https://www.linkedin.com/in/hannah-pagade"
             target="_blank"
             rel="noreferrer"
-            className="transition-opacity hover:opacity-100"
+            className="no-underline transition-opacity hover:opacity-100"
+            style={{ color: "rgba(244, 239, 230, 0.85)" }}
           >
             LinkedIn
           </a>
         </nav>
       </div>
-      <div className="mx-auto mt-10 max-w-6xl border-t border-cream/10 px-6 pt-8 sm:px-8 md:px-16">
-        <p className="font-body text-xs text-cream/70">
+      <div
+        className="mx-auto mt-10 max-w-6xl px-6 pt-8 sm:px-8 md:px-16"
+        style={{ borderTop: "1px solid rgba(244, 239, 230, 0.1)" }}
+      >
+        <p
+          className="font-body text-xs"
+          style={{ color: "rgba(244, 239, 230, 0.7)" }}
+        >
           © {new Date().getFullYear()} Hannah Pagade. All rights reserved.
         </p>
       </div>

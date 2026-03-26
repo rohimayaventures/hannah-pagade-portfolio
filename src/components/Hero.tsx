@@ -104,7 +104,7 @@ export default function Hero() {
                 color: "var(--cream)",
               }}
             >
-              <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-gold/80 transition-transform group-hover:scale-125 group-hover:bg-gold" />
+              <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full transition-transform group-hover:scale-125" style={{ backgroundColor: "rgba(200, 169, 110, 0.8)" }} />
               {pill.label}
             </Link>
           ))}

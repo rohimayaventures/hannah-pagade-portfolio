@@ -47,8 +47,17 @@ export default function ProcessSection({
                   {stepLabels[i]}
                 </span>
               </div>
-              <div className="rounded-xl border border-gold/20 bg-white/5 p-6 flex-1">
-                <div className="font-body text-cream/80 text-[15px] leading-relaxed">
+              <div
+                className="rounded-xl p-6 flex-1"
+                style={{
+                  border: "1px solid rgba(200, 169, 110, 0.2)",
+                  backgroundColor: "rgba(255, 255, 255, 0.05)",
+                }}
+              >
+                <div
+                  className="font-body text-[15px] leading-relaxed"
+                  style={{ color: "rgba(244, 239, 230, 0.8)" }}
+                >
                   {step}
                 </div>
               </div>
@@ -59,7 +68,13 @@ export default function ProcessSection({
 
       {impactLine && (
         <FadeIn delay={400}>
-          <div className="mt-8 rounded-xl border border-gold/20 bg-white/5 p-6">
+          <div
+            className="mt-8 rounded-xl p-6"
+            style={{
+              border: "1px solid rgba(200, 169, 110, 0.2)",
+              backgroundColor: "rgba(255, 255, 255, 0.05)",
+            }}
+          >
             <div className="flex items-center gap-3 mb-3">
               <div
                 className="flex h-8 w-8 items-center justify-center rounded-full"
@@ -81,7 +96,10 @@ export default function ProcessSection({
               </div>
               <div className="font-display text-lg text-cream">Impact</div>
             </div>
-            <p className="font-body text-cream/80 leading-relaxed">
+            <p
+              className="font-body leading-relaxed"
+              style={{ color: "rgba(244, 239, 230, 0.8)" }}
+            >
               {impactLine}
             </p>
           </div>

@@ -5,7 +5,18 @@ import { useState } from "react";
 type Status = "idle" | "sending" | "success" | "error";
 
 const fieldClass =
-  "w-full rounded-sm border border-cream/25 bg-obsidian/80 px-4 py-3 font-body text-cream placeholder:text-cream/35 shadow-inner shadow-black/20 transition-[border-color,box-shadow] focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/60 disabled:opacity-50 autofill:shadow-[inset_0_0_0_1000px_rgb(8,12,20)] autofill:[-webkit-text-fill-color:rgb(244,239,230)]";
+  "w-full rounded-sm px-4 py-3 font-body text-cream shadow-inner shadow-black/20 transition-[border-color,box-shadow] focus:outline-none disabled:opacity-50 autofill:shadow-[inset_0_0_0_1000px_rgb(8,12,20)] autofill:[-webkit-text-fill-color:rgb(244,239,230)]";
+
+const fieldStyle = {
+  border: "1px solid rgba(244, 239, 230, 0.25)",
+  backgroundColor: "rgba(8, 12, 20, 0.8)",
+  color: "var(--cream)",
+} as const;
+
+const placeholderStyle = `
+  .contact-field::placeholder { color: rgba(244, 239, 230, 0.35); }
+  .contact-field:focus { border-color: #C8A96E; box-shadow: 0 0 0 1px rgba(200, 169, 110, 0.6); }
+`;
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -67,10 +78,12 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+      <style>{placeholderStyle}</style>
       <div className="flex flex-col gap-2">
         <label
           htmlFor="contact-name"
-          className="font-body text-xs uppercase tracking-[0.15em] text-cream/75"
+          className="font-body text-xs uppercase tracking-[0.15em]"
+          style={{ color: "rgba(244, 239, 230, 0.75)" }}
         >
           Name
         </label>
@@ -82,14 +95,16 @@ export default function ContactForm() {
           maxLength={200}
           autoComplete="name"
           disabled={status === "sending"}
-          className={fieldClass}
+          className={`${fieldClass} contact-field`}
+          style={fieldStyle}
           placeholder="Your name"
         />
       </div>
       <div className="flex flex-col gap-2">
         <label
           htmlFor="contact-email"
-          className="font-body text-xs uppercase tracking-[0.15em] text-cream/75"
+          className="font-body text-xs uppercase tracking-[0.15em]"
+          style={{ color: "rgba(244, 239, 230, 0.75)" }}
         >
           Email
         </label>
@@ -100,14 +115,16 @@ export default function ContactForm() {
           required
           autoComplete="email"
           disabled={status === "sending"}
-          className={fieldClass}
+          className={`${fieldClass} contact-field`}
+          style={fieldStyle}
           placeholder="your@email.com"
         />
       </div>
       <div className="flex flex-col gap-2">
         <label
           htmlFor="contact-message"
-          className="font-body text-xs uppercase tracking-[0.15em] text-cream/75"
+          className="font-body text-xs uppercase tracking-[0.15em]"
+          style={{ color: "rgba(244, 239, 230, 0.75)" }}
         >
           Message
         </label>
@@ -119,7 +136,8 @@ export default function ContactForm() {
           minLength={10}
           maxLength={10000}
           disabled={status === "sending"}
-          className={`${fieldClass} min-h-[140px] resize-y`}
+          className={`${fieldClass} contact-field min-h-[140px] resize-y`}
+          style={fieldStyle}
           placeholder="How can I help?"
         />
       </div>
