@@ -40,8 +40,8 @@ export const caseStudies: CaseStudy[] = [
       "OrixLink AI accepts any symptom from any person and returns a structured clinical differential with urgency triage, red flag detection, care pathway recommendations, and plain-language reasoning. No login. No prior diagnosis required. Built on Next.js 16 and the Claude API under Rohimaya Health AI.",
     tags: ["CLINICAL-AI", "CONVERSATIONAL", "FULL-STACK"],
     embedType: "live",
-    embedUrl: "https://orixlink.vercel.app",
-    liveUrl: "https://orixlink.vercel.app",
+    embedUrl: "https://triage.rohimaya.ai",
+    liveUrl: "https://triage.rohimaya.ai",
     status: "live",
     coverImage: "/images/orixlink-ai-landing.png",
     projectDescription:
@@ -73,8 +73,8 @@ export const caseStudies: CaseStudy[] = [
       "HealthLiteracy AI translates discharge summaries, lab results, and clinical notes into plain language a patient can actually use. Paste, upload a PDF, or speak. Choose Simple, Clear, or Complete. Twelve languages. Urgent action items surfaced as visual cards before the translation body.",
     tags: ["HEALTH-EQUITY", "AI-PRODUCT", "FULL-STACK", "PATIENT-FACING"],
     embedType: "live",
-    embedUrl: "https://health-literacy-ai.vercel.app",
-    liveUrl: "https://health-literacy-ai.vercel.app",
+    embedUrl: "https://literacy.rohimaya.ai",
+    liveUrl: "https://literacy.rohimaya.ai",
     status: "live",
     coverImage: "/images/healthliteracy-ai-landing.png",
     projectDescription:

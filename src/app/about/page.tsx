@@ -211,7 +211,7 @@ export default function AboutPage() {
               </a>
               . Explore the live products:{" "}
               <a
-                href="https://orixlink.vercel.app"
+                href="https://triage.rohimaya.ai"
                 target="_blank"
                 rel="noreferrer"
                 className="text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
@@ -220,7 +220,7 @@ export default function AboutPage() {
               </a>
               ,{" "}
               <a
-                href="https://health-literacy-ai.vercel.app"
+                href="https://literacy.rohimaya.ai"
                 target="_blank"
                 rel="noreferrer"
                 className="text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
