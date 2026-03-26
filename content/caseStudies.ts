@@ -43,7 +43,7 @@ export const caseStudies: CaseStudy[] = [
     embedUrl: "https://orixlink.vercel.app",
     liveUrl: "https://orixlink.vercel.app",
     status: "live",
-    coverImage: "",
+    coverImage: "/images/orixlink-ai-landing.png",
     projectDescription:
       "OrixLink AI accepts any symptom from any person and returns a structured clinical differential with urgency triage, red flag detection, care pathway recommendations, and plain-language reasoning. No login. No prior diagnosis required. Built on Next.js 16 and the Claude API under Rohimaya Health AI.",
     problemStatement:
@@ -76,7 +76,7 @@ export const caseStudies: CaseStudy[] = [
     embedUrl: "https://health-literacy-ai.vercel.app",
     liveUrl: "https://health-literacy-ai.vercel.app",
     status: "live",
-    coverImage: "",
+    coverImage: "/images/healthliteracy-ai-landing.png",
     projectDescription:
       "HealthLiteracy AI translates discharge summaries, lab results, and clinical notes into plain language a patient can actually use. Paste, upload a PDF, or speak. Choose Simple, Clear, or Complete. Twelve languages. Urgent action items surfaced as visual cards before the translation body.",
     problemStatement:
