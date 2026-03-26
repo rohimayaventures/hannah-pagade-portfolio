@@ -22,7 +22,7 @@ export default function Footer() {
           </p>
         </div>
         <nav
-          className="flex flex-wrap gap-x-8 gap-y-3 font-body text-[13px] uppercase tracking-widest text-cream/60"
+          className="flex flex-wrap gap-x-8 gap-y-3 font-body text-[13px] uppercase tracking-widest text-cream/85"
           aria-label="Footer"
         >
           <Link href="/#work" className="transition-opacity hover:opacity-100">

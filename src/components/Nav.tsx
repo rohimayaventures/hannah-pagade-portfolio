@@ -16,21 +16,21 @@ export default function Nav() {
         <div className="flex items-center gap-8">
           <Link
             href="/#work"
-            className="text-[13px] font-[family-name:Arial,sans-serif] uppercase tracking-widest no-underline opacity-70 transition-opacity hover:opacity-100"
+            className="text-[13px] font-[family-name:Arial,sans-serif] uppercase tracking-widest no-underline transition-opacity hover:opacity-100"
             style={{ color: "var(--cream)" }}
           >
             Work
           </Link>
           <Link
             href="/about"
-            className="text-[13px] font-[family-name:Arial,sans-serif] uppercase tracking-widest no-underline opacity-70 transition-opacity hover:opacity-100"
+            className="text-[13px] font-[family-name:Arial,sans-serif] uppercase tracking-widest no-underline transition-opacity hover:opacity-100"
             style={{ color: "var(--cream)" }}
           >
             About
           </Link>
           <Link
             href="/contact"
-            className="text-[13px] font-[family-name:Arial,sans-serif] uppercase tracking-widest no-underline opacity-70 transition-opacity hover:opacity-100"
+            className="text-[13px] font-[family-name:Arial,sans-serif] uppercase tracking-widest no-underline transition-opacity hover:opacity-100"
             style={{ color: "var(--cream)" }}
           >
             Contact
@@ -39,7 +39,7 @@ export default function Nav() {
             href="https://www.linkedin.com/in/hannah-pagade"
             target="_blank"
             rel="noreferrer"
-            className="text-[13px] font-[family-name:Arial,sans-serif] uppercase tracking-widest no-underline opacity-70 transition-opacity hover:opacity-100"
+            className="text-[13px] font-[family-name:Arial,sans-serif] uppercase tracking-widest no-underline transition-opacity hover:opacity-100"
             style={{ color: "var(--cream)" }}
           >
             LinkedIn

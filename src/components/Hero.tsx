@@ -121,14 +121,23 @@ export default function Hero() {
         <div className="flex flex-wrap gap-4">
           <Link
             href="/#work"
-            className="hero-cta-primary inline-flex items-center rounded-sm border border-gold bg-gold/10 px-6 py-3.5 text-sm font-[family-name:Arial,sans-serif] uppercase tracking-widest text-gold shadow-[0_0_0_1px_rgba(200,169,110,0.15)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-gold hover:text-obsidian hover:shadow-[0_12px_40px_-12px_rgba(200,169,110,0.55)]"
+            className="hero-cta-primary inline-flex items-center rounded-sm border px-6 py-3.5 text-sm font-[family-name:Arial,sans-serif] uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(200,169,110,0.55)]"
+            style={{
+              borderColor: "var(--gold)",
+              backgroundColor: "var(--gold)",
+              color: "var(--obsidian)",
+            }}
           >
             View Work
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center rounded-sm border px-6 py-3.5 text-sm font-[family-name:Arial,sans-serif] uppercase tracking-widest text-cream transition-all duration-200 hover:-translate-y-0.5 hover:border-gold hover:text-gold"
-            style={{ borderColor: "rgba(244,239,230,0.35)" }}
+            className="inline-flex items-center rounded-sm border px-6 py-3.5 text-sm font-[family-name:Arial,sans-serif] uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5"
+            style={{
+              borderColor: "rgba(244,239,230,0.65)",
+              backgroundColor: "rgba(8, 12, 20, 0.92)",
+              color: "var(--cream)",
+            }}
           >
             Contact
           </Link>
@@ -136,7 +145,12 @@ export default function Hero() {
             href="https://www.linkedin.com/in/hannah-pagade"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center px-6 py-3.5 text-sm font-[family-name:Arial,sans-serif] uppercase tracking-widest text-cream/75 transition-all duration-200 hover:-translate-y-0.5 hover:text-cream"
+            className="inline-flex items-center rounded-sm border px-6 py-3.5 text-sm font-[family-name:Arial,sans-serif] uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5"
+            style={{
+              borderColor: "rgba(200, 169, 110, 0.45)",
+              color: "var(--cream)",
+              backgroundColor: "rgba(200, 169, 110, 0.06)",
+            }}
           >
             LinkedIn →
           </a>
