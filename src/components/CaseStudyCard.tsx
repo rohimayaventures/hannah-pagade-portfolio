@@ -50,9 +50,8 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
             }}
           >
             <span
-              className="text-[48px] leading-none tracking-tight opacity-30"
+              className="font-display text-[48px] leading-none tracking-tight opacity-30"
               style={{
-                fontFamily: "Georgia, serif",
                 color: "var(--gold)",
                 letterSpacing: "-0.04em",
               }}
@@ -75,7 +74,7 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
             }}
           />
           <span
-            className="text-[10px] font-[family-name:Arial,sans-serif] uppercase tracking-wider"
+            className="text-[10px] font-body uppercase tracking-wider"
             style={{ color: "var(--cream)" }}
           >
             {statusLabel[study.status] ?? study.status}
@@ -96,9 +95,8 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
           </div>
         )}
         <h3
-          className="mb-2 text-xl leading-snug"
+          className="mb-2 font-display text-xl leading-snug"
           style={{
-            fontFamily: "Georgia, serif",
             color: "var(--obsidian)",
           }}
         >

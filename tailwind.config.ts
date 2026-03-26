@@ -9,8 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        body: ["Arial", "Helvetica", "sans-serif"],
-        display: ["Georgia", "Times New Roman", "serif"],
+        body: ["var(--font-body)", "Arial", "Helvetica", "sans-serif"],
+        display: ["var(--font-display)", "Georgia", "Times New Roman", "serif"],
+        mono: ["var(--font-mono)", "DM Mono", "monospace"],
       },
       colors: {
         obsidian: "#080C14",

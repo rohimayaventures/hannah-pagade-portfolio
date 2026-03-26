@@ -18,20 +18,20 @@ export default function ContactPage() {
       >
         <div className="mx-auto max-w-4xl">
           <p
-            className="mb-4 text-xs font-[family-name:Arial,sans-serif] uppercase tracking-[0.2em] opacity-80"
+            className="mb-4 text-xs font-body uppercase tracking-[0.2em] opacity-80"
             style={{ color: "var(--gold)" }}
           >
             Contact
           </p>
           <h1
-            className="mb-6 text-4xl leading-tight md:text-5xl"
-            style={{ color: "var(--cream)", fontFamily: "Georgia, serif" }}
+            className="mb-6 font-display text-4xl leading-tight md:text-5xl"
+            style={{ color: "var(--cream)" }}
           >
             Let&apos;s talk
           </h1>
           <p
-            className="mb-8 max-w-2xl text-lg leading-relaxed opacity-90"
-            style={{ color: "var(--cream)", fontFamily: "Arial, sans-serif" }}
+            className="mb-8 max-w-2xl font-body text-lg leading-relaxed opacity-90"
+            style={{ color: "var(--cream)" }}
           >
             Interested in working together? Send a message — I&apos;ll respond
             from my inbox. For a faster connection, you can also reach me on

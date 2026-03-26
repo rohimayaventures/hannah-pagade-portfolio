@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-8 md:flex-row md:items-start md:justify-between md:px-16">
         <div>
           <p
-            className="font-[family-name:Georgia,serif] text-base tracking-tight"
+            className="font-display text-base tracking-tight"
             style={{ color: "var(--cream)" }}
           >
             Hannah Pagade

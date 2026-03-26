@@ -2,7 +2,7 @@ export default function TagChip({ tag }: { tag: string }) {
   return (
     <span
       style={{
-        fontFamily: 'Arial, sans-serif',
+        fontFamily: 'var(--font-body), Arial, sans-serif',
         fontSize: '11px',
         letterSpacing: '0.06em',
         textTransform: 'uppercase',

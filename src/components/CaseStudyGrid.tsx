@@ -27,7 +27,7 @@ export default function CaseStudyGrid() {
       <div className="relative mx-auto max-w-6xl">
         <div className="mb-12 md:mb-14">
           <p
-            className="mb-3 font-[family-name:Arial,sans-serif] text-[11px] uppercase tracking-[0.2em] text-gold"
+            className="mb-3 font-body text-[11px] uppercase tracking-[0.2em] text-gold"
           >
             Selected Work
           </p>

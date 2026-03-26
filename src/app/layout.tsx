@@ -1,42 +1,66 @@
 import type { Metadata } from "next";
+import { Cormorant_Garamond, DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
+import KaiWidget from "@/components/KaiWidget";
+
+const displayFont = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const bodyFont = DM_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const monoFont = DM_Mono({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ||
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null);
 
 const defaultTitle =
-  "Hannah Pagade | Product & UX Strategist, Conversational AI Designer";
+  "Hannah Kraulik Pagade | Clinical AI Builder, Conversational Designer, Healthcare Product";
 
 const defaultDescription =
-  "Product and UX strategist shipping conversational AI in healthcare and high-stakes environments. OrixLink AI, HealthLiteracy AI — discovery, intent architecture, prompt design, and live products.";
+  "I build AI products clinical environments demand. 15 years of healthcare operations as field research. Live work: OrixLink AI, HealthLiteracy AI, ClearChannel by Vestara.";
 
 export const metadata: Metadata = {
   ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
   title: {
     default: defaultTitle,
-    template: "%s | Hannah Pagade",
+    template: "%s | Hannah Kraulik Pagade",
   },
   description: defaultDescription,
   keywords: [
-    "Product",
-    "Product strategy",
-    "UX strategy",
-    "Conversational AI",
-    "AI product",
-    "Healthcare AI",
     "Clinical AI",
-    "Prompt architecture",
-    "Dialogue design",
-    "Health tech",
+    "Healthcare AI product",
+    "Conversational AI designer",
+    "NLU architecture",
+    "AI product manager",
+    "Healthcare UX",
+    "Prompt engineering",
+    "OrixLink AI",
+    "HealthLiteracy AI",
+    "ClearChannel Vestara",
   ],
-  authors: [{ name: "Hannah Pagade" }],
+  authors: [{ name: "Hannah Kraulik Pagade" }],
   openGraph: {
     title: defaultTitle,
     description: defaultDescription,
     type: "website",
     locale: "en_US",
-    siteName: "Hannah Pagade",
+    siteName: "Hannah Kraulik Pagade",
   },
   twitter: {
     card: "summary",
@@ -55,9 +79,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`}>
       <body className="font-body antialiased">
         {children}
+        <KaiWidget />
       </body>
     </html>
   );

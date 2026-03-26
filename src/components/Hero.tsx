@@ -64,27 +64,26 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto max-w-4xl">
         <p
-          className="mb-5 text-xs font-[family-name:Arial,sans-serif] uppercase tracking-[0.2em] opacity-90"
+          className="mb-5 text-xs font-body uppercase tracking-[0.2em] opacity-90"
           style={{ color: "var(--gold)" }}
         >
           Hannah Pagade
         </p>
         <h1
-          className="mb-3 text-4xl leading-[1.08] tracking-tight md:text-6xl lg:text-7xl"
-          style={{ fontFamily: "Georgia, serif", color: "var(--cream)" }}
+          className="mb-3 font-display text-4xl leading-[1.08] tracking-tight md:text-6xl lg:text-7xl"
+          style={{ color: "var(--cream)" }}
         >
           Product &amp; UX Strategist
         </h1>
         <p
-          className="mb-6 text-3xl leading-tight tracking-tight md:text-5xl lg:text-6xl"
-          style={{ fontFamily: "Georgia, serif" }}
+          className="mb-6 font-display text-3xl leading-tight tracking-tight md:text-5xl lg:text-6xl"
         >
           <span className="hero-gradient-text">Conversational AI</span>
           <span style={{ color: "var(--cream)" }}> designer</span>
         </p>
         <p
-          className="mb-8 max-w-2xl text-lg leading-relaxed opacity-90 md:text-xl"
-          style={{ color: "var(--cream)", fontFamily: "Arial, sans-serif" }}
+          className="mb-8 max-w-2xl font-body text-lg leading-relaxed opacity-90 md:text-xl"
+          style={{ color: "var(--cream)" }}
         >
           From discovery and prioritization to shipped AI products: multi-turn
           dialogue, intent architecture, and role-adaptive flows in regulated,
@@ -98,7 +97,7 @@ export default function Hero() {
             <Link
               key={pill.label}
               href={pill.href}
-              className="hero-pill group inline-flex items-center rounded-full border px-4 py-2.5 text-[11px] font-[family-name:Arial,sans-serif] uppercase tracking-widest shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-gold hover:shadow-[0_0_24px_rgba(200,169,110,0.24)] active:scale-[0.98]"
+              className="hero-pill group inline-flex items-center rounded-full border px-4 py-2.5 text-[11px] font-body uppercase tracking-widest shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-gold hover:shadow-[0_0_24px_rgba(200,169,110,0.24)] active:scale-[0.98]"
               style={{
                 borderColor: "rgba(200, 169, 110, 0.42)",
                 backgroundColor: "rgba(8, 12, 20, 0.88)",
@@ -121,7 +120,7 @@ export default function Hero() {
         <div className="flex flex-wrap gap-4">
           <Link
             href="/#work"
-            className="hero-cta-primary inline-flex items-center rounded-sm border px-6 py-3.5 text-sm font-[family-name:Arial,sans-serif] uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(200,169,110,0.55)]"
+            className="hero-cta-primary inline-flex items-center rounded-sm border px-6 py-3.5 text-sm font-body uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(200,169,110,0.55)]"
             style={{
               borderColor: "var(--gold)",
               backgroundColor: "var(--gold)",
@@ -132,7 +131,7 @@ export default function Hero() {
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center rounded-sm border px-6 py-3.5 text-sm font-[family-name:Arial,sans-serif] uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5"
+            className="inline-flex items-center rounded-sm border px-6 py-3.5 text-sm font-body uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5"
             style={{
               borderColor: "rgba(244,239,230,0.65)",
               backgroundColor: "rgba(8, 12, 20, 0.92)",
@@ -145,7 +144,7 @@ export default function Hero() {
             href="https://www.linkedin.com/in/hannah-pagade"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center rounded-sm border px-6 py-3.5 text-sm font-[family-name:Arial,sans-serif] uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5"
+            className="inline-flex items-center rounded-sm border px-6 py-3.5 text-sm font-body uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5"
             style={{
               borderColor: "rgba(200, 169, 110, 0.45)",
               color: "var(--cream)",
