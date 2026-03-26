@@ -13,10 +13,13 @@ const productSkills = [
   "0-to-1 Product Development",
   "Discovery & User Research",
   "Outcome-Driven Roadmapping",
+  "Data-Informed Prioritization",
   "Stakeholder Alignment",
-  "Clinical Workflow Analysis",
-  "Regulatory-Aware Strategy",
+  "Workflow Analysis & Redesign",
+  "Regulated Environments",
   "Cross-Functional Leadership",
+  "User Story Mapping",
+  "Sprint Planning & Delivery",
   "AI Product Strategy",
 ];
 
@@ -30,7 +33,7 @@ const aiUxSkills = [
   "Multi-Turn Dialogue Systems",
   "Role-Adaptive Flows",
   "Escalation Design",
-  "Enterprise Application Design",
+  "Voice UX & TTS",
 ];
 
 const techStack = [
@@ -39,11 +42,11 @@ const techStack = [
   "Tailwind CSS",
   "React",
   "Claude API",
+  "OpenAI API",
   "Supabase",
   "Vercel",
   "Python",
   "Figma",
-  "FHIR",
 ];
 
 export default function AboutPage() {
