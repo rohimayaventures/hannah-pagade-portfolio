@@ -132,19 +132,35 @@ export const caseStudies: CaseStudy[] = [
   {
     featured: false,
     order: 5,
-    slug: "voice-sdr-demo",
-    title: "Voice SDR Demo",
+    slug: "clearchannel-vestara",
+    title: "ClearChannel by Vestara",
     subtitle:
-      "A live inbound voice AI that qualifies leads, answers product questions, and offers to book a meeting, powered by Vapi and Claude. Call a real phone number and experience a full AI sales conversation. After the call, a lead summary is generated and available at a shareable URL.",
-    tags: ["GTM", "VOICE-AI", "FULL-STACK"],
-    embedType: "coming-soon",
-    embedUrl: "",
-    liveUrl: "",
-    status: "coming-soon",
+      "ClearChannel is a live NLU routing simulator that classifies investor utterances with confidence scoring and sentiment, then generates simultaneous channel outputs across IVR, chatbot, and agent assist.",
+    tags: ["FINSERV", "CONVERSATIONAL-AI", "NLU-ARCHITECTURE"],
+    embedType: "live",
+    embedUrl: "https://clearchannel-vestara.vercel.app/",
+    liveUrl: "https://clearchannel-vestara.vercel.app/",
+    status: "live",
     coverImage: "",
     projectDescription:
-      "A live inbound voice AI that qualifies leads, answers product questions, and offers to book a meeting, powered by Vapi and Claude. Call a real phone number and experience a full AI sales conversation. After the call, a lead summary is generated and available at a shareable URL.",
-    processAngle: "Coming soon.",
+      "A real-time conversational design lab for enterprise financial services contact centers. ClearChannel makes NLU routing logic visible and auditable by showing intent, confidence, sentiment, and channel-specific responses in one flow.",
+    problemStatement:
+      "Enterprise contact centers still struggle with misrouted, emotionally mismatched conversations because intent architecture is often designed separately from downstream channel experiences. In high-stakes contexts like bereavement, fraud, and urgent account events, those first routing decisions directly impact trust and retention.",
+    processSteps: [
+      "I designed ClearChannel around an architecture gap: product and UX teams rarely get to observe how one utterance propagates through IVR, chatbot, and agent-assist simultaneously. The solution was to treat routing design as a live, testable artifact rather than a hidden configuration layer.",
+      "The core system prompt encodes 18 intent categories, confidence logic, and pre-classification emotional override protocols (bereavement, fraud, barge-in). The app pairs Claude-powered intent analysis with voice input and live channel rendering to expose routing behavior in real time for design review.",
+      "A deployed, interactive NLU routing simulator that streams intent, confidence, sentiment, and three synchronized channel responses in seconds. Built with Next.js 16, TypeScript, Tailwind CSS v4, Claude API streaming, and realtime voice integration.",
+    ],
+    impactLine:
+      "ClearChannel turns invisible routing logic into a visible design and product decision surface, enabling teams to test emotional-context handling and cross-channel consistency before those decisions affect live customers.",
+    processAngle:
+      "Designed for enterprise conversational governance: emotional overrides, simultaneous channel outputs, confidence legibility, and verbatim-ready agent assist.",
+    cardSummary:
+      "Real-time NLU routing lab for financial services across IVR, chatbot, and agent assist.",
+    role: "Product & Conversation UX",
+    timeline: "2025",
+    keyOutcome:
+      "Live multi-channel NLU simulator with 18 intents, confidence scoring, and sentiment-aware routing",
   },
 ];
 

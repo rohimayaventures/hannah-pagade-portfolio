@@ -98,7 +98,12 @@ export default function Hero() {
             <Link
               key={pill.label}
               href={pill.href}
-              className="hero-pill group inline-flex items-center rounded-full border border-gold/35 bg-obsidian/40 px-4 py-2 text-xs font-[family-name:Arial,sans-serif] uppercase tracking-widest text-cream/90 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-gold hover:bg-gold/10 hover:text-cream hover:shadow-[0_0_24px_rgba(200,169,110,0.2)] active:scale-[0.98]"
+              className="hero-pill group inline-flex items-center rounded-full border px-4 py-2.5 text-[11px] font-[family-name:Arial,sans-serif] uppercase tracking-widest shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-gold hover:shadow-[0_0_24px_rgba(200,169,110,0.24)] active:scale-[0.98]"
+              style={{
+                borderColor: "rgba(200, 169, 110, 0.42)",
+                backgroundColor: "rgba(8, 12, 20, 0.88)",
+                color: "var(--cream)",
+              }}
             >
               <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-gold/80 transition-transform group-hover:scale-125 group-hover:bg-gold" />
               {pill.label}
