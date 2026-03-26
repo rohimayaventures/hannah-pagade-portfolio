@@ -8,6 +8,11 @@ type FadeInProps = {
   delay?: number;
 };
 
+function reveal(el: HTMLDivElement) {
+  el.style.opacity = "1";
+  el.style.transform = "translateY(0)";
+}
+
 export default function FadeIn({ children, className = "", delay = 0 }: FadeInProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -17,20 +22,28 @@ export default function FadeIn({ children, className = "", delay = 0 }: FadeInPr
 
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (mq.matches) {
-      el.style.opacity = "1";
-      el.style.transform = "translateY(0)";
+      reveal(el);
+      return;
+    }
+
+    // Above-the-fold: IntersectionObserver can miss the first paint on some
+    // browsers; show immediately if any part of the element is in view.
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const inView = rect.top < vh + 80 && rect.bottom > -80;
+    if (inView) {
+      reveal(el);
       return;
     }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.style.opacity = "1";
-          el.style.transform = "translateY(0)";
+          reveal(el);
           observer.unobserve(el);
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.01, rootMargin: "0px 0px 10% 0px" }
     );
 
     observer.observe(el);

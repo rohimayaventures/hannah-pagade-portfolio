@@ -74,7 +74,10 @@ export default function AboutPage() {
             >
               About
             </p>
-            <h1 className="font-display text-3xl text-cream sm:text-4xl md:text-5xl">
+            <h1
+              className="font-display text-3xl sm:text-4xl md:text-5xl"
+              style={{ color: "var(--cream)" }}
+            >
               Hannah Kraulik Pagade
             </h1>
             <div
@@ -97,7 +100,8 @@ export default function AboutPage() {
                 href="https://triage.rohimaya.ai"
                 target="_blank"
                 rel="noreferrer"
-                className="text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
+                className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                style={{ color: "var(--gold)" }}
               >
                 OrixLink AI
               </a>{" "}
@@ -106,7 +110,8 @@ export default function AboutPage() {
                 href="https://literacy.rohimaya.ai"
                 target="_blank"
                 rel="noreferrer"
-                className="text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
+                className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                style={{ color: "var(--gold)" }}
               >
                 HealthLiteracy AI
               </a>{" "}
@@ -115,7 +120,8 @@ export default function AboutPage() {
                 href="https://clearchannel-vestara.vercel.app"
                 target="_blank"
                 rel="noreferrer"
-                className="text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
+                className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                style={{ color: "var(--gold)" }}
               >
                 ClearChannel by Vestara
               </a>{" "}
@@ -134,7 +140,9 @@ export default function AboutPage() {
       >
         <div className="mx-auto max-w-3xl">
           <FadeIn>
-            <h2 className="font-display text-2xl text-cream">Background</h2>
+            <h2 className="font-display text-2xl" style={{ color: "var(--cream)" }}>
+              Background
+            </h2>
             <div
               className="mt-3 h-px w-10 opacity-50"
               style={{ backgroundColor: "var(--gold)" }}
@@ -205,7 +213,9 @@ export default function AboutPage() {
       >
         <div className="mx-auto max-w-3xl">
           <FadeIn>
-            <h2 className="font-display text-2xl text-cream">Product</h2>
+            <h2 className="font-display text-2xl" style={{ color: "var(--cream)" }}>
+              Product
+            </h2>
             <div
               className="mt-3 h-px w-10 opacity-50"
               style={{ backgroundColor: "var(--gold)" }}
@@ -228,7 +238,10 @@ export default function AboutPage() {
           </FadeIn>
 
           <FadeIn delay={150}>
-            <h2 className="mt-14 font-display text-2xl text-cream">
+            <h2
+              className="mt-14 font-display text-2xl"
+              style={{ color: "var(--cream)" }}
+            >
               Conversational AI &amp; UX
             </h2>
             <div
@@ -253,7 +266,10 @@ export default function AboutPage() {
           </FadeIn>
 
           <FadeIn delay={300}>
-            <h2 className="mt-14 font-display text-2xl text-cream">
+            <h2
+              className="mt-14 font-display text-2xl"
+              style={{ color: "var(--cream)" }}
+            >
               Technical Stack
             </h2>
             <div
@@ -286,7 +302,9 @@ export default function AboutPage() {
       >
         <div className="mx-auto max-w-3xl">
           <FadeIn>
-            <h2 className="font-display text-2xl text-cream">Get in touch</h2>
+            <h2 className="font-display text-2xl" style={{ color: "var(--cream)" }}>
+              Get in touch
+            </h2>
             <div
               className="mt-3 h-px w-10 opacity-50"
               style={{ backgroundColor: "var(--gold)" }}
@@ -295,7 +313,8 @@ export default function AboutPage() {
               Use the{" "}
               <Link
                 href="/contact"
-                className="text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
+                className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                style={{ color: "var(--gold)" }}
               >
                 contact form
               </Link>{" "}
@@ -304,7 +323,8 @@ export default function AboutPage() {
                 href="https://www.linkedin.com/in/hannah-pagade"
                 target="_blank"
                 rel="noreferrer"
-                className="text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
+                className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                style={{ color: "var(--gold)" }}
               >
                 LinkedIn
               </a>
@@ -313,7 +333,8 @@ export default function AboutPage() {
                 href="https://triage.rohimaya.ai"
                 target="_blank"
                 rel="noreferrer"
-                className="text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
+                className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                style={{ color: "var(--gold)" }}
               >
                 OrixLink AI
               </a>
@@ -322,7 +343,8 @@ export default function AboutPage() {
                 href="https://literacy.rohimaya.ai"
                 target="_blank"
                 rel="noreferrer"
-                className="text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
+                className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                style={{ color: "var(--gold)" }}
               >
                 HealthLiteracy AI
               </a>
@@ -331,7 +353,8 @@ export default function AboutPage() {
                 href="https://clearchannel-vestara.vercel.app"
                 target="_blank"
                 rel="noreferrer"
-                className="text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
+                className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                style={{ color: "var(--gold)" }}
               >
                 ClearChannel by Vestara
               </a>
