@@ -33,7 +33,7 @@ const defaultTitle =
   "Hannah Kraulik Pagade | Clinical AI Builder, Conversational Designer, Healthcare Product";
 
 const defaultDescription =
-  "I build AI products clinical environments demand. 15 years of healthcare operations as field research. Live work: OrixLink AI, HealthLiteracy AI, ClearChannel by Vestara.";
+  "I build AI products clinical environments demand. 15+ years in healthcare and operations as field research. Live work: OrixLink AI, HealthLiteracy AI, ClearChannel by Vestara.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

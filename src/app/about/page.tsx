@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Product and UX strategist — conversational AI, dialogue systems, intent architecture, and high-stakes clinical UX. 15 years healthcare operations.",
+    "Product and UX strategist — conversational AI, dialogue systems, intent architecture, and high-stakes clinical UX. 15+ years in healthcare and operations.",
 };
 
 const productSkills = [
@@ -150,13 +150,13 @@ export default function AboutPage() {
           </FadeIn>
           <FadeIn delay={100}>
             <p className="mt-8 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.8)" }}>
-              I spent 15 years in enterprise operations and healthcare leadership
-              across acute care, rehabilitation, and post-acute settings. I led
-              EHR implementations, care coordination platform rollouts, and
-              cross-functional programs spanning clinical, IT, compliance, and
-              operations teams. That work taught me how complex organizations
-              actually make decisions, where technology fails its users, and what
-              it takes to ship in regulated environments.
+              I spent 15+ years in healthcare and operations across acute care,
+              rehabilitation, and post-acute settings. I led EHR implementations,
+              care coordination platform rollouts, and cross-functional programs
+              spanning clinical, IT, compliance, and operations teams. That work
+              taught me how complex organizations actually make decisions, where
+              technology fails its users, and what it takes to ship in regulated
+              environments.
             </p>
           </FadeIn>
           <FadeIn delay={200}>
