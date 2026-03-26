@@ -55,7 +55,7 @@ export default function Nav() {
         {/* Hamburger button — mobile only */}
         <button
           onClick={() => setOpen((v) => !v)}
-          className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-[5px] md:hidden"
+          className="relative z-50 flex h-11 w-11 flex-col items-center justify-center gap-[5px] md:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
         >
@@ -97,7 +97,7 @@ export default function Nav() {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="text-[15px] font-body uppercase tracking-widest no-underline transition-opacity hover:opacity-100"
+              className="block py-3 text-[15px] font-body uppercase tracking-widest no-underline transition-opacity hover:opacity-100"
               style={{ color: "var(--cream)" }}
             >
               {link.label}
@@ -108,7 +108,7 @@ export default function Nav() {
             target="_blank"
             rel="noreferrer"
             onClick={() => setOpen(false)}
-            className="text-[15px] font-body uppercase tracking-widest no-underline transition-opacity hover:opacity-100"
+            className="block py-3 text-[15px] font-body uppercase tracking-widest no-underline transition-opacity hover:opacity-100"
             style={{ color: "var(--cream)" }}
           >
             LinkedIn

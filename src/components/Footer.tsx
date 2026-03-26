@@ -26,26 +26,26 @@ export default function Footer() {
           </p>
         </div>
         <nav
-          className="flex flex-wrap gap-x-8 gap-y-3 font-body text-[13px] uppercase tracking-widest"
+          className="flex flex-wrap gap-x-8 gap-y-1 font-body text-[13px] uppercase tracking-widest"
           aria-label="Footer"
         >
           <Link
             href="/#work"
-            className="no-underline transition-opacity hover:opacity-100"
+            className="inline-block py-2 no-underline transition-opacity hover:opacity-100"
             style={{ color: "rgba(244, 239, 230, 0.85)" }}
           >
             Work
           </Link>
           <Link
             href="/about"
-            className="no-underline transition-opacity hover:opacity-100"
+            className="inline-block py-2 no-underline transition-opacity hover:opacity-100"
             style={{ color: "rgba(244, 239, 230, 0.85)" }}
           >
             About
           </Link>
           <Link
             href="/contact"
-            className="no-underline transition-opacity hover:opacity-100"
+            className="inline-block py-2 no-underline transition-opacity hover:opacity-100"
             style={{ color: "rgba(244, 239, 230, 0.85)" }}
           >
             Contact
@@ -54,7 +54,7 @@ export default function Footer() {
             href="https://www.linkedin.com/in/hannah-pagade"
             target="_blank"
             rel="noreferrer"
-            className="no-underline transition-opacity hover:opacity-100"
+            className="inline-block py-2 no-underline transition-opacity hover:opacity-100"
             style={{ color: "rgba(244, 239, 230, 0.85)" }}
           >
             LinkedIn

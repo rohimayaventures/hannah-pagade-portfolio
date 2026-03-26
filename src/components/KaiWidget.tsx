@@ -154,7 +154,7 @@ export default function KaiWidget() {
               position: "absolute",
               bottom: "100px",
               right: "0",
-              width: "320px",
+              width: "min(320px, calc(100vw - 2.5rem))",
               background: "#0D1420",
               border: "1px solid rgba(200,169,110,0.22)",
               borderRadius: "14px 14px 4px 14px",
@@ -201,7 +201,7 @@ export default function KaiWidget() {
               </div>
               <button
                 onClick={() => setOpen(false)}
-                style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(244,239,230,0.35)", fontSize: "18px", lineHeight: 1, padding: "2px 4px" }}
+                style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(244,239,230,0.35)", fontSize: "18px", lineHeight: 1, padding: "8px 10px", minWidth: "44px", minHeight: "44px", display: "flex", alignItems: "center", justifyContent: "center" }}
               >
                 ×
               </button>
@@ -322,8 +322,8 @@ export default function KaiWidget() {
                 onClick={handleSend}
                 disabled={!input.trim() || isLoading}
                 style={{
-                  width: "32px",
-                  height: "32px",
+                  width: "44px",
+                  height: "44px",
                   borderRadius: "8px",
                   background: input.trim() && !isLoading ? "#C8A96E" : "rgba(200,169,110,0.15)",
                   border: "none",

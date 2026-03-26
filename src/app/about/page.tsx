@@ -74,7 +74,7 @@ export default function AboutPage() {
             >
               About
             </p>
-            <h1 className="font-display text-4xl text-cream md:text-5xl">
+            <h1 className="font-display text-3xl text-cream sm:text-4xl md:text-5xl">
               Hannah Kraulik Pagade
             </h1>
             <div
