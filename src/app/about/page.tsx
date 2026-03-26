@@ -81,20 +81,116 @@ export default function AboutPage() {
           </FadeIn>
           <FadeIn delay={100}>
             <p className="mt-8 max-w-2xl font-body text-lg leading-relaxed text-cream/90">
-              Product and UX strategist who builds AI products from zero to one
-              and designs the conversation systems that make them work in
-              high-stakes, regulated environments.
+              AI product manager, conversational UX strategist, and builder. I
+              take products from zero to one and design the conversation systems,
+              intent architectures, and multi-turn flows that make AI work in
+              complex, regulated environments.
             </p>
           </FadeIn>
           <FadeIn delay={200}>
             <p className="mt-6 max-w-2xl font-body text-cream/75 leading-relaxed">
-              I designed and shipped the complete conversation UX for OrixLink
-              AI, a live clinical triage product on the Claude API — including
-              NLU-informed intent modeling, escalation patterns, and prompt
-              architecture across mobile and web. I bring 15 years of enterprise
-              stakeholder facilitation and a track record of translating complex
-              business requirements into intuitive conversational experiences.
+              Three live products in production right now:{" "}
+              <a
+                href="https://triage.rohimaya.ai"
+                target="_blank"
+                rel="noreferrer"
+                className="text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
+              >
+                OrixLink AI
+              </a>{" "}
+              (clinical triage and diagnosis),{" "}
+              <a
+                href="https://literacy.rohimaya.ai"
+                target="_blank"
+                rel="noreferrer"
+                className="text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
+              >
+                HealthLiteracy AI
+              </a>{" "}
+              (patient document translation across 12 languages), and{" "}
+              <a
+                href="https://clearchannel-vestara.vercel.app"
+                target="_blank"
+                rel="noreferrer"
+                className="text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
+              >
+                ClearChannel by Vestara
+              </a>{" "}
+              (enterprise NLU routing for financial services). Each one built end
+              to end: product strategy, conversation design, prompt architecture,
+              and full-stack delivery.
             </p>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* Background narrative */}
+      <section
+        className="w-full px-6 py-16 sm:px-8 md:px-16"
+        style={{ backgroundColor: "#0a0f18" }}
+      >
+        <div className="mx-auto max-w-3xl">
+          <FadeIn>
+            <h2 className="font-display text-2xl text-cream">Background</h2>
+            <div
+              className="mt-3 h-px w-10 opacity-50"
+              style={{ backgroundColor: "var(--gold)" }}
+            />
+          </FadeIn>
+          <FadeIn delay={100}>
+            <p className="mt-8 max-w-2xl font-body text-cream/80 leading-relaxed">
+              I spent 15 years in enterprise operations and healthcare leadership
+              across acute care, rehabilitation, and post-acute settings. I led
+              EHR implementations, care coordination platform rollouts, and
+              cross-functional programs spanning clinical, IT, compliance, and
+              operations teams. That work taught me how complex organizations
+              actually make decisions, where technology fails its users, and what
+              it takes to ship in regulated environments.
+            </p>
+          </FadeIn>
+          <FadeIn delay={200}>
+            <p className="mt-6 max-w-2xl font-body text-cream/80 leading-relaxed">
+              I left the bedside to build the products that should have existed
+              all along. Now I design conversational AI systems, intent
+              architectures, and multi-turn dialogue flows for healthcare,
+              financial services, and enterprise SaaS. I bring discovery
+              research, stakeholder facilitation, and product strategy together
+              with the technical ability to ship what I design.
+            </p>
+          </FadeIn>
+          <FadeIn delay={300}>
+            <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
+              <div>
+                <p
+                  className="font-body text-xs uppercase tracking-widest"
+                  style={{ color: "var(--gold)", opacity: 0.7 }}
+                >
+                  Education
+                </p>
+                <p className="mt-2 font-body text-sm text-cream/90 leading-relaxed">
+                  MS, Artificial Intelligence &amp; Machine Learning
+                  <br />
+                  <span className="text-cream/60">
+                    University of Colorado Boulder — Expected 2026
+                  </span>
+                </p>
+              </div>
+              <div>
+                <p
+                  className="font-body text-xs uppercase tracking-widest"
+                  style={{ color: "var(--gold)", opacity: 0.7 }}
+                >
+                  Location
+                </p>
+                <p className="mt-2 font-body text-sm text-cream/90 leading-relaxed">
+                  Westminster, CO
+                  <br />
+                  <span className="text-cream/60">
+                    Open to SF, remote, and hybrid
+                  </span>
+                </p>
+              </div>
+            </div>
           </FadeIn>
         </div>
       </section>
