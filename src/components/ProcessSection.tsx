@@ -21,7 +21,7 @@ export default function ProcessSection({
       </div>
 
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
-        <div className="rounded-xl border border-light-gray bg-white/5 p-6">
+        <div className="rounded-xl border border-gold/20 bg-white/5 p-6">
           <div className="font-display text-lg text-cream">
             Step 1
           </div>
@@ -29,7 +29,7 @@ export default function ProcessSection({
             {steps[0]}
           </div>
         </div>
-        <div className="rounded-xl border border-light-gray bg-white/5 p-6">
+        <div className="rounded-xl border border-gold/20 bg-white/5 p-6">
           <div className="font-display text-lg text-cream">
             Step 2
           </div>
@@ -37,7 +37,7 @@ export default function ProcessSection({
             {steps[1]}
           </div>
         </div>
-        <div className="rounded-xl border border-light-gray bg-white/5 p-6">
+        <div className="rounded-xl border border-gold/20 bg-white/5 p-6">
           <div className="font-display text-lg text-cream">
             Step 3
           </div>
@@ -48,7 +48,7 @@ export default function ProcessSection({
       </div>
 
       {impactLine ? (
-        <div className="mt-8 rounded-xl border border-light-gray bg-white/5 p-6">
+        <div className="mt-8 rounded-xl border border-gold/20 bg-white/5 p-6">
           <div className="font-display text-lg text-cream">
             Impact
           </div>

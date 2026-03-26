@@ -17,7 +17,7 @@ export default function NextStudyCard({
   if (!next) return null;
 
   return (
-    <section className="mt-14 rounded-xl border border-light-gray bg-white/5 p-6">
+    <section className="mt-14 rounded-xl border border-gold/20 bg-white/5 p-6">
       <div className="font-display text-xl text-cream">
         Next Project
       </div>

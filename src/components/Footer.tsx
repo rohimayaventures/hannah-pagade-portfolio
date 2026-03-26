@@ -18,7 +18,7 @@ export default function Footer() {
             Hannah Pagade
           </p>
           <p className="mt-2 max-w-xs font-body text-sm text-cream/70">
-            UX strategist & conversational AI design. Meridian Oracle palette.
+            Product & UX strategist. Conversational AI design for high-stakes environments.
           </p>
         </div>
         <nav

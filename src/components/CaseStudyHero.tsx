@@ -43,7 +43,7 @@ export default function CaseStudyHero({
             ))}
           </div>
 
-          <div className="rounded-xl border border-light-gray bg-white/5 px-4 py-3 text-sm font-body text-cream/80">
+          <div className="rounded-xl border border-gold/20 bg-white/5 px-4 py-3 text-sm font-body text-cream/80">
             Status: {statusLabel}
           </div>
         </div>

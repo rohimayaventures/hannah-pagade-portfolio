@@ -38,7 +38,7 @@ export default function EmbedBlock({
 
   if (!resolvedUrl) {
     return (
-      <section className="rounded-xl border border-light-gray bg-white/5 p-6">
+      <section className="rounded-xl border border-gold/20 bg-white/5 p-6">
         <div className="font-display text-xl text-cream">
           Live demo
         </div>
@@ -51,8 +51,8 @@ export default function EmbedBlock({
   }
 
   return (
-    <section className="rounded-xl border border-light-gray bg-white/5 p-0">
-      <div className="flex items-center justify-between gap-4 border-b border-light-gray px-6 py-4">
+    <section className="rounded-xl border border-gold/20 bg-white/5 p-0">
+      <div className="flex items-center justify-between gap-4 border-b border-gold/20 px-6 py-4">
         <div className="font-body text-sm text-cream/80">
           Live demo — {title}
         </div>

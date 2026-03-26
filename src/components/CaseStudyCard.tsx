@@ -84,7 +84,7 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
 
       <div className="p-5 pt-5">
         {(study.role || study.timeline) && (
-          <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-0 font-body text-xs text-mid-gray">
+          <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-0 font-body text-xs" style={{ color: "var(--mid-gray)" }}>
             {study.role && <span>{study.role}</span>}
             {study.role && study.timeline && (
               <span aria-hidden className="opacity-50">

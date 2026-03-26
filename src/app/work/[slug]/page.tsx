@@ -43,7 +43,7 @@ export default function CaseStudyPage({
 
         <div className="mx-auto max-w-6xl px-4 pb-16 pt-10">
           {isComingSoon ? (
-            <section className="rounded-xl border border-light-gray bg-white/5 p-8">
+            <section className="rounded-xl border border-gold/20 bg-white/5 p-8">
               <h2 className="font-display text-2xl text-cream">
                 In Progress
               </h2>

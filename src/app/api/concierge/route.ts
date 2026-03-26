@@ -3,6 +3,20 @@ import { NextRequest, NextResponse } from "next/server";
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
+const RATE_WINDOW_MS = 60_000;
+const RATE_LIMIT = 10;
+const ipHits = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const hits = ipHits.get(ip) ?? [];
+  const recent = hits.filter((t) => now - t < RATE_WINDOW_MS);
+  if (recent.length >= RATE_LIMIT) return true;
+  recent.push(now);
+  ipHits.set(ip, recent);
+  return false;
+}
+
 const SYSTEM_PROMPT = `You are Kai, the portfolio assistant for Hannah Kraulik Pagade. You are warm, sharp, and represent Hannah authentically. You know her work deeply and speak about it with genuine enthusiasm.
 
 WHO HANNAH IS:
@@ -40,8 +54,6 @@ ROLES HANNAH IS ACTIVELY TARGETING:
 - Product Designer or AI Product Designer at health tech startups
 - Open to SF-based, remote, and Westminster CO hybrid
 
-COMPENSATION ANCHOR: $185K
-
 HANNAH'S SKILLS AND STACK:
 Conversation design, intent architecture, NLU modeling, prompt engineering, multi-turn dialogue systems, IVR and chatbot design, escalation interaction design, discovery facilitation, stakeholder research, 0-to-1 product development, clinical workflow analysis, HIPAA and Joint Commission environments.
 Technical: Next.js, TypeScript, Tailwind CSS, React, Claude API, Supabase, Vercel, Whisper STT, FHIR, Python, Figma.
@@ -56,9 +68,19 @@ YOUR BEHAVIOR AS KAI:
 - Never make up information not in this prompt
 - Never use em dashes in your responses. Use commas, periods, or restructure the sentence instead
 - Keep responses conversational and concise, not essay-length
-- If someone asks what roles Hannah is open to, give the full picture — she is not just a UX designer, she is a product builder, conversation designer, and clinical AI specialist all at once`;
+- If someone asks what roles Hannah is open to, give the full picture — she is not just a UX designer, she is a product builder, conversation designer, and clinical AI specialist all at once
+- If someone asks about salary, compensation, or rate expectations, deflect warmly. Say something like "Compensation is something Hannah prefers to discuss directly once there is mutual fit. Feel free to share your email and she will follow up personally."
+- Never share a specific dollar amount for compensation`;
 
 export async function POST(req: NextRequest) {
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Too many requests. Please wait a moment." },
+      { status: 429 }
+    );
+  }
+
   try {
     const { messages } = await req.json();
 

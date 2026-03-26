@@ -96,7 +96,7 @@ export const caseStudies: CaseStudy[] = [
     keyOutcome: "Twelve-language translation with AI verification and shareable sessions",
   },
   {
-    order: 3,
+    order: 4,
     featured: false,
     slug: "onboarding-agent",
     title: "Onboarding Agent",
@@ -114,7 +114,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     featured: false,
-    order: 4,
+    order: 5,
     slug: "financelens-ai",
     title: "FinanceLens AI",
     subtitle:
@@ -131,7 +131,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     featured: false,
-    order: 5,
+    order: 3,
     slug: "clearchannel-vestara",
     title: "ClearChannel by Vestara",
     subtitle:
