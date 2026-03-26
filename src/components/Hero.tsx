@@ -87,8 +87,8 @@ export default function Hero() {
         >
           From discovery and prioritization to shipped AI products: multi-turn
           dialogue, intent architecture, and role-adaptive flows in regulated,
-          high-stakes environments. Live work: OrixLink AI &amp; HealthLiteracy
-          AI. 15 years in healthcare operations.
+          high-stakes environments. Live work: OrixLink AI, HealthLiteracy AI
+          &amp; ClearChannel by Vestara. 15 years in healthcare operations.
         </p>
 
         {/* Interactive focus chips */}

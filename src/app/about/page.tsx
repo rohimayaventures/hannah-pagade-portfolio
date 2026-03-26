@@ -19,9 +19,9 @@ export default function AboutPage() {
           About
         </h1>
         <p className="mt-8 max-w-2xl font-body text-lg leading-relaxed text-cream/90">
-          UX strategist and conversational AI designer who builds multi-turn
-          dialogue systems, intent architectures, and role-adaptive conversation
-          flows for high-stakes environments.
+          Product and UX strategist who builds AI products from zero to one and
+          designs the conversation systems that make them work in high-stakes,
+          regulated environments.
         </p>
         <p className="mt-6 max-w-2xl font-body text-cream/80">
           I designed and shipped the complete conversation UX for OrixLink AI, a
@@ -33,15 +33,25 @@ export default function AboutPage() {
         </p>
 
         <h2 className="mt-12 font-display text-2xl text-cream">
-          Core Competencies
+          Product
         </h2>
         <ul className="mt-4 space-y-2 font-body text-cream/80">
-          <li>• Conversation design: IVR, chatbot, AI-driven interfaces</li>
+          <li>• 0-to-1 product development: concept through launch</li>
+          <li>• Discovery facilitation, user research, and stakeholder alignment</li>
+          <li>• Outcome-driven roadmapping and prioritization</li>
+          <li>• Clinical workflow analysis and regulatory-aware product strategy</li>
+          <li>• Cross-functional leadership across engineering, design, and clinical teams</li>
+        </ul>
+
+        <h2 className="mt-12 font-display text-2xl text-cream">
+          Conversational AI &amp; UX
+        </h2>
+        <ul className="mt-4 space-y-2 font-body text-cream/80">
+          <li>• Conversation design: IVR, chatbot, agent assist, AI-driven interfaces</li>
           <li>• Intent architecture, entity design, NLU model development</li>
-          <li>• AI prompt writing and generative AI conversational strategy</li>
+          <li>• AI prompt engineering and generative AI conversational strategy</li>
           <li>• Multi-turn dialogue systems and role-adaptive response architecture</li>
           <li>• Escalation interaction design and high-stakes conversational UX</li>
-          <li>• Discovery facilitation and cross-functional stakeholder alignment</li>
           <li>• Enterprise-scale application design and delivery</li>
         </ul>
 
@@ -62,7 +72,7 @@ export default function AboutPage() {
           >
             LinkedIn
           </a>
-          . You can also explore{" "}
+          . Explore the live products:{" "}
           <a
             href="https://orixlink.vercel.app"
             target="_blank"
@@ -70,8 +80,26 @@ export default function AboutPage() {
             className="text-gold underline hover:no-underline"
           >
             OrixLink AI
-          </a>{" "}
-          (live product).
+          </a>
+          ,{" "}
+          <a
+            href="https://health-literacy-ai.vercel.app"
+            target="_blank"
+            rel="noreferrer"
+            className="text-gold underline hover:no-underline"
+          >
+            HealthLiteracy AI
+          </a>
+          , and{" "}
+          <a
+            href="https://clearchannel-vestara.vercel.app"
+            target="_blank"
+            rel="noreferrer"
+            className="text-gold underline hover:no-underline"
+          >
+            ClearChannel by Vestara
+          </a>
+          .
         </p>
 
         <div className="mt-12">
