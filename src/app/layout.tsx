@@ -27,7 +27,7 @@ const monoFont = DM_Mono({
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null);
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://hannahkraulikpagade.com");
 
 const defaultTitle =
   "Hannah Kraulik Pagade | Clinical AI Builder, Conversational Designer, Healthcare Product";
@@ -36,7 +36,7 @@ const defaultDescription =
   "I build AI products clinical environments demand. 15 years of healthcare operations as field research. Live work: OrixLink AI, HealthLiteracy AI, ClearChannel by Vestara.";
 
 export const metadata: Metadata = {
-  ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
+  metadataBase: new URL(siteUrl),
   title: {
     default: defaultTitle,
     template: "%s | Hannah Kraulik Pagade",
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     siteName: "Hannah Kraulik Pagade",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: defaultTitle,
     description: defaultDescription,
   },
