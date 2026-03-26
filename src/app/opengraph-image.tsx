@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "Hannah Kraulik Pagade — Clinical AI Builder, Conversational Designer";
+  "Hannah Kraulik Pagade — Conversational AI, Product & UX Strategy";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const runtime = "edge";
@@ -85,7 +85,7 @@ export default function OgImage() {
             display: "flex",
           }}
         >
-          Clinical AI Builder · Conversational Designer · Healthcare Product
+          Conversational AI · Product and UX · Shipped work you can try
         </div>
 
         {/* Projects */}

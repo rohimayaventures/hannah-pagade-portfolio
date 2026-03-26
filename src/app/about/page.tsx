@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Product and UX strategist — conversational AI, dialogue systems, intent architecture, and high-stakes clinical UX. 15+ years in healthcare and operations.",
+    "Conversational AI and product design. Live work: OrixLink AI, HealthLiteracy AI, ClearChannel by Vestara.",
 };
 
 const productSkills = [
@@ -87,10 +87,10 @@ export default function AboutPage() {
           </FadeIn>
           <FadeIn delay={100}>
             <p className="mt-8 max-w-2xl font-body text-lg leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.9)" }}>
-              AI product manager, conversational UX strategist, and builder. I
-              take products from zero to one and design the conversation systems,
-              intent architectures, and multi-turn flows that make AI work in
-              complex, regulated environments.
+              I design and ship conversational AI products: dialogue systems,
+              intent architecture, and multi-turn flows where mistakes are
+              costly. The work on this site is the best record of how I think
+              and build.
             </p>
           </FadeIn>
           <FadeIn delay={200}>
@@ -125,15 +125,15 @@ export default function AboutPage() {
               >
                 ClearChannel by Vestara
               </a>{" "}
-              (enterprise NLU routing for financial services). Each one built end
-              to end: product strategy, conversation design, prompt architecture,
-              and full-stack delivery.
+              (enterprise NLU routing for financial services). Each one is
+              documented as a case study here, from problem framing through what
+              shipped.
             </p>
           </FadeIn>
         </div>
       </section>
 
-      {/* Background narrative */}
+      {/* Story — work-first; no invented biography */}
       <section
         className="w-full px-6 py-16 sm:px-8 md:px-16"
         style={{ backgroundColor: "#0a0f18" }}
@@ -141,7 +141,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-3xl">
           <FadeIn>
             <h2 className="font-display text-2xl" style={{ color: "var(--cream)" }}>
-              Background
+              Beyond the demos
             </h2>
             <div
               className="mt-3 h-px w-10 opacity-50"
@@ -150,23 +150,36 @@ export default function AboutPage() {
           </FadeIn>
           <FadeIn delay={100}>
             <p className="mt-8 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.8)" }}>
-              I spent 15+ years in healthcare and operations across acute care,
-              rehabilitation, and post-acute settings. I led EHR implementations,
-              care coordination platform rollouts, and cross-functional programs
-              spanning clinical, IT, compliance, and operations teams. That work
-              taught me how complex organizations actually make decisions, where
-              technology fails its users, and what it takes to ship in regulated
-              environments.
+              I am not using this page to compress a whole career into a few
+              paragraphs. If you want to understand how I work, start with the
+              case studies and the live products. They show the problems I care
+              about, how I structure conversations and systems, and what I ship.
             </p>
           </FadeIn>
           <FadeIn delay={200}>
             <p className="mt-6 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.8)" }}>
-              I left the bedside to build the products that should have existed
-              all along. Now I design conversational AI systems, intent
-              architectures, and multi-turn dialogue flows for healthcare,
-              financial services, and enterprise SaaS. I bring discovery
-              research, stakeholder facilitation, and product strategy together
-              with the technical ability to ship what I design.
+              If you are hiring or exploring a collaboration and need the fuller
+              picture of my background and fit for a role, the right next step is
+              a conversation. Use the{" "}
+              <Link
+                href="/contact"
+                className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                style={{ color: "var(--gold)" }}
+              >
+                contact form
+              </Link>{" "}
+              or{" "}
+              <a
+                href="https://www.linkedin.com/in/hannah-pagade"
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                style={{ color: "var(--gold)" }}
+              >
+                LinkedIn
+              </a>
+              , and I will respond with context that matches what you actually
+              need.
             </p>
           </FadeIn>
           <FadeIn delay={300}>

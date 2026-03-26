@@ -85,10 +85,9 @@ export default function Hero() {
           className="mb-8 max-w-2xl font-body text-base leading-relaxed opacity-90 sm:text-lg md:text-xl"
           style={{ color: "var(--cream)" }}
         >
-          From discovery and prioritization to shipped AI products: multi-turn
-          dialogue, intent architecture, and role-adaptive flows in regulated,
-          high-stakes environments. Live work: OrixLink AI, HealthLiteracy AI
-          &amp; ClearChannel by Vestara. 15+ years in healthcare and operations.
+          Multi-turn dialogue, intent architecture, and role-adaptive flows in
+          high-stakes, regulated contexts. Live work: OrixLink AI,
+          HealthLiteracy AI &amp; ClearChannel by Vestara.
         </p>
 
         {/* Interactive focus chips */}

@@ -30,10 +30,10 @@ const siteUrl =
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://hannahkraulikpagade.com");
 
 const defaultTitle =
-  "Hannah Kraulik Pagade | Clinical AI Builder, Conversational Designer, Healthcare Product";
+  "Hannah Kraulik Pagade | Conversational AI, Product & UX Strategy";
 
 const defaultDescription =
-  "I build AI products clinical environments demand. 15+ years in healthcare and operations as field research. Live work: OrixLink AI, HealthLiteracy AI, ClearChannel by Vestara.";
+  "Shipped conversational AI: OrixLink AI, HealthLiteracy AI, ClearChannel by Vestara. Product, conversation design, and implementation.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
