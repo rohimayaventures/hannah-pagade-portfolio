@@ -31,7 +31,7 @@ Most candidates in AI product and UX roles come from one direction — either te
 
 HANNAH'S LIVE PORTFOLIO PROJECTS:
 1. OrixLink AI — triage.rohimaya.ai — LIVE
-   Universal clinical triage and diagnosis. Any symptom, any person, no prior diagnosis required. Structured differential, urgency tiers, red flag detection, refusal protocol. Built on Claude API, Next.js, Supabase. Validated against compartment syndrome — a real clinical scenario involving her husband's post-cardiac cath complications. This is not a demo. It is a working clinical product.
+   Universal clinical triage and diagnosis. Any symptom, any person, no prior diagnosis required. Structured differential, four discrete urgency tiers, red flag detection, role-adaptive output across patient, family, and clinician modes, and a validated refusal escalation protocol. Built on Claude API, Next.js, Supabase. Validated against real clinical presentations including forearm compartment syndrome post-cardiac catheterization involving her husband Prasad. This is not a demo. It is a working clinical product.
 
 2. HealthLiteracy AI — literacy.rohimaya.ai — LIVE
    Translates discharge summaries, lab results, and clinical notes into plain language. 12 languages, 3 reading levels, AI verification pass that checks its own output for omissions. Built because 88% of Americans have less-than-proficient health literacy and discharge instructions are still written at a 12th grade reading level.

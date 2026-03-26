@@ -35,9 +35,10 @@ export const caseStudies: CaseStudy[] = [
     order: 1,
     slug: "orixlink-ai",
     title: "OrixLink AI",
+    tagline: "Where every symptom finds its answer.",
     subtitle:
       "OrixLink AI accepts any symptom from any person and returns a structured clinical differential with urgency triage, red flag detection, care pathway recommendations, and plain-language reasoning. No login. No prior diagnosis required. Built on Next.js 16 and the Claude API under Rohimaya Health AI.",
-    tags: ["CLINICAL-AI", "PRODUCT-DESIGN", "FULL-STACK"],
+    tags: ["CLINICAL-AI", "CONVERSATIONAL", "FULL-STACK"],
     embedType: "live",
     embedUrl: "https://orixlink.vercel.app",
     liveUrl: "https://orixlink.vercel.app",
@@ -49,18 +50,18 @@ export const caseStudies: CaseStudy[] = [
       "At least 12 million Americans experience a diagnostic error in outpatient settings each year. Most are preventable. Most begin at the front end of the clinical encounter, before a physician is involved, when a patient with an undifferentiated symptom presentation has no structured tool to help them or their care team reason through what might be happening. OrixLink AI is that tool.",
     processSteps: [
       "The single non-negotiable constraint that shaped everything: any symptom, any person, no prior diagnosis required. Every existing triage tool narrows its scope to reduce complexity. OrixLink accepts the full scope and manages it through prompt engineering rather than feature limitation. The clinical logic — red flag taxonomy, urgency tiers, care pathway language — came directly from 15 years of bedside nursing, not from a product spec.",
-      "The core product work was the Claude system prompt. Building a prompt that produces a reliable, structured clinical differential from free-text symptom input, enforces attribution language, surfaces urgency as a discrete field, and detects red flag presentations without hallucinating diagnoses required iterating through dozens of constraint combinations. The Meridian Oracle design system (obsidian, gold, cream) was built alongside the product as the visual language for the Rohimaya Health AI brand family, designed to signal clinical authority to both clinicians and patients.",
-      "A live, free, universal triage and diagnosis tool with structured differential output, discrete urgency tiers, red flag detection, care pathway recommendations, and plain-language reasoning alongside clinical reasoning. Deployed on Vercel, built on Next.js 16, TypeScript, Tailwind CSS v4, Claude API, and Supabase.",
+      "The core product work was the Claude system prompt. Building a prompt that produces a reliable, structured clinical differential from free-text symptom input, enforces attribution language, surfaces urgency as a discrete field, detects red flag presentations, adapts output across patient and clinician modes, and activates a refusal escalation protocol without hallucinating diagnoses required iterating through dozens of constraint combinations across six architectural layers. The Meridian Oracle design system — obsidian, gold, cream, Cormorant Garamond, DM Sans, DM Mono — was built alongside the product as the visual language for the Rohimaya Health AI brand family.",
+      "A live, free, universal triage and diagnosis tool validated against real clinical presentations including forearm compartment syndrome post-cardiac catheterization. Structured differential output, four discrete urgency tiers, red flag detection, care pathway recommendations, role-adaptive output, refusal protocol, and living conversation that updates the assessment as new symptoms arrive. Deployed on Vercel, built on Next.js 16, TypeScript, Tailwind CSS v4, Claude API, and Supabase.",
     ],
     impactLine:
       "OrixLink AI is positioned at the highest-risk moment in the diagnostic process: before the physician encounter, when a patient or caregiver is trying to decide whether this is an emergency or something that can wait until Monday. Getting that decision wrong costs lives. The research agrees, and so does everyone who has worked a clinical floor.",
     processAngle:
-      "Built end to end on Claude API, Next.js, Tailwind v4, Supabase, and Vercel. Includes a production refusal protocol designed around compartment syndrome false-negative risk.",
+      "Built end to end on Claude API, Next.js, Tailwind v4, Supabase, and Vercel. Includes a validated refusal protocol tested against compartment syndrome post-cardiac catheterization.",
     cardSummary:
       "Universal clinical triage. Any symptom, any person. Structured differential, urgency tiers, refusal protocol.",
     role: "Conversation UX Lead & Prompt Architect",
     timeline: "2025 — Present",
-    keyOutcome: "Live product with structured differential, urgency tiers, and production refusal protocol",
+    keyOutcome: "Live product with structured differential, four urgency tiers, validated refusal protocol, and Supabase session persistence",
   },
   {
     featured: false,
@@ -70,7 +71,7 @@ export const caseStudies: CaseStudy[] = [
     tagline: "Your medical records, in your language.",
     subtitle:
       "HealthLiteracy AI translates discharge summaries, lab results, and clinical notes into plain language a patient can actually use. Paste, upload a PDF, or speak. Choose Simple, Clear, or Complete. Twelve languages. Urgent action items surfaced as visual cards before the translation body.",
-    tags: ["HEALTH-EQUITY", "AI-PRODUCT", "FULL-STACK"],
+    tags: ["HEALTH-EQUITY", "AI-PRODUCT", "FULL-STACK", "PATIENT-FACING"],
     embedType: "live",
     embedUrl: "https://health-literacy-ai.vercel.app",
     liveUrl: "https://health-literacy-ai.vercel.app",
@@ -83,7 +84,7 @@ export const caseStudies: CaseStudy[] = [
     processSteps: [
       "I did not need to conduct user research for this project. I have conducted it for 15 years on every shift. The constraints were clear before the first line of code: no login, no setup, urgent items at the top, built-in translation in the languages my actual patients speak. The tool had to serve patients who might be scared, tired, medicated, or not literate in English — all at once.",
       "The core product decision was the Claude system prompt. Translation is easy. A translation that a nurse would trust to hand to a patient requires specific constraints: every medical term explained in the same sentence, urgent items returned as a structured array separate from the translation body, attribution language that prevents the tool from being read as a diagnosis, and a verification pass that checks its own work for omissions. Twelve languages and voice input were built at launch, not deferred, because the population this serves is not well-served by English-only MVP thinking.",
-      "A free, no-login patient document translation tool with three input methods, twelve languages, three reading levels, urgent item cards, side-by-side view, copy and share, and a built-in AI verification pass that checks the translation against the original for omissions. Deployed on Vercel, sessions persisted in Supabase, built on Next.js 15 and the Claude API.",
+      "A free, no-login patient document translation tool with three input methods, twelve languages, three reading levels, urgent item cards, side-by-side view, copy and share, and a built-in AI verification pass that checks the translation against the original for omissions. Deployed on Vercel at literacy.rohimaya.ai, sessions persisted in Supabase, built on Next.js 15 and the Claude API.",
     ],
     impactLine:
       "This project exists because discharge instructions written at a 12th-grade reading level do not help a patient who reads at a 5th-grade level, speaks Haitian Creole at home, and is scared. That gap is preventable with a two-second API call. The research agrees.",
@@ -93,7 +94,7 @@ export const caseStudies: CaseStudy[] = [
       "Patient document translation. Twelve languages, three reading levels. Urgent items surfaced first.",
     role: "Product & Conversation Design",
     timeline: "2025 — Present",
-    keyOutcome: "Twelve-language translation with AI verification and shareable sessions",
+    keyOutcome: "Twelve-language translation with AI verification, three reading levels, and shareable sessions",
   },
   {
     order: 4,
