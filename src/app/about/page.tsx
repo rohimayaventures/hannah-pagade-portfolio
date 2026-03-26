@@ -238,6 +238,9 @@ export default function AboutPage() {
               </a>
               .
             </p>
+            <p className="mt-4 font-body text-sm text-cream/50 italic">
+              Resume available on request.
+            </p>
           </FadeIn>
 
           <FadeIn delay={150}>
