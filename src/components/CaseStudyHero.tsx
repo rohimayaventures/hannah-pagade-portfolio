@@ -25,13 +25,13 @@ export default function CaseStudyHero({
               {caseStudy.title}
             </h1>
             <GoldRule />
-            <p className="mt-6 max-w-3xl font-body text-lg text-mid-gray md:text-2xl">
+            <p className="mt-6 max-w-3xl font-body text-lg text-cream/80 md:text-2xl">
               {caseStudy.problemStatement ?? caseStudy.subtitle}
             </p>
           </div>
 
           {(caseStudy.role || caseStudy.timeline) && (
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 font-body text-sm text-mid-gray">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 font-body text-sm text-cream/80">
               {caseStudy.role && <span>{caseStudy.role}</span>}
               {caseStudy.timeline && <span>{caseStudy.timeline}</span>}
             </div>
@@ -43,7 +43,7 @@ export default function CaseStudyHero({
             ))}
           </div>
 
-          <div className="rounded-xl border border-light-gray bg-white/5 px-4 py-3 text-sm font-body text-mid-gray">
+          <div className="rounded-xl border border-light-gray bg-white/5 px-4 py-3 text-sm font-body text-cream/80">
             Status: {statusLabel}
           </div>
         </div>

@@ -23,7 +23,7 @@ export default function AboutPage() {
           dialogue systems, intent architectures, and role-adaptive conversation
           flows for high-stakes environments.
         </p>
-        <p className="mt-6 max-w-2xl font-body text-mid-gray">
+        <p className="mt-6 max-w-2xl font-body text-cream/80">
           I designed and shipped the complete conversation UX for OrixLink AI, a
           live clinical triage product on the Claude API — including
           NLU-informed intent modeling, escalation patterns, and prompt
@@ -35,7 +35,7 @@ export default function AboutPage() {
         <h2 className="mt-12 font-display text-2xl text-cream">
           Core Competencies
         </h2>
-        <ul className="mt-4 space-y-2 font-body text-mid-gray">
+        <ul className="mt-4 space-y-2 font-body text-cream/80">
           <li>• Conversation design: IVR, chatbot, AI-driven interfaces</li>
           <li>• Intent architecture, entity design, NLU model development</li>
           <li>• AI prompt writing and generative AI conversational strategy</li>

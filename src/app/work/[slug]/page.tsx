@@ -47,7 +47,7 @@ export default function CaseStudyPage({
               <h2 className="font-display text-2xl text-cream">
                 In Progress
               </h2>
-              <p className="mt-4 max-w-3xl font-body text-mid-gray">
+              <p className="mt-4 max-w-3xl font-body text-cream/80">
                 {study.projectDescription}
               </p>
               <div className="mt-6 inline-flex items-center rounded-full border border-gold px-4 py-2 text-sm font-body text-gold">

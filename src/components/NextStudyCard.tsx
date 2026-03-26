@@ -32,7 +32,7 @@ export default function NextStudyCard({
               <div className="font-display text-2xl text-cream">
                 {next.title}
               </div>
-              <div className="mt-2 font-body text-mid-gray">
+              <div className="mt-2 font-body text-cream/80">
                 {next.subtitle}
               </div>
             </div>

@@ -42,7 +42,7 @@ export default function EmbedBlock({
         <div className="font-display text-xl text-cream">
           Live demo
         </div>
-        <div className="mt-2 font-body text-mid-gray">
+        <div className="mt-2 font-body text-cream/80">
           A live embed for this project will be available when the demo is
           published.
         </div>
@@ -53,7 +53,7 @@ export default function EmbedBlock({
   return (
     <section className="rounded-xl border border-light-gray bg-white/5 p-0">
       <div className="flex items-center justify-between gap-4 border-b border-light-gray px-6 py-4">
-        <div className="font-body text-sm text-mid-gray">
+        <div className="font-body text-sm text-cream/80">
           Live demo — {title}
         </div>
 
@@ -74,7 +74,7 @@ export default function EmbedBlock({
           <div className="font-display text-xl text-cream">
             Embed blocked
           </div>
-          <div className="mt-2 font-body text-mid-gray">
+          <div className="mt-2 font-body text-cream/80">
             Your browser may be blocking this iframe. Use the button above
             to open the source link.
           </div>

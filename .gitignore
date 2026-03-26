@@ -29,9 +29,12 @@ pnpm-debug.log*
 
 # env files (never commit secrets — keep .env.example tracked)
 .env
+.env.*
 .env*.local
 .env.development
 .env.production
+!.env.example
+.envrc
 
 # vercel
 .vercel

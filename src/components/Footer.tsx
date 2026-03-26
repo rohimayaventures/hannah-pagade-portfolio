@@ -17,7 +17,7 @@ export default function Footer() {
           >
             Hannah Pagade
           </p>
-          <p className="mt-2 max-w-xs font-body text-sm text-mid-gray">
+          <p className="mt-2 max-w-xs font-body text-sm text-cream/70">
             UX strategist & conversational AI design. Meridian Oracle palette.
           </p>
         </div>
@@ -45,7 +45,7 @@ export default function Footer() {
         </nav>
       </div>
       <div className="mx-auto mt-10 max-w-6xl border-t border-cream/10 px-8 pt-8 md:px-16">
-        <p className="font-body text-xs text-mid-gray">
+        <p className="font-body text-xs text-cream/70">
           © {new Date().getFullYear()} Hannah Pagade. All rights reserved.
         </p>
       </div>

@@ -25,7 +25,7 @@ export default function ProcessSection({
           <div className="font-display text-lg text-cream">
             Step 1
           </div>
-          <div className="mt-3 font-body text-mid-gray">
+          <div className="mt-3 font-body text-cream/80">
             {steps[0]}
           </div>
         </div>
@@ -33,7 +33,7 @@ export default function ProcessSection({
           <div className="font-display text-lg text-cream">
             Step 2
           </div>
-          <div className="mt-3 font-body text-mid-gray">
+          <div className="mt-3 font-body text-cream/80">
             {steps[1]}
           </div>
         </div>
@@ -41,7 +41,7 @@ export default function ProcessSection({
           <div className="font-display text-lg text-cream">
             Step 3
           </div>
-          <div className="mt-3 font-body text-mid-gray">
+          <div className="mt-3 font-body text-cream/80">
             {steps[2]}
           </div>
         </div>
@@ -52,7 +52,7 @@ export default function ProcessSection({
           <div className="font-display text-lg text-cream">
             Impact
           </div>
-          <p className="mt-3 font-body text-mid-gray">
+          <p className="mt-3 font-body text-cream/80">
             {impactLine}
           </p>
         </div>
