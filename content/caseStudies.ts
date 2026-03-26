@@ -142,7 +142,7 @@ export const caseStudies: CaseStudy[] = [
     embedUrl: "https://clearchannel-vestara.vercel.app/",
     liveUrl: "https://clearchannel-vestara.vercel.app/",
     status: "live",
-    coverImage: "",
+    coverImage: "/images/clearchannel-landing.png",
     projectDescription:
       "A real-time conversational design lab for enterprise financial services contact centers. ClearChannel makes NLU routing logic visible and auditable by showing intent, confidence, sentiment, and channel-specific responses in one flow.",
     problemStatement:
