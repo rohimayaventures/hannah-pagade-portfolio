@@ -3,10 +3,33 @@ import FadeIn from "@/components/FadeIn";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+const aboutDesc =
+  "Hannah Kraulik Pagade, LPN and founder of Rohimaya Health AI. Live AI products: OrixLink AI, HealthLiteracy AI, ClearChannel. MS AI/ML at CU Boulder (in progress). hannahkraulikpagade.com.";
+
 export const metadata: Metadata = {
   title: "About",
-  description:
-    "Hannah Kraulik Pagade, LPN and founder of Rohimaya Health AI. Live AI products: OrixLink AI, HealthLiteracy AI, ClearChannel. MS AI/ML at CU Boulder (in progress). hannahkraulikpagade.com.",
+  description: aboutDesc,
+  openGraph: {
+    title: "About",
+    description: aboutDesc,
+    url: "/about",
+    type: "website",
+    siteName: "Hannah Kraulik Pagade",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Hannah Kraulik Pagade — LPN, Rohimaya Health AI, live AI products",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About — Hannah Kraulik Pagade",
+    description: aboutDesc,
+    images: ["/opengraph-image"],
+  },
 };
 
 const productSkills = [
@@ -184,6 +207,59 @@ export default function AboutPage() {
                 GitHub
               </a>
             </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* How I work */}
+      <section
+        className="w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
+        style={{ backgroundColor: "#0c1119" }}
+      >
+        <div className="mx-auto max-w-3xl">
+          <FadeIn>
+            <h2
+              className="font-display text-2xl"
+              style={{ color: "var(--cream)" }}
+            >
+              How I work
+            </h2>
+            <div
+              className="mt-3 h-px w-10 opacity-50"
+              style={{ backgroundColor: "var(--gold)" }}
+            />
+          </FadeIn>
+          <FadeIn delay={80}>
+            <ol
+              className="mt-8 list-decimal space-y-4 pl-5 font-body text-sm leading-relaxed sm:text-base"
+              style={{ color: "rgba(244, 239, 230, 0.88)" }}
+            >
+              <li>
+                <span style={{ color: "var(--cream)" }}>I start from constraints, not feature lists.</span>{" "}
+                Safety and governance, who the product is for, what “good” output looks like,
+                and when the model must stay assistive instead of authoritative. The
+                constraint set is the spec, whether the domain is clinical, financial, or
+                enterprise conversational.
+              </li>
+              <li>
+                <span style={{ color: "var(--cream)" }}>I design the intelligence layer first.</span>{" "}
+                Structured outputs, attribution language, and guardrails in the prompts
+                before the UI does the selling. If the model behavior is not trustworthy,
+                the interface cannot fix it.
+              </li>
+              <li>
+                <span style={{ color: "var(--cream)" }}>I ship in small loops.</span>{" "}
+                I build in Cursor, deploy to Vercel, and test on real documents, transcripts,
+                and utterances. Then I iterate on the failure modes users would actually
+                hit in production, not just demo paths.
+              </li>
+              <li>
+                <span style={{ color: "var(--cream)" }}>I judge success by clarity of scope.</span>{" "}
+                Someone using the product should know what it does, what it refuses to do,
+                and what to do next, without mistaking an assistive tool for an authority
+                they should not rely on alone.
+              </li>
+            </ol>
           </FadeIn>
         </div>
       </section>

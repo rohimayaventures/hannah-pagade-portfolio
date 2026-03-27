@@ -9,6 +9,7 @@ import {
   caseStudies,
   getCaseStudyBySlug,
 } from "@/content/caseStudies";
+import { ogDescription } from "@/lib/seo";
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
@@ -21,9 +22,42 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const study = getCaseStudyBySlug(params.slug);
   if (!study) return { title: "Not Found" };
+
+  const descSource = study.cardSummary ?? study.subtitle;
+  const description = ogDescription(descSource);
+  const pageTitle = study.title;
+  const ogTitle = `${pageTitle} | Hannah Kraulik Pagade`;
+  const ogImagePath = study.coverImage || "/opengraph-image";
+  const ogImage =
+    study.coverImage ?
+      {
+        url: study.coverImage,
+        alt: `${study.title} — case study preview`,
+      }
+    : {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: `${study.title} — Hannah Kraulik Pagade portfolio`,
+      };
+
   return {
-    title: study.title,
-    description: study.subtitle,
+    title: pageTitle,
+    description,
+    openGraph: {
+      title: ogTitle,
+      description,
+      url: `/work/${study.slug}`,
+      type: "article",
+      siteName: "Hannah Kraulik Pagade",
+      images: [ogImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description,
+      images: [ogImagePath],
+    },
   };
 }
 

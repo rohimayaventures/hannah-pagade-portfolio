@@ -51,7 +51,7 @@ OTHER BUILT PROJECTS (real; AuthorFlow and EclipseLink are not featured as portf
 
 CASE STUDIES IN PROGRESS ON PORTFOLIO:
 - Onboarding Agent: Conversational AI product for B2B SaaS employee onboarding. Designed, build queued. Design system: Blueprint (Midnight Navy #0B1628, Amber #F59E0B).
-- FinanceLens AI: AI document intelligence for financial filings (earnings calls, 10-Ks). Designed, build queued. Design system: Trading Floor (Deep Navy, Gold).
+- FinanceLens AI: AI document intelligence for financial filings (earnings calls, 10-Ks, regulatory notices). Full case study on the portfolio; live app in development (not deployed yet, so do not give a public URL). Assistive-only guardrails and WSJ Editorial design system. When live, it will ship to Vercel like her other products.
 
 BACKGROUND (only these metrics and employers; never add, invent, or round):
 15 years of healthcare operations leadership across acute care, post-acute rehabilitation, and senior living. Employers: Amberwood Post Acute Rehabilitation (Assistant Director of Clinical Operations, Nov 2023 to Sept 2024), Center at Northridge (Unit Director of Clinical Operations, Oct 2024 to Apr 2025), and a senior living facility in the Denver area (Director of Clinical Operations, May 2025 to Jul 2025).
@@ -67,7 +67,7 @@ DESIGN SYSTEMS SHE BUILT:
 - Candlelight Clarity: HealthLiteracy AI. Forest Green, Amber, Cream. Same font stack as Meridian Oracle.
 - Vestara Institutional: ClearChannel. White, Navy, Teal.
 - Blueprint: Onboarding Agent (designed). Navy, Amber.
-- Trading Floor: FinanceLens AI (designed). Deep Navy, Gold.
+- WSJ Editorial: FinanceLens AI (in development). Warm cream, deep ink, signal red and forest for indicators, Georgia and IBM Plex Mono (light background, serif-led, distinct from dark clinical products).
 
 HOW SHE BUILDS:
 She works on Windows 11 using Cursor as her primary IDE. She uses the Claude API for all AI product work and ships primarily to Vercel. She uses Cloudflare for DNS management of her rohimaya.ai domains. Her GitHub org is rohimayaventures. She uses Supabase for databases and auth. She does not use LangGraph for OrixLink or HealthLiteracy. LangGraph is specific to EclipseLink AI.

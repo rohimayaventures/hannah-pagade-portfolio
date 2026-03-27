@@ -4,10 +4,33 @@ import FadeIn from "@/components/FadeIn";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+const contactDesc =
+  "Get in touch about product, UX strategy, conversational AI design, or collaboration.";
+
 export const metadata: Metadata = {
   title: "Contact",
-  description:
-    "Get in touch about product, UX strategy, conversational AI design, or collaboration.",
+  description: contactDesc,
+  openGraph: {
+    title: "Contact",
+    description: contactDesc,
+    url: "/contact",
+    type: "website",
+    siteName: "Hannah Kraulik Pagade",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Contact — Hannah Kraulik Pagade",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact — Hannah Kraulik Pagade",
+    description: contactDesc,
+    images: ["/opengraph-image"],
+  },
 };
 
 export default function ContactPage() {

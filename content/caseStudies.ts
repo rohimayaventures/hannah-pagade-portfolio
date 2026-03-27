@@ -118,17 +118,34 @@ export const caseStudies: CaseStudy[] = [
     order: 5,
     slug: "financelens-ai",
     title: "FinanceLens AI",
+    tagline: "Financial documents, in plain English.",
     subtitle:
-      "FinanceLens AI translates earnings call transcripts, 10-K filings, and regulatory notices into plain language. Paste or upload. The Claude-powered output surfaces what the company said, what it actually means, key numbers with context, and items worth a closer look.",
-    tags: ["FINTECH", "AI-PRODUCT", "FULL-STACK"],
+      "FinanceLens AI translates earnings calls, 10-K filings, and regulatory notices into five structured intelligence sections: plain language, interpretation, key numbers, language drift signals, and flags worth a closer look. Compare two documents side by side. Generate a Canva presentation deck in one click. Assistive analysis only, not financial advice.",
+    tags: ["FINTECH", "AI-PRODUCT", "FULL-STACK", "DOCUMENT-INTELLIGENCE"],
     embedType: "coming-soon",
     embedUrl: "",
     liveUrl: "",
     status: "coming-soon",
     coverImage: "",
     projectDescription:
-      "FinanceLens AI translates earnings call transcripts, 10-K filings, and regulatory notices into plain language. Paste or upload. The Claude-powered output surfaces what the company said, what it actually means, key numbers with context, and items worth a closer look.",
-    processAngle: "Coming soon.",
+      "FinanceLens AI translates earnings calls, 10-K filings, and regulatory notices into five structured intelligence sections: plain language, interpretation, key numbers, language drift signals, and flags worth a closer look. Compare two documents side by side. Generate a Canva presentation deck in one click. Assistive analysis only, not financial advice.",
+    problemStatement:
+      'Executives write earnings calls to communicate selectively. The language is deliberate. "We believe we are well-positioned" is not the same as "we are confident we will deliver." Most people reading these documents lack the tools to read what the language is actually signaling. FinanceLens surfaces those signals.',
+    processSteps: [
+      "The core constraint was the difference between translation and intelligence. Translation removes complexity. Intelligence reveals the complexity beneath deliberately simple language. Every design decision (the five-section structure, drift detection, document type selector, explicit guardrails, Canva integration) follows from that distinction.",
+      "The core product work was a multi-layer Claude prompt architecture producing five structurally distinct output sections with analysis logic that varies by document type. An earnings call is analyzed for guidance language and management tone. A 10-K is analyzed for auditor changes, revenue concentration, and risk factor shifts. A regulatory notice is analyzed for compliance obligations and enforcement language. Compare mode runs a third Claude pass that diffs two analyses and surfaces what changed, what was dropped, and how confidence shifted. Every output section uses attribution language throughout (the same constraint architecture that prevents OrixLink from functioning as a diagnostic instrument applies here to prevent FinanceLens from functioning as a financial advisor).",
+      "A financial document intelligence tool with three document type modes, five structured output sections, language drift detection with phrase-level tagging, claim confidence scoring, two-document compare mode, one-click Canva presentation generation, and persistent assistive-only disclaimers throughout. Deployed on Vercel, sessions persisted in Supabase, built on Next.js 15 and the Claude and Canva APIs.",
+    ],
+    impactLine:
+      "Three to four hours of analyst work (read the document, take notes, write a summary, build slides) replaced by one workflow: ingest, analyze, present. That is the product. And it is honest about what it is: an assistive intelligence layer, not a financial advisor.",
+    processAngle:
+      "Document intelligence with explicit guardrails: attribution language, no buy or sell or hold recommendations, persistent disclaimers. WSJ Editorial design system (light, serif-led) for financial editorial register.",
+    cardSummary:
+      "Financial document intelligence. Earnings calls, 10-Ks, regulatory notices. Drift detection, confidence scoring, one-click decks.",
+    role: "Product Design and Prompt Architecture",
+    timeline: "2026",
+    keyOutcome:
+      "Five-section financial intelligence with language drift detection, claim confidence scoring, explicit assistive-only guardrails, and one-click Canva deck generation",
   },
   {
     featured: false,
