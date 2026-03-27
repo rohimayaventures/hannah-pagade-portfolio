@@ -43,19 +43,51 @@ const techStack = [
   "React",
   "Claude API",
   "OpenAI API",
-  "Supabase",
-  "Vercel",
+  "FastAPI",
   "Python",
+  "ElevenLabs",
+  "Supabase",
+  "Cloudflare",
+  "Stripe",
+  "Vercel",
   "Figma",
   "Cursor",
+  "Git",
+];
+
+const products = [
+  {
+    name: "OrixLink AI",
+    url: "https://triage.rohimaya.ai",
+    urlDisplay: "triage.rohimaya.ai",
+    description:
+      "Universal triage and diagnosis on the Claude API. Any symptom, any person, no prior diagnosis required.",
+    stack: "Next.js 16 · TypeScript · Tailwind v4 · Claude API · Supabase",
+  },
+  {
+    name: "HealthLiteracy AI",
+    url: "https://literacy.rohimaya.ai",
+    urlDisplay: "literacy.rohimaya.ai",
+    description:
+      "Free patient-facing tool that translates clinical discharge documents into plain language at three reading levels across 12 languages.",
+    stack: "Next.js · Claude API · Supabase · PDF upload · Voice input",
+  },
+  {
+    name: "ClearChannel by Vestara",
+    url: "https://clearchannel-vestara.vercel.app",
+    urlDisplay: "clearchannel-vestara.vercel.app",
+    description:
+      "Enterprise NLU routing simulator demonstrating IVR, chatbot, and agent assist channel handling for a fictional financial services firm. 18-intent NLU architecture with OpenAI voice integration.",
+    stack: "Next.js 15 · Claude API · OpenAI Whisper · TTS",
+  },
 ];
 
 export default function AboutPage() {
   return (
     <Layout>
-      {/* Hero section */}
+      {/* Hero */}
       <section
-        className="relative w-full overflow-hidden px-6 py-16 sm:px-8 md:px-16"
+        className="relative w-full overflow-hidden px-6 py-14 sm:px-8 sm:py-16 md:px-16"
         style={{ backgroundColor: "var(--obsidian)" }}
       >
         <div
@@ -70,7 +102,7 @@ export default function AboutPage() {
         <div className="relative mx-auto max-w-3xl">
           <FadeIn>
             <p
-              className="mb-4 text-xs font-body uppercase tracking-[0.2em]"
+              className="mb-3 text-xs font-body uppercase tracking-[0.2em]"
               style={{ color: "var(--gold)", opacity: 0.8 }}
             >
               About
@@ -81,27 +113,51 @@ export default function AboutPage() {
             >
               Hannah Kraulik Pagade
             </h1>
+            <p
+              className="mt-2 font-body text-xs uppercase tracking-[0.14em]"
+              style={{ color: "var(--gold)", opacity: 0.75 }}
+            >
+              AI Product Manager&nbsp;&nbsp;·&nbsp;&nbsp;AI Builder&nbsp;&nbsp;·&nbsp;&nbsp;UX Strategist
+            </p>
             <div
-              className="mt-4 h-px w-16 opacity-60"
+              className="mt-4 h-px w-14 opacity-60"
               style={{ backgroundColor: "var(--gold)" }}
             />
           </FadeIn>
+
           <FadeIn delay={100}>
-            <p className="mt-8 max-w-2xl font-body text-lg leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.9)" }}>
+            <p
+              className="mt-8 max-w-2xl font-body text-base leading-relaxed sm:text-lg"
+              style={{ color: "rgba(244, 239, 230, 0.9)" }}
+            >
               I&apos;m a Licensed Practical Nurse at PAM Health Rehabilitation
               Hospital of Westminster in Westminster, Colorado. I&apos;m also
-              the founder of Rohimaya Health AI, where I design and build live AI
-              products with working URLs, not mockups. I work in Cursor and ship
-              with the Claude API. I&apos;m pursuing an MS in Artificial
+              the founder of Rohimaya Health AI, where I design and build live
+              AI products with working URLs, not mockups. I work in Cursor and
+              ship with the Claude API. I&apos;m pursuing an MS in Artificial
               Intelligence and Machine Learning at CU Boulder, expected 2026
-              (in progress, not completed). I co-founded Two Peaks Chai Co. with
-              my husband Prasad: an artisan chai brand here in Westminster, rooted
-              in my Southern US roots and his Mumbai heritage.
+              (in progress, not completed). I co-founded Two Peaks Chai Co.
+              with my spouse: a live artisan chai brand here in
+              Westminster, rooted in my Southern US roots and his Mumbai
+              heritage. Customers can order at{" "}
+              <a
+                href="https://twopeakschai.com"
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                style={{ color: "var(--gold)" }}
+              >
+                twopeakschai.com
+              </a>
+              .
             </p>
           </FadeIn>
+
           <FadeIn delay={200}>
-            <p className="mt-6 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.75)" }}>
-              Portfolio:{" "}
+            <div
+              className="mt-6 flex flex-wrap gap-x-5 gap-y-2 font-body text-sm"
+              style={{ color: "rgba(244, 239, 230, 0.65)" }}
+            >
               <a
                 href="https://hannahkraulikpagade.com"
                 className="underline underline-offset-4 transition-opacity hover:opacity-90"
@@ -109,7 +165,6 @@ export default function AboutPage() {
               >
                 hannahkraulikpagade.com
               </a>
-              . LinkedIn:{" "}
               <a
                 href="https://www.linkedin.com/in/hannah-pagade"
                 target="_blank"
@@ -117,22 +172,33 @@ export default function AboutPage() {
                 className="underline underline-offset-4 transition-opacity hover:opacity-90"
                 style={{ color: "var(--gold)" }}
               >
-                linkedin.com/in/hannah-pagade
+                LinkedIn
               </a>
-              .
-            </p>
+              <a
+                href="https://github.com/rohimayaventures"
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                style={{ color: "var(--gold)" }}
+              >
+                GitHub
+              </a>
+            </div>
           </FadeIn>
         </div>
       </section>
 
       {/* What I built */}
       <section
-        className="w-full px-6 py-16 sm:px-8 md:px-16"
+        className="w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
         style={{ backgroundColor: "#0a0f18" }}
       >
         <div className="mx-auto max-w-3xl">
           <FadeIn>
-            <h2 className="font-display text-2xl" style={{ color: "var(--cream)" }}>
+            <h2
+              className="font-display text-2xl"
+              style={{ color: "var(--cream)" }}
+            >
               What I built and shipped
             </h2>
             <div
@@ -140,62 +206,76 @@ export default function AboutPage() {
               style={{ backgroundColor: "var(--gold)" }}
             />
           </FadeIn>
-          <FadeIn delay={100}>
-            <p className="mt-8 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.85)" }}>
+
+          <div className="mt-8 flex flex-col gap-8">
+            {products.map((p, i) => (
+              <FadeIn key={p.name} delay={i * 80}>
+                <div>
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-body text-base font-medium underline underline-offset-4 transition-opacity hover:opacity-90"
+                      style={{ color: "var(--gold)" }}
+                    >
+                      {p.name}
+                    </a>
+                    <span
+                      className="font-body text-xs"
+                      style={{ color: "rgba(200,169,110,0.5)" }}
+                    >
+                      {p.urlDisplay}
+                    </span>
+                  </div>
+                  <p
+                    className="mt-2 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
+                    style={{ color: "rgba(244, 239, 230, 0.85)" }}
+                  >
+                    {p.description}
+                  </p>
+                  <p
+                    className="mt-1.5 font-body text-xs"
+                    style={{ color: "rgba(244, 239, 230, 0.4)" }}
+                  >
+                    {p.stack}
+                  </p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+
+          <FadeIn delay={300}>
+            <p
+              className="mt-8 font-body text-xs"
+              style={{ color: "rgba(244, 239, 230, 0.4)" }}
+            >
+              All code at{" "}
               <a
-                href="https://triage.rohimaya.ai"
+                href="https://github.com/rohimayaventures"
                 target="_blank"
                 rel="noreferrer"
-                className="underline underline-offset-4 transition-opacity hover:opacity-90"
-                style={{ color: "var(--gold)" }}
+                className="underline underline-offset-4 transition-opacity hover:opacity-80"
+                style={{ color: "rgba(200,169,110,0.65)" }}
               >
-                OrixLink AI
-              </a>{" "}
-              at triage.rohimaya.ai: a universal triage and diagnosis tool built
-              on the Claude API. Any symptom, any person, no prior diagnosis
-              required.
-            </p>
-            <p className="mt-5 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.85)" }}>
-              <a
-                href="https://literacy.rohimaya.ai"
-                target="_blank"
-                rel="noreferrer"
-                className="underline underline-offset-4 transition-opacity hover:opacity-90"
-                style={{ color: "var(--gold)" }}
-              >
-                HealthLiteracy AI
-              </a>{" "}
-              at literacy.rohimaya.ai: a free patient-facing tool that translates
-              clinical discharge documents into plain language at three reading
-              levels across 12 languages.
-            </p>
-            <p className="mt-5 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.85)" }}>
-              <a
-                href="https://clearchannel-vestara.vercel.app"
-                target="_blank"
-                rel="noreferrer"
-                className="underline underline-offset-4 transition-opacity hover:opacity-90"
-                style={{ color: "var(--gold)" }}
-              >
-                ClearChannel by Vestara
-              </a>{" "}
-              at clearchannel-vestara.vercel.app: an enterprise NLU routing
-              simulator for a fictional financial services firm, with IVR,
-              chatbot, and agent assist channel handling. Built with 18-intent NLU
-              architecture and OpenAI voice integration.
+                github.com/rohimayaventures
+              </a>
             </p>
           </FadeIn>
         </div>
       </section>
 
-      {/* My background */}
+      {/* Background */}
       <section
-        className="w-full px-6 py-16 sm:px-8 md:px-16"
+        className="w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
         style={{ backgroundColor: "#0a0f18" }}
       >
         <div className="mx-auto max-w-3xl">
           <FadeIn>
-            <h2 className="font-display text-2xl" style={{ color: "var(--cream)" }}>
+            <h2
+              className="font-display text-2xl"
+              style={{ color: "var(--cream)" }}
+            >
               My background
             </h2>
             <div
@@ -204,16 +284,21 @@ export default function AboutPage() {
             />
           </FadeIn>
           <FadeIn delay={100}>
-            <p className="mt-8 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.85)" }}>
+            <p
+              className="mt-8 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
+              style={{ color: "rgba(244, 239, 230, 0.85)" }}
+            >
               I have 15 years of healthcare operations leadership across acute
-              care, post-acute rehabilitation, and senior living, and 15 years
-              bedside and in operations. Real employers include Amberwood Post
-              Acute Rehabilitation, Center at Northridge, and a senior living
-              facility in Denver. I managed 130+ staff, achieved $1.2M in cost
-              savings through workflow optimization, and maintained 96%
-              regulatory audit success rates.
+              care, post-acute rehabilitation, and senior living. Real employers
+              include Amberwood Post Acute Rehabilitation, Center at Northridge,
+              and a senior living facility in the Westminster area. I managed
+              130+ staff, achieved $1.2M in cost savings through workflow
+              optimization, and maintained 96% regulatory audit success rates.
             </p>
-            <p className="mt-6 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.85)" }}>
+            <p
+              className="mt-6 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
+              style={{ color: "rgba(244, 239, 230, 0.85)" }}
+            >
               I did not come from a product whiteboard. I came from the floor.
               Those 15 years were field research.
             </p>
@@ -221,14 +306,17 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Role targets */}
+      {/* Looking for */}
       <section
-        className="w-full px-6 py-16 sm:px-8 md:px-16"
+        className="w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
         style={{ backgroundColor: "#0c1119" }}
       >
         <div className="mx-auto max-w-3xl">
           <FadeIn>
-            <h2 className="font-display text-2xl" style={{ color: "var(--cream)" }}>
+            <h2
+              className="font-display text-2xl"
+              style={{ color: "var(--cream)" }}
+            >
               What I&apos;m looking for
             </h2>
             <div
@@ -237,11 +325,13 @@ export default function AboutPage() {
             />
           </FadeIn>
           <FadeIn delay={100}>
-            <p className="mt-8 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.85)" }}>
-              I&apos;m targeting AI Product Manager, Head of Product,
-              Conversational UX Strategist, Conversational AI Designer, and
-              Founding PM roles. I&apos;m open to relocation. If this sounds like
-              a fit, use the{" "}
+            <p
+              className="mt-8 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
+              style={{ color: "rgba(244, 239, 230, 0.85)" }}
+            >
+              I&apos;m targeting AI Product Manager, Head of Product, UX
+              Strategist, Conversational AI Designer, and Founding PM roles.
+              I&apos;m open to relocation. If this sounds like a fit, use the{" "}
               <Link
                 href="/contact"
                 className="underline underline-offset-4 transition-opacity hover:opacity-90"
@@ -249,7 +339,7 @@ export default function AboutPage() {
               >
                 contact form
               </Link>{" "}
-              or{" "}
+              or connect on{" "}
               <a
                 href="https://www.linkedin.com/in/hannah-pagade"
                 target="_blank"
@@ -265,25 +355,29 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Skills sections */}
+      {/* Skills */}
       <section
-        className="w-full px-6 py-16 sm:px-8 md:px-16"
+        className="w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
         style={{ backgroundColor: "#0a0f18" }}
       >
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-3xl space-y-12">
+
           <FadeIn>
-            <h2 className="font-display text-2xl" style={{ color: "var(--cream)" }}>
+            <h2
+              className="font-display text-2xl"
+              style={{ color: "var(--cream)" }}
+            >
               Product
             </h2>
             <div
               className="mt-3 h-px w-10 opacity-50"
               style={{ backgroundColor: "var(--gold)" }}
             />
-            <div className="mt-6 flex flex-wrap gap-2.5">
+            <div className="mt-6 flex flex-wrap gap-2">
               {productSkills.map((skill) => (
                 <span
                   key={skill}
-                  className="skill-chip inline-block rounded-full border px-4 py-2 font-body text-[13px]"
+                  className="inline-block rounded-full border px-3 py-1.5 font-body text-xs sm:text-[13px]"
                   style={{
                     borderColor: "rgba(200, 169, 110, 0.25)",
                     color: "var(--cream)",
@@ -296,9 +390,9 @@ export default function AboutPage() {
             </div>
           </FadeIn>
 
-          <FadeIn delay={150}>
+          <FadeIn delay={100}>
             <h2
-              className="mt-14 font-display text-2xl"
+              className="font-display text-2xl"
               style={{ color: "var(--cream)" }}
             >
               Conversational AI &amp; UX
@@ -307,11 +401,11 @@ export default function AboutPage() {
               className="mt-3 h-px w-10 opacity-50"
               style={{ backgroundColor: "var(--gold)" }}
             />
-            <div className="mt-6 flex flex-wrap gap-2.5">
+            <div className="mt-6 flex flex-wrap gap-2">
               {aiUxSkills.map((skill) => (
                 <span
                   key={skill}
-                  className="skill-chip inline-block rounded-full border px-4 py-2 font-body text-[13px]"
+                  className="inline-block rounded-full border px-3 py-1.5 font-body text-xs sm:text-[13px]"
                   style={{
                     borderColor: "rgba(200, 169, 110, 0.25)",
                     color: "var(--cream)",
@@ -324,9 +418,9 @@ export default function AboutPage() {
             </div>
           </FadeIn>
 
-          <FadeIn delay={300}>
+          <FadeIn delay={200}>
             <h2
-              className="mt-14 font-display text-2xl"
+              className="font-display text-2xl"
               style={{ color: "var(--cream)" }}
             >
               Technical Stack
@@ -335,11 +429,11 @@ export default function AboutPage() {
               className="mt-3 h-px w-10 opacity-50"
               style={{ backgroundColor: "var(--gold)" }}
             />
-            <div className="mt-6 flex flex-wrap gap-2.5">
+            <div className="mt-6 flex flex-wrap gap-2">
               {techStack.map((tech) => (
                 <span
                   key={tech}
-                  className="skill-chip inline-block rounded-full border px-4 py-2 font-body text-[13px] font-mono"
+                  className="inline-block rounded-full border px-3 py-1.5 font-body font-mono text-xs sm:text-[13px]"
                   style={{
                     borderColor: "rgba(200, 169, 110, 0.2)",
                     color: "rgba(200, 169, 110, 0.85)",
@@ -351,24 +445,31 @@ export default function AboutPage() {
               ))}
             </div>
           </FadeIn>
+
         </div>
       </section>
 
       {/* Get in touch */}
       <section
-        className="w-full px-6 py-16 sm:px-8 md:px-16"
+        className="w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
         style={{ backgroundColor: "var(--obsidian)" }}
       >
         <div className="mx-auto max-w-3xl">
           <FadeIn>
-            <h2 className="font-display text-2xl" style={{ color: "var(--cream)" }}>
+            <h2
+              className="font-display text-2xl"
+              style={{ color: "var(--cream)" }}
+            >
               Get in touch
             </h2>
             <div
               className="mt-3 h-px w-10 opacity-50"
               style={{ backgroundColor: "var(--gold)" }}
             />
-            <p className="mt-6 max-w-2xl font-body leading-relaxed" style={{ color: "rgba(244, 239, 230, 0.9)" }}>
+            <p
+              className="mt-6 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
+              style={{ color: "rgba(244, 239, 230, 0.9)" }}
+            >
               Use the{" "}
               <Link
                 href="/contact"
@@ -419,16 +520,19 @@ export default function AboutPage() {
               </a>
               .
             </p>
-            <p className="mt-4 font-body text-sm italic" style={{ color: "rgba(244, 239, 230, 0.5)" }}>
+            <p
+              className="mt-4 font-body text-sm italic"
+              style={{ color: "rgba(244, 239, 230, 0.5)" }}
+            >
               Resume available on request.
             </p>
           </FadeIn>
 
           <FadeIn delay={150}>
-            <div className="mt-12">
+            <div className="mt-10">
               <Link
                 href="/#work"
-                className="inline-flex items-center gap-2 rounded-sm border px-6 py-3 font-body text-sm uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-sm border px-5 py-3 font-body text-xs uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 sm:px-6 sm:text-sm"
                 style={{
                   borderColor: "rgba(200, 169, 110, 0.4)",
                   color: "var(--gold)",

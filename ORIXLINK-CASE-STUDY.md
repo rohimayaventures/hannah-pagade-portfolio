@@ -135,7 +135,7 @@ Deployed on Vercel at `triage.rohimaya.ai`. Built on Next.js 16, TypeScript, Tai
 - Urgency assigned: Emergency Department Now
 - Refusal protocol: Activated and validated when patient hesitancy language was introduced
 
-This was not a synthetic test case. It was a real clinical presentation involving Hannah's husband Prasad following a cardiac procedure. OrixLink's output was validated against the actual clinical outcome. The product existed and performed correctly on a real emergency presentation before it was declared ready for public use.
+This was not a synthetic test case. It was a real clinical presentation involving Hannah's spouse following a cardiac procedure. OrixLink's output was validated against the actual clinical outcome. The product existed and performed correctly on a real emergency presentation before it was declared ready for public use.
 
 ### AFib test case
 
