@@ -18,9 +18,10 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const study = getCaseStudyBySlug(params.slug);
+  const { slug } = await params;
+  const study = getCaseStudyBySlug(slug);
   if (!study) return { title: "Not Found" };
 
   const descSource = study.cardSummary ?? study.subtitle;
@@ -61,12 +62,13 @@ export async function generateMetadata({
   };
 }
 
-export default function CaseStudyPage({
+export default async function CaseStudyPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const study = getCaseStudyBySlug(params.slug);
+  const { slug } = await params;
+  const study = getCaseStudyBySlug(slug);
   if (!study) notFound();
   const isComingSoon = study.status === "coming-soon";
 
