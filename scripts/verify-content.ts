@@ -28,6 +28,14 @@ for (const study of caseStudies) {
     console.error(`[verify-content] Missing title or subtitle: ${study.slug}`);
     process.exit(1);
   }
+
+  const embed = study.embedUrl?.trim();
+  if (embed && !embed.startsWith("https://")) {
+    console.error(
+      `[verify-content] embedUrl must use https:// for ${study.slug}`
+    );
+    process.exit(1);
+  }
 }
 
 console.log(`[verify-content] OK — ${caseStudies.length} case studies.`);

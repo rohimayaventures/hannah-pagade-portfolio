@@ -99,7 +99,7 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
         {(study.role || study.timeline) && (
           <div
             className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-0 font-body text-xs"
-            style={{ color: "var(--mid-gray)" }}
+            style={{ color: "rgba(8, 12, 20, 0.72)" }}
           >
             {study.role && <span>{study.role}</span>}
             {study.role && study.timeline && (
@@ -123,7 +123,7 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
         )}
         <p
           className="mb-4 font-body text-sm leading-relaxed"
-          style={{ color: "var(--mid-gray)" }}
+          style={{ color: "rgba(8, 12, 20, 0.72)" }}
         >
           {displaySummary}
         </p>

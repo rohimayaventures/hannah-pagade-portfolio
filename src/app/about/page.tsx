@@ -113,6 +113,15 @@ const products = [
   },
 ];
 
+const ABOUT_TOC = [
+  { id: "how-i-work", label: "How I work" },
+  { id: "what-i-built", label: "What I built" },
+  { id: "my-background", label: "My background" },
+  { id: "looking-for", label: "What I'm looking for" },
+  { id: "skills", label: "Skills" },
+  { id: "get-in-touch", label: "Get in touch" },
+] as const;
+
 export default function AboutPage() {
   return (
     <Layout>
@@ -216,12 +225,40 @@ export default function AboutPage() {
               </a>
             </div>
           </FadeIn>
+
+          <FadeIn delay={260}>
+            <nav
+              aria-label="On this page"
+              className="mt-12 border-t border-white/10 pt-8"
+            >
+              <p
+                className="mb-3 font-body text-[10px] uppercase tracking-[0.2em]"
+                style={{ color: "rgba(244, 239, 230, 0.45)" }}
+              >
+                On this page
+              </p>
+              <ul className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-5 sm:gap-y-2">
+                {ABOUT_TOC.map(({ id, label }) => (
+                  <li key={id}>
+                    <a
+                      href={`#${id}`}
+                      className="font-body text-sm underline-offset-4 transition-opacity hover:opacity-90 hover:underline"
+                      style={{ color: "rgba(244, 239, 230, 0.82)" }}
+                    >
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </FadeIn>
         </div>
       </section>
 
       {/* How I work */}
       <section
-        className="w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
+        id="how-i-work"
+        className="scroll-mt-24 w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
         style={{ backgroundColor: "#0c1119" }}
       >
         <div className="mx-auto max-w-3xl">
@@ -274,7 +311,8 @@ export default function AboutPage() {
 
       {/* What I built */}
       <section
-        className="w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
+        id="what-i-built"
+        className="scroll-mt-24 w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
         style={{ backgroundColor: "#0a0f18" }}
       >
         <div className="mx-auto max-w-3xl">
@@ -351,7 +389,8 @@ export default function AboutPage() {
 
       {/* Background */}
       <section
-        className="w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
+        id="my-background"
+        className="scroll-mt-24 w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
         style={{ backgroundColor: "#0a0f18" }}
       >
         <div className="mx-auto max-w-3xl">
@@ -392,7 +431,8 @@ export default function AboutPage() {
 
       {/* Looking for */}
       <section
-        className="w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
+        id="looking-for"
+        className="scroll-mt-24 w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
         style={{ backgroundColor: "#0c1119" }}
       >
         <div className="mx-auto max-w-3xl">
@@ -441,7 +481,8 @@ export default function AboutPage() {
 
       {/* Skills */}
       <section
-        className="w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
+        id="skills"
+        className="scroll-mt-24 w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
         style={{ backgroundColor: "#0a0f18" }}
       >
         <div className="mx-auto max-w-3xl space-y-12">
@@ -535,7 +576,8 @@ export default function AboutPage() {
 
       {/* Get in touch */}
       <section
-        className="w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
+        id="get-in-touch"
+        className="scroll-mt-24 w-full px-6 py-14 sm:px-8 sm:py-16 md:px-16"
         style={{ backgroundColor: "var(--obsidian)" }}
       >
         <div className="mx-auto max-w-3xl">

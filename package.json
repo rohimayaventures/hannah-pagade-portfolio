@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "verify-content": "tsx scripts/verify-content.ts"
+    "verify-content": "tsx scripts/verify-content.ts",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.80.0",
@@ -24,6 +25,7 @@
     "@types/nodemailer": "^7.0.11",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@playwright/test": "^1.55.0",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.2.0",
     "postcss": "^8",
