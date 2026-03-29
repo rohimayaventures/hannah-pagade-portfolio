@@ -1,5 +1,21 @@
+import { createIpRateLimiter, getRequestIp } from "@/lib/ipRateLimit";
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+
+const isNotifyRateLimited = createIpRateLimiter(8, 15 * 60 * 1000);
+
+const MAX_NAME = 200;
+const MAX_EMAIL_LEN = 254;
+const MAX_BODY_BYTES = 400 * 1024;
+const MAX_MESSAGES = 80;
+const MAX_CONTENT_PER_MESSAGE = 4_000;
+const SLACK_TRANSCRIPT_MAX = 2_800;
+
+function isValidEmail(email: string): boolean {
+  const trimmed = email.trim();
+  if (trimmed.length < 3 || trimmed.length > MAX_EMAIL_LEN) return false;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+}
 
 function escapeHtml(s: string): string {
   return s
@@ -7,6 +23,49 @@ function escapeHtml(s: string): string {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+/** Slack mrkdwn: escape &, <, > per API formatting rules. */
+function escapeSlackMrkdwn(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function truncate(s: string, max: number): string {
+  if (s.length <= max) return s;
+  return `${s.slice(0, max - 1)}…`;
+}
+
+function parseNotifyMessages(raw: unknown):
+  | { role: "user" | "assistant"; content: string }[]
+  | null {
+  if (!Array.isArray(raw) || raw.length > MAX_MESSAGES) return null;
+  const out: { role: "user" | "assistant"; content: string }[] = [];
+  for (const m of raw) {
+    if (typeof m !== "object" || m === null) return null;
+    const rec = m as Record<string, unknown>;
+    const role = rec.role;
+    const content = rec.content;
+    if (role !== "user" && role !== "assistant") return null;
+    if (typeof content !== "string" || content.length > MAX_CONTENT_PER_MESSAGE) {
+      return null;
+    }
+    out.push({ role, content });
+  }
+  return out;
+}
+
+function buildTranscript(
+  messages: { role: "user" | "assistant"; content: string }[]
+): string {
+  return messages
+    .map(
+      (m) =>
+        `${m.role === "user" ? "Visitor" : "Kai"}: ${m.content}`
+    )
+    .join("\n\n");
 }
 
 async function sendSlackNotification(
@@ -20,6 +79,10 @@ async function sendSlackNotification(
     return;
   }
 
+  const safeName = escapeSlackMrkdwn(truncate(visitorName, MAX_NAME));
+  const safeEmail = escapeSlackMrkdwn(truncate(visitorEmail, MAX_EMAIL_LEN));
+  const safeTranscript = escapeSlackMrkdwn(truncate(transcript, SLACK_TRANSCRIPT_MAX));
+
   const slackBody = {
     blocks: [
       {
@@ -27,6 +90,7 @@ async function sendSlackNotification(
         text: {
           type: "plain_text",
           text: "New Portfolio Lead from Kai",
+          emoji: false,
         },
       },
       {
@@ -34,11 +98,11 @@ async function sendSlackNotification(
         fields: [
           {
             type: "mrkdwn",
-            text: `*Name:*\n${visitorName}`,
+            text: `*Name:*\n${safeName}`,
           },
           {
             type: "mrkdwn",
-            text: `*Email:*\n${visitorEmail}`,
+            text: `*Email:*\n${safeEmail}`,
           },
         ],
       },
@@ -46,7 +110,7 @@ async function sendSlackNotification(
         type: "section",
         text: {
           type: "mrkdwn",
-          text: `*Conversation Summary:*\n${transcript}`,
+          text: `*Conversation Summary:*\n${safeTranscript}`,
         },
       },
       {
@@ -141,46 +205,84 @@ async function sendHannahNotification(
 }
 
 export async function POST(req: NextRequest) {
+  const ip = getRequestIp(req);
+  if (isNotifyRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Too many submissions. Please try again later." },
+      { status: 429 }
+    );
+  }
+
+  const len = req.headers.get("content-length");
+  if (len && Number.parseInt(len, 10) > MAX_BODY_BYTES) {
+    return NextResponse.json({ error: "Request too large." }, { status: 413 });
+  }
+
+  let body: unknown;
   try {
-    const { visitorName, visitorEmail, messages } = await req.json();
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON." }, { status: 400 });
+  }
 
-    if (!visitorName || !visitorEmail) {
-      return NextResponse.json(
-        { error: "Missing visitor info" },
-        { status: 400 }
-      );
-    }
+  if (typeof body !== "object" || body === null) {
+    return NextResponse.json({ error: "Invalid request." }, { status: 400 });
+  }
 
-    const transcript = messages
-      .map(
-        (m: { role: string; content: string }) =>
-          `${m.role === "user" ? "Visitor" : "Kai"}: ${m.content}`
-      )
-      .join("\n\n");
+  const rec = body as Record<string, unknown>;
+  const visitorName = rec.visitorName;
+  const visitorEmail = rec.visitorEmail;
+  const messagesRaw = rec.messages;
 
-    const gmailUser = process.env.GMAIL_USER?.trim();
-    const gmailPass = process.env.GMAIL_APP_PASSWORD?.replace(/\s/g, "");
+  if (typeof visitorName !== "string" || typeof visitorEmail !== "string") {
+    return NextResponse.json({ error: "Missing visitor info." }, { status: 400 });
+  }
 
-    const tasks: Promise<void>[] = [
-      sendSlackNotification(visitorName, visitorEmail, transcript),
-    ];
+  const nameTrim = visitorName.trim();
+  const emailTrim = visitorEmail.trim();
 
-    if (gmailUser && gmailPass) {
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: { user: gmailUser, pass: gmailPass },
-      });
-      tasks.push(
-        sendVisitorConfirmation(visitorName, visitorEmail, transporter, gmailUser),
-        sendHannahNotification(visitorName, visitorEmail, transcript, transporter, gmailUser),
-      );
-    } else {
-      console.warn("[notify] Gmail credentials not set, skipping email notifications");
-    }
+  if (!nameTrim || nameTrim.length > MAX_NAME) {
+    return NextResponse.json({ error: "Invalid name." }, { status: 400 });
+  }
+  if (!isValidEmail(emailTrim)) {
+    return NextResponse.json({ error: "Invalid email." }, { status: 400 });
+  }
 
+  const messages = parseNotifyMessages(messagesRaw);
+  if (!messages || messages.length === 0) {
+    return NextResponse.json(
+      { error: "Invalid or empty conversation." },
+      { status: 400 }
+    );
+  }
+
+  const transcript = buildTranscript(messages);
+  if (transcript.length > 120_000) {
+    return NextResponse.json({ error: "Conversation too long." }, { status: 400 });
+  }
+
+  const gmailUser = process.env.GMAIL_USER?.trim();
+  const gmailPass = process.env.GMAIL_APP_PASSWORD?.replace(/\s/g, "");
+
+  const tasks: Promise<void>[] = [
+    sendSlackNotification(nameTrim, emailTrim, transcript),
+  ];
+
+  if (gmailUser && gmailPass) {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: { user: gmailUser, pass: gmailPass },
+    });
+    tasks.push(
+      sendVisitorConfirmation(nameTrim, emailTrim, transporter, gmailUser),
+      sendHannahNotification(nameTrim, emailTrim, transcript, transporter, gmailUser),
+    );
+  } else {
+    console.warn("[notify] Gmail credentials not set, skipping email notifications");
+  }
+
+  try {
     await Promise.all(tasks);
-
-    return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Notify error:", error);
     return NextResponse.json(
@@ -188,4 +290,6 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
+
+  return NextResponse.json({ success: true });
 }

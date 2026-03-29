@@ -1,21 +1,15 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
+import { createIpRateLimiter, getRequestIp } from "@/lib/ipRateLimit";
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-const RATE_WINDOW_MS = 60_000;
-const RATE_LIMIT = 10;
-const ipHits = new Map<string, number[]>();
+/** Tighter than before to reduce scripted cost / prompt stuffing. */
+const isRateLimited = createIpRateLimiter(8, 60_000);
 
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const hits = ipHits.get(ip) ?? [];
-  const recent = hits.filter((t) => now - t < RATE_WINDOW_MS);
-  if (recent.length >= RATE_LIMIT) return true;
-  recent.push(now);
-  ipHits.set(ip, recent);
-  return false;
-}
+const MAX_BODY_BYTES = 256 * 1024;
+const MAX_MESSAGES = 24;
+const MAX_CONTENT_PER_MESSAGE = 2_000;
 
 const SYSTEM_PROMPT = `You are Kai, the portfolio assistant for Hannah Kraulik Pagade at hannahkraulikpagade.com. You live on her portfolio site. Be warm, conversational, and professional. Never use em dashes in your replies. Use commas, periods, or parentheses instead.
 
@@ -101,8 +95,29 @@ FORBIDDEN IN YOUR OUTPUT:
 - moonlstudios.com as a recruiter-facing destination
 - Any pen name, alias, or alternate name for Hannah`;
 
+function parseChatMessages(raw: unknown):
+  | { role: "user" | "assistant"; content: string }[]
+  | null {
+  if (!Array.isArray(raw) || raw.length === 0 || raw.length > MAX_MESSAGES) {
+    return null;
+  }
+  const out: { role: "user" | "assistant"; content: string }[] = [];
+  for (const m of raw) {
+    if (typeof m !== "object" || m === null) return null;
+    const rec = m as Record<string, unknown>;
+    const role = rec.role;
+    const content = rec.content;
+    if (role !== "user" && role !== "assistant") return null;
+    if (typeof content !== "string" || content.length > MAX_CONTENT_PER_MESSAGE) {
+      return null;
+    }
+    out.push({ role, content });
+  }
+  return out;
+}
+
 export async function POST(req: NextRequest) {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  const ip = getRequestIp(req);
   if (isRateLimited(ip)) {
     return NextResponse.json(
       { error: "Too many requests. Please wait a moment." },
@@ -110,9 +125,35 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  try {
-    const { messages } = await req.json();
+  const len = req.headers.get("content-length");
+  if (len && Number.parseInt(len, 10) > MAX_BODY_BYTES) {
+    return NextResponse.json({ error: "Request too large." }, { status: 413 });
+  }
 
+  if (!process.env.ANTHROPIC_API_KEY?.trim()) {
+    return NextResponse.json(
+      { error: "Kai is not configured." },
+      { status: 503 }
+    );
+  }
+
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON." }, { status: 400 });
+  }
+
+  if (typeof body !== "object" || body === null || !("messages" in body)) {
+    return NextResponse.json({ error: "Invalid request." }, { status: 400 });
+  }
+
+  const messages = parseChatMessages((body as Record<string, unknown>).messages);
+  if (!messages) {
+    return NextResponse.json({ error: "Invalid messages." }, { status: 400 });
+  }
+
+  try {
     const response = await client.messages.create({
       model: "claude-sonnet-4-20250514",
       max_tokens: 1024,
@@ -125,8 +166,7 @@ export async function POST(req: NextRequest) {
 
     const emailRegex = /[\w.-]+@[\w.-]+\.\w+/;
     const hasEmail = messages.some(
-      (m: { role: string; content: string }) =>
-        m.role === "user" && emailRegex.test(m.content)
+      (m) => m.role === "user" && emailRegex.test(m.content)
     );
 
     return NextResponse.json({ text, hasEmail });
