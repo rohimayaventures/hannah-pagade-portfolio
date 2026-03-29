@@ -37,31 +37,32 @@ export const caseStudies: CaseStudy[] = [
     title: "OrixLink AI",
     tagline: "Where every symptom finds its answer.",
     subtitle:
-      "OrixLink AI accepts any symptom from any person and returns a structured clinical differential with urgency triage, red flag detection, care pathway recommendations, and plain-language reasoning. No login. No prior diagnosis required. Built on Next.js 16 and the Claude API under Rohimaya Health AI.",
-    tags: ["CLINICAL-AI", "CONVERSATIONAL", "FULL-STACK"],
+      "OrixLink AI accepts any symptom in natural language and returns a structured clinical differential, red flag criteria, four-tier urgency classification, and plain-language next steps. Built by a 15-year LPN for the intake gap behind an estimated 12 million outpatient diagnostic errors a year. Monetized with tiered subscriptions, credit packs, and a lifetime access offer.",
+    tags: ["CLINICAL-AI", "CONVERSATIONAL", "FULL-STACK", "MONETIZED"],
     embedType: "live",
     embedUrl: "https://triage.rohimaya.ai",
     liveUrl: "https://triage.rohimaya.ai",
     status: "live",
     coverImage: "/images/orixlink-ai-landing.png",
     projectDescription:
-      "OrixLink AI accepts any symptom from any person and returns a structured clinical differential with urgency triage, red flag detection, care pathway recommendations, and plain-language reasoning. No login. No prior diagnosis required. Built on Next.js 16 and the Claude API under Rohimaya Health AI.",
+      "OrixLink AI accepts any symptom in natural language and returns a structured clinical differential, red flag criteria, four-tier urgency classification, and plain-language next steps. Built by a 15-year LPN for the intake gap that causes an estimated 12 million diagnostic errors a year in outpatient settings. Monetized with tiered subscriptions, credit packs, and a lifetime access offer.",
     problemStatement:
-      "At least 12 million Americans experience a diagnostic error in outpatient settings each year. Most are preventable. Most begin at the front end of the clinical encounter, before a physician is involved, when a patient with an undifferentiated symptom presentation has no structured tool to help them or their care team reason through what might be happening. OrixLink AI is that tool.",
+      "At least 12 million Americans experience a diagnostic error in outpatient settings each year. Most happen not because clinicians lack knowledge, but because the intake process gives them no structured way to connect a patient's full symptom picture to a working differential. OrixLink is the tool that closes that gap—any symptom, any person, no prior diagnosis required. Validated in March 2026 against a real compartment syndrome presentation.",
     processSteps: [
-      "The single non-negotiable constraint that shaped everything: any symptom, any person, no prior diagnosis required. Every existing triage tool narrows its scope to reduce complexity. OrixLink accepts the full scope and manages it through prompt engineering rather than feature limitation. The clinical logic — red flag taxonomy, urgency tiers, care pathway language — came directly from 15 years of bedside nursing, not from a product spec.",
-      "The core product work was the Claude system prompt. Building a prompt that produces a reliable, structured clinical differential from free-text symptom input, enforces attribution language, surfaces urgency as a discrete field, detects red flag presentations, adapts output across patient and clinician modes, and activates a refusal escalation protocol without hallucinating diagnoses required iterating through dozens of constraint combinations across six architectural layers. The Meridian Oracle design system — obsidian, gold, cream, Cormorant Garamond, DM Sans, DM Mono — was built alongside the product as the visual language for the Rohimaya Health AI brand family.",
-      "A live, free, universal triage and diagnosis tool validated against real clinical presentations including forearm compartment syndrome post-cardiac catheterization. Structured differential output, four discrete urgency tiers, red flag detection, care pathway recommendations, role-adaptive output, refusal protocol, and living conversation that updates the assessment as new symptoms arrive. Deployed on Vercel, built on Next.js 16, TypeScript, Tailwind CSS v4, Claude API, and Supabase.",
+      "I did not need to conduct user research for this product. I have conducted it for 15 years on every shift. The intake failure pattern is not hypothetical. It is the first 90 seconds of every clinical encounter, repeated across every setting I have worked in.",
+      "The hardest problem was the output contract. The Claude system prompt had to accept unconstrained natural language, return a structured differential with likelihood rankings, surface red flags as a discrete layer, assign a four-tier urgency level, and frame everything as clinical support without being a disclaimer wall or a dangerously confident diagnosis. Every word of that prompt was iterated until a triage nurse would trust it. Then the output was parsed by a typed consumer so the UI never breaks regardless of language or phrasing variation.",
+      "A conversational clinical triage tool with natural language intake, structured differential output, red flag cards, urgency tiers, follow-up prompting, legal overlay, Supabase persistence, full authentication with anonymous session migration, tiered Stripe billing with atomic usage enforcement, credit packs, a follow-up reminder system via Resend and pg_cron, admin dashboard, Meridian Oracle dark design system across all surfaces, PWA with offline fallback, and a compliance-aware legal layer including HIPAA scope, anonymous data disclosure, and session timeout policy. Validated in March 2026 against a real compartment syndrome presentation that matched the clinical workup.",
     ],
     impactLine:
-      "OrixLink AI is positioned at the highest-risk moment in the diagnostic process: before the physician encounter, when a patient or caregiver is trying to decide whether this is an emergency or something that can wait until Monday. Getting that decision wrong costs lives. The research agrees, and so does everyone who has worked a clinical floor.",
+      "OrixLink exists because the intake gap is real, the diagnostic error rate is real, and 15 years of clinical experience is worth more than a user research sprint. The proof point is not a demo. It is a real patient whose symptom cluster the product correctly flagged as an emergency before a clinician saw him.",
     processAngle:
-      "Built end to end on Claude API, Next.js, Tailwind v4, Supabase, and Vercel. Includes a validated refusal protocol tested against compartment syndrome post-cardiac catheterization.",
+      "Next.js 16 App Router, Claude API (Sonnet for paid tiers, Haiku for free), Supabase (auth, persistence, RLS, pg_cron, pg_net), Stripe (checkout, webhooks, billing portal), Resend for transactional email, typed assessment output via parseAssessment, Meridian Oracle design system. Live at triage.rohimaya.ai, early commercial pilot.",
     cardSummary:
-      "Universal clinical triage. Any symptom, any person. Structured differential, urgency tiers, refusal protocol.",
-    role: "Conversation UX Lead & Prompt Architect",
+      "Universal triage and diagnosis. Any symptom, any person, no prior diagnosis required. Live at triage.rohimaya.ai with full Stripe billing, usage cap enforcement, and a reminder system.",
+    role: "Product Lead, Conversation UX, Prompt Architect, Full-Stack Implementation",
     timeline: "2025 — Present",
-    keyOutcome: "Live product with structured differential, four urgency tiers, validated refusal protocol, and Supabase session persistence",
+    keyOutcome:
+      "Early commercial pilot: Stripe subscriptions and credit packs, atomic usage caps with rollback, Resend reminders; March 2026 validation matched clinical workup on a compartment syndrome presentation",
   },
   {
     featured: false,

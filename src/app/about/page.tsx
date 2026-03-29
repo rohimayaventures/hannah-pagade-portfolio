@@ -84,8 +84,9 @@ const products = [
     url: "https://triage.rohimaya.ai",
     urlDisplay: "triage.rohimaya.ai",
     description:
-      "Universal triage and diagnosis on the Claude API. Any symptom, any person, no prior diagnosis required.",
-    stack: "Next.js 16 · TypeScript · Tailwind v4 · Claude API · Supabase",
+      "Universal clinical triage: structured differential, red flags, four-tier urgency, follow-up chat. Early commercial pilot with Stripe subscriptions, credit packs, usage caps, and email reminders.",
+    stack:
+      "Next.js 16 · TypeScript · Tailwind v4 · Claude API (Sonnet/Haiku) · Supabase · Stripe · Resend · Vercel",
   },
   {
     name: "HealthLiteracy AI",
