@@ -1,7 +1,7 @@
 # ClearChannel by Vestara
 ## Designing Real-Time NLU Routing Intelligence for Enterprise Financial Services Contact Centers
 
-**Built by Hannah Kraulik Pagade** · Pagade Ventures / Rohimaya Health AI · 2025
+**Built by Hannah Kraulik Pagade** · Rohimaya Health AI · 2025
 
 **Live Demo:** [clearchannel-vestara.vercel.app](https://clearchannel-vestara.vercel.app)
 
@@ -14,6 +14,8 @@ ClearChannel is a live, AI-powered NLU routing simulator that demonstrates how a
 The system was built in response to a documented gap in enterprise conversational AI practice: the design of NLU routing logic is rarely visible to the teams who govern it. Product managers, UX researchers, and conversational designers make architecture decisions that affect millions of customer interactions with little ability to observe or test how intent classification behaves across channels simultaneously.
 
 ClearChannel makes that logic visible, interactive, and auditable in real time. It is not a prototype of a future system. It is a working artifact built on the Claude API with OpenAI Realtime voice integration, deployed at clearchannel-vestara.vercel.app.
+
+Built as a portfolio demonstration of enterprise conversational AI design across IVR, Chatbot, and Agent Assist channels simultaneously.
 
 | | |
 |---|---|
@@ -51,13 +53,11 @@ Peer-reviewed research published in *Pattern Analysis and Applications* (Springe
 
 > Springer Nature (2023). A review of natural language processing in contact centre automation. *Pattern Analysis and Applications.* Papers reviewed: 125, spanning 2003–2023. DOI: 10.1007/s10044-023-01182-8
 
-### The Vanguard Context
+### The Enterprise Context
 
-Vanguard Group — the largest mutual fund provider in the United States, managing over $9 trillion in assets on behalf of more than 50 million investors — has publicly committed to AI-driven contact center innovation. MIT Sloan Management Review reports that **Vanguard estimates its AI ROI at close to $500 million**, with call center support among its proven use cases.
+Financial services contact centers manage some of the highest-stakes customer interactions in consumer technology. Firms managing retirement savings for millions of customers face a direct link between conversation design quality and institutional trust. When a customer calls during bereavement, a fraud event, or a market downturn, what happens in the first three seconds determines whether they feel heard or escalate.
 
-> MIT Sloan Management Review (2024). Scaling AI for Results. Citing Vanguard Group AI ROI reporting.
-
-For a firm that manages retirement savings for millions of Americans, the quality of the conversation at moments of highest emotional urgency — market downturns, estate transitions, fraud — is a direct expression of institutional values. ClearChannel was built to demonstrate what that design looks like in practice.
+ClearChannel was built to demonstrate what best-in-class multi-channel NLU routing design looks like in that environment — visible, interactive, and auditable in real time.
 
 ---
 
@@ -169,7 +169,69 @@ The parallels between clinical triage and contact center NLU routing are not met
 
 This perspective — built from years of navigating those failure modes in clinical settings — informs every design decision in ClearChannel. The bereavement protocol, which opens with *I am so sorry for your loss* followed by an 800ms pause before any transactional language, reflects the same principle that governs clinical communication with a family who has just received a difficult diagnosis: acknowledgment before action, always.
 
-> ClearChannel is one of three AI products under Rohimaya Health AI and Pagade Ventures. EclipseLink AI addresses hospital handoff intelligence. OrixLink AI addresses universal triage and diagnosis. The conversational AI architecture principles demonstrated in ClearChannel apply across all three.
+> ClearChannel is one project in a broader portfolio of conversational AI products. OrixLink AI addresses clinical triage intelligence. HealthLiteracy AI addresses medical document translation. The conversation design architecture principles demonstrated here apply across all three.
+
+---
+
+## SECTION 5 — STATUS MATRIX
+
+### What works
+
+- Live demo at clearchannel-vestara.vercel.app — no login required, no setup
+- 18 intent categories with confidence scoring and sentiment detection
+- Three simultaneous channel outputs per utterance: IVR, Chatbot, Agent Assist
+- NLU architecture card per utterance: intent taxonomy, entity schema, training phrases, confidence thresholds
+- Three hard override rules: bereavement detection, fraud detection, barge-in detection
+- Sentiment-driven UI theme system: five states (neutral, concerned, urgent, distressed, confused) trigger full CSS variable swap
+- Streaming response via Claude API Server-Sent Events with brace-depth section extractor for progressive panel hydration
+- Voice input via OpenAI Whisper with IVR spoken response via OpenAI TTS (alloy voice)
+- OpenAI Realtime API bidirectional voice session for full live call simulation
+- 11 curated sample utterances covering standard and edge-case emotional scenarios
+- Mobile-compatible audio via Blob URL
+- Vestara Institutional design system consistent across all surfaces
+
+### Known gaps and roadmap
+
+| Gap | Status | Notes |
+|-----|--------|-------|
+| Rate limiting on API routes | Not implemented | Appropriate before any public traffic push beyond portfolio use |
+| Persistence / session history | Not built | All analysis is stateless — no Supabase layer. Portfolio artifact scope. |
+| Multi-turn conversation memory | Not built | Each utterance is analyzed independently. Full conversation memory is Phase 2. |
+| Mobile layout | Partial | Two-panel layout degrades gracefully but is not fully optimized for small screens |
+| Confidence calibration | Rubric only | Scores reflect the system prompt rubric, not calibrated cross-model benchmarks |
+| Additional channel types | Roadmap | SMS, email, and push notification channel outputs are planned for a future version |
+
+## SECTION 6 — PORTFOLIO COPY
+
+### Card summary
+
+Enterprise NLU routing simulator. One utterance drives three simultaneous channel outputs — IVR, Chatbot, Agent Assist — with full intent taxonomy, confidence scoring, sentiment detection, and three emotional override protocols.
+
+### Project description (card view)
+
+ClearChannel demonstrates what it means to design a conversational AI system for all channels simultaneously rather than one at a time. Type or speak any investor utterance and watch Claude generate IVR script, Chatbot response, and Agent Assist content in real time, with a full NLU architecture breakdown per utterance. Three override protocols handle bereavement, fraud, and barge-in before any intent classification runs.
+
+### Problem statement (case study hero)
+
+Most conversational AI design optimizes for one channel. Enterprise contact centers run three simultaneously. A customer who calls about a deceased spouse is also potentially in the chatbot, and a live agent may be watching the same interaction. The design consequences of routing decisions are invisible across channels unless you can see all three fire at once. ClearChannel makes that visible, interactive, and auditable.
+
+### The design decisions that matter
+
+The three hard override rules are the most important product decisions in this build. Bereavement, fraud, and barge-in fire before intent classification — because in enterprise financial services, getting those wrong is not a UX failure, it is an institutional trust failure. The bereavement protocol opens with acknowledgment and an 800ms pause before any transactional language, which mirrors the same principle used in clinical communication: acknowledgment before action, always.
+
+The streaming architecture was chosen because perceived latency matters more than actual latency in a design tool. A practitioner watching three panels populate progressively at under two seconds engages differently with the output than one waiting six seconds for a blocking response. The brace-depth section extractor that fires setResult per completed JSON section was the key implementation decision.
+
+### One honest line for interviews
+
+ClearChannel demonstrates multi-channel conversational AI system design: simultaneous NLU routing across IVR, Chatbot, and Agent Assist with emotional override protocols, streaming architecture, sentiment-driven UI state, and voice input/output — built as a live, portable portfolio artifact with no login barrier.
+
+### What I would build next
+
+- Supabase session persistence with shareable utterance analysis URLs
+- Full conversation memory across a multi-turn session
+- SMS and email channel outputs as additional panels
+- Confidence threshold adjustment UI so practitioners can tune per intent in real time
+- Side-by-side A/B comparison of two utterances through the same intent taxonomy
 
 ---
 
@@ -181,7 +243,7 @@ This perspective — built from years of navigating those failure modes in clini
 
 3. Grand View Research (2024). Natural Language Understanding Market Size & Outlook, 2030. https://www.grandviewresearch.com/industry-analysis/natural-language-understanding-market-report
 
-4. MIT Sloan Management Review (2024). Scaling AI for Results: Strategies from MIT Sloan Management Review. Citing Vanguard Group AI ROI data. https://mitsloan.mit.edu
+4. MIT Sloan Management Review (2024). Scaling AI for Results. Research on enterprise AI adoption and operational impact in large organizations. https://mitsloan.mit.edu
 
 5. Du, K. et al. (2024). Natural language processing in finance: A survey. *Information Fusion*, Elsevier. DOI: 10.1016/j.inffus.2024.102414
 
@@ -195,4 +257,4 @@ This perspective — built from years of navigating those failure modes in clini
 
 ---
 
-*Built by Hannah Kraulik Pagade · hannahkraulikpagade.com · linkedin.com/in/hannahkraulik*
+*Built by Hannah Kraulik Pagade · hannahkraulikpagade.com*

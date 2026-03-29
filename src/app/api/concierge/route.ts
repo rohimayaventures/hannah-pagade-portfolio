@@ -28,13 +28,13 @@ GitHub: https://github.com/rohimayaventures
 
 LIVE PRODUCTS (these four only, with these exact URLs):
 1. OrixLink AI at triage.rohimaya.ai
-   Universal clinical triage and conversational assessment. Any symptom, any person, no prior diagnosis required. Structured differential with likelihood rankings, red flag criteria as a distinct layer, four-tier urgency, follow-up chat, legal overlay, and compliance-oriented disclosures (not a diagnostic instrument, not FDA reviewed). Live in an early commercial pilot with tiered Stripe subscriptions, credit packs, atomic server-side usage enforcement with rollback on model failure, email reminders (Resend, scheduled via Supabase pg_cron), Supabase Auth (including anonymous-to-signed migration), and a PWA. Claude Sonnet on paid tiers, Haiku on the free tier. Output is contract-driven (typed parsing) so the UI stays reliable across languages. Built on Next.js 16, TypeScript, Tailwind CSS v4, Claude API, Supabase, Stripe, Vercel. Code repo: github.com/rohimayaventures/orixlink. Design system: Meridian Oracle (Obsidian #080C14, Gold #C8A96E, Cream #F4EFE6, fonts: Cormorant Garamond, DM Sans, DM Mono). In March 2026 the product flagged a real post-procedure compartment syndrome presentation as an emergency consistent with the subsequent clinical workup (Hannah documents this in the portfolio case study, not a cherry-picked demo).
+   Universal clinical triage and conversational assessment. Any symptom, any person, no prior diagnosis required. Structured differential with likelihood rankings, red flag criteria as a distinct layer, four-tier urgency, follow-up chat, legal overlay, and compliance-oriented disclosures (not a diagnostic instrument, not FDA reviewed). Live in an early commercial pilot with tiered Stripe subscriptions, credit packs, atomic server-side usage enforcement with rollback on model failure, credit delivery deduplicated using a unique constraint (for example on Stripe payment intent id) to prevent double-charging on webhook retries, email reminders (Resend, scheduled via Supabase pg_cron), Supabase Auth including Google OAuth for authentication plus email and anonymous-to-signed migration, and a PWA. Claude Sonnet on paid tiers, Haiku on the free tier. Output is contract-driven (typed parsing) so the UI stays reliable across languages. Built on Next.js 16, TypeScript, Tailwind CSS v4, Claude API, Supabase, Stripe, Vercel. Code repo: github.com/rohimayaventures/orixlink. Design system: Meridian Oracle (Obsidian #080C14, Gold #C8A96E, Cream #F4EFE6, fonts: Cormorant Garamond, DM Sans, DM Mono). In March 2026 the system survived a real-world compartment syndrome validation scenario: it flagged the presentation as an emergency consistent with the subsequent clinical workup (Hannah documents this in the portfolio case study, not a cherry-picked demo).
 
 2. HealthLiteracy AI at literacy.rohimaya.ai
    Free patient-facing tool that translates clinical discharge documents into plain language at three reading levels across 12 languages. Supports PDF upload, voice input, and side-by-side translation panels. Includes an AI verification pass that checks translation completeness against the original. Built on Next.js, TypeScript, Tailwind CSS, Claude API, Supabase, Vercel. Design system: Candlelight Clarity (Forest Green #0F3D34, Amber #D4882A, Cream #F4EFE6).
 
 3. ClearChannel by Vestara at clearchannel-vestara.vercel.app
-   Enterprise NLU routing simulator demonstrating IVR, chatbot, and agent assist channel handling simultaneously for a fictional financial services firm. Built with 18-intent NLU architecture and critical override rules for bereavement, fraud, and barge-in. Voice input via OpenAI Whisper, IVR playback via OpenAI TTS. Built for a Vanguard UX Strategist Conversational Channels interview as a leave-behind portfolio artifact. Built on Next.js 15, TypeScript, Tailwind CSS, Claude API, OpenAI APIs, Vercel.
+   Portfolio project demonstrating enterprise NLU routing and conversational AI design for financial services contact centers: IVR, chatbot, and agent assist channel handling simultaneously for a fictional firm. Built with 18-intent NLU architecture and critical override rules for bereavement, fraud, and barge-in. Voice input via OpenAI Whisper, IVR playback via OpenAI TTS. Neutral portfolio artifact, not framed as interview prep and not built for any specific company. Built on Next.js 15, TypeScript, Tailwind CSS, Claude API, OpenAI APIs, Vercel.
 
 4. FinanceLens AI at financelens-ai.vercel.app
    Financial document intelligence for earnings calls, 10-K filings, and regulatory notices: structured outputs include plain language, interpretation, key numbers, drift with quoted phrases, flags, source anchors, and an evidence-based confidence rubric (not investment advice). Compare two documents, export branded PDF (pdf-lib), generate PPTX briefing decks (pptxgenjs from Claude slide JSON), and share full-screen deck views at 30-day URLs (/deck/[slug]) stored in Supabase. Unsplash and Pollinations for deck imagery. Haiku default on analyze for speed, Sonnet for deeper work. Zod-validated JSON with retry. Dedicated /methodology page. Code repo: github.com/rohimayaventures/finance-lens. Original plan used Canva Connect API; Canva app review blocked programmatic access, so Hannah shipped owned PPTX plus in-app deck viewer first. Canva remains on the roadmap. Built on Next.js 16, React 19, TypeScript, Tailwind CSS v4, Claude API, Supabase, Vercel. Design system: WSJ Editorial (warm cream, Georgia, IBM Plex Mono).
@@ -161,15 +161,21 @@ export async function POST(req: NextRequest) {
       messages,
     });
 
-    const text =
-      response.content[0].type === "text" ? response.content[0].text : "";
+    const textBlock = response.content.find((block) => block.type === "text");
+    const text = textBlock?.text ?? "";
 
     const emailRegex = /[\w.-]+@[\w.-]+\.\w+/;
     const hasEmail = messages.some(
       (m) => m.role === "user" && emailRegex.test(m.content)
     );
 
-    return NextResponse.json({ text, hasEmail });
+    return NextResponse.json({
+      text:
+        text.trim() === ""
+          ? "I'm having trouble responding right now. Please try again in a moment."
+          : text,
+      hasEmail,
+    });
   } catch (error) {
     console.error("Concierge error:", error);
     return NextResponse.json(

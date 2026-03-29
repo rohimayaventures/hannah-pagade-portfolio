@@ -16,7 +16,7 @@ export type CaseStudy = {
   tagline?: string;
   projectDescription: string;
   problemStatement?: string;
-  processSteps?: [string, string, string];
+  processSteps?: [string, string, string] | [string, string, string, string];
   impactLine?: string;
   processAngle: string;
   /** Short summary for card view (scan-friendly). */
@@ -37,7 +37,7 @@ export const caseStudies: CaseStudy[] = [
     title: "OrixLink AI",
     tagline: "Where every symptom finds its answer.",
     subtitle:
-      "OrixLink AI accepts any symptom in natural language and returns a structured clinical differential, red flag criteria, four-tier urgency classification, and plain-language next steps. Built by a 15-year LPN for the intake gap behind an estimated 12 million outpatient diagnostic errors a year. Monetized with tiered subscriptions, credit packs, and a lifetime access offer.",
+      "OrixLink AI accepts any symptom in natural language and returns a structured clinical differential, red flag criteria, four-tier urgency classification, and plain-language next steps. Built by a 15-year LPN for the intake gap behind an estimated 12 million outpatient diagnostic errors a year. Monetized with tiered subscriptions, credit packs, Google OAuth, Stripe with idempotent credit delivery (unique constraint on payment intent), and a lifetime access offer.",
     tags: ["CLINICAL-AI", "CONVERSATIONAL", "FULL-STACK", "MONETIZED"],
     embedType: "live",
     embedUrl: "https://triage.rohimaya.ai",
@@ -45,24 +45,25 @@ export const caseStudies: CaseStudy[] = [
     status: "live",
     coverImage: "/images/orixlink-ai-landing.png",
     projectDescription:
-      "OrixLink AI accepts any symptom in natural language and returns a structured clinical differential, red flag criteria, four-tier urgency classification, and plain-language next steps. Built by a 15-year LPN for the intake gap that causes an estimated 12 million diagnostic errors a year in outpatient settings. Monetized with tiered subscriptions, credit packs, and a lifetime access offer.",
+      "OrixLink AI accepts any symptom in natural language and returns a structured clinical differential, red flag criteria, four-tier urgency classification, and plain-language next steps. Built by a 15-year LPN for the intake gap that causes an estimated 12 million diagnostic errors a year in outpatient settings. Monetized with tiered subscriptions, credit packs, Google OAuth, Stripe with idempotent credit delivery (unique constraint on payment intent), and a lifetime access offer.",
     problemStatement:
       "At least 12 million Americans experience a diagnostic error in outpatient settings each year. Most happen not because clinicians lack knowledge, but because the intake process gives them no structured way to connect a patient's full symptom picture to a working differential. OrixLink is the tool that closes that gap—any symptom, any person, no prior diagnosis required. Validated in March 2026 against a real compartment syndrome presentation.",
     processSteps: [
       "I did not need to conduct user research for this product. I have conducted it for 15 years on every shift. The intake failure pattern is not hypothetical. It is the first 90 seconds of every clinical encounter, repeated across every setting I have worked in.",
       "The hardest problem was the output contract. The Claude system prompt had to accept unconstrained natural language, return a structured differential with likelihood rankings, surface red flags as a discrete layer, assign a four-tier urgency level, and frame everything as clinical support without being a disclaimer wall or a dangerously confident diagnosis. Every word of that prompt was iterated until a triage nurse would trust it. Then the output was parsed by a typed consumer so the UI never breaks regardless of language or phrasing variation.",
-      "A conversational clinical triage tool with natural language intake, structured differential output, red flag cards, urgency tiers, follow-up prompting, legal overlay, Supabase persistence, full authentication with anonymous session migration, tiered Stripe billing with atomic usage enforcement, credit packs, a follow-up reminder system via Resend and pg_cron, admin dashboard, Meridian Oracle dark design system across all surfaces, PWA with offline fallback, and a compliance-aware legal layer including HIPAA scope, anonymous data disclosure, and session timeout policy. Validated in March 2026 against a real compartment syndrome presentation that matched the clinical workup.",
+      "A conversational clinical triage tool with natural language intake, structured differential output, red flag cards, urgency tiers, follow-up prompting, legal overlay, Supabase persistence, full authentication with Google OAuth and email plus anonymous session migration, tiered Stripe billing with atomic usage enforcement, idempotent credit delivery using a unique constraint on Stripe payment intent, credit packs, a follow-up reminder system via Resend and pg_cron, admin dashboard, Meridian Oracle dark design system across all surfaces, PWA with offline fallback, and a compliance-aware legal layer including HIPAA scope, anonymous data disclosure, and session timeout policy. Validated in March 2026 against a real compartment syndrome presentation that matched the clinical workup.",
+      "Production SQL fix — the RPC boundary bug: at the subscription cap, attempt_assessment could mis-classify the last included assessment as over-cap and consume a credit (ghost credit). Diagnosed in the Supabase SQL editor by tracing subscription usage before and after the cap check. Fixed with v_used_before logic so subscription-funded sessions never fall through to credits incorrectly. Credit purchases also use a unique constraint on stripe_payment_intent_id so duplicate Stripe webhook retries cannot double-apply credits.",
     ],
     impactLine:
       "OrixLink exists because the intake gap is real, the diagnostic error rate is real, and 15 years of clinical experience is worth more than a user research sprint. The proof point is not a demo. It is a real patient whose symptom cluster the product correctly flagged as an emergency before a clinician saw him.",
     processAngle:
-      "Next.js 16 App Router, Claude API (Sonnet for paid tiers, Haiku for free), Supabase (auth, persistence, RLS, pg_cron, pg_net), Stripe (checkout, webhooks, billing portal), Resend for transactional email, typed assessment output via parseAssessment, Meridian Oracle design system. Live at triage.rohimaya.ai, early commercial pilot.",
+      "Next.js 16 App Router, Claude API (Sonnet for paid tiers, Haiku for free), Supabase (Google OAuth and email auth, persistence, RLS, pg_cron, pg_net), Stripe (checkout, webhooks, billing portal, idempotent credits via unique constraint on payment intent), Resend for transactional email, typed assessment output via parseAssessment, Meridian Oracle design system. Live at triage.rohimaya.ai, early commercial pilot.",
     cardSummary:
-      "Universal triage and diagnosis. Any symptom, any person, no prior diagnosis required. Live at triage.rohimaya.ai with full Stripe billing, usage cap enforcement, and a reminder system.",
+      "Universal triage at triage.rohimaya.ai: Stripe billing, credit packs, Google OAuth, usage caps and reminders. March 2026 compartment syndrome validation matched the clinical workup.",
     role: "Product Lead, Conversation UX, Prompt Architect, Full-Stack Implementation",
     timeline: "2025 — Present",
     keyOutcome:
-      "Early commercial pilot: Stripe subscriptions and credit packs, atomic usage caps with rollback, Resend reminders; March 2026 validation matched clinical workup on a compartment syndrome presentation",
+      "Early commercial pilot: Stripe subscriptions, credit packs, Google OAuth, atomic usage caps with rollback and idempotent credit webhooks, Resend reminders; March 2026 validation matched clinical workup on a compartment syndrome presentation",
   },
   {
     featured: false,
@@ -71,29 +72,30 @@ export const caseStudies: CaseStudy[] = [
     title: "HealthLiteracy AI",
     tagline: "Your medical records, in your language.",
     subtitle:
-      "HealthLiteracy AI translates discharge summaries, lab results, and clinical notes into plain language a patient can actually use. Paste, upload a PDF, or speak. Choose Simple, Clear, or Complete. Twelve languages. Urgent action items surfaced as visual cards before the translation body.",
-    tags: ["HEALTH-EQUITY", "AI-PRODUCT", "FULL-STACK", "PATIENT-FACING"],
+      "Clinical document translation into plain language across 12 languages and 3 reading levels. Urgent action items surfaced before the translation body. Built-in AI verification pass checks the translation against the original for omissions before showing it to the patient.",
+    tags: ["HEALTH-EQUITY", "PATIENT-FACING", "FULL-STACK", "MULTILINGUAL"],
     embedType: "live",
     embedUrl: "https://literacy.rohimaya.ai",
     liveUrl: "https://literacy.rohimaya.ai",
     status: "live",
     coverImage: "/images/healthliteracy-ai-landing.png",
     projectDescription:
-      "HealthLiteracy AI translates discharge summaries, lab results, and clinical notes into plain language a patient can actually use. Paste, upload a PDF, or speak. Choose Simple, Clear, or Complete. Twelve languages. Urgent action items surfaced as visual cards before the translation body.",
+      "HealthLiteracy AI translates discharge summaries, lab results, and clinical notes into plain language a patient can actually act on. Three input methods. Twelve languages. Three reading levels with descriptive labels. A reverse-check verification step sends the translation back through Claude before the patient sees it. Urgent items are surfaced as visual cards above the translation body so a patient who reads only the top of the page still knows what to do.",
     problemStatement:
-      "88% of Americans have less-than-proficient health literacy. The average discharge summary is written at a 9th or 10th grade reading level. The average patient reads at an 8th grade level at best — often lower — and may not read English at home. Patients who understand their discharge instructions are 30% less likely to be readmitted. That gap is a product problem.",
+      "88% of Americans have less-than-proficient health literacy. The average discharge summary is written at a 9th grade reading level. Patients who clearly understand their discharge instructions are 30% less likely to be readmitted. That gap is a product problem — and a product can close it.",
     processSteps: [
-      "I did not need to conduct user research for this project. I have conducted it for 15 years on every shift. The constraints were clear before the first line of code: no login, no setup, urgent items at the top, built-in translation in the languages my actual patients speak. The tool had to serve patients who might be scared, tired, medicated, or not literate in English — all at once.",
-      "The core product decision was the Claude system prompt. Translation is easy. A translation that a nurse would trust to hand to a patient requires specific constraints: every medical term explained in the same sentence, urgent items returned as a structured array separate from the translation body, attribution language that prevents the tool from being read as a diagnosis, and a verification pass that checks its own work for omissions. Twelve languages and voice input were built at launch, not deferred, because the population this serves is not well-served by English-only MVP thinking.",
-      "A free, no-login patient document translation tool with three input methods, twelve languages, three reading levels, urgent item cards, side-by-side view, copy and share, and a built-in AI verification pass that checks the translation against the original for omissions. Deployed on Vercel at literacy.rohimaya.ai, sessions persisted in Supabase, built on Next.js 15 and the Claude API.",
+      "The constraint set was clear before a line of code was written: no login, no setup, urgent items at the top, built-in translation in the languages patients in a real clinical setting actually speak. The tool had to serve someone who might be scared, medicated, and not literate in English — all at the same time.",
+      "The hardest product decision was the Claude system prompt. Translation is easy. A translation a nurse would trust to hand to a patient requires specific constraints: every medical term explained in the same sentence it appears, urgent items returned as a structured array separate from the translation body so the front end can always render them first, attribution language that prevents the tool from functioning as a diagnostic instrument, and a verification pass that checks its own work.",
+      "Twelve languages and voice input were built at launch rather than deferred. English-only MVP thinking does not serve the population this product is for. The reading level selector uses descriptive labels — Simple, Clear, Complete — rather than grade levels, because selecting a reading level should feel like choosing a format, not assessing yourself.",
+      "The reverse-check verification step was the most important safety decision. A second Claude API call sends the translation back through Claude acting as a QA auditor. It checks for omissions, meaning drift, and inaccuracies before the output is shown. A patient who cannot catch a translation error should never be in a position where catching it was their responsibility.",
     ],
     impactLine:
-      "If someone cannot read or act on discharge instructions, the care plan never really starts. HealthLiteracy is built so plain language, reading level, language, and urgent items are part of the product, not an afterthought.",
+      "If someone cannot read or act on discharge instructions, the care plan never really starts. HealthLiteracy AI is built so plain language, reading level, language choice, and urgent action items are part of the product — not an afterthought.",
     processAngle:
       "Built around health equity constraints with twelve-language output, low-friction input modes, and AI verification for omission checking.",
     cardSummary:
-      "Patient document translation. Twelve languages, three reading levels. Urgent items surfaced first.",
-    role: "Product & Conversation Design",
+      "Patient document translation. 12 languages, 3 reading levels, urgent items surfaced first. Built-in AI verification pass. No login required. Free by design.",
+    role: "Product and Conversation Design",
     timeline: "2025 — Present",
     keyOutcome: "Twelve-language translation with AI verification, three reading levels, and shareable sessions",
   },
@@ -153,29 +155,31 @@ export const caseStudies: CaseStudy[] = [
     order: 3,
     slug: "clearchannel-vestara",
     title: "ClearChannel by Vestara",
+    tagline: "Design the conversation. Across every channel.",
     subtitle:
-      "ClearChannel is a live NLU routing simulator that classifies investor utterances with confidence scoring and sentiment, then generates simultaneous channel outputs across IVR, chatbot, and agent assist.",
-    tags: ["FINSERV", "CONVERSATIONAL-AI", "NLU-ARCHITECTURE"],
+      "Enterprise NLU routing simulator for financial services contact centers. One utterance drives three simultaneous channel outputs — IVR, Chatbot, and Agent Assist — with full intent taxonomy, confidence scoring, three emotional override protocols, and voice input via OpenAI Whisper.",
+    tags: ["CONVERSATION-DESIGN", "NLU-ARCHITECTURE", "ENTERPRISE-AI", "FINTECH"],
     embedType: "live",
     embedUrl: "https://clearchannel-vestara.vercel.app/",
     liveUrl: "https://clearchannel-vestara.vercel.app/",
     status: "live",
     coverImage: "/images/clearchannel-landing.png",
     projectDescription:
-      "A real-time conversational design lab for enterprise financial services contact centers. ClearChannel makes NLU routing logic visible and auditable by showing intent, confidence, sentiment, and channel-specific responses in one flow.",
+      "ClearChannel demonstrates what it means to design a conversational AI system for all channels at once rather than one at a time. Built to show how a single investor utterance is classified, routed, and transformed into channel-specific responses in real time. Three hard override protocols handle bereavement, fraud, and barge-in before any standard intent classification runs.",
     problemStatement:
-      "Enterprise contact centers still struggle with misrouted, emotionally mismatched conversations because intent architecture is often designed separately from downstream channel experiences. In high-stakes contexts like bereavement, fraud, and urgent account events, those first routing decisions directly impact trust and retention.",
+      "Most conversational AI design tools optimize for one channel. Enterprise contact centers run three simultaneously. The design consequences of routing decisions are invisible unless you can see IVR, Chatbot, and Agent Assist fire at once. ClearChannel makes that system visible, interactive, and auditable.",
     processSteps: [
-      "I designed ClearChannel around an architecture gap: product and UX teams rarely get to observe how one utterance propagates through IVR, chatbot, and agent-assist simultaneously. The solution was to treat routing design as a live, testable artifact rather than a hidden configuration layer.",
-      "The core system prompt encodes 18 intent categories, confidence logic, and pre-classification emotional override protocols (bereavement, fraud, barge-in). The app pairs Claude-powered intent analysis with voice input and live channel rendering to expose routing behavior in real time for design review.",
-      "A deployed, interactive NLU routing simulator that streams intent, confidence, sentiment, and three synchronized channel responses in seconds. Built with Next.js 16, TypeScript, Tailwind CSS v4, Claude API streaming, and realtime voice integration.",
+      "The product started from a simple observation: conversational AI design tools show one channel at a time, but the real design problem is the system — how the same utterance gets handled differently across IVR, chatbot, and live agent support, and where those three channels contradict each other. That contradiction is invisible in standard design tools. ClearChannel makes it visible in real time.",
+      "The core architecture decision was to treat all three channel outputs as a single atomic Claude API call with a structured JSON output contract rather than three separate calls. This keeps latency low and guarantees the three outputs are always internally consistent with each other — the IVR containment decision and the Agent Assist script can never contradict each other in the same response.",
+      "The three override protocols — bereavement, fraud, barge-in — were designed before the standard intent taxonomy. The principle is the same one used in clinical triage: the most dangerous presentations are handled before the standard intake process runs. Emotional emergencies in a financial services context require the same discipline.",
+      "Streaming via Server-Sent Events with a brace-depth JSON section extractor was chosen to give progressive panel hydration under two seconds of perceived latency. A practitioner watching three panels populate in real time engages differently with the output than one waiting for a blocking response.",
     ],
     impactLine:
-      "ClearChannel turns invisible routing logic into a visible design and product decision surface, enabling teams to test emotional-context handling and cross-channel consistency before those decisions affect live customers.",
+      "Live portfolio demonstration of enterprise conversational AI for financial services contact centers: multi-channel NLU architecture that is visible, interactive, and auditable in real time.",
     processAngle:
       "Designed for enterprise conversational governance: emotional overrides, simultaneous channel outputs, confidence legibility, and verbatim-ready agent assist.",
     cardSummary:
-      "Real-time NLU routing lab for financial services across IVR, chatbot, and agent assist.",
+      "Enterprise NLU routing simulator. One utterance, three simultaneous channel outputs, three emotional override protocols, full NLU architecture card per utterance. Live with voice input and IVR audio playback.",
     role: "Product & Conversation UX",
     timeline: "2025",
     keyOutcome:

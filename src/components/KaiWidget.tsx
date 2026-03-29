@@ -107,7 +107,7 @@ export default function KaiWidget() {
     const { visitorEmail, visitorName } = extractContact(msgs);
     if (!visitorEmail) return;
     try {
-      await fetch("/api/notify", {
+      const res = await fetch("/api/notify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -116,7 +116,9 @@ export default function KaiWidget() {
           messages: msgs,
         }),
       });
-      setNotified(true);
+      if (res.ok) {
+        setNotified(true);
+      }
     } catch (err) {
       console.error("Notification failed:", err);
     }
@@ -135,8 +137,31 @@ export default function KaiWidget() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: updatedMessages }),
       });
-      const data = await res.json();
-      const assistantMessage: Message = { role: "assistant", content: data.text };
+      const data = (await res.json()) as {
+        text?: string;
+        hasEmail?: boolean;
+      };
+
+      if (!res.ok) {
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content:
+              "Something went wrong on my end. Please try again in a moment.",
+          },
+        ]);
+        return;
+      }
+
+      const replyText =
+        typeof data.text === "string" && data.text.length > 0
+          ? data.text
+          : "Something went wrong on my end. Please try again in a moment.";
+      const assistantMessage: Message = {
+        role: "assistant",
+        content: replyText,
+      };
       const finalMessages = [...updatedMessages, assistantMessage];
       setMessages(finalMessages);
       if (data.hasEmail) await sendNotification(finalMessages);

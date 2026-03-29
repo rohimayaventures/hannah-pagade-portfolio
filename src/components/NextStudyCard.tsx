@@ -10,7 +10,12 @@ type NextStudyCardProps = {
 export default function NextStudyCard({
   current,
 }: NextStudyCardProps) {
-  const ordered = [...caseStudies].sort((a, b) => a.order - b.order);
+  const ordered = [...caseStudies].sort((a, b) => {
+    const soon = (s: CaseStudy["status"]) => (s === "coming-soon" ? 1 : 0);
+    const byStatus = soon(a.status) - soon(b.status);
+    if (byStatus !== 0) return byStatus;
+    return a.order - b.order;
+  });
   const idx = ordered.findIndex((s) => s.slug === current.slug);
   const next = idx >= 0 ? ordered[(idx + 1) % ordered.length] : null;
 

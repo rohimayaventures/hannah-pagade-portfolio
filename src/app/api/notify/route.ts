@@ -128,11 +128,17 @@ async function sendSlackNotification(
     ],
   };
 
-  await fetch(webhookUrl, {
+  const slackRes = await fetch(webhookUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(slackBody),
   });
+  if (!slackRes.ok) {
+    const detail = await slackRes.text().catch(() => "");
+    throw new Error(
+      `[notify] Slack webhook failed: ${slackRes.status} ${slackRes.statusText}${detail ? ` ${detail}` : ""}`
+    );
+  }
 }
 
 async function sendVisitorConfirmation(

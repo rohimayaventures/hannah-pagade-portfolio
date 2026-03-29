@@ -4,7 +4,13 @@ import { useState } from "react";
 import FadeIn from "./FadeIn";
 import GoldRule from "./GoldRule";
 
-const stepLabels = ["Discovery", "Design & Build", "What Shipped"] as const;
+const stepLabels3 = ["Discovery", "Design & Build", "What Shipped"] as const;
+const stepLabels4 = [
+  "Discovery",
+  "Design & build",
+  "Architecture",
+  "Delivery",
+] as const;
 
 function MobileProcessStep({
   step,
@@ -12,7 +18,7 @@ function MobileProcessStep({
   index,
 }: {
   step: string;
-  label: (typeof stepLabels)[number];
+  label: string;
   index: number;
 }) {
   const [expanded, setExpanded] = useState(true);
@@ -66,7 +72,7 @@ function MobileProcessStep({
 }
 
 type ProcessSectionProps = {
-  steps: [string, string, string];
+  steps: [string, string, string] | [string, string, string, string];
   impactLine?: string;
 };
 
@@ -74,6 +80,13 @@ export default function ProcessSection({
   steps,
   impactLine,
 }: ProcessSectionProps) {
+  const labels =
+    steps.length === 4 ? stepLabels4 : stepLabels3;
+  const gridClass =
+    steps.length === 4
+      ? "mt-8 flex flex-col gap-6 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-5"
+      : "mt-8 flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-5";
+
   return (
     <section className="mt-12">
       <FadeIn>
@@ -85,13 +98,13 @@ export default function ProcessSection({
         </div>
       </FadeIn>
 
-      <div className="mt-8 flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-5">
+      <div className={gridClass}>
         {steps.map((step, i) => (
           <FadeIn key={i} delay={i * 120}>
             <div className="process-step">
               <MobileProcessStep
                 step={step}
-                label={stepLabels[i]}
+                label={labels[i] ?? `Step ${i + 1}`}
                 index={i}
               />
 
@@ -112,7 +125,7 @@ export default function ProcessSection({
                     className="text-[10px] font-body uppercase tracking-widest"
                     style={{ color: "var(--gold)", opacity: 0.7 }}
                   >
-                    {stepLabels[i]}
+                    {labels[i] ?? `Step ${i + 1}`}
                   </span>
                 </div>
                 <div
@@ -123,7 +136,7 @@ export default function ProcessSection({
                   }}
                 >
                   <h3 className="mb-3 font-display text-lg leading-snug text-cream">
-                    {stepLabels[i]}
+                    {labels[i] ?? `Step ${i + 1}`}
                   </h3>
                   <div
                     className="font-body text-[15px] leading-relaxed md:text-base"

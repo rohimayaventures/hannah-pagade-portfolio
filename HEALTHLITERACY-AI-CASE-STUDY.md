@@ -153,7 +153,57 @@ An early iteration used grade-level labels (5th Grade, 8th Grade, College). Thes
 
 ---
 
-## SECTION 4 — SCHOLARLY CITATIONS
+## SECTION 4 — TECHNICAL ARCHITECTURE
+
+| Piece | Implementation |
+|-------|----------------|
+| Framework | Next.js 15 App Router |
+| AI | Claude API — `claude-sonnet-4-20250514` for all translation and verification calls |
+| Prompt architecture | Two-call pipeline: Call 1 produces plain-language translation at the selected reading level in the target language. Call 2 sends translation back through Claude as a QA auditor checking for omissions, inaccuracies, and meaning drift against the original clinical text. Returns structured pass/fail with itemized flags. |
+| Output contract | Structured JSON: `translatedText`, `urgentItems[]` (array of discrete action items surfaced before translation body), `readingLevel`, `language`, `verificationResult` with `passed`, `confidence`, and `flags[]` |
+| Languages | English, Spanish, Haitian Creole, Portuguese, French, Mandarin, Vietnamese, Tagalog, Korean, Arabic, Hindi, Russian |
+| Input methods | Text paste, PDF upload (server-side via pdf-parse, Node.js runtime, edge runtime explicitly excluded), Voice input (Web Speech API, no third-party dependency) |
+| Persistence | Supabase — public read by session ID, public insert, no authentication required. Row Level Security enabled. Shared `financelens_sessions` table structure. |
+| Auth | None required — no login barrier by design. Free access is a core product value for health equity positioning. |
+| PDF parsing | pdf-parse with Node.js runtime. Text-layer extraction only. Scanned image PDFs require paste input. UI copy reflects this accurately. |
+| Shareable URLs | Session persisted to Supabase on translation completion. UUID slug returned as shareable URL. No expiry. |
+| Design system | Candlelight Clarity — Cream `#F4EFE6`, Forest Green `#0F3D34`, Amber `#D4882A`. Cormorant Garamond + DM Sans + DM Mono. WCAG AA contrast verified throughout. |
+| Motion | Continuous ring animation in hero (CSS, no library). Communicates calm and warmth without urgency. |
+| Deploy | Vercel. Primary domain literacy.rohimaya.ai via Cloudflare DNS (CNAME to cname.vercel-dns.com, not proxied). |
+
+## SECTION 5 — STATUS MATRIX
+
+### What works
+
+- Three input methods: text paste, PDF upload, voice input
+- Twelve-language output with tiered confidence disclaimers per language
+- Emergency override: Tier 4 urgency outputs render in both selected language and English simultaneously regardless of language setting
+- Three reading levels: Simple, Clear, Complete with descriptive labels (not grade levels)
+- Urgent items surfaced as discrete visual cards above translation body
+- Side-by-side view: original clinical text left, plain-language translation right
+- Reverse-check verification pass: second Claude API call auditing translation for omissions and inaccuracies, structured pass/fail result with itemized flags
+- Copy to clipboard
+- Supabase-persisted shareable session URLs with no login required
+- Candlelight Clarity design system across all surfaces
+- WCAG AA contrast verified programmatically
+- Hero ring motion animation
+- Responsive layout
+
+### Known gaps and roadmap
+
+| Gap | Status | Notes |
+|-----|--------|-------|
+| Scanned PDF support | Not built | pdf-parse extracts text layer only. OCR pipeline (Tesseract or cloud OCR) is Phase 2. UI accurately reflects this limitation. |
+| Usage analytics | Not instrumented | Session counts, language distribution, reading level distribution, share rate — not yet tracked. Metrics listed in case study are targets, not live data. |
+| Rate limiting | Not implemented | No API rate limiting on translation or verification routes. Needed before any public traffic push. |
+| Verification confidence calibration | Rubric only | Pass/fail confidence reflects the auditor prompt rubric. Not calibrated across document types or languages. |
+| Native app | Not built | PWA manifest not yet implemented. Mobile browser works. App store submission is long-term roadmap. |
+| Offline support | Not built | Requires Claude API access. No offline fallback for translation. |
+| Patient feedback loop | Not built | No mechanism for a patient to flag a translation as confusing or incorrect. Phase 3 roadmap. |
+
+---
+
+## SECTION 6 — SCHOLARLY CITATIONS
 
 1. Kutner, M., Greenberg, E., Jin, Y., & Paulsen, C. (2006). The health literacy of America's adults: Results from the 2003 National Assessment of Adult Literacy. Institute of Education Sciences, NCES 2006-483.
 
@@ -175,7 +225,7 @@ An early iteration used grade-level labels (5th Grade, 8th Grade, College). Thes
 
 ---
 
-## SECTION 5 — PORTFOLIO PAGE COPY (READY TO DROP IN)
+## SECTION 7 — PORTFOLIO PAGE COPY (READY TO DROP IN)
 
 ### Status badge
 Live
@@ -210,4 +260,4 @@ If someone cannot read or act on discharge instructions, the care plan never rea
 ---
 
 *Case study documentation updated March 2026.*
-*Hannah Kraulik Pagade, Pagade Ventures / Rohimaya Health AI.*
+*Hannah Kraulik Pagade, Rohimaya Health AI.*
