@@ -176,3 +176,12 @@ h1, h2, h3, h4, h5, h6 {
   background-color: rgba(200, 169, 110, 0.08);
   transform: translateY(-1px);
 }
+
+/* Case study process: collapsible steps on narrow viewports */
+.process-step-mobile > summary {
+  list-style: none;
+}
+
+.process-step-mobile > summary::-webkit-details-marker {
+  display: none;
+}

@@ -1,9 +1,69 @@
 "use client";
 
+import { useState } from "react";
 import FadeIn from "./FadeIn";
 import GoldRule from "./GoldRule";
 
 const stepLabels = ["Discovery", "Design & Build", "What Shipped"] as const;
+
+function MobileProcessStep({
+  step,
+  label,
+  index,
+}: {
+  step: string;
+  label: (typeof stepLabels)[number];
+  index: number;
+}) {
+  const [expanded, setExpanded] = useState(true);
+
+  return (
+    <details
+      className="process-step-mobile md:hidden rounded-xl"
+      style={{
+        border: "1px solid rgba(200, 169, 110, 0.2)",
+        backgroundColor: "rgba(255, 255, 255, 0.05)",
+      }}
+      open={expanded}
+      onToggle={(e) => setExpanded(e.currentTarget.open)}
+    >
+      <summary className="flex cursor-pointer items-center justify-between gap-3 px-4 py-3 text-left select-none">
+        <span className="flex min-w-0 items-center gap-3">
+          <span
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border text-sm font-body"
+            style={{
+              borderColor: "rgba(200, 169, 110, 0.4)",
+              color: "var(--gold)",
+              backgroundColor: "rgba(200, 169, 110, 0.06)",
+            }}
+            aria-hidden
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span className="font-display text-base leading-snug text-cream">
+            {label}
+          </span>
+        </span>
+        <span
+          className="shrink-0 font-body text-[10px] uppercase tracking-widest"
+          style={{ color: "var(--gold)", opacity: 0.75 }}
+          aria-hidden
+        >
+          Tap
+        </span>
+      </summary>
+      <div
+        className="border-t px-4 pb-4 pt-3 font-body text-[15px] leading-relaxed sm:text-base"
+        style={{
+          borderColor: "rgba(200, 169, 110, 0.12)",
+          color: "rgba(244, 239, 230, 0.85)",
+        }}
+      >
+        {step}
+      </div>
+    </details>
+  );
+}
 
 type ProcessSectionProps = {
   steps: [string, string, string];
@@ -28,37 +88,49 @@ export default function ProcessSection({
       <div className="mt-8 flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-5">
         {steps.map((step, i) => (
           <FadeIn key={i} delay={i * 120}>
-            <div className="process-step flex gap-4 md:flex-col md:gap-0">
-              <div className="flex shrink-0 flex-col items-center md:flex-row md:items-center md:gap-3 md:mb-4">
+            <div className="process-step">
+              <MobileProcessStep
+                step={step}
+                label={stepLabels[i]}
+                index={i}
+              />
+
+              {/* Desktop: three-column layout */}
+              <div className="hidden gap-4 md:flex md:flex-col md:gap-0">
+                <div className="mb-4 flex flex-row items-center gap-3">
+                  <div
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border text-sm font-body"
+                    style={{
+                      borderColor: "rgba(200, 169, 110, 0.4)",
+                      color: "var(--gold)",
+                      backgroundColor: "rgba(200, 169, 110, 0.06)",
+                    }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <span
+                    className="text-[10px] font-body uppercase tracking-widest"
+                    style={{ color: "var(--gold)", opacity: 0.7 }}
+                  >
+                    {stepLabels[i]}
+                  </span>
+                </div>
                 <div
-                  className="flex h-11 w-11 items-center justify-center rounded-full border text-sm font-body"
+                  className="rounded-xl p-6"
                   style={{
-                    borderColor: "rgba(200, 169, 110, 0.4)",
-                    color: "var(--gold)",
-                    backgroundColor: "rgba(200, 169, 110, 0.06)",
+                    border: "1px solid rgba(200, 169, 110, 0.2)",
+                    backgroundColor: "rgba(255, 255, 255, 0.05)",
                   }}
                 >
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-                <span
-                  className="mt-2 text-[10px] font-body uppercase tracking-widest md:mt-0"
-                  style={{ color: "var(--gold)", opacity: 0.7 }}
-                >
-                  {stepLabels[i]}
-                </span>
-              </div>
-              <div
-                className="rounded-xl p-6 flex-1"
-                style={{
-                  border: "1px solid rgba(200, 169, 110, 0.2)",
-                  backgroundColor: "rgba(255, 255, 255, 0.05)",
-                }}
-              >
-                <div
-                  className="font-body text-[15px] leading-relaxed"
-                  style={{ color: "rgba(244, 239, 230, 0.8)" }}
-                >
-                  {step}
+                  <h3 className="mb-3 font-display text-lg leading-snug text-cream">
+                    {stepLabels[i]}
+                  </h3>
+                  <div
+                    className="font-body text-[15px] leading-relaxed md:text-base"
+                    style={{ color: "rgba(244, 239, 230, 0.8)" }}
+                  >
+                    {step}
+                  </div>
                 </div>
               </div>
             </div>
@@ -75,7 +147,7 @@ export default function ProcessSection({
               backgroundColor: "rgba(255, 255, 255, 0.05)",
             }}
           >
-            <div className="flex items-center gap-3 mb-3">
+            <div className="mb-3 flex items-center gap-3">
               <div
                 className="flex h-8 w-8 items-center justify-center rounded-full"
                 style={{ backgroundColor: "rgba(200, 169, 110, 0.1)" }}
@@ -85,6 +157,7 @@ export default function ProcessSection({
                   height="14"
                   viewBox="0 0 14 14"
                   fill="none"
+                  aria-hidden
                 >
                   <path
                     d="M7 1v12M1 7h12"

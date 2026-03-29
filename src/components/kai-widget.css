@@ -1,0 +1,426 @@
+/* Kai floating chat — layout and motion (colors align with Meridian Oracle) */
+
+@keyframes kai-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes kai-spin-r {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes kai-aura {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+@keyframes kai-core {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(200, 169, 110, 0),
+      0 0 8px rgba(200, 169, 110, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 0 8px rgba(200, 169, 110, 0.08),
+      0 0 22px rgba(200, 169, 110, 0.55);
+  }
+}
+
+@keyframes kai-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes kai-bounce {
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.85);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.kai-root {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+}
+
+@media (max-width: 639px) {
+  .kai-root {
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+.kai-panel.kai-panel-shell {
+  position: absolute;
+  bottom: 100px;
+  right: 0;
+  width: min(320px, calc(100vw - 2.5rem));
+  background: #0d1420;
+  border: 1px solid rgba(200, 169, 110, 0.22);
+  border-radius: 14px 14px 4px 14px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  animation: kai-slide-up 0.25s ease-out forwards;
+}
+
+.kai-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(200, 169, 110, 0.12);
+  background: rgba(200, 169, 110, 0.04);
+}
+
+.kai-avatar-ring {
+  display: flex;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(200, 169, 110, 0.1);
+  border: 1px solid rgba(200, 169, 110, 0.3);
+}
+
+.kai-title-block {
+  flex: 1;
+  min-width: 0;
+}
+
+.kai-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f4efe6;
+  font-family: var(--font-body), sans-serif;
+}
+
+.kai-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: rgba(244, 239, 230, 0.4);
+  font-family: var(--font-body), sans-serif;
+}
+
+.kai-status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #4ade80;
+  display: inline-block;
+}
+
+.kai-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: rgba(244, 239, 230, 0.35);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.kai-messages {
+  display: flex;
+  max-height: 320px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  overflow-y: auto;
+}
+
+.kai-msg-row {
+  display: flex;
+  animation: kai-slide-up 0.2s ease-out forwards;
+}
+
+.kai-msg-row--user {
+  justify-content: flex-end;
+}
+
+.kai-msg-row--assistant {
+  justify-content: flex-start;
+}
+
+.kai-bubble {
+  max-width: 82%;
+  padding: 9px 12px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  font-family: var(--font-body), sans-serif;
+  color: rgba(244, 239, 230, 0.88);
+}
+
+.kai-bubble--assistant {
+  border-radius: 4px 10px 10px 10px;
+  background: rgba(200, 169, 110, 0.07);
+  border: 1px solid rgba(200, 169, 110, 0.13);
+}
+
+.kai-bubble--user {
+  border-radius: 10px 4px 10px 10px;
+  background: rgba(200, 169, 110, 0.16);
+  border: 1px solid rgba(200, 169, 110, 0.32);
+}
+
+.kai-typing {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.kai-typing-inner {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 14px;
+  border-radius: 4px 10px 10px 10px;
+  background: rgba(200, 169, 110, 0.07);
+  border: 1px solid rgba(200, 169, 110, 0.13);
+}
+
+.kai-typing-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c8a96e;
+  display: inline-block;
+}
+
+.kai-dot-1 {
+  animation: kai-bounce 1.4s ease-in-out infinite 0s;
+}
+
+.kai-dot-2 {
+  animation: kai-bounce 1.4s ease-in-out infinite 0.2s;
+}
+
+.kai-dot-3 {
+  animation: kai-bounce 1.4s ease-in-out infinite 0.4s;
+}
+
+.kai-notify-toast {
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: rgba(200, 169, 110, 0.08);
+  border: 1px solid rgba(200, 169, 110, 0.22);
+  font-size: 11.5px;
+  color: #c8a96e;
+  font-family: var(--font-body), sans-serif;
+  text-align: center;
+}
+
+.kai-input-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid rgba(200, 169, 110, 0.08);
+}
+
+.kai-input {
+  flex: 1;
+  padding: 8px 11px;
+  border: 1px solid rgba(200, 169, 110, 0.18);
+  border-radius: 8px;
+  background: rgba(244, 239, 230, 0.05);
+  font-size: 12px;
+  color: #f4efe6;
+  font-family: var(--font-body), sans-serif;
+  outline: none;
+}
+
+.kai-send {
+  display: flex;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  background: rgba(200, 169, 110, 0.15);
+  cursor: not-allowed;
+  transition: background 0.2s;
+}
+
+.kai-send--ready {
+  background: #c8a96e;
+  cursor: pointer;
+}
+
+.kai-send svg path {
+  fill: none;
+  stroke: rgba(200, 169, 110, 0.4);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.kai-send--ready svg path {
+  stroke: #080c14;
+  stroke-width: 1.5;
+}
+
+.kai-launcher {
+  position: relative;
+  display: flex;
+  width: 64px;
+  height: 64px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.kai-aura {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(200, 169, 110, 0.14);
+}
+
+.kai-aura--0 {
+  width: 64px;
+  height: 64px;
+  animation: kai-aura 3s ease-in-out infinite 0s;
+}
+
+.kai-aura--1 {
+  width: 54px;
+  height: 54px;
+  animation: kai-aura 3s ease-in-out infinite 0.6s;
+}
+
+.kai-aura--2 {
+  width: 44px;
+  height: 44px;
+  animation: kai-aura 3s ease-in-out infinite 1.2s;
+}
+
+.kai-ring-1 {
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 1px solid rgba(200, 169, 110, 0.3);
+  animation: kai-spin 18s linear infinite;
+}
+
+.kai-ring-2 {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(200, 169, 110, 0.22);
+  animation: kai-spin-r 12s linear infinite;
+}
+
+.kai-ring-3 {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid rgba(200, 169, 110, 0.4);
+  animation: kai-spin 8s linear infinite;
+}
+
+.kai-ring-dot {
+  position: absolute;
+  border-radius: 50%;
+  background: #c8a96e;
+}
+
+.kai-ring-dot--lg {
+  top: -2.5px;
+  left: calc(50% - 2.5px);
+  width: 5px;
+  height: 5px;
+}
+
+.kai-ring-dot--sm {
+  top: -2px;
+  left: calc(50% - 2px);
+  width: 4px;
+  height: 4px;
+}
+
+.kai-core-disc {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #c8a96e;
+  animation: kai-core 3s ease-in-out infinite;
+}
+
+.kai-core-pupil {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #080c14;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kai-panel.kai-panel-shell,
+  .kai-msg-row,
+  .kai-aura--0,
+  .kai-aura--1,
+  .kai-aura--2,
+  .kai-ring-1,
+  .kai-ring-2,
+  .kai-ring-3,
+  .kai-core-disc,
+  .kai-dot-1,
+  .kai-dot-2,
+  .kai-dot-3 {
+    animation: none;
+  }
+
+  .kai-core-disc {
+    box-shadow: 0 0 8px rgba(200, 169, 110, 0.3);
+  }
+}

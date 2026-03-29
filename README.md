@@ -31,6 +31,10 @@ If both Gmail and Resend are set, Gmail is used first.
 
 Copy `.env.example` to `.env.local` and fill in values. **Do not commit** `.env` or `.env.local`.
 
+## Case study content
+
+The site reads case study data from `content/caseStudies.ts` (including work pages and the home grid). Long-form drafts in repo-root files such as `*-CASE-STUDY.md` are references for you; when you change shipped copy, update both so they stay aligned. CI runs `npm run verify-content` to catch duplicate or broken slugs in the TypeScript source.
+
 ## Deploy
 
 Deploy on [Vercel](https://vercel.com). Add the same environment variables in the project settings.

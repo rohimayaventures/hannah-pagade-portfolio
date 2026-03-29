@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import "./kai-widget.css";
 
 type Message = {
   role: "user" | "assistant";
@@ -152,362 +153,136 @@ export default function KaiWidget() {
     }
   };
 
+  const sendReady = Boolean(input.trim() && !isLoading);
+
   return (
-    <>
-      <style>{`
-        @keyframes kai-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes kai-spin-r { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
-        @keyframes kai-aura {
-          0%, 100% { transform: scale(1); opacity: 0.5; }
-          50% { transform: scale(1.4); opacity: 0; }
-        }
-        @keyframes kai-core {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(200,169,110,0), 0 0 8px rgba(200,169,110,0.3); }
-          50% { box-shadow: 0 0 0 8px rgba(200,169,110,0.08), 0 0 22px rgba(200,169,110,0.55); }
-        }
-        @keyframes kai-slide-up {
-          from { opacity: 0; transform: translateY(16px) scale(0.97); }
-          to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        @keyframes kai-bounce {
-          0%, 80%, 100% { opacity: 0.3; transform: scale(0.85); }
-          40% { opacity: 1; transform: scale(1.1); }
-        }
-        .kai-ring-1 { animation: kai-spin 18s linear infinite; }
-        .kai-ring-2 { animation: kai-spin-r 12s linear infinite; }
-        .kai-ring-3 { animation: kai-spin 8s linear infinite; }
-        .kai-aura-1 { animation: kai-aura 3s ease-in-out infinite 0s; }
-        .kai-aura-2 { animation: kai-aura 3s ease-in-out infinite 0.6s; }
-        .kai-aura-3 { animation: kai-aura 3s ease-in-out infinite 1.2s; }
-        .kai-core { animation: kai-core 3s ease-in-out infinite; }
-        .kai-panel { animation: kai-slide-up 0.25s ease-out forwards; }
-        .kai-dot-1 { animation: kai-bounce 1.4s ease-in-out infinite 0s; }
-        .kai-dot-2 { animation: kai-bounce 1.4s ease-in-out infinite 0.2s; }
-        .kai-dot-3 { animation: kai-bounce 1.4s ease-in-out infinite 0.4s; }
-        .kai-msg-enter { animation: kai-slide-up 0.2s ease-out forwards; }
-      `}</style>
-
-      {/* Floating button */}
-      <div
-        style={{
-          position: "fixed",
-          bottom: "28px",
-          right: "28px",
-          zIndex: 9999,
-        }}
-        className="max-sm:bottom-5 max-sm:right-5"
-      >
-        {/* Chat panel */}
-        {open && (
-          <div
-            ref={panelRef}
-            id="kai-chat-panel"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="kai-chat-title"
-            className="kai-panel"
-            style={{
-              position: "absolute",
-              bottom: "100px",
-              right: "0",
-              width: "min(320px, calc(100vw - 2.5rem))",
-              background: "#0D1420",
-              border: "1px solid rgba(200,169,110,0.22)",
-              borderRadius: "14px 14px 4px 14px",
-              overflow: "hidden",
-              boxShadow: "0 24px 60px rgba(0,0,0,0.6)",
-            }}
-          >
-            {/* Header */}
-            <div
-              style={{
-                padding: "12px 14px",
-                borderBottom: "1px solid rgba(200,169,110,0.12)",
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-                background: "rgba(200,169,110,0.04)",
-              }}
-            >
-              <div
-                style={{
-                  width: "30px",
-                  height: "30px",
-                  borderRadius: "50%",
-                  background: "rgba(200,169,110,0.1)",
-                  border: "1px solid rgba(200,169,110,0.3)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexShrink: 0,
-                }}
-              >
-                <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
-                  <circle cx="10" cy="10" r="4" fill="#C8A96E" />
-                  <circle cx="10" cy="10" r="7" stroke="#C8A96E" strokeWidth="0.8" fill="none" opacity="0.4" />
-                  <circle cx="10" cy="10" r="9.5" stroke="#C8A96E" strokeWidth="0.5" fill="none" opacity="0.2" />
-                </svg>
-              </div>
-              <div style={{ flex: 1 }}>
-                <div id="kai-chat-title" style={{ fontSize: "13px", fontWeight: 600, color: "#F4EFE6", fontFamily: "var(--font-body), sans-serif" }}>Kai</div>
-                <div style={{ fontSize: "10px", color: "rgba(244,239,230,0.4)", fontFamily: "var(--font-body), sans-serif", display: "flex", alignItems: "center", gap: "4px" }}>
-                  <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#4ade80", display: "inline-block" }} />
-                  Hannah&apos;s assistant
-                </div>
-              </div>
-              <button
-                type="button"
-                onClick={closePanel}
-                aria-label="Close chat"
-                style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(244,239,230,0.35)", fontSize: "18px", lineHeight: 1, padding: "8px 10px", minWidth: "44px", minHeight: "44px", display: "flex", alignItems: "center", justifyContent: "center" }}
-              >
-                ×
-              </button>
-            </div>
-
-            {/* Messages */}
-            <div
-              style={{
-                padding: "14px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-                maxHeight: "320px",
-                overflowY: "auto",
-              }}
-            >
-              {messages.map((msg, i) => (
-                <div
-                  key={i}
-                  className="kai-msg-enter"
-                  style={{
-                    display: "flex",
-                    justifyContent: msg.role === "user" ? "flex-end" : "flex-start",
-                  }}
-                >
-                  <div
-                    style={{
-                      maxWidth: "82%",
-                      padding: "9px 12px",
-                      borderRadius: msg.role === "assistant" ? "4px 10px 10px 10px" : "10px 4px 10px 10px",
-                      fontSize: "12.5px",
-                      lineHeight: "1.55",
-                      fontFamily: "var(--font-body), sans-serif",
-                      background: msg.role === "assistant"
-                        ? "rgba(200,169,110,0.07)"
-                        : "rgba(200,169,110,0.16)",
-                      border: msg.role === "assistant"
-                        ? "1px solid rgba(200,169,110,0.13)"
-                        : "1px solid rgba(200,169,110,0.32)",
-                      color: "rgba(244,239,230,0.88)",
-                    }}
-                  >
-                    {msg.content}
-                  </div>
-                </div>
-              ))}
-
-              {isLoading && (
-                <div style={{ display: "flex", justifyContent: "flex-start" }}>
-                  <div
-                    style={{
-                      padding: "10px 14px",
-                      borderRadius: "4px 10px 10px 10px",
-                      background: "rgba(200,169,110,0.07)",
-                      border: "1px solid rgba(200,169,110,0.13)",
-                      display: "flex",
-                      gap: "5px",
-                      alignItems: "center",
-                    }}
-                  >
-                    <span className="kai-dot-1" style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#C8A96E", display: "inline-block" }} />
-                    <span className="kai-dot-2" style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#C8A96E", display: "inline-block" }} />
-                    <span className="kai-dot-3" style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#C8A96E", display: "inline-block" }} />
-                  </div>
-                </div>
-              )}
-
-              {notified && (
-                <div
-                  style={{
-                    padding: "9px 12px",
-                    borderRadius: "8px",
-                    background: "rgba(200,169,110,0.08)",
-                    border: "1px solid rgba(200,169,110,0.22)",
-                    fontSize: "11.5px",
-                    color: "#C8A96E",
-                    fontFamily: "var(--font-body), sans-serif",
-                    textAlign: "center",
-                  }}
-                >
-                  Hannah has been notified. She will be in touch soon.
-                </div>
-              )}
-              <div ref={bottomRef} />
-            </div>
-
-            {/* Input */}
-            <div
-              style={{
-                padding: "10px 12px",
-                borderTop: "1px solid rgba(200,169,110,0.08)",
-                display: "flex",
-                gap: "8px",
-                alignItems: "center",
-              }}
-            >
-              <input
-                ref={inputRef}
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
-                placeholder="Ask Kai anything..."
-                disabled={isLoading}
-                style={{
-                  flex: 1,
-                  background: "rgba(244,239,230,0.05)",
-                  border: "1px solid rgba(200,169,110,0.18)",
-                  borderRadius: "8px",
-                  padding: "8px 11px",
-                  fontSize: "12px",
-                  color: "#F4EFE6",
-                  fontFamily: "var(--font-body), sans-serif",
-                  outline: "none",
-                }}
-              />
-              <button
-                type="button"
-                onClick={handleSend}
-                disabled={!input.trim() || isLoading}
-                aria-label="Send message"
-                style={{
-                  width: "44px",
-                  height: "44px",
-                  borderRadius: "8px",
-                  background: input.trim() && !isLoading ? "#C8A96E" : "rgba(200,169,110,0.15)",
-                  border: "none",
-                  cursor: input.trim() && !isLoading ? "pointer" : "not-allowed",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexShrink: 0,
-                  transition: "background 0.2s",
-                }}
-              >
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                  <path d="M1 6.5h11M7.5 2l4.5 4.5L7.5 11" stroke={input.trim() && !isLoading ? "#080C14" : "rgba(200,169,110,0.4)"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Kai button */}
-        <button
-          ref={launcherRef}
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          style={{
-            width: "64px",
-            height: "64px",
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            position: "relative",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          aria-label="Chat with Kai"
-          aria-expanded={open}
-          aria-controls={open ? "kai-chat-panel" : undefined}
+    <div className="kai-root">
+      {open && (
+        <div
+          ref={panelRef}
+          id="kai-chat-panel"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="kai-chat-title"
+          className="kai-panel kai-panel-shell"
         >
-          {/* Aura layers */}
-          {["kai-aura-1", "kai-aura-2", "kai-aura-3"].map((cls, i) => (
-            <span
-              key={i}
-              className={cls}
-              style={{
-                position: "absolute",
-                borderRadius: "50%",
-                background: "rgba(200,169,110,0.14)",
-                width: `${64 - i * 10}px`,
-                height: `${64 - i * 10}px`,
-              }}
+          <div className="kai-header">
+            <div className="kai-avatar-ring">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden>
+                <circle cx="10" cy="10" r="4" fill="#C8A96E" />
+                <circle cx="10" cy="10" r="7" stroke="#C8A96E" strokeWidth="0.8" fill="none" opacity="0.4" />
+                <circle cx="10" cy="10" r="9.5" stroke="#C8A96E" strokeWidth="0.5" fill="none" opacity="0.2" />
+              </svg>
+            </div>
+            <div className="kai-title-block">
+              <div id="kai-chat-title" className="kai-title">
+                Kai
+              </div>
+              <div className="kai-subtitle">
+                <span className="kai-status-dot" aria-hidden />
+                Hannah&apos;s assistant
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={closePanel}
+              className="kai-close"
+              aria-label="Close chat"
+            >
+              ×
+            </button>
+          </div>
+
+          <div className="kai-messages">
+            {messages.map((msg, i) => (
+              <div
+                key={i}
+                className={`kai-msg-row ${msg.role === "user" ? "kai-msg-row--user" : "kai-msg-row--assistant"}`}
+              >
+                <div
+                  className={`kai-bubble ${msg.role === "assistant" ? "kai-bubble--assistant" : "kai-bubble--user"}`}
+                >
+                  {msg.content}
+                </div>
+              </div>
+            ))}
+
+            {isLoading && (
+              <div className="kai-typing">
+                <div className="kai-typing-inner">
+                  <span className="kai-typing-dot kai-dot-1" aria-hidden />
+                  <span className="kai-typing-dot kai-dot-2" aria-hidden />
+                  <span className="kai-typing-dot kai-dot-3" aria-hidden />
+                </div>
+              </div>
+            )}
+
+            {notified && (
+              <div className="kai-notify-toast">
+                Hannah has been notified. She will be in touch soon.
+              </div>
+            )}
+            <div ref={bottomRef} />
+          </div>
+
+          <div className="kai-input-bar">
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
+              placeholder="Ask Kai anything..."
+              disabled={isLoading}
+              className="kai-input"
             />
-          ))}
+            <button
+              type="button"
+              onClick={handleSend}
+              disabled={!sendReady}
+              className={`kai-send ${sendReady ? "kai-send--ready" : ""}`}
+              aria-label="Send message"
+            >
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden>
+                <path
+                  d="M1 6.5h11M7.5 2l4.5 4.5L7.5 11"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
 
-          {/* Ring 1 */}
-          <span
-            className="kai-ring-1"
-            style={{
-              position: "absolute",
-              width: "62px", height: "62px",
-              borderRadius: "50%",
-              border: "1px solid rgba(200,169,110,0.3)",
-            }}
-          >
-            <span style={{
-              position: "absolute", width: "5px", height: "5px",
-              borderRadius: "50%", background: "#C8A96E",
-              top: "-2.5px", left: "calc(50% - 2.5px)",
-            }} />
-          </span>
+      <button
+        ref={launcherRef}
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="kai-launcher"
+        aria-label="Chat with Kai"
+        aria-expanded={open}
+        aria-controls={open ? "kai-chat-panel" : undefined}
+      >
+        <span className="kai-aura kai-aura--0" aria-hidden />
+        <span className="kai-aura kai-aura--1" aria-hidden />
+        <span className="kai-aura kai-aura--2" aria-hidden />
 
-          {/* Ring 2 */}
-          <span
-            className="kai-ring-2"
-            style={{
-              position: "absolute",
-              width: "48px", height: "48px",
-              borderRadius: "50%",
-              border: "1px solid rgba(200,169,110,0.22)",
-            }}
-          >
-            <span style={{
-              position: "absolute", width: "4px", height: "4px",
-              borderRadius: "50%", background: "#C8A96E",
-              top: "-2px", left: "calc(50% - 2px)",
-            }} />
-          </span>
+        <span className="kai-ring-1" aria-hidden>
+          <span className="kai-ring-dot kai-ring-dot--lg" />
+        </span>
+        <span className="kai-ring-2" aria-hidden>
+          <span className="kai-ring-dot kai-ring-dot--sm" />
+        </span>
+        <span className="kai-ring-3" aria-hidden>
+          <span className="kai-ring-dot kai-ring-dot--sm" />
+        </span>
 
-          {/* Ring 3 */}
-          <span
-            className="kai-ring-3"
-            style={{
-              position: "absolute",
-              width: "35px", height: "35px",
-              borderRadius: "50%",
-              border: "1px solid rgba(200,169,110,0.4)",
-            }}
-          >
-            <span style={{
-              position: "absolute", width: "4px", height: "4px",
-              borderRadius: "50%", background: "#C8A96E",
-              top: "-2px", left: "calc(50% - 2px)",
-            }} />
-          </span>
-
-          {/* Core */}
-          <span
-            className="kai-core"
-            style={{
-              width: "24px", height: "24px",
-              borderRadius: "50%",
-              background: "#C8A96E",
-              position: "relative", zIndex: 2,
-              display: "flex", alignItems: "center", justifyContent: "center",
-            }}
-          >
-            <span style={{
-              width: "10px", height: "10px",
-              borderRadius: "50%",
-              background: "#080C14",
-            }} />
-          </span>
-        </button>
-      </div>
-    </>
+        <span className="kai-core-disc" aria-hidden>
+          <span className="kai-core-pupil" />
+        </span>
+      </button>
+    </div>
   );
 }
