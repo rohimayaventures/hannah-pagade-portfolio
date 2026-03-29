@@ -33,7 +33,7 @@ const defaultTitle =
   "Hannah Kraulik Pagade | Rohimaya Health AI, Live AI Products, Conversational Design";
 
 const defaultDescription =
-  "LPN, founder of Rohimaya Health AI. Live products: OrixLink AI (triage.rohimaya.ai), HealthLiteracy AI (literacy.rohimaya.ai), ClearChannel. MS AI/ML at CU Boulder in progress. Portfolio: hannahkraulikpagade.com.";
+  "LPN, founder of Rohimaya Health AI. Live products: OrixLink AI, HealthLiteracy AI, ClearChannel, FinanceLens AI (financial document intelligence at financelens-ai.vercel.app). MS AI/ML at CU Boulder in progress. Portfolio: hannahkraulikpagade.com.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -53,6 +53,7 @@ export const metadata: Metadata = {
     "OrixLink AI",
     "HealthLiteracy AI",
     "ClearChannel Vestara",
+    "FinanceLens AI",
   ],
   authors: [{ name: "Hannah Kraulik Pagade" }],
   openGraph: {

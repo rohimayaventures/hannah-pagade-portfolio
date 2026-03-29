@@ -87,7 +87,7 @@ export const caseStudies: CaseStudy[] = [
       "A free, no-login patient document translation tool with three input methods, twelve languages, three reading levels, urgent item cards, side-by-side view, copy and share, and a built-in AI verification pass that checks the translation against the original for omissions. Deployed on Vercel at literacy.rohimaya.ai, sessions persisted in Supabase, built on Next.js 15 and the Claude API.",
     ],
     impactLine:
-      "This project exists because discharge instructions written at a 12th-grade reading level do not help a patient who reads at a 5th-grade level, speaks Haitian Creole at home, and is scared. That gap is preventable with a two-second API call. The research agrees.",
+      "If someone cannot read or act on discharge instructions, the care plan never really starts. HealthLiteracy is built so plain language, reading level, language, and urgent items are part of the product, not an afterthought.",
     processAngle:
       "Built around health equity constraints with twelve-language output, low-friction input modes, and AI verification for omission checking.",
     cardSummary:
@@ -120,32 +120,32 @@ export const caseStudies: CaseStudy[] = [
     title: "FinanceLens AI",
     tagline: "Financial documents, in plain English.",
     subtitle:
-      "FinanceLens AI translates earnings calls, 10-K filings, and regulatory notices into five structured intelligence sections: plain language, interpretation, key numbers, language drift signals, and flags worth a closer look. Compare two documents side by side. Generate a Canva presentation deck in one click. Assistive analysis only, not financial advice.",
+      "FinanceLens analyzes earnings calls, 10-K filings, and regulatory notices into structured intelligence: plain language, interpretation, key numbers, drift with quoted phrases, flags, source anchors, and an evidence-based confidence rubric (not investment advice). Compare two documents, export a branded PDF, generate PPTX briefing decks from a Claude-built slide outline, and share full-screen deck views via 30-day links. Haiku by default for latency, Sonnet for deeper passes. Assistive analysis only, not financial advice.",
     tags: ["FINTECH", "AI-PRODUCT", "FULL-STACK", "DOCUMENT-INTELLIGENCE"],
-    embedType: "coming-soon",
-    embedUrl: "",
-    liveUrl: "",
-    status: "coming-soon",
-    coverImage: "",
+    embedType: "live",
+    embedUrl: "https://financelens-ai.vercel.app",
+    liveUrl: "https://financelens-ai.vercel.app",
+    status: "live",
+    coverImage: "/images/financelens-ai-landing.png",
     projectDescription:
-      "FinanceLens AI translates earnings calls, 10-K filings, and regulatory notices into five structured intelligence sections: plain language, interpretation, key numbers, language drift signals, and flags worth a closer look. Compare two documents side by side. Generate a Canva presentation deck in one click. Assistive analysis only, not financial advice.",
+      "FinanceLens analyzes earnings calls, 10-K filings, and regulatory notices into structured intelligence: plain language, interpretation, key numbers, drift with quoted phrases, flags, source anchors, and an evidence-based confidence rubric (not investment advice). Compare two documents, export a branded PDF, generate PPTX briefing decks from a Claude-built slide outline, and share full-screen deck views via 30-day links. Haiku by default for latency, Sonnet for deeper passes. Assistive analysis only, not financial advice.",
     problemStatement:
-      'Executives write earnings calls to communicate selectively. The language is deliberate. "We believe we are well-positioned" is not the same as "we are confident we will deliver." Most people reading these documents lack the tools to read what the language is actually signaling. FinanceLens surfaces those signals.',
+      "Executives write earnings calls and regulatory filings to communicate selectively. The language is deliberate. Most readers lack tools to see what the language is signaling, not just what it says. FinanceLens makes that signal visible. It also reduces workflow friction: turning a careful read into something shareable without institutional tooling.",
     processSteps: [
-      "The core constraint was the difference between translation and intelligence. Translation removes complexity. Intelligence reveals the complexity beneath deliberately simple language. Every design decision (the five-section structure, drift detection, document type selector, explicit guardrails, Canva integration) follows from that distinction.",
-      "The core product work was a multi-layer Claude prompt architecture producing five structurally distinct output sections with analysis logic that varies by document type. An earnings call is analyzed for guidance language and management tone. A 10-K is analyzed for auditor changes, revenue concentration, and risk factor shifts. A regulatory notice is analyzed for compliance obligations and enforcement language. Compare mode runs a third Claude pass that diffs two analyses and surfaces what changed, what was dropped, and how confidence shifted. Every output section uses attribution language throughout (the same constraint architecture that prevents OrixLink from functioning as a diagnostic instrument applies here to prevent FinanceLens from functioning as a financial advisor).",
-      "A financial document intelligence tool with three document type modes, five structured output sections, language drift detection with phrase-level tagging, claim confidence scoring, two-document compare mode, one-click Canva presentation generation, and persistent assistive-only disclaimers throughout. Deployed on Vercel, sessions persisted in Supabase, built on Next.js 15 and the Claude and Canva APIs.",
+      "The core insight is translation versus intelligence. Translation removes complexity; intelligence reveals what deliberately simple language is doing. Constraints included drift as a discrete quoted signal, confidence tied to evidence density in the excerpt (not stock recommendations), document-type-specific prompts, shareable outputs, and persistent assistive-only guardrails. The original spec used Canva Connect for decks; Canva app review blocked programmatic access, so the architecture pivoted to an owned presentation layer: Claude-built slide JSON, pptxgenjs for PPTX download, Unsplash plus Pollinations for imagery, and a branded full-screen viewer at share URLs with a 30-day TTL. Canva integration remains on the roadmap.",
+      "Implementation centers on Anthropic (Haiku default on analyze for speed, Sonnet for compare, briefing, and deeper passes), Zod-validated JSON with a repair retry path, Supabase persistence for shared analyses and decks, pdf-lib for branded PDF export, and server-side PDF text extraction (text layer only; scanned PDFs need paste). Routes use extended maxDuration where needed for long documents. A dedicated methodology page documents confidence, image sourcing, session scope, and disclaimers.",
+      "What shipped: single-document analyze with PDF upload, six output areas including source anchors and optional confidence, compare mode with sample pairs and shared compare layouts, briefing flow with PPTX download and copy-to-clipboard share links, /deck/[slug] scroll and presenter views, branded PDF export, and in-product trust copy. Next.js 16 App Router, React 19, TypeScript, Tailwind CSS v4, deployed on Vercel.",
     ],
     impactLine:
-      "Three to four hours of analyst work (read the document, take notes, write a summary, build slides) replaced by one workflow: ingest, analyze, present. That is the product. And it is honest about what it is: an assistive intelligence layer, not a financial advisor.",
+      "FinanceLens closes the loop from financial document to shareable artifact: validated JSON from Claude, branded PDF, PPTX decks, and 30-day share links in a WSJ Editorial viewer, with methodology and assistive-only framing throughout.",
     processAngle:
-      "Document intelligence with explicit guardrails: attribution language, no buy or sell or hold recommendations, persistent disclaimers. WSJ Editorial design system (light, serif-led) for financial editorial register.",
+      "Next.js 16, React 19, Claude (Haiku and Sonnet), Zod plus JSON retry, Supabase, pdf-lib, pptxgenjs, Unsplash and Pollinations. WSJ Editorial UI. Canva Connect planned after approval, not required for the core workflow.",
     cardSummary:
-      "Financial document intelligence. Earnings calls, 10-Ks, regulatory notices. Drift detection, confidence scoring, one-click decks.",
-    role: "Product Design and Prompt Architecture",
+      "Earnings calls, 10-Ks, and regulatory filings: structured analysis, two-document compare, branded PDF, PPTX decks, 30-day share URLs, methodology and trust framing.",
+    role: "Product design, prompt architecture, implementation",
     timeline: "2026",
     keyOutcome:
-      "Five-section financial intelligence with language drift detection, claim confidence scoring, explicit assistive-only guardrails, and one-click Canva deck generation",
+      "Drift, anchors, and evidence-based confidence rubric; compare mode; branded PDF; PPTX and 30-day /deck share viewer; Zod-validated pipeline. Assistive only, not financial advice.",
   },
   {
     featured: false,

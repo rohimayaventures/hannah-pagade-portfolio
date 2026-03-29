@@ -92,10 +92,16 @@ export default function OgImage() {
         <div
           style={{
             display: "flex",
+            flexWrap: "wrap",
             gap: 20,
           }}
         >
-          {["OrixLink AI", "HealthLiteracy AI", "ClearChannel"].map((name) => (
+          {[
+            "OrixLink AI",
+            "HealthLiteracy AI",
+            "ClearChannel",
+            "FinanceLens AI",
+          ].map((name) => (
             <div
               key={name}
               style={{

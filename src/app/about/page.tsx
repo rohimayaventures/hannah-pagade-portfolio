@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 const aboutDesc =
-  "Hannah Kraulik Pagade, LPN and founder of Rohimaya Health AI. Live AI products: OrixLink AI, HealthLiteracy AI, ClearChannel. MS AI/ML at CU Boulder (in progress). hannahkraulikpagade.com.";
+  "Hannah Kraulik Pagade, LPN and founder of Rohimaya Health AI. Live AI products: OrixLink AI, HealthLiteracy AI, ClearChannel, FinanceLens AI. MS AI/ML at CU Boulder (in progress). hannahkraulikpagade.com.";
 
 export const metadata: Metadata = {
   title: "About",
@@ -102,6 +102,14 @@ const products = [
     description:
       "Enterprise NLU routing simulator demonstrating IVR, chatbot, and agent assist channel handling for a fictional financial services firm. 18-intent NLU architecture with OpenAI voice integration.",
     stack: "Next.js 15 · Claude API · OpenAI Whisper · TTS",
+  },
+  {
+    name: "FinanceLens AI",
+    url: "https://financelens-ai.vercel.app",
+    urlDisplay: "financelens-ai.vercel.app",
+    description:
+      "Structured analysis for filings and calls: drift, anchors, confidence rubric, compare mode, branded PDF, PPTX decks, 30-day share links. Assistive only, not financial advice.",
+    stack: "Next.js 16 · React 19 · Claude API · Zod · Supabase · pdf-lib · pptxgenjs",
   },
 ];
 
@@ -584,7 +592,7 @@ export default function AboutPage() {
               >
                 HealthLiteracy AI
               </a>
-              , and{" "}
+              ,{" "}
               <a
                 href="https://clearchannel-vestara.vercel.app"
                 target="_blank"
@@ -593,6 +601,16 @@ export default function AboutPage() {
                 style={{ color: "var(--gold)" }}
               >
                 ClearChannel by Vestara
+              </a>
+              , and{" "}
+              <a
+                href="https://financelens-ai.vercel.app"
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                style={{ color: "var(--gold)" }}
+              >
+                FinanceLens AI
               </a>
               .
             </p>

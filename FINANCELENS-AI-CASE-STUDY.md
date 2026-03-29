@@ -8,8 +8,8 @@
 
 **Project name:** FinanceLens AI
 **Tagline:** Financial documents, in plain English.
-**Status:** In development (deploy to Vercel pending)
-**Primary URL:** financelens-ai.vercel.app (when live)
+**Status:** Live
+**Primary URL:** https://financelens-ai.vercel.app
 **Repo:** github.com/rohimayaventures/financelens-ai
 **Tags:** FINTECH · AI-PRODUCT · FULL-STACK · DOCUMENT-INTELLIGENCE
 **Role:** Product Design and Prompt Architecture
@@ -161,7 +161,7 @@ This framing is intentional and mirrors the same safety-first prompt architectur
 ## SECTION 4 — PORTFOLIO PAGE COPY (READY TO DROP IN)
 
 ### Status badge
-In development
+Live
 
 ### Role and timeline
 Product Design and Prompt Architecture · 2026

@@ -87,8 +87,8 @@ export default function Hero() {
         >
           I build live AI products you can try today, not mockups. Multi-turn
           dialogue, intent architecture, and role-adaptive flows in high-stakes
-          settings. OrixLink AI, HealthLiteracy AI, and ClearChannel by Vestara.
-          I work in Cursor and ship with the Claude API.
+          settings. OrixLink AI, HealthLiteracy AI, ClearChannel by Vestara, and
+          FinanceLens AI. I work in Cursor and ship with the Claude API.
         </p>
 
         {/* Interactive focus chips */}

@@ -32,7 +32,7 @@ Portfolio: https://hannahkraulikpagade.com
 LinkedIn: https://www.linkedin.com/in/hannah-pagade
 GitHub: https://github.com/rohimayaventures
 
-LIVE PRODUCTS (these three only, with these exact URLs):
+LIVE PRODUCTS (these four only, with these exact URLs):
 1. OrixLink AI at triage.rohimaya.ai
    Universal triage and diagnosis tool built on the Claude API. Any symptom, any person, no prior diagnosis required. Users receive a structured clinical assessment with urgency level, differential diagnosis, red flags, and a multi-turn conversational follow-up that updates the assessment as new information arrives. Built on Next.js 16, TypeScript, Tailwind CSS v4, Claude API, Supabase, Vercel. Design system: Meridian Oracle (Obsidian #080C14, Gold #C8A96E, Cream #F4EFE6, fonts: Cormorant Garamond, DM Sans, DM Mono).
 
@@ -41,6 +41,9 @@ LIVE PRODUCTS (these three only, with these exact URLs):
 
 3. ClearChannel by Vestara at clearchannel-vestara.vercel.app
    Enterprise NLU routing simulator demonstrating IVR, chatbot, and agent assist channel handling simultaneously for a fictional financial services firm. Built with 18-intent NLU architecture and critical override rules for bereavement, fraud, and barge-in. Voice input via OpenAI Whisper, IVR playback via OpenAI TTS. Built for a Vanguard UX Strategist Conversational Channels interview as a leave-behind portfolio artifact. Built on Next.js 15, TypeScript, Tailwind CSS, Claude API, OpenAI APIs, Vercel.
+
+4. FinanceLens AI at financelens-ai.vercel.app
+   Financial document intelligence for earnings calls, 10-K filings, and regulatory notices: structured outputs include plain language, interpretation, key numbers, drift with quoted phrases, flags, source anchors, and an evidence-based confidence rubric (not investment advice). Compare two documents, export branded PDF (pdf-lib), generate PPTX briefing decks (pptxgenjs from Claude slide JSON), and share full-screen deck views at 30-day URLs (/deck/[slug]) stored in Supabase. Unsplash and Pollinations for deck imagery. Haiku default on analyze for speed, Sonnet for deeper work. Zod-validated JSON with retry. Dedicated /methodology page. Code repo: github.com/rohimayaventures/finance-lens. Original plan used Canva Connect API; Canva app review blocked programmatic access, so Hannah shipped owned PPTX plus in-app deck viewer first. Canva remains on the roadmap. Built on Next.js 16, React 19, TypeScript, Tailwind CSS v4, Claude API, Supabase, Vercel. Design system: WSJ Editorial (warm cream, Georgia, IBM Plex Mono).
 
 NEVER use orixlink.vercel.app, health-literacy-ai.vercel.app, or any old URL. The correct URLs are listed above.
 
@@ -51,7 +54,6 @@ OTHER BUILT PROJECTS (real; AuthorFlow and EclipseLink are not featured as portf
 
 CASE STUDIES IN PROGRESS ON PORTFOLIO:
 - Onboarding Agent: Conversational AI product for B2B SaaS employee onboarding. Designed, build queued. Design system: Blueprint (Midnight Navy #0B1628, Amber #F59E0B).
-- FinanceLens AI: AI document intelligence for financial filings (earnings calls, 10-Ks, regulatory notices). Full case study on the portfolio; live app in development (not deployed yet, so do not give a public URL). Assistive-only guardrails and WSJ Editorial design system. When live, it will ship to Vercel like her other products.
 
 BACKGROUND (only these metrics and employers; never add, invent, or round):
 15 years of healthcare operations leadership across acute care, post-acute rehabilitation, and senior living. Employers: Amberwood Post Acute Rehabilitation (Assistant Director of Clinical Operations, Nov 2023 to Sept 2024), Center at Northridge (Unit Director of Clinical Operations, Oct 2024 to Apr 2025), and a senior living facility in the Denver area (Director of Clinical Operations, May 2025 to Jul 2025).
@@ -67,13 +69,13 @@ DESIGN SYSTEMS SHE BUILT:
 - Candlelight Clarity: HealthLiteracy AI. Forest Green, Amber, Cream. Same font stack as Meridian Oracle.
 - Vestara Institutional: ClearChannel. White, Navy, Teal.
 - Blueprint: Onboarding Agent (designed). Navy, Amber.
-- WSJ Editorial: FinanceLens AI (in development). Warm cream, deep ink, signal red and forest for indicators, Georgia and IBM Plex Mono (light background, serif-led, distinct from dark clinical products).
+- WSJ Editorial: FinanceLens AI. Warm cream, deep ink, signal red and forest for indicators, Georgia and IBM Plex Mono (light background, serif-led, distinct from dark clinical products).
 
 HOW SHE BUILDS:
 She works on Windows 11 using Cursor as her primary IDE. She uses the Claude API for all AI product work and ships primarily to Vercel. She uses Cloudflare for DNS management of her rohimaya.ai domains. Her GitHub org is rohimayaventures. She uses Supabase for databases and auth. She does not use LangGraph for OrixLink or HealthLiteracy. LangGraph is specific to EclipseLink AI.
 
 FULL TECHNICAL STACK (verified across all projects):
-Next.js (14, 15, 16 App Router), TypeScript, Tailwind CSS (including v4), React, Claude API (Anthropic), OpenAI APIs (Whisper STT, TTS, Realtime API, DALL-E), ElevenLabs, FastAPI, Python 3.11+, Supabase (PostgreSQL, Auth, Storage), Vercel, Railway, Cloudflare (R2 for AuthorFlow, DNS for rohimaya.ai domains), Shopify, Stripe, Google Drive OAuth, pydub, ffmpeg, LangGraph (EclipseLink only), FHIR/SMART on FHIR (EclipseLink only), Figma, Git, Cursor.
+Next.js (14, 15, 16 App Router), TypeScript, Tailwind CSS (including v4), React (including React 19 on FinanceLens), Claude API (Anthropic), OpenAI APIs (Whisper STT, TTS, Realtime API, DALL-E), ElevenLabs, FastAPI, Python 3.11+, Supabase (PostgreSQL, Auth, Storage), Vercel, Railway, Cloudflare (R2 for AuthorFlow, DNS for rohimaya.ai domains), Shopify, Stripe, Google Drive OAuth, pydub, ffmpeg, LangGraph (EclipseLink only), FHIR/SMART on FHIR (EclipseLink only), Zod, pdf-lib, pptxgenjs (FinanceLens PDF export and PPTX decks), Figma, Git, Cursor.
 
 ROLES SHE IS TARGETING:
 AI Product Manager, Head of Product, Conversational UX Strategist, Conversational AI Designer, Founding PM. Open to relocation.

@@ -97,6 +97,7 @@ async function sendVisitorConfirmation(
           <li><a href="https://triage.rohimaya.ai" style="color: #C8A96E;">OrixLink AI</a>: universal triage (triage.rohimaya.ai)</li>
           <li><a href="https://literacy.rohimaya.ai" style="color: #C8A96E;">HealthLiteracy AI</a>: discharge translation (literacy.rohimaya.ai)</li>
           <li><a href="https://clearchannel-vestara.vercel.app" style="color: #C8A96E;">ClearChannel by Vestara</a>: NLU routing lab</li>
+          <li><a href="https://financelens-ai.vercel.app" style="color: #C8A96E;">FinanceLens AI</a>: document intelligence, compare, PDF and PPTX export, share links (assistive only, not financial advice)</li>
         </ul>
         <p style="font-size: 16px; line-height: 1.7;">Talk soon,</p>
         <p style="font-size: 16px; line-height: 1.7; margin-top: 0;">
