@@ -1,9 +1,13 @@
+import { createIpRateLimiter, getRequestIp } from "@/lib/ipRateLimit";
 import { Resend } from "resend";
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
 
 const MAX_NAME = 200;
 const MAX_MESSAGE = 10_000;
+const MAX_BODY_BYTES = 64 * 1024;
+
+const isContactRateLimited = createIpRateLimiter(10, 60_000);
 
 function isValidEmail(email: string): boolean {
   const trimmed = email.trim();
@@ -63,6 +67,19 @@ export async function POST(request: Request) {
           "Contact form is not configured. Add Gmail (GMAIL_USER + GMAIL_APP_PASSWORD) or Resend (RESEND_API_KEY).",
       },
       { status: 503 }
+    );
+  }
+
+  const len = request.headers.get("content-length");
+  if (len && Number.parseInt(len, 10) > MAX_BODY_BYTES) {
+    return NextResponse.json({ error: "Request too large." }, { status: 413 });
+  }
+
+  const ip = getRequestIp(request);
+  if (isContactRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Too many submissions. Please try again in a minute." },
+      { status: 429 }
     );
   }
 

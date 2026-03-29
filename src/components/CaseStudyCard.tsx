@@ -134,8 +134,8 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
             ))}
           </div>
           <span
-            className="text-xs font-body opacity-0 transition-opacity duration-300 group-hover:opacity-70"
-            style={{ color: "var(--gold)" }}
+            className="text-xs font-body opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            style={{ color: "var(--gold-on-light)" }}
           >
             View →
           </span>

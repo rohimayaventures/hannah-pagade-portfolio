@@ -16,6 +16,7 @@ const config: Config = {
       colors: {
         obsidian: "#080C14",
         gold: "#C8A96E",
+        "gold-on-light": "#5a4728",
         cream: "#F4EFE6",
         "light-gray": "#F0EDE8",
         "mid-gray": "#C8C0B4",

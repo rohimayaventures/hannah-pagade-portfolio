@@ -18,7 +18,7 @@ export default function NotFound() {
       >
         <p
           className="mb-4 font-mono text-sm uppercase tracking-widest"
-          style={{ color: "var(--gold)" }}
+          style={{ color: "var(--gold-on-light)" }}
         >
           404
         </p>
@@ -50,8 +50,8 @@ export default function NotFound() {
             href="/contact"
             className="rounded-sm border px-6 py-3 font-body text-sm font-medium tracking-wide transition-colors duration-200"
             style={{
-              borderColor: "var(--gold)",
-              color: "var(--gold)",
+              borderColor: "var(--gold-on-light)",
+              color: "var(--gold-on-light)",
             }}
           >
             Get in Touch

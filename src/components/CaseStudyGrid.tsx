@@ -27,14 +27,14 @@ export default function CaseStudyGrid() {
       <div className="relative mx-auto max-w-6xl">
         <FadeIn>
           <div className="mb-12 md:mb-14">
-            <p className="mb-3 font-body text-[11px] uppercase tracking-[0.2em] text-gold">
+            <p className="mb-3 font-body text-[11px] uppercase tracking-[0.2em] text-gold-on-light">
               Selected Work
             </p>
             <h2 className="max-w-xl font-display text-2xl leading-tight text-obsidian md:text-3xl">
               Live products and case studies
             </h2>
             <div
-              className="mt-4 h-0.5 w-12 rounded-full bg-gradient-to-r from-gold to-gold/20"
+              className="mt-4 h-0.5 w-12 rounded-full bg-gradient-to-r from-gold-on-light to-gold-on-light/25"
               aria-hidden
             />
           </div>

@@ -4,6 +4,8 @@
 :root {
   --obsidian: #080C14;
   --gold: #C8A96E;
+  /** WCAG-friendly gold on cream / white (~4.6:1 on #F4EFE6); use for small text on light backgrounds */
+  --gold-on-light: #5a4728;
   --cream: #F4EFE6;
   --cream-dark: #EAE3D8;
   --mid-gray: #6B7280;
