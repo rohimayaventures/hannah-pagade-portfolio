@@ -26,7 +26,7 @@ export default function Nav() {
           className="text-base font-display no-underline tracking-tight transition-opacity hover:opacity-90"
           style={{ color: "var(--cream)" }}
         >
-          Hannah Pagade
+          Hannah Kraulik Pagade
         </Link>
 
         {/* Desktop links */}

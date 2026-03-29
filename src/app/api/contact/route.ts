@@ -115,7 +115,7 @@ export async function POST(request: Request) {
         auth: { user: gmailUser, pass: gmailPass },
       });
       await transporter.sendMail({
-        from: `"Hannah Pagade" <${gmailUser}>`,
+        from: `"Hannah Kraulik Pagade" <${gmailUser}>`,
         to,
         replyTo: emailTrim,
         subject,

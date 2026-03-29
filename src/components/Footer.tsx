@@ -15,7 +15,7 @@ export default function Footer() {
             className="font-display text-base tracking-tight"
             style={{ color: "var(--cream)" }}
           >
-            Hannah Pagade
+            Hannah Kraulik Pagade
           </p>
           <p
             className="mt-2 max-w-xs font-body text-sm leading-relaxed"
@@ -69,7 +69,7 @@ export default function Footer() {
           className="font-body text-xs"
           style={{ color: "rgba(244, 239, 230, 0.7)" }}
         >
-          © {new Date().getFullYear()} Hannah Pagade. All rights reserved.
+          © {new Date().getFullYear()} Hannah Kraulik Pagade. All rights reserved.
         </p>
       </div>
     </footer>

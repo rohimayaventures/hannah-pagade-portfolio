@@ -67,7 +67,7 @@ export default function Hero() {
           className="mb-5 text-xs font-body uppercase tracking-[0.2em] opacity-90"
           style={{ color: "var(--gold)" }}
         >
-          Hannah Pagade
+          Hannah Kraulik Pagade
         </p>
         <h1
           className="mb-3 font-display text-3xl leading-[1.08] tracking-tight sm:text-4xl md:text-6xl lg:text-7xl"

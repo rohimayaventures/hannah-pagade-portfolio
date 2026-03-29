@@ -1,4 +1,4 @@
-# Hannah Pagade — Portfolio
+# Hannah Kraulik Pagade — Portfolio
 
 Next.js portfolio for UX strategy and conversational AI design work.
 
@@ -19,7 +19,7 @@ The `/contact` page posts to `/api/contact`. Configure **one** of these in Verce
 
 - `CONTACT_TO_EMAIL` — where inquiries are delivered
 - `RESEND_API_KEY` — from [Resend](https://resend.com)
-- `RESEND_FROM_EMAIL` — e.g. `Hannah Pagade <hello@yourdomain.com>`
+- `RESEND_FROM_EMAIL` — e.g. `Hannah Kraulik Pagade <hello@yourdomain.com>`
 
 **Gmail** (optional; sends from your Gmail via App Password):
 
