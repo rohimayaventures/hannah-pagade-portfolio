@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import { Cormorant_Garamond, DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 import KaiWidget from "@/components/KaiWidget";
@@ -90,6 +91,7 @@ export default function RootLayout({
         </a>
         {children}
         <KaiWidget />
+        <Analytics />
       </body>
     </html>
   );
