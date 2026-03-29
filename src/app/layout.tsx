@@ -82,6 +82,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`}>
       <body className="font-body antialiased">
+        <a
+          href="#main-content"
+          className="fixed left-4 top-4 z-[10001] -translate-y-[150%] rounded-sm bg-gold px-4 py-2.5 font-body text-sm font-medium text-obsidian shadow-md transition-transform focus:translate-y-4 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-obsidian"
+        >
+          Skip to main content
+        </a>
         {children}
         <KaiWidget />
       </body>

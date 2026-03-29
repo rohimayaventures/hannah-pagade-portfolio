@@ -102,6 +102,7 @@ export default async function CaseStudyPage({
           ) : (
             <>
               <EmbedBlock
+                key={study.slug}
                 embedType={study.embedType}
                 embedUrl={study.embedUrl}
                 title={study.title}

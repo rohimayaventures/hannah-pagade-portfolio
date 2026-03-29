@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 
 type Message = {
   role: "user" | "assistant";
@@ -21,6 +21,13 @@ export default function KaiWidget() {
   const [notified, setNotified] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const launcherRef = useRef<HTMLButtonElement>(null);
+
+  const closePanel = useCallback(() => {
+    setOpen(false);
+    queueMicrotask(() => launcherRef.current?.focus());
+  }, []);
 
   useEffect(() => {
     if (open) {
@@ -28,6 +35,50 @@ export default function KaiWidget() {
       setTimeout(() => inputRef.current?.focus(), 300);
     }
   }, [open, messages]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const container = panelRef.current;
+    if (!container) return;
+
+    const getFocusable = (): HTMLElement[] => {
+      const sel =
+        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      return Array.from(container.querySelectorAll<HTMLElement>(sel)).filter(
+        (el) => !el.hasAttribute("disabled")
+      );
+    };
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closePanel();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const focusables = getFocusable();
+      if (focusables.length === 0) return;
+      const active = document.activeElement as HTMLElement | null;
+      if (!active || !container.contains(active)) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey) {
+        if (active === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown, true);
+    return () => document.removeEventListener("keydown", onKeyDown, true);
+  }, [open, closePanel]);
 
   const extractContact = (msgs: Message[]) => {
     const emailRegex = /[\w.-]+@[\w.-]+\.\w+/;
@@ -149,6 +200,11 @@ export default function KaiWidget() {
         {/* Chat panel */}
         {open && (
           <div
+            ref={panelRef}
+            id="kai-chat-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="kai-chat-title"
             className="kai-panel"
             style={{
               position: "absolute",
@@ -193,14 +249,16 @@ export default function KaiWidget() {
                 </svg>
               </div>
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: "13px", fontWeight: 600, color: "#F4EFE6", fontFamily: "var(--font-body), sans-serif" }}>Kai</div>
+                <div id="kai-chat-title" style={{ fontSize: "13px", fontWeight: 600, color: "#F4EFE6", fontFamily: "var(--font-body), sans-serif" }}>Kai</div>
                 <div style={{ fontSize: "10px", color: "rgba(244,239,230,0.4)", fontFamily: "var(--font-body), sans-serif", display: "flex", alignItems: "center", gap: "4px" }}>
                   <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#4ade80", display: "inline-block" }} />
                   Hannah&apos;s assistant
                 </div>
               </div>
               <button
-                onClick={() => setOpen(false)}
+                type="button"
+                onClick={closePanel}
+                aria-label="Close chat"
                 style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(244,239,230,0.35)", fontSize: "18px", lineHeight: 1, padding: "8px 10px", minWidth: "44px", minHeight: "44px", display: "flex", alignItems: "center", justifyContent: "center" }}
               >
                 ×
@@ -319,8 +377,10 @@ export default function KaiWidget() {
                 }}
               />
               <button
+                type="button"
                 onClick={handleSend}
                 disabled={!input.trim() || isLoading}
+                aria-label="Send message"
                 style={{
                   width: "44px",
                   height: "44px",
@@ -345,6 +405,8 @@ export default function KaiWidget() {
 
         {/* Kai button */}
         <button
+          ref={launcherRef}
+          type="button"
           onClick={() => setOpen((v) => !v)}
           style={{
             width: "64px",
@@ -358,6 +420,8 @@ export default function KaiWidget() {
             justifyContent: "center",
           }}
           aria-label="Chat with Kai"
+          aria-expanded={open}
+          aria-controls={open ? "kai-chat-panel" : undefined}
         >
           {/* Aura layers */}
           {["kai-aura-1", "kai-aura-2", "kai-aura-3"].map((cls, i) => (

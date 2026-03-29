@@ -11,6 +11,8 @@ export default function NotFound() {
     <>
       <Nav />
       <main
+        id="main-content"
+        tabIndex={-1}
         className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center"
         style={{ backgroundColor: "var(--cream)" }}
       >
