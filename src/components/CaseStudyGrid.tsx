@@ -1,9 +1,14 @@
-import { caseStudies } from "@/content/caseStudies";
+import { caseStudies, type CaseStudy } from "@/content/caseStudies";
 import CaseStudyCard from "./CaseStudyCard";
 import FadeIn from "./FadeIn";
 
 export default function CaseStudyGrid() {
-  const sorted = [...caseStudies].sort((a, b) => a.order - b.order);
+  const sorted = [...caseStudies].sort((a, b) => {
+    const soon = (s: CaseStudy["status"]) => (s === "coming-soon" ? 1 : 0);
+    const byStatus = soon(a.status) - soon(b.status);
+    if (byStatus !== 0) return byStatus;
+    return a.order - b.order;
+  });
 
   return (
     <section
