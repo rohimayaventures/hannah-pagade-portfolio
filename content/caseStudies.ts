@@ -293,15 +293,14 @@ export const caseStudies: CaseStudy[] = [
     projectDescription:
       "HealthLiteracy AI translates discharge summaries, lab results, and clinical notes into plain language a patient can actually act on. Three input methods. Twelve languages. Three reading levels with descriptive labels. A reverse-check verification step sends the translation back through Claude before the patient sees it. Urgent items are surfaced as visual cards above the translation body so a patient who reads only the top of the page still knows what to do.",
     problemStatement:
-      "88% of Americans have less-than-proficient health literacy. The average discharge summary is written at a 9th grade reading level. Patients who clearly understand their discharge instructions are 30% less likely to be readmitted. That gap is a product problem — and a product can close it.",
+      "88% of Americans have less-than-proficient health literacy. The average discharge summary is written at a 9th or 10th grade reading level. The average patient reads at an 8th grade level at best — often lower — and may not read English at home. Patients who understand their discharge instructions are 30% less likely to be readmitted. That gap is a product problem.",
     processSteps: [
-      "The constraint set was clear before a line of code was written: no login, no setup, urgent items at the top, built-in translation in the languages patients in a real clinical setting actually speak. The tool had to serve someone who might be scared, medicated, and not literate in English — all at the same time.",
-      "The hardest product decision was the Claude system prompt. Translation is easy. A translation a nurse would trust to hand to a patient requires specific constraints: every medical term explained in the same sentence it appears, urgent items returned as a structured array separate from the translation body so the front end can always render them first, attribution language that prevents the tool from functioning as a diagnostic instrument, and a verification pass that checks its own work.",
-      "Twelve languages and voice input were built at launch rather than deferred. English-only MVP thinking does not serve the population this product is for. The reading level selector uses descriptive labels — Simple, Clear, Complete — rather than grade levels, because selecting a reading level should feel like choosing a format, not assessing yourself.",
-      "The reverse-check verification step was the most important safety decision. A second Claude API call sends the translation back through Claude acting as a QA auditor. It checks for omissions, meaning drift, and inaccuracies before the output is shown. A patient who cannot catch a translation error should never be in a position where catching it was their responsibility.",
+      "I did not need to conduct user research for this project. I have conducted it for 15 years on every shift. The constraints were clear before the first line of code: no login, no setup, urgent items at the top, built-in translation in the languages my actual patients speak. The tool had to serve patients who might be scared, tired, medicated, or not literate in English — all at once.",
+      "The core product decision was the Claude system prompt. Translation is easy. A translation that a nurse would trust to hand to a patient requires specific constraints: every medical term explained in the same sentence, urgent items returned as a structured array separate from the translation body, attribution language that prevents the tool from being read as a diagnosis, and a verification pass that checks its own work for omissions. Twelve languages and voice input were built at launch, not deferred, because the population this serves is not well-served by English-only MVP thinking.",
+      "A free, no-login patient document translation tool with three input methods, twelve languages, three reading levels, urgent item cards, side-by-side view, copy and share, and a built-in AI verification pass that checks the translation against the original for omissions. Deployed on Vercel at literacy.rohimaya.ai, sessions persisted in Supabase, built on Next.js 15 and the Claude API.",
     ],
     impactLine:
-      "If someone cannot read or act on discharge instructions, the care plan never really starts. HealthLiteracy AI is built so plain language, reading level, language choice, and urgent action items are part of the product — not an afterthought.",
+      "If someone cannot read or act on discharge instructions, the care plan never really starts. HealthLiteracy is built so plain language, reading level, language, and urgent items are part of the product, not an afterthought.",
     processAngle:
       "Built around health equity constraints with twelve-language output, low-friction input modes, and AI verification for omission checking.",
     cardSummary:
@@ -309,6 +308,133 @@ export const caseStudies: CaseStudy[] = [
     role: "Product and Conversation Design",
     timeline: "2025 — Present",
     keyOutcome: "Twelve-language translation with AI verification, three reading levels, and shareable sessions",
+    stats: [
+      {
+        number: "88%",
+        label:
+          "of American adults have less-than-proficient health literacy",
+        source: "U.S. Department of Health and Human Services",
+      },
+      {
+        number: "88.7%",
+        label:
+          "of discharge instructions analyzed were inaccessible to the patients they were intended for",
+        source: "Zhong et al., Journal of General Internal Medicine, 2021",
+      },
+      {
+        number: "30%",
+        label:
+          "lower likelihood of readmission or ED return when patients understand after-hospital care instructions",
+        source: "Agency for Healthcare Research and Quality (cited in case study)",
+      },
+      {
+        number: "78%",
+        label:
+          "of ED-discharged patients show comprehension deficits for at least one discharge instruction component",
+        source: "Menchine & Baraff, Annals of Emergency Medicine, 1994",
+      },
+    ],
+    processStepsInteractive: [
+      {
+        number: "01",
+        label: "Discovery",
+        phase: "STEP 01 — DISCOVERY",
+        title: "Discovery",
+        body: "I did not need to conduct user research for this project. I have conducted it for 15 years on every shift. The constraints were clear before the first line of code: no login, no setup, urgent items at the top, built-in translation in the languages my actual patients speak. The tool had to serve patients who might be scared, tired, medicated, or not literate in English — all at once.",
+      },
+      {
+        number: "02",
+        label: "Design",
+        phase: "STEP 02 — DESIGN AND BUILD",
+        title: "Design and build",
+        body: "The core product decision was the Claude system prompt. Translation is easy. A translation that a nurse would trust to hand to a patient requires specific constraints: every medical term explained in the same sentence, urgent items returned as a structured array separate from the translation body, attribution language that prevents the tool from being read as a diagnosis, and a verification pass that checks its own work for omissions. Twelve languages and voice input were built at launch, not deferred, because the population this serves is not well-served by English-only MVP thinking.",
+      },
+      {
+        number: "03",
+        label: "Delivery",
+        phase: "STEP 03 — WHAT SHIPPED",
+        title: "What shipped",
+        body: "A free, no-login patient document translation tool with three input methods, twelve languages, three reading levels, urgent item cards, side-by-side view, copy and share, and a built-in AI verification pass that checks the translation against the original for omissions. Deployed on Vercel at literacy.rohimaya.ai, sessions persisted in Supabase, built on Next.js 15 and the Claude API.",
+      },
+    ],
+    pivots: [
+      {
+        tag: "DESIGN",
+        title: "Reading level selector: descriptive labels instead of grade levels",
+        body: "An early iteration used grade-level labels (5th Grade, 8th Grade, College). These were replaced with descriptive labels (Simple, Clear, Complete) because grade levels require meta-cognition — a patient has to assess their own reading ability and select accordingly.",
+        lesson:
+          "Descriptive labels communicate the output quality, not a judgment about the reader. A patient picking Simple is choosing a format, not identifying a deficit.",
+      },
+      {
+        tag: "SAFETY",
+        title: "Reverse-check verification as a second Claude pass",
+        body: "A reverse-check pass runs as a second API call after translation. Claude is prompted to act as a QA auditor comparing the translation against the original for omissions and inaccuracies, returning a structured pass/fail result with itemized flags.",
+        lesson:
+          "A patient who cannot catch a translation error should never be in a position where catching it was their responsibility.",
+      },
+    ],
+    shippedCards: [
+      {
+        title: "Inputs and reading levels",
+        body: "Paste text, upload PDF (server-side pdf-parse), or voice input (Web Speech API). Reading levels: Simple, Clear, Complete. Twelve-language output including English, Spanish, Haitian Creole, Portuguese, French, Mandarin, Vietnamese, Tagalog, Korean, Arabic, Hindi, and Russian.",
+      },
+      {
+        title: "Urgent items and layout",
+        body: "Urgent item cards rendered above the translation body for follow-up appointments, medication changes, and return precautions. Side-by-side view: original clinical document and plain-language translation. Copy to clipboard supported.",
+      },
+      {
+        title: "Verification pipeline",
+        body: "Two-call pipeline: translate, then verify. Second Claude call audits the translation for omissions, inaccuracies, and meaning drift with structured pass/fail, confidence, and itemized flags.",
+      },
+      {
+        title: "Share and persistence",
+        body: "Shareable URLs via Supabase-persisted sessions. Public read by session ID, public insert, no authentication required. Row Level Security enabled.",
+      },
+      {
+        title: "Candlelight Clarity design system",
+        body: "Cream, forest green, and amber palette; Cormorant Garamond, DM Sans, DM Mono; WCAG AA contrast; hero ring motion for calm, warm register; urgent cards use amber border instead of clinical red.",
+      },
+      {
+        title: "Deploy and runtime",
+        body: "Next.js 15 App Router, TypeScript, Tailwind CSS v4, Claude API (claude-sonnet-4-20250514), Vercel at literacy.rohimaya.ai, Cloudflare DNS. PDF parsing on Node.js runtime; edge runtime excluded for parsing reliability.",
+      },
+    ],
+    stackHighlighted: ["Claude API", "Next.js 15", "Supabase", "Tailwind CSS v4"],
+    stackStandard: [
+      "TypeScript",
+      "pdf-parse",
+      "Web Speech API",
+      "Vercel",
+    ],
+    whatThisDemonstrates: [
+      {
+        title: "AI architecture for clinical-safe document processing",
+        tag: "TECHNICAL",
+        body: "The two-call pipeline (translate, then verify) and structured JSON output show how to constrain LLM behavior for clinical contexts. This is not a chatbot. It is a deterministic document processing pipeline with AI as the engine.",
+      },
+      {
+        title: "Health equity as a product value, not a feature",
+        tag: "PRODUCT",
+        body: "Twelve languages and voice input were included at launch rather than deferred. Reading level was made accessible via descriptive labels rather than grade levels. Each decision traded speed-to-ship for who the product actually serves.",
+      },
+      {
+        title: "Separation of concerns in prompt engineering",
+        tag: "TECHNICAL",
+        body: "The system prompt lives as a standalone TypeScript module; the verification prompt is separate with different constraints. That reflects production-grade thinking about prompt versioning and auditability.",
+      },
+      {
+        title: "Design system differentiation in a product family",
+        tag: "DESIGN",
+        body: "Candlelight Clarity and Meridian Oracle share a font stack but differ in palette and emotional register: patient-facing warmth versus clinical authority, with brand coherence across Rohimaya products.",
+      },
+      {
+        title: "Portfolio breadth in one domain",
+        tag: "PRODUCT",
+        body: "HealthLiteracy applies the same document-processing discipline as OrixLink in a patient-facing context rather than an assessment context, alongside ClearChannel extending conversational architecture outside healthcare.",
+      },
+    ],
+    impactQuote:
+      "If someone cannot read or act on discharge instructions, the care plan never really starts. HealthLiteracy is built so plain language, reading level, language, and urgent items are part of the product, not an afterthought.",
   },
   {
     order: 4,
@@ -344,22 +470,106 @@ export const caseStudies: CaseStudy[] = [
     projectDescription:
       "FinanceLens analyzes earnings calls, 10-K filings, and regulatory notices into structured intelligence: plain language, interpretation, key numbers, drift with quoted phrases, flags, source anchors, and an evidence-based confidence rubric (not investment advice). Compare two documents, export a branded PDF, generate PPTX briefing decks from a Claude-built slide outline, and share full-screen deck views via 30-day links. Haiku by default for latency, Sonnet for deeper passes. Assistive analysis only, not financial advice.",
     problemStatement:
-      "Executives write earnings calls and regulatory filings to communicate selectively. The language is deliberate. Most readers lack tools to see what the language is signaling, not just what it says. FinanceLens makes that signal visible. It also reduces workflow friction: turning a careful read into something shareable without institutional tooling.",
+      "Executives write earnings calls and regulatory filings to communicate selectively. The language is deliberate. Most readers lack tools to see what the language is signaling, not just what it says. FinanceLens was built to make that signal visible. Analysts and operators who read these documents carefully lose hours turning a read-through into something shareable without institutional tooling or a Bloomberg terminal. No accessible tool combines plain-language translation, language drift detection, confidence scoring, two-document comparison, and shareable presentation generation in one workflow for non-institutional users.",
     processSteps: [
-      "The core insight is translation versus intelligence. Translation removes complexity; intelligence reveals what deliberately simple language is doing. Constraints included drift as a discrete quoted signal, confidence tied to evidence density in the excerpt (not stock recommendations), document-type-specific prompts, shareable outputs, and persistent assistive-only guardrails. The original spec used Canva Connect for decks; Canva app review blocked programmatic access, so the architecture pivoted to an owned presentation layer: Claude-built slide JSON, pptxgenjs for PPTX download, Unsplash plus Pollinations for imagery, and a branded full-screen viewer at share URLs with a 30-day TTL. Canva integration remains on the roadmap.",
-      "Implementation centers on Anthropic (Haiku default on analyze for speed, Sonnet for compare, briefing, and deeper passes), Zod-validated JSON with a repair retry path, Supabase persistence for shared analyses and decks, pdf-lib for branded PDF export, and server-side PDF text extraction (text layer only; scanned PDFs need paste). Routes use extended maxDuration where needed for long documents. A dedicated methodology page documents confidence, image sourcing, session scope, and disclaimers.",
-      "What shipped: single-document analyze with PDF upload, six output areas including source anchors and optional confidence, compare mode with sample pairs and shared compare layouts, briefing flow with PPTX download and copy-to-clipboard share links, /deck/[slug] scroll and presenter views, branded PDF export, and in-product trust copy. Next.js 16 App Router, React 19, TypeScript, Tailwind CSS v4, deployed on Vercel.",
+      "The difference between FinanceLens and a document summarizer is translation versus intelligence: translation removes complexity; intelligence reveals what deliberately simple language is doing. Constraints included drift as a discrete quoted signal, confidence tied to evidence density in the excerpt (not stock recommendations), document-type-specific prompts for earnings calls, 10-Ks, and regulatory notices, shareable outputs, and persistent assistive-only guardrails.",
+      "The original architecture specified the Canva Connect API for branded decks; Canva app review blocked programmatic access. The stack pivoted to an owned presentation layer: Claude-built 7-slide JSON, Unsplash with attribution or Pollinations fallback, pptxgenjs PPTX download, slide JSON in Supabase, and a branded full-screen viewer at /deck/[slug] with 30-day TTL — no third-party OAuth dependency for the core path.",
+      "Shipped: single-document analyze with PDF text extraction, six output areas including source anchors and optional confidence, compare mode with sample pairs and shared layouts, briefing modal with PPTX and share links, /deck/[slug] scroll and presenter views, branded PDF export via pdf-lib, methodology page, and claudeJsonWithRetry with Zod validation across analyze, compare, and briefing routes. Next.js 16, React 19, TypeScript, Tailwind CSS v4, Vercel.",
     ],
     impactLine:
-      "FinanceLens closes the loop from financial document to shareable artifact: validated JSON from Claude, branded PDF, PPTX decks, and 30-day share links in a WSJ Editorial viewer, with methodology and assistive-only framing throughout.",
+      "Structured financial intelligence — plain language, drift detection, source anchors, confidence rubric — across single-document analysis and two-document comparison, with branded PDF share, LLM-built briefing decks with Unsplash imagery, PPTX download, full-screen presenter view at a 30-day share URL (/deck/[slug]), and an explicit methodology and trust layer. Assistive only. Never financial advice.",
     processAngle:
       "Next.js 16, React 19, Claude (Haiku and Sonnet), Zod plus JSON retry, Supabase, pdf-lib, pptxgenjs, Unsplash and Pollinations. WSJ Editorial UI. Canva Connect planned after approval, not required for the core workflow.",
     cardSummary:
-      "Earnings calls, 10-Ks, and regulatory filings: structured analysis, two-document compare, branded PDF, PPTX decks, 30-day share URLs, methodology and trust framing.",
+      "Earnings calls, 10-Ks, and regulatory filings → structured analysis, two-document compare, shareable PDF, and exportable slides — with explicit trust framing and a validated JSON pipeline from document to shareable artifact.",
     role: "Product design, prompt architecture, implementation",
     timeline: "2026",
     keyOutcome:
-      "Drift, anchors, and evidence-based confidence rubric; compare mode; branded PDF; PPTX and 30-day /deck share viewer; Zod-validated pipeline. Assistive only, not financial advice.",
+      "Structured financial intelligence with drift, anchors, and confidence rubric; compare mode; branded PDF; briefing decks, PPTX, and 30-day /deck URLs; methodology and trust layer. Assistive only. Not financial advice.",
+    processStepsInteractive: [
+      {
+        number: "01",
+        label: "Insight",
+        phase: "STEP 01 — CORE INSIGHT",
+        title: "Translation versus intelligence",
+        body: "FinanceLens must tell you what language means and signals, not only what was said. Drift is a discrete signal with quoted phrases. Confidence reflects evidence density in the excerpt, not a stock recommendation. Document type steers the analysis logic. Outputs are shareable; guardrails frame everything as assistive analysis.",
+      },
+      {
+        number: "02",
+        label: "Constraints",
+        phase: "STEP 02 — CONSTRAINT SET",
+        title: "Product and compliance constraints",
+        body: "Earnings calls, 10-Ks, and regulatory notices each get different prompt logic. The UI and methodology page explain confidence, image sourcing, sessionStorage scope, and the assistive-only disclaimer so the product never reads as a financial advisor.",
+      },
+      {
+        number: "03",
+        label: "Pivot",
+        phase: "STEP 03 — PRESENTATION LAYER PIVOT",
+        title: "Owned decks instead of Canva",
+        body: "Canva Connect was blocked pending app review. The architecture owns the presentation layer: Claude JSON slide outlines, pptxgenjs blob downloads, Supabase persistence, and /deck/[slug] in the WSJ Editorial system. Canva remains roadmap as an additive path, not a dependency for the core workflow.",
+      },
+      {
+        number: "04",
+        label: "Delivery",
+        phase: "STEP 04 — WHAT SHIPPED",
+        title: "Shipped surfaces",
+        body: "Analyze and compare with Zod-validated JSON and a repair retry path; PDF upload via pdf-parse; briefing flow with PPTX and clipboard share URLs; deck viewer with scroll and full-screen modes; branded PDF export; methodology and in-product trust hints; graceful degradation if Supabase insert fails.",
+      },
+    ],
+    pivots: [
+      {
+        tag: "DESIGN",
+        title: "Canva Connect blocked — own the presentation layer",
+        body: "The original spec called for the Canva Connect API as the presentation output. During build, Canva's app review process blocked access pending approval — a real-world constraint with no timeline. Rather than stall the ship, the architecture was redesigned to own the presentation layer entirely: Claude JSON outlines, pptxgenjs for the file download, and a custom /deck/[slug] viewer built inside the app using the WSJ Editorial design system.",
+        lesson:
+          "The result removed a third-party OAuth dependency, gave full control over the branded output, and shipped faster. Canva API remains on the roadmap as an additive feature, not a requirement for the core workflow to function.",
+      },
+    ],
+    shippedCards: [
+      {
+        title: "Single-document analysis",
+        body: "Paste or PDF upload with text-layer extraction (scanned PDFs require paste). Document-type-specific prompts. Outputs: what they said, what it means, key numbers, language drift with hedge versus firm tags, flags, source anchors, optional confidence toggle. Haiku default on analyze; Sonnet for deeper work.",
+      },
+      {
+        title: "Compare mode",
+        body: "Two documents, one structured JSON response: period shift overview, new and dropped language, claim shifts, metrics narrative, dual confidence scores. Six built-in sample pairs. Share saves to Supabase with compare layout in DeckViewer. maxDuration 120s on the route.",
+      },
+      {
+        title: "Briefing decks and PPTX",
+        body: "Seven-slide JSON from Claude; Unsplash search with attribution or Pollinations fallback; modal preview; PPTX download via pptxgenjs after async image fetch; share copies /deck/[slug] to clipboard.",
+      },
+      {
+        title: "Shareable deck viewer",
+        body: "/deck/[slug] for analysis, briefing, or compare: 30-day TTL, scroll view and full-screen presenter mode, WSJ Editorial styling, expiry called out in the UI, branded error state for missing or expired slugs.",
+      },
+      {
+        title: "PDF export and methodology",
+        body: "Branded PDF via pdf-lib on Node with FinanceLens identity and disclaimers. Dedicated /methodology page plus on-page hints for confidence and evidence framing.",
+      },
+      {
+        title: "Validation and deploy",
+        body: "claudeJsonWithRetry with one repair turn on invalid JSON or failed Zod validation. Supabase financelens_sessions with RLS. Vercel deploy; extended maxDuration on analyze, compare, export, and parse routes as documented in the case study.",
+      },
+    ],
+    stackHighlighted: [
+      "Next.js 16",
+      "Claude API",
+      "Supabase",
+      "Zod",
+    ],
+    stackStandard: [
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "pdf-lib",
+      "pptxgenjs",
+      "pdf-parse",
+      "Vercel",
+      "Unsplash",
+      "Pollinations",
+    ],
+    impactQuote:
+      "FinanceLens closes the loop from financial document to shareable artifact using Claude, Zod validation, pdf-lib, pptxgenjs, and Supabase-backed 30-day share URLs — not a thin summarizer, and every architectural decision in the case study matches what is actually wired in the repo.",
   },
   {
     featured: false,
@@ -368,7 +578,7 @@ export const caseStudies: CaseStudy[] = [
     title: "ClearChannel by Vestara",
     tagline: "Design the conversation. Across every channel.",
     subtitle:
-      "Enterprise NLU routing simulator for financial services contact centers. One utterance drives three simultaneous channel outputs — IVR, Chatbot, and Agent Assist — with full intent taxonomy, confidence scoring, three emotional override protocols, and voice input via OpenAI Whisper.",
+      "ClearChannel demonstrates what it means to design a conversational AI system for all channels simultaneously rather than one at a time. Type or speak any investor utterance and watch Claude generate IVR script, Chatbot response, and Agent Assist content in real time, with a full NLU architecture breakdown per utterance. Three override protocols handle bereavement, fraud, and barge-in before any intent classification runs.",
     tags: ["CONVERSATION-DESIGN", "NLU-ARCHITECTURE", "ENTERPRISE-AI", "FINTECH"],
     embedType: "live",
     embedUrl: "https://clearchannel-vestara.vercel.app/",
@@ -376,25 +586,116 @@ export const caseStudies: CaseStudy[] = [
     status: "live",
     coverImage: "/images/clearchannel-landing.png",
     projectDescription:
-      "ClearChannel demonstrates what it means to design a conversational AI system for all channels at once rather than one at a time. Built to show how a single investor utterance is classified, routed, and transformed into channel-specific responses in real time. Three hard override protocols handle bereavement, fraud, and barge-in before any standard intent classification runs.",
+      "ClearChannel demonstrates what it means to design a conversational AI system for all channels simultaneously rather than one at a time. Type or speak any investor utterance and watch Claude generate IVR script, Chatbot response, and Agent Assist content in real time, with a full NLU architecture breakdown per utterance. Three override protocols handle bereavement, fraud, and barge-in before any intent classification runs.",
     problemStatement:
-      "Most conversational AI design tools optimize for one channel. Enterprise contact centers run three simultaneously. The design consequences of routing decisions are invisible unless you can see IVR, Chatbot, and Agent Assist fire at once. ClearChannel makes that system visible, interactive, and auditable.",
+      "Most conversational AI design optimizes for one channel. Enterprise contact centers run three simultaneously. A customer who calls about a deceased spouse is also potentially in the chatbot, and a live agent may be watching the same interaction. The design consequences of routing decisions are invisible across channels unless you can see all three fire at once. ClearChannel makes that visible, interactive, and auditable.",
     processSteps: [
-      "The product started from a simple observation: conversational AI design tools show one channel at a time, but the real design problem is the system — how the same utterance gets handled differently across IVR, chatbot, and live agent support, and where those three channels contradict each other. That contradiction is invisible in standard design tools. ClearChannel makes it visible in real time.",
-      "The core architecture decision was to treat all three channel outputs as a single atomic Claude API call with a structured JSON output contract rather than three separate calls. This keeps latency low and guarantees the three outputs are always internally consistent with each other — the IVR containment decision and the Agent Assist script can never contradict each other in the same response.",
-      "The three override protocols — bereavement, fraud, barge-in — were designed before the standard intent taxonomy. The principle is the same one used in clinical triage: the most dangerous presentations are handled before the standard intake process runs. Emotional emergencies in a financial services context require the same discipline.",
-      "Streaming via Server-Sent Events with a brace-depth JSON section extractor was chosen to give progressive panel hydration under two seconds of perceived latency. A practitioner watching three panels populate in real time engages differently with the output than one waiting for a blocking response.",
+      "The three hard override rules are the most important product decisions in this build. Bereavement, fraud, and barge-in fire before intent classification — because in enterprise financial services, getting those wrong is not a UX failure, it is an institutional trust failure. The bereavement protocol opens with acknowledgment and an 800ms pause before any transactional language, which mirrors the same principle used in clinical communication: acknowledgment before action, always.",
+      "Channel responses are generated simultaneously: IVR script, Chatbot response, and Agent Assist content in a single API call so practitioners see all three within seconds of submitting an utterance. That makes design tradeoffs visible that are typically invisible — for example, a containment decision that looks reasonable in the chatbot panel may produce an agent assist script that contradicts it.",
+      "Confidence is surfaced prominently in the intent bar and NLU architecture section, with intent-specific thresholds so bereavement, fraud, and barge-in can trigger on weaker signal when the protocol requires it. Agent Assist uses verbatim-ready spoken scripts plus policy references, not only abstract recommendations.",
+      "The streaming architecture was chosen because perceived latency matters more than actual latency in a design tool. Claude streams via Server-Sent Events; the client uses a brace-depth JSON section extractor so each completed section (IVR, chatbot, agent_assist, NLU) hydrates its panel as it arrives — under about two seconds for the first panel versus six to eight seconds for a blocking response.",
     ],
     impactLine:
-      "Live portfolio demonstration of enterprise conversational AI for financial services contact centers: multi-channel NLU architecture that is visible, interactive, and auditable in real time.",
+      "ClearChannel makes that visible, interactive, and auditable: one utterance, three simultaneous channel outputs, emotional override protocols, and streaming NLU you can watch populate in real time.",
     processAngle:
       "Designed for enterprise conversational governance: emotional overrides, simultaneous channel outputs, confidence legibility, and verbatim-ready agent assist.",
     cardSummary:
-      "Enterprise NLU routing simulator. One utterance, three simultaneous channel outputs, three emotional override protocols, full NLU architecture card per utterance. Live with voice input and IVR audio playback.",
+      "Enterprise NLU routing simulator. One utterance drives three simultaneous channel outputs — IVR, Chatbot, Agent Assist — with full intent taxonomy, confidence scoring, sentiment detection, and three emotional override protocols.",
     role: "Product & Conversation UX",
     timeline: "2025",
     keyOutcome:
-      "Live multi-channel NLU simulator with 18 intents, confidence scoring, and sentiment-aware routing",
+      "Live multi-channel NLU simulator: 18 intents, simultaneous IVR/Chatbot/Agent Assist, three emotional overrides, streaming SSE with progressive panel hydration, sentiment-driven UI, and voice input/output (Whisper, TTS, Realtime).",
+    stats: [
+      {
+        number: "81%",
+        label:
+          "had abandoned at least one call to a business in the past year because they reached an IVR",
+        source: "Vonage (2019). IVR Customer Experience Survey. Opinion Matters. n=4,019 adults, UK and US.",
+      },
+      {
+        number: "51%",
+        label:
+          "reported having stopped using a business entirely as a direct result of a frustrating IVR interaction",
+        source: "Vonage (2019). IVR Customer Experience Survey. Opinion Matters. n=4,019 adults, UK and US.",
+      },
+      {
+        number: "14%",
+        label:
+          "higher productivity on average for agents with access to a generative AI assistant (issues resolved per hour)",
+        source: "Li, Brynjolfsson & Raymond (2023). Generative AI at Work. NBER Working Paper 31161. 5,179 agents.",
+      },
+      {
+        number: "25%",
+        label:
+          "decline in requests to speak to a manager (customer sentiment)",
+        source: "Li, Brynjolfsson & Raymond (2023). Generative AI at Work. NBER Working Paper 31161.",
+      },
+    ],
+    processStepsInteractive: [
+      {
+        number: "01",
+        label: "Overrides",
+        phase: "STEP 01 — EMOTIONAL OVERRIDE PROTOCOLS",
+        title: "Bereavement, fraud, and barge-in before intent",
+        body: "The three hard override rules fire before standard intent classification. Getting them wrong is an institutional trust failure, not a UX nit. The bereavement protocol opens with acknowledgment and an 800ms pause before transactional language — acknowledgment before action, the same principle as strong clinical communication.",
+      },
+      {
+        number: "02",
+        label: "Channels",
+        phase: "STEP 02 — SIMULTANEOUS MULTI-CHANNEL OUTPUT",
+        title: "IVR, Chatbot, and Agent Assist together",
+        body: "One utterance produces IVR script, Chatbot response, and Agent Assist content in one call so you can see cross-channel consequences immediately — including when a containment choice in one channel clashes with the script another channel needs.",
+      },
+      {
+        number: "03",
+        label: "Legibility",
+        phase: "STEP 03 — CONFIDENCE AND AGENT-READY COPY",
+        title: "Confidence you can read; scripts you can say",
+        body: "Confidence scores surface in the intent bar and NLU card with differentiated thresholds for high-stakes intents. Agent Assist delivers verbatim-ready spoken English plus policy references so agents are not left to improvise under pressure.",
+      },
+      {
+        number: "04",
+        label: "Streaming",
+        phase: "STEP 04 — STREAMING ARCHITECTURE",
+        title: "Perceived latency under ~2 seconds for the first panel",
+        body: "Streaming via Claude Server-Sent Events and a brace-depth JSON section extractor fires setResult as each section completes, so panels hydrate progressively instead of waiting six to eight seconds on a blocking JSON blob.",
+      },
+    ],
+    shippedCards: [
+      {
+        title: "Live simulator scope",
+        body: "Live demo at clearchannel-vestara.vercel.app with no login or setup. 18 intent categories with confidence scoring and sentiment detection. Three simultaneous channel outputs per utterance: IVR, Chatbot, and Agent Assist. NLU architecture card per utterance: intent taxonomy, entity schema, training phrases, confidence thresholds.",
+      },
+      {
+        title: "Emotional override protocols",
+        body: "Three hard rules before intent classification: bereavement detection, fraud detection, and barge-in detection — each wired to the routing and copy patterns described in the case study.",
+      },
+      {
+        title: "Sentiment-driven UI",
+        body: "Five sentiment states (neutral, concerned, urgent, distressed, confused) each trigger a full UI theme shift via CSS custom properties so tenor is visible before an operator reads the scripts.",
+      },
+      {
+        title: "Streaming NLU pipeline",
+        body: "Analyze route streams Claude via Server-Sent Events with a brace-depth section extractor for progressive panel hydration and sub–two-second perceived time to first panel.",
+      },
+      {
+        title: "Voice input and audio",
+        body: "Voice input via OpenAI Whisper; IVR spoken response via OpenAI TTS-1 (alloy) as streaming audio through a Blob URL for mobile compatibility. OpenAI Realtime API for bidirectional voice with a Vestara AI persona.",
+      },
+      {
+        title: "Samples and design system",
+        body: "11 curated sample utterances spanning standard and edge-case emotional scenarios. Vestara Institutional design system applied consistently across surfaces.",
+      },
+    ],
+    stackHighlighted: [
+      "Claude API",
+      "Next.js 16",
+      "OpenAI (Whisper, TTS, Realtime)",
+      "Tailwind CSS v4",
+    ],
+    stackStandard: ["TypeScript", "Vercel", "Server-Sent Events"],
+    impactQuote:
+      "ClearChannel demonstrates multi-channel conversational AI system design: simultaneous NLU routing across IVR, Chatbot, and Agent Assist with emotional override protocols, streaming architecture, sentiment-driven UI state, and voice input/output — built as a live, portable portfolio artifact with no login barrier.",
   },
 ];
 
