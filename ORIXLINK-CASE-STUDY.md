@@ -1,47 +1,35 @@
 # OrixLink AI — Portfolio Case Study
-# Hannah Kraulik Pagade | Rohimaya Health AI
-# hannahkraulikpagade.com
 
-**Last updated:** March 2026
+**Hannah Kraulik Pagade | Rohimaya Health AI**
+[hannahkraulikpagade.com](https://hannahkraulikpagade.com)
+
+**Last updated:** April 2026
 
 ---
 
-## PROJECT METADATA
+## Project metadata
 
 | Field | Value |
 |-------|-------|
 | **Project name** | OrixLink AI |
 | **Tagline** | Where every symptom finds its answer. |
-| **Status** | Live -- early commercial pilot |
-| **Primary URL** | triage.rohimaya.ai |
+| **Status** | Live — production |
+| **Primary URL** | [triage.rohimaya.ai](https://triage.rohimaya.ai) |
 | **Repo** | github.com/rohimayaventures/orixlink |
-| **Process documentation** | Narrative in this case study only (no separate route on the portfolio site). |
 | **Tags** | CLINICAL-AI · CONVERSATIONAL · FULL-STACK · MONETIZED |
 | **Role** | Product Lead, Conversation UX, Prompt Architect, Full-Stack Implementation |
-| **Timeline** | 2025 -- Present |
-| **Stack** | Next.js 16 · TypeScript · Tailwind CSS v4 · Claude API (Sonnet + Haiku) · Supabase (Auth + Postgres + RLS + pg_cron + pg_net) · Stripe (Checkout + Webhooks + Billing Portal) · Resend (transactional email) · Loops (marketing email, future) · Vercel |
+| **Timeline** | 2025 — Present |
+| **Stack** | Next.js 16 · TypeScript · Tailwind CSS v4 · Claude API (Sonnet + Haiku) · Supabase (Auth + Postgres + RLS + pg_cron + pg_net) · Stripe (Checkout + Webhooks + Billing Portal) · Resend · Vercel |
 
 ---
 
-## SECTION 1 — THE PROBLEM
+## Section 1 — The proof point
 
-### One-sentence framing
+Seven days after my spouse had a radial artery cardiac catheterization with stent placement, he developed forearm swelling, a hard and tight forearm to palpation, pain that had returned after initial improvement, pain waking him from sleep, and progressive grip weakness.
 
-Diagnostic errors affect at least 12 million Americans every year. Most happen not because clinicians lack knowledge, but because the current intake process gives them no structured way to connect a patient's full symptom picture to a working differential before the encounter even begins.
+I ran OrixLink.
 
-### The data
-
-Diagnostic errors are the most costly and most invisible category of medical error. The U.S. healthcare system estimates at least 12 million Americans experience a diagnostic error in outpatient settings each year. The majority occur not in hospitals but in primary care and urgent care settings -- where time is shortest and intake is least structured.
-
-The problem compounds in two directions simultaneously. Clinicians are working from fragmented intake -- a rushed triage note, a chief complaint field, a patient who cannot describe what they are feeling in clinical terms. And patients are entering care settings with no tool to help them articulate what they are experiencing before the encounter begins.
-
-OrixLink addresses both. Any symptom. Any person. No prior diagnosis required.
-
-### The proof point
-
-In March 2026, OrixLink was used in a real clinical scenario: an adult patient, 38, seven days post radial artery cardiac catheterization with stent placement, presenting with forearm swelling, a hard and tight forearm to palpation, pain that had returned after initial improvement, pain waking him from sleep, and progressive grip weakness.
-
-OrixLink flagged the symptom cluster as a red-flag emergency presentation consistent with compartment syndrome. It returned a structured differential ranking hematoma, pseudoaneurysm, radial artery occlusion, and compartment syndrome in order of likelihood. It identified four present red flag criteria and recommended: go to the emergency room now, bring this assessment, ask for compartment pressure measurement.
+It flagged the symptom cluster as a red-flag emergency presentation consistent with compartment syndrome. It returned a structured differential ranking hematoma, pseudoaneurysm, radial artery occlusion, and compartment syndrome in order of likelihood. It identified four present red flag criteria and recommended: go to the emergency room now, bring this assessment, ask for compartment pressure measurement.
 
 He was seen. The assessment matched the clinical workup.
 
@@ -49,305 +37,279 @@ This is not a demo. This is what the product is for.
 
 ---
 
-## SECTION 2 — THE PROCESS
+## Section 2 — The problem
 
-### Step 1 -- Discovery
+### One-sentence framing
 
-I have 15 years of clinical experience across acute care, post-acute, rehabilitation, and senior living. Every shift for 15 years has been field research for this product. The constraints were not discovered through user interviews. They were accumulated through repetition:
+Diagnostic errors affect at least 12 million Americans every year. Most happen not because clinicians lack knowledge, but because the intake process gives them no structured way to connect a patient's full symptom picture to a working differential before the encounter begins.
 
-- Patients who cannot articulate their symptoms in clinical language get worse intake assessments.
-- The same symptom cluster means different things depending on context, history, and onset pattern.
-- No tool exists that accepts any symptom from any person with no prior diagnosis and returns a structured clinical differential.
-- That absence is not a gap in the market. It is a gap in care.
+### Why familiar tools do not solve this
 
-### Step 2 -- Constraint set
+**Consumer symptom checkers** optimize for engagement and liability avoidance. They steer users toward emergency departments or self-care buckets without producing a clinician-grade differential with explicit likelihood language and red flag criteria tied to the actual narrative the patient typed.
 
-**The product had to do five things simultaneously without failing any of them:**
+**EMR intake** captures chief complaint and structured fields. It does not help a layperson translate "it feels like something is tearing when I grip" into the pattern a triage nurse weighs in the first 90 seconds.
 
-- Accept unconstrained natural language symptom input from any person regardless of health literacy or prior diagnosis
-- Return a structured differential with likelihood rankings that a clinician would recognize as correctly framed
-- Surface red flag criteria as a discrete visual layer -- not buried in prose
-- Assign a four-tier urgency level that mirrors the judgment a triage nurse applies in the first 90 seconds of an encounter
-- Frame every output as clinical support, not diagnosis -- with the legal overlay present but not obstructive
+OrixLink sits in the gap: any symptom, any person, no prior diagnosis required, with output structured so it could travel with the patient into the clinical encounter.
 
-**The urgency tier system required the most iteration.** The tiers are not algorithmic. They are judgment-based on symptom pattern, red flag presence, and onset velocity. The system prompt encodes the same pattern recognition a 15-year LPN uses, not a decision tree.
+### A personal professional observation
 
-**The output contract required a structural decision.** Rather than letting Claude return free-form prose, the prompt architecture enforces fixed section tokens -- differential rankings, red flag criteria, urgency tier, disclaimer -- that `lib/parseAssessment.ts` parses into typed React components. This means the UI is always correct regardless of language, phrasing variation, or model output style. It also makes share text, PDF output, and reminder previews reliable without post-processing.
+As a healthcare operations leader and Licensed Practical Nurse (LPN) with 15+ years across acute care, post-acute, rehabilitation, and senior living, I work with patients who arrived at their current level of care because something was missed or delayed upstream. A patient presenting with nonspecific complaints at a doctor's office, urgent care clinic, or emergency room that has no structured way to think through a differential is a patient at risk. That observation is not from a product spec. It is from 15+ years of shift work on the ground, living and breathing this problem. OrixLink exists because I have seen what happens when the intake gap is not closed and health problems are not addressed properly.
 
-**Monetization architecture was designed before a single paying user existed.** The usage cap system uses an atomic `attempt_assessment` RPC with a paired `rollback_assessment` on model failure. This means a user never loses a cap slot because Claude threw an error. The credit pack system writes to a `credits` table that the RPC reads, with `frozen_at` and `expires_at` columns for future freeze-on-cancel and expiry mechanics. The webhook handler uses a claim-after-process pattern so Stripe retries work correctly if processing fails.
+### The data
 
-### Step 3 -- The pivots
+The stakes are not abstract. They are quantified.
 
-**Pivot 1: Anonymous enforcement**
+**Diagnostic errors kill and disable at scale.** Diagnosis-related allegations account for the highest proportion of total U.S. malpractice payments at 32.9%, with $28.7 billion paid out between 1999 and 2018. Among those outcomes, 38.9% resulted in death and 36% in permanent disability. A 2024 BMJ Quality and Safety study found that harmful diagnostic errors may occur in 1 in every 14 general medical hospital patients, with 85% assessed as likely preventable.
 
-The original anonymous assessment enforcement used localStorage only. A technically sophisticated user could clear browser storage and run unlimited free assessments -- a real revenue leak for a product where Haiku costs $0.014 per session. Rather than add friction to the UX, the architecture was extended to add server-side fingerprint and IP storage in an `anonymous_assessments` table with a 24-hour window and a 30-day retention policy. The legal page was updated to disclose this explicitly. The result is an enforcement layer that is transparent to normal users, meaningful against abuse, and legally accurate.
+**Error rates are highest where presentation is least obvious.** Diagnostic error rates across 15 serious conditions have a median of 13.6%, ranging from 2.2% for myocardial infarction to 62.1% for spinal abscess. The conditions with the highest error rates are also the least obvious at initial presentation. That is precisely where a structured triage and differential tool has the most value.
 
-**Pivot 2: Credit data model drift**
+**Triage delays cost lives in measurable minutes.** Research published in JAMA Network Open found that undertriaged patients with aortic dissection waited an average of 8.9 minutes longer for CT imaging and 33.3 minutes longer for critical medications. For subarachnoid hemorrhage, undertriage delayed CT orders by 2.4 minutes and medication orders by 17.6 minutes. In time-sensitive emergencies, those minutes are not administrative inconveniences.
 
-The initial credit pack implementation wrote to a `credits_balance` column in `usage_tracking`. The `attempt_assessment` RPC read from a separate `credits` table. A user could pay for credits and get nothing. The fix was not just a code change -- it was recognizing that the data model had drifted between the webhook layer and the RPC layer during a fast-moving build, and that catching this before real users paid money was the highest-value thing to do before launch.
+**AI shows clinical-grade promise in this category.** Research published in The Lancet Digital Health found that a general-purpose AI language model performed diagnostic tasks at levels comparable to physicians and significantly better than lay individuals. The implication: a properly constrained AI in a clinical support context is a viable tool for improving the front end of the diagnostic process, particularly for patients and caregivers navigating symptoms without immediate access to a clinician.
 
-**Pivot 3: RPC boundary bug in production SQL**
-
-During a structured codebase audit, a logic error was identified in `attempt_assessment`: the condition `v_used >= p_cap` incorrectly sent the last included subscription assessment into the credits path. When a user consumed their final monthly assessment, the RPC read the post-increment count, found it equal to the cap, and treated the user as over-cap -- burning a credit that should not have been touched.
-
-The fix reads `v_used_before` before the update, then checks `if v_used > v_used_before` to confirm whether the subscription increment actually fired. If it did, the assessment was subscription-funded and returns immediately. If it did not, the user was already at cap and the credits path is correct. This was fixed directly in the production database via `CREATE OR REPLACE FUNCTION` and synced back to `supabase/migrations/006_assessment_rpcs.sql`. This is the kind of bug that does not show in unit tests but shows immediately in production when a paying user hits their cap.
-
-### Step 4 -- Design system: Meridian Oracle
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| Obsidian | `#080C14` | Primary background |
-| Gold | `#C8A96E` | Primary accent, urgency indicators, CTAs |
-| Cream | `#F4EFE6` | Body text, card surfaces |
-| Typography | Cormorant Garamond + DM Sans + DM Mono | Display / body / data labels |
-
-The dark background and gold accent were chosen to signal institutional authority and precision. The product is for clinical staff as much as patients, and the design register communicates that before a word is read. Cormorant Garamond brings the weight of clinical documentation. DM Sans keeps it readable at speed. DM Mono makes urgency tiers and differential rankings scannable as data.
+| Focus | Source | Finding |
+|-------|--------|---------|
+| Diagnostic error magnitude | National Academies, *Improving Diagnosis in Health Care* (2015) | Most people experience at least one diagnostic error in their lifetime; harm is often preventable. |
+| Primary care burden | Singh et al., *BMJ Qual Saf* (2014) | ~5% of adults in large health systems experience a missed diagnostic opportunity per year. |
+| Malpractice and mortality | Newman-Toker et al., *Diagnosis* (2021) | Diagnosis-related claims: 32.9% of total U.S. malpractice payments; 38.9% of outcomes resulted in death. |
+| Triage delays | Sax et al., *JAMA Network Open* (2025) | Undertriaged aortic dissection: 8.9 min longer to CT, 33.3 min longer to critical medications. |
+| Error rate by condition | Johns Hopkins / Newman-Toker | Median 13.6% across 15 serious conditions; spinal abscess 62.1%. |
+| AI diagnostic performance | Levine et al., *Lancet Digital Health* (2024) | General-purpose AI performed diagnostic tasks comparable to physicians; triage inferior but improving. |
+| Symptom checkers | Semigran et al., *BMJ* (2015) | Triage advice from symptom checkers is variable; most tools lack transparent clinical reasoning. |
+| Human factors | Graber et al., *BMJ Qual Saf* (2014) | Cognitive and systems factors both drive diagnostic error; structured intake is a leverage point. |
 
 ---
 
-## SECTION 3 — WHAT SHIPPED
+## Section 3 — The process
+
+### The constraint set
+
+The product had to do five things simultaneously and none of them could be sacrificed for the others:
+
+- Accept unconstrained natural-language symptom input regardless of health literacy or prior diagnosis.
+- Return a structured differential with likelihood rankings a clinician would recognize as correctly framed.
+- Surface red flag criteria as a discrete visual layer, not buried in prose.
+- Assign a four-tier urgency level that mirrors triage judgment in the first 90 seconds.
+- Frame every output as clinical support, not diagnosis, with a legal overlay present but not obstructive.
+
+The urgency tiers are judgment-based, encoded in the system prompt, not a shallow decision tree. Tier 1 is monitor at home. Tier 4 is go to the emergency department now. The criteria for each tier were drawn from 15 years of clinical observation across acute care, post-acute, and rehabilitation environments.
+
+The output contract matters as much as the clinical logic. The system prompt enforces fixed section tokens — differential, red flags, urgency, disclaimer, follow-up prompts — that `lib/parseAssessment.ts` maps into typed UI components. That keeps share text, print output, and reminder previews predictable regardless of how the model phrases its response. The parser includes regex fallbacks for minor formatting drift. The goal is stable structure, not a claim that the model can never deviate.
+
+The tool must reason like a clinician, not like a search engine. That distinction drove every constraint that followed.
+
+**The system prompt is the product IP.** The output contract matters as much as the clinical logic. The system prompt enforces fixed section tokens that `lib/parseAssessment.ts` maps into typed UI components. The contract was defined first. The UI was built to consume it. That sequence is why share text, print output, and reminder previews are all consistent without separate formatting logic for each surface.
+
+**Monetization was designed before the first paying user.** The atomic `attempt_assessment` RPC paired with `rollback_assessment` on model failure means users do not lose a cap slot when the model errors. Credits live in a dedicated table. Stripe webhooks use a claim-after-process pattern so retries behave correctly. These are product decisions, not engineering afterthoughts.
+
+**Claude API over a fine-tuned model was a deliberate choice.** Fine-tuned clinical models require labeled training data, model hosting infrastructure, and ongoing retraining as guidelines evolve. A well-constrained general-purpose model with a production-grade system prompt achieves clinical-grade output quality while remaining maintainable by a single builder. When the model improves, the product improves automatically. That is a sustainable architecture for a product at this stage.
+
+### The pivot stories
+
+**Pivot 1: Anonymous enforcement**
+
+Early enforcement leaned on localStorage. A determined user could clear storage and run unlimited free assessments. At roughly $0.014 per Haiku session, that is a real cost leak, not a theoretical one. The fix moved enforcement server-side: fingerprint and IP stored in `anonymous_assessments` with a 24-hour window and 30-day retention. The legal disclosure was added at the same time. The goal was closing the abuse loop without punishing normal users who simply close a tab and come back.
+
+The lesson: client-side enforcement is a UX signal, not a security gate. Any enforcement that matters lives at the data layer.
+
+**Pivot 2: Credit data model drift**
+
+Credit packs initially wrote to a `credits_balance` column on `usage_tracking` while `attempt_assessment` read a separate `credits` table. A user could purchase a credit pack, see a confirmation, and still hit a cap-reached wall on their next assessment because the two systems never talked to each other. Real money was moving. The fix was aligning webhook writes with RPC reads before any paid user hit the flow.
+
+The lesson: billing data model decisions compound quickly. Every column that stores money-adjacent state needs an explicit contract with the function that reads it.
+
+**Pivot 3: The RPC boundary bug**
+
+`attempt_assessment` used logic that could treat the last included subscription assessment as over-cap and pull from credits incorrectly. A user at exactly their monthly limit would have a credit consumed for what should have been a free subscription assessment. The fix reads `v_used_before` before incrementing and only enters the credits path when the subscription increment did not fire.
+
+This is the kind of bug that is invisible in normal usage, catastrophic in edge cases, and nearly impossible to catch without knowing exactly what the RPC is supposed to guarantee. The fix is one variable and two lines of SQL. The diagnosis took careful reading of the entire function contract.
+
+The lesson: atomic database functions require explicit boundary definitions, not implicit assumptions about when paths fire.
+
+---
+
+## Section 4 — What shipped
 
 ### Core assessment
 
-- Conversational symptom intake in natural language, any symptom, any person
-- Three-step intake flow: role selection, context selection, symptom description with sessionStorage persistence across refresh
-- 12-language support with tiered confidence disclaimers (High/Moderate/Low vocabulary confidence per language)
-- Emergency override: any Tier 4 urgency output in a Low-confidence language renders the emergency instruction in both the selected language and English simultaneously
-- Structured differential output parsed from fixed section tokens via `lib/parseAssessment.ts`
-- Red flag criteria surfaced as a discrete visual card layer before the differential body
-- Four-tier urgency classification with plain-language action guidance
-- Follow-up prompting -- the conversation continues as new symptoms or context arrive
-- Share and print output with full disclaimer block, URL driven by `NEXT_PUBLIC_APP_URL`
+- Three-step conversational intake (role, context, symptoms) with session persistence across refresh.
+- Seven roles: patient, clinician, and five caregiver variants (child, elderly, spouse, family member, other).
+- 12-language support with tiered confidence disclaimers. Emergency results in moderate or low-confidence languages surface copy in both the selected language and English.
+- Structured differential from section tokens via `lib/parseAssessment.ts`. Red flags as a discrete card layer with PRESENT, ABSENT, and UNKNOWN status. Four-tier urgency. Three follow-up prompt chips per response.
+- Share and print with full disclaimer. Multi-turn conversation with full message history.
 
-### Authentication and session management
+### Authentication and sessions
 
-- Supabase Auth with email/password and Google OAuth, published to production via Google Auth Platform
-- Anonymous first-assessment gate via browser fingerprint + sessionStorage, with server-side rate limiting in `anonymous_assessments` table
-- Anonymous to signed-in session migration via `POST /api/migrate-session`
-- Bootstrap on `SIGNED_IN` event creates `subscriptions`, `usage_tracking`, and credit rows
-- 30-minute inactivity timeout with 2-minute warning banner via `hooks/useSessionTimeout.ts`
-- Session warning banner "Keep me signed in" dispatches `session-reset` custom event to actually restart timers
-- Protected routes: `/dashboard`, `/history`, `/account`, `/pricing/success`
-- `?auth=required` and `?session=expired` handling on landing page
+- Supabase Auth: email/password and Google OAuth.
+- Anonymous first-assessment gate: client-side UX layer, server-side enforcement in `anonymous_assessments`.
+- Anonymous-to-authenticated session migration on sign-in.
+- Bootstrap on sign-in creates subscription and usage tracking rows automatically.
+- 30-minute inactivity timeout with 2-minute warning banner.
+- Protected routes across dashboard, history, account, admin, and pricing success.
 
 ### Billing and monetization
-
-**Tiers:**
 
 | Tier | Price | Cap | Model |
 |------|-------|-----|-------|
 | Free | $0 | 5/month | Haiku |
 | Pro | $19/mo or $190/yr | 150/month | Sonnet |
-| Family | $34/mo or $340/yr | 300/month, 6 members | Sonnet |
-| Clinical | $99/mo or $990/yr | 200/month, 3 seats | Sonnet |
-| Lifetime | $249 one-time | 100/month | Sonnet |
+| Family | $34/mo or $340/yr | 600/month, 6 members | Sonnet |
+| Lifetime | $249 one-time | 100/month, 2 dependent profiles | Sonnet |
 
-**Credit packs (Pro and Family):**
+Credit packs (Starter through Power) with full lifecycle management: purchased credits live in a dedicated table, consumed atomically by the RPC, rolled back on model failure, deduped on payment intent ID.
 
-| Pack | Assessments | Price | Margin |
-|------|-------------|-------|--------|
-| Starter | 25 | $5 | 79% |
-| Standard | 75 | $12 | 74% |
-| Value | 150 | $20 | 69% |
-| Power | 300 | $35 | 64% |
-| Clinic Boost | 500 | $75 | 72% |
+**Clinical B2B tier is a planned future feature.** The database schema, RPC scaffolding, and seat management tables are built. Public checkout and provider UI are deferred until B2C production validates the core product and legal review of the clinical practice context is complete.
 
-**API cost reference:** Haiku ~$0.014/session, Sonnet ~$0.042/session. At full Pro cap (150 sessions), API cost is $6.30 against $19 revenue. Break-even at 4 Pro subscribers per 1,000 free users.
+Stripe Checkout (subscription and one-time), full webhook lifecycle handling, Billing Portal, authenticated success confirmation. Env validation at startup fails fast on bad deploys.
 
-**Stripe integration:**
-- Checkout route handles subscription mode (Pro, Family, Clinical) and payment mode (Lifetime, credit packs) in a single route with correct branching
-- Webhook handler covers 11 events including full subscription lifecycle
-- Claim-after-process idempotency: `webhook_events` insert happens after successful processing so Stripe retries can re-run failed handlers
-- Credit idempotency via unique constraint on `credits.stripe_payment_intent_id` -- duplicate inserts on retry return `23505` and are skipped without error
-- `addCredits` writes full row: `pack_name`, `purchased_at`, `expires_at`, `frozen_at`, `stripe_payment_intent_id`
-- Billing portal for self-service subscription management
-- Success page verifies payment status via authenticated `GET /api/checkout/confirm` with `user_id` ownership check before showing confirmation
-- Webhook observability: missing `user_id` and invalid `credits_amount` log with event type, event ID, and customer ID to Vercel function logs
+### Family system
 
-**Usage enforcement:**
-- `attempt_assessment` RPC reads `v_used_before` to confirm subscription increment fired before entering credits path -- prevents last included assessment from incorrectly consuming a credit
-- `rollback_assessment` RPC restores the cap slot if Claude fails, with credit restoration on credit-funded attempts via `rollbackCreditForRow`
-- Cap reached returns structured `402` payload driving `CapReachedPrompt` component with correct fields for both anonymous and authenticated states
-- Server-side anonymous fingerprint enforcement with IP fallback, 24-hour window
-
-**Startup validation:**
-- `lib/env.ts` + `instrumentation.ts` validate all required env vars at server startup including all 9 Stripe price IDs
-- Misconfigured deploys fail immediately with a clear list of missing variables rather than silently at runtime
+Complete invite and join flow via email and invite code. Shared 600-assessment pool across 6 members with 10-assessment daily per-member limit. Owner cancellation cascades to all members. Usage dashboard with per-member breakdown.
 
 ### Post-auth product surface
 
-- Dashboard with usage ring, 5 recent sessions with chief complaint preview via single joined query (no N+1), upgrade CTA for free users
-- History with full session list, session detail view via `/assessment/[id]`
-- Account page showing tier, assessments used vs cap, credits balance, billing period dates, Manage Billing button
-- Admin dashboard with usage analytics, tier management, manual credit grants
+Dashboard with usage ring and recent sessions. History with full session list and dependent filter. Session detail view. Account page with tier, usage, credits, billing dates, dependent management, and family join.
 
-### Follow-up reminder system
+### Reminders
 
-- Post-assessment `ReminderPrompt` component for Pro and Family users
-- 24h/48h/72h reminder options with cancel capability and loading skeleton while session ID syncs
-- `reminders` table with `pending`/`sent`/`cancelled`/`failed` status tracking
-- Hourly pg_cron job fires `POST /api/reminders/send` via pg_net, secured via `CRON_SECRET`
-- Resend sends fully branded HTML email with Meridian Oracle styling, OrixLink logo, assessment summary card, gold CTA button, emergency disclaimer
-- Loops configured and domain verified for future marketing campaigns
+24, 48, and 72-hour delay options with cancel. Resend-branded HTML email with Meridian Oracle styling. pg_cron hourly job via pg_net secured with cron secret. Status tracking: pending, sent, cancelled, failed.
 
 ### Compliance and legal
 
-- Legal overlay: first-use acknowledgment, persistent emergency redirect
-- Full legal page: medical disclaimer, terms of use, subscription terms, privacy policy with explicit HIPAA non-covered-entity statement, anonymous fingerprint/IP data disclosure with 30-day retention policy, session security section aligned with 30-minute implementation, user rights including deletion and export, 30-day deletion timeline
-- FDA informational stance in footer
-- Disclaimer present in system prompt, parsed into every output, included in share text, print output, and session detail exports
-- Data processors listed accurately: Supabase, Stripe, Anthropic, Vercel, Resend active; Loops noted as future
+First-use legal overlay. Full legal page covering disclaimer, terms, subscription terms, privacy policy, HIPAA non-covered-entity statement, anonymous fingerprint and IP disclosure, and session policy. Disclaimers in system prompt, UI, share text, and print output. RLS on all core tables.
 
-### Design and infrastructure
+### Infrastructure
 
-- Meridian Oracle dark theme consistent across all pages including assessment, results, legal, pricing, account, dashboard, history, 404
-- Stylized 404 page with ghost gold watermark
-- PWA manifest with 192/512 PNG icons, apple-touch-icon, theme color `#080C14`
-- Service worker with offline fallback that avoids caching `/api/*`
-- WCAG AA contrast validated programmatically across all Meridian Oracle color combinations
-- Systematic hover, focus, and active states on all interactive elements via shared CSS classes
-- Loading skeletons on history, session detail, and account pages via reusable `SkeletonBlock` component
-- Focus-visible ring in gold across all keyboard-navigable elements
-- `pulse` keyframe animation for all skeleton states
+Meridian Oracle design system across all surfaces. PWA manifest and service worker with offline fallback. WCAG-oriented contrast and focus states. Admin panel with user management, tier control, manual credit grants, and analytics.
 
 ---
 
-## SECTION 4 — TECHNICAL ARCHITECTURE
+## Section 5 — Technical architecture
 
 | Piece | Implementation |
 |-------|----------------|
 | Framework | Next.js 16 App Router |
-| AI | Claude API -- `claude-sonnet-4-20250514` for Pro/Family/Clinical/Lifetime, `claude-3-5-haiku-20241022` for Free tier |
-| Prompt architecture | System prompt with urgency tier hierarchy, red flag criteria, differential ranking structure, refusal protocol for emergency patterns, section token enforcement for `parseAssessment` consumer |
-| Output contract | Fixed section tokens parsed by `lib/parseAssessment.ts` into typed React components -- differential, red flags, urgency, disclaimer |
-| Persistence | Supabase -- sessions, messages, subscriptions, usage_tracking, credits, reminders, webhook_events, anonymous_assessments, profiles, dependents, practice_accounts, practice_seats, practice_sessions |
-| Auth | `@supabase/ssr` browser and server clients, middleware session refresh, OAuth callback, bootstrap on SIGNED_IN, Google OAuth published to production |
-| Anonymous enforcement | localStorage + sessionStorage UX layer, server-side fingerprint + IP in anonymous_assessments table, 24h window, 30-day retention |
-| Usage caps | `attempt_assessment` RPC with `v_used_before` boundary fix (subscription path only when increment confirmed), `rollback_assessment` on failure including `rollbackCreditForRow` for credit-funded attempts |
-| Billing | Stripe Checkout (subscription + payment modes), webhook handler (11 events, claim-after-process idempotency, `23505` credit dedup, NaN guard, missing user_id logging), Billing Portal, authenticated checkout confirm |
-| Credits | credits table with `pack_name`, `purchased_at`, `expires_at`, `frozen_at`, `stripe_payment_intent_id` (unique constraint); RPC-based consumption; rollback on model failure |
-| Email -- transactional | Resend -- follow-up reminders with branded Meridian Oracle HTML templates |
-| Email -- marketing | Loops -- configured, domain verified, reserved for future campaigns |
-| Scheduling | pg_cron (hourly) + pg_net (HTTP to Next.js) for reminder delivery, secured via CRON_SECRET |
-| Security | RLS on all core tables, service role isolated to server-only paths, CRON_SECRET for cron endpoint auth, session timeout at 30 minutes with custom event timer reset, central env validation at startup including all Stripe price IDs |
-| Design system | Meridian Oracle -- Obsidian #080C14, Gold #C8A96E, Cream #F4EFE6, Cormorant Garamond + DM Sans + DM Mono, WCAG AA verified programmatically |
-| Deploy | Vercel, primary domain triage.rohimaya.ai via Cloudflare DNS, all env vars validated at startup |
-| PWA | manifest.json with PNG icons (192/512/180), service worker with offline fallback |
+| AI | `claude-sonnet-4-20250514` (paid tiers); `claude-haiku-4-5-20251001` (Free) |
+| Temperature | 0.3 — hardcoded for clinical determinism |
+| Prompt | Urgency tier hierarchy, red flag criteria, differential ranking, refusal protocol, ABSENT vs UNKNOWN symptom documentation rule, section tokens for `parseAssessment` |
+| Output parser | `lib/parseAssessment.ts` — section token extraction, urgency with null fallback, red flag card layer, disclaimer with non-English resilience |
+| Persistence | sessions, messages, subscriptions, usage_tracking, credits, reminders, webhook_events, anonymous_assessments, profiles, dependents, family_members, practice_* (scaffold) |
+| Usage enforcement | `attempt_assessment` RPC (jsonb contract, atomic, v_used_before boundary fix) + `rollback_assessment` on failure with credit restoration |
+| Auth | `@supabase/ssr`, middleware refresh, Google OAuth, bootstrap on sign-in |
+| Billing | Stripe Checkout + Webhooks + Billing Portal, claim-after-process idempotency, `stripe_payment_intent_id` dedup constraint |
+| Scheduling | pg_cron + pg_net for reminders |
+| Security | RLS on all public tables including anonymous_assessments and practice tables (migration 029) |
+| Deploy | Vercel; primary domain triage.rohimaya.ai |
 
 ---
 
-## SECTION 5 — STATUS MATRIX
+## Section 6 — Status matrix
 
 ### What works
 
-- Core assessment funnel: intake, Claude call, structured output, follow-up chat
-- Authentication: Google OAuth (published to production), email, anonymous gate, session migration, bootstrap
-- Usage cap enforcement: atomic RPC with corrected boundary logic, rollback on failure, credit consumption and restoration
-- Stripe billing: checkout, webhook lifecycle with claim-after-process idempotency, credit dedup via unique constraint, billing portal, authenticated success confirmation
-- Credit pack purchase and delivery end to end including full row write and idempotent retry handling
-- Reminder system: set, send via Resend with branded email, cancel with timer reset
-- Dashboard (single joined query, no N+1), history, session detail, account
-- Legal overlay, legal page with HIPAA statement, anonymous data disclosure, session timeout alignment
-- Meridian Oracle dark theme across all surfaces
-- PWA install, service worker, offline fallback
-- Admin dashboard: usage analytics, tier management, credit grants
-- 404 page, session timeout with correct timer reset on "Keep me signed in", focus states, loading skeletons
-- Central env validation at startup including all Stripe price IDs
-- Webhook observability for missing metadata and invalid amounts
-- Share URL driven by `NEXT_PUBLIC_APP_URL` throughout
+Core assessment funnel end to end. Auth including Google OAuth. Caps, rollback, and credit consumption. Full Stripe lifecycle. Credit packs. Family invite, join, member management, and pool enforcement. Reminders with branded email. Dashboard, history, and account. Legal layer. PWA. Admin tools. Env validation at startup. Webhook logging for edge cases.
 
-### Known gaps and active roadmap
+### Known gaps and roadmap
 
-| Gap | Status | Notes |
-|-----|--------|-------|
-| PDF export via dedicated pipeline | Not built -- browser print only | Railway + Puppeteer microservice on roadmap. Browser print is the current implementation. This is an intentional deferral documented as a future pivot -- the print-to-PDF pattern works for the current use case and the dedicated pipeline ships when the Railway infrastructure is built. |
-| Lifetime 90-day retirement enforcement | Copy only | Enforcement requires archiving the Stripe price in the Stripe Dashboard after 90 days. Not a code change. Documented in status matrix. |
-| pg_cron operational verification | Manual SQL | The cron job must be created in Supabase SQL editor. Not verifiable from the repo alone. Documented in supabase/migrations/README.md. |
-| Family member invite flow | Not built | Family tier exists in billing. Member management and invite UI are Phase 4 roadmap. |
-| Clinical practice dashboard | Scaffolded | Tables exist (practice_accounts, practice_seats, practice_sessions). Provider dashboard UI is Phase 5 roadmap. |
-| Reminder partial send idempotency | Not hardened | Send route processes up to 50 reminders per run. Partial batch failures are logged but not retried automatically. |
-| Anonymous 30-day data deletion | Policy stated, job not verified | Legal page states 30-day retention. Operational deletion job not visible in repo. Requires a Supabase cron or scheduled function. |
-| Apple App Store / Google Play submission | Not started | PWA infrastructure complete. App store submission is Phase 6 roadmap. |
-| Webhook metadata missing -- no auto-recovery | Logged, not recovered | If Stripe sends a webhook with missing user_id metadata, the handler logs and breaks. No automatic reconciliation. Requires manual Stripe dashboard review. |
+| Gap | Notes |
+|-----|-------|
+| PDF pipeline | Browser print today; dedicated pipeline (Puppeteer or similar) on roadmap. |
+| Emergency number localization | Hardcoded 911 in share text and some copy; locale-aware mapping planned. |
+| Test suite | No automated tests; manual launch checklist is thorough. Parsing and RPC contract tests are the first priority post-launch. |
+| Anonymous session recovery | localStorage marks the gate as used; sessionStorage holds the data. A user who closes the tab loses results but cannot re-run. |
+| Webhook family cascade | 3 to 4 separate operations on owner cancel with no transaction wrapper. Acceptable at current scale; database function wrap is the fix. |
+| Clinical B2B tier | Schema, RPC scaffolding, and seat management tables built. Provider UI, public checkout, and legal review deferred until B2C production validates the core product. |
+| App stores | PWA ready; store submission not started. |
 
 ---
 
-## SECTION 6 — PORTFOLIO COPY
+## Section 7 — Portfolio copy
 
 ### Card summary
 
-Universal triage and diagnosis. Any symptom, any person, no prior diagnosis required. Live at triage.rohimaya.ai with full Stripe billing, atomic usage cap enforcement, credit packs, and a follow-up reminder system.
+Universal triage support: any symptom, any person, no prior diagnosis required. Live at triage.rohimaya.ai with Stripe billing, atomic usage enforcement, credit packs, family plans, 12-language support, and follow-up reminders.
 
 ### Project description (card view)
 
-OrixLink AI accepts any symptom in natural language and returns a structured clinical differential, red flag criteria, four-tier urgency classification, and plain-language next steps. Built by a 15-year LPN for the intake gap that causes 12 million diagnostic errors a year. Monetized with tiered subscriptions, credit packs, and a Lifetime access offer. Validated in production against a real compartment syndrome presentation in March 2026.
+OrixLink AI is a clinical triage and differential support tool that accepts any symptom from any person with no prior diagnosis required. The output is structured the way a triage nurse actually thinks: four-tier urgency, ranked differential with likelihood language, red flags as a discrete layer, and a follow-up thread for evolving presentations. It is live, monetized, and validated against a real clinical scenario.
 
 ### Problem statement (case study hero)
 
-At least 12 million Americans experience a diagnostic error in outpatient settings each year. Most happen not because clinicians lack knowledge, but because the intake process gives them no structured way to connect a patient's full symptom picture to a working differential. OrixLink is the tool that closes that gap -- any symptom, any person, no prior diagnosis required.
+Twelve million Americans experience a diagnostic error in outpatient settings every year. The majority happen not in hospitals but in primary care and urgent care, where intake is shortest and least structured. Symptom checkers optimize for liability avoidance. EMR intake captures what the system needs, not what the patient is experiencing. OrixLink sits in the gap between a person's symptom narrative and the structured clinical picture a provider can actually work from.
 
-### Process Step 1 -- Discovery
+### Process steps (for portfolio page)
 
-I did not need to conduct user research for this product. I have conducted it for 15 years on every shift. The intake failure pattern is not hypothetical. It is the first 90 seconds of every clinical encounter, repeated across every setting I have worked in.
+**Step 1 — Clinical constraint set**
+The core design constraint was not technical. It was clinical: the output had to be structured the way a triage nurse actually thinks, not the way a software team imagines triage works. Urgency tiers, differential ranking, and red flag framing were all drawn from 15 years of clinical observation before a single line of prompt engineering was written.
 
-### Process Step 2 -- Design and Build
+**Step 2 — Output contract before UI**
+The system prompt enforces fixed section tokens that the parser maps into typed UI components. The contract was defined first. The UI was built to consume it. That sequence is why share text, print output, and reminder previews are all consistent without separate formatting logic for each surface.
 
-The hardest problem was the output contract. The Claude system prompt had to accept unconstrained natural language, return a structured differential with likelihood rankings, surface red flags as a discrete layer, assign a four-tier urgency level, and frame everything as clinical support without being a disclaimer wall or a dangerously confident diagnosis. Every word of that prompt was iterated until a triage nurse would trust it. Then the output was parsed by a typed consumer so the UI never breaks regardless of language or phrasing variation.
+**Step 3 — Monetization before the first user**
+Billing architecture, credit data model, and the atomic attempt/rollback RPC pairing were all designed before launch. Three real production bugs were caught and fixed during build: anonymous enforcement leakage, credit data model misalignment, and an RPC boundary error that would have consumed credits incorrectly at cap boundaries. All three are documented in the migrations and the process.
 
-### Process Step 3 -- What shipped
-
-A conversational clinical triage tool with natural language intake, structured differential output, red flag cards, urgency tiers, follow-up prompting, legal overlay, Supabase persistence, full authentication with Google OAuth and anonymous session migration, tiered Stripe billing with atomic usage enforcement and idempotent credit delivery, a follow-up reminder system via Resend and pg_cron, admin dashboard, Meridian Oracle dark design system across all surfaces, PWA with offline fallback, and a compliance-aware legal layer including HIPAA scope, anonymous data disclosure, and session timeout policy. Validated in March 2026 against a real compartment syndrome presentation that matched the clinical workup.
-
-### The pivot story (for PM and product strategy interviews)
-
-**Anonymous enforcement:** The original implementation used localStorage only. A technically sophisticated user could clear browser storage and run unlimited free assessments. The architecture was extended to add server-side fingerprint and IP storage with a 24-hour window and explicit legal disclosure. The result is an enforcement layer that is transparent to normal users, meaningful against abuse, and legally accurate.
-
-**Credit data model drift:** The initial credit pack webhook wrote to a `credits_balance` column in `usage_tracking`. The `attempt_assessment` RPC read from a separate `credits` table. Two different places. A user could pay for credits and get nothing. The fix was recognizing that the data model had drifted between the webhook layer and the RPC layer during a fast-moving build, and catching it before real users paid money.
-
-**RPC boundary bug in production SQL:** A structured audit identified a logic error in `attempt_assessment` where `v_used >= p_cap` incorrectly sent the last included subscription assessment into the credits path. The fix reads `v_used_before` before the update, then checks `if v_used > v_used_before` to confirm whether the subscription increment actually fired. Fixed directly in the production database and synced back to the migration file. This is the kind of bug that does not appear in unit tests but surfaces immediately when a paying user hits their monthly cap.
-
-### The business model (for product and strategy interviews)
-
-OrixLink is the only product in this portfolio with real unit economics.
-
-API cost per session: Haiku $0.014 (Free tier), Sonnet $0.042 (Pro and above). At full Pro cap (150 sessions/month): API cost $6.30 against $19 revenue. Gross margin on Pro: 67% before infrastructure.
-
-Credit pack margins: 64% to 79% depending on pack size. Packs are positioned as cheaper than overage ($0.25/assessment). The real function is retention -- credits freeze on cancellation and reactivate on return.
-
-Break-even math: 4 Pro subscribers covers API cost for 1,000 free users. 1 Clinical practice covers approximately 1,400 free users.
-
-The Lifetime offer at $249 breaks even against Pro annual at 13 months. It was designed as a launch instrument with a 90-day availability window. The retire-after-90-days enforcement is a Stripe Dashboard configuration step -- a known operational gap documented in the status matrix.
-
-### What this is not (for healthcare-adjacent interviews)
-
-OrixLink AI is not a diagnostic instrument. It does not create a provider-patient relationship. It is not a covered entity under HIPAA. It has not been reviewed or approved by the FDA. It is a consumer informational tool that uses AI to help people describe what they are experiencing before a clinical encounter.
-
-This distinction determines what the product can claim, what it cannot claim, and what legal exposure it does not carry. Every surface -- the legal overlay, the output disclaimer, the system prompt, the metadata, the footer -- reflects that distinction consistently.
-
-### Clinical credibility statement
-
-The urgency tier system mirrors the reasoning a triage nurse applies in the first 90 seconds of an encounter -- because I am a triage nurse and I built it that way. Tier 1 is monitor at home. Tier 2 is contact your provider today. Tier 3 is urgent care now. Tier 4 is emergency department now. The thresholds encode 15 years of pattern recognition across acute care, post-acute, rehabilitation, and senior living. When OrixLink flagged this compartment syndrome presentation as a Tier 4 emergency, it was not because of a rule. It was because the symptom pattern -- post-procedural, progressive, waking from sleep, grip weakness -- matched the mental model of a nurse who has seen what happens when that pattern is missed.
-
-### One honest line for interviews
-
-OrixLink demonstrates full AI product ownership: a typed output contract enforced by the system prompt and consumed by `parseAssessment`, atomic usage cap enforcement with RPC boundary logic corrected in production SQL, a complete Stripe billing lifecycle with claim-after-process idempotency and unique constraint credit dedup, clinical domain expertise embedded throughout, and a compliance layer that is accurate rather than performative -- with an honest status matrix documenting the operational gaps that remain.
-
-### Interview talking points by audience
-
-**For clinical and healthcare AI interviews (Abridge, Hippocratic AI, Ambience Healthcare):**
-The urgency tier system is not algorithmic. It encodes clinical judgment. The legal architecture is not a disclaimer wall -- it is a precisely calibrated disclosure that says exactly what the product does and does not do, including explicit HIPAA non-covered-entity positioning. The compartment syndrome validation is not a cherry-picked demo. It is an instance of the product doing what it was designed to do under real clinical stakes.
-
-**For technical interviews:**
-The three strongest architectural decisions are: the fixed section token output contract that makes AI output machine-readable without post-processing, the `attempt_assessment` / `rollback_assessment` RPC pairing with corrected boundary logic that prevents both revenue leakage and incorrect credit consumption, and the claim-after-process webhook idempotency pattern combined with a unique constraint on `stripe_payment_intent_id` that prevents double-crediting on Stripe retries. The remaining open engineering items are the PDF export pipeline (currently browser print) and the operational 30-day deletion job for anonymous rate limit data.
-
-**For product and strategy interviews:**
-The product is live, monetized, and has real unit economics I can defend. The pricing architecture -- tiered subscriptions, credit packs with freeze-on-cancel retention mechanics, a Lifetime offer designed to retire after 90 days -- was designed before a single paying user existed. The three pivot stories (anonymous enforcement, credit data model drift, RPC boundary bug in production SQL) are all examples of catching business model and billing issues before they became customer trust issues.
+**Step 4 — Delivery and validation**
+The product was validated against a real clinical scenario before marketing began. The compartment syndrome presentation matched the clinical workup. Three production-class billing bugs were diagnosed and fixed before any paying user encountered them. The launch checklist covered 28 items across clinical accuracy, billing integrity, auth flows, mobile layout, and legal compliance. This is what production readiness looks like when the builder understands what is at stake.
 
 ### Impact line
 
-OrixLink exists because the intake gap is real, the diagnostic error rate is real, and 15 years of clinical experience is worth more than a user research sprint. The proof point is not a demo. It is a real patient whose symptom cluster the product correctly flagged as an emergency before a clinician saw him.
+The intake gap and diagnostic error statistics are real. Fifteen years at the bedside is the research program. The proof point is a real patient whose emergency presentation the product surfaced before a clinician saw him.
+
+### The honest summary
+
+**For technical understanding**
+Typed output contract via `parseAssessment` plus `attempt_assessment` and `rollback_assessment` RPC pairing plus Stripe claim-after-process idempotency and `stripe_payment_intent_id` dedup, built and shipped by one person with a clinical license and a code editor.
+
+**For product understanding**
+I designed the monetization architecture, wrote the system prompt, built the full-stack implementation, identified and fixed three production-class billing bugs during build, and validated the clinical output against a real emergency presentation. This is what 0-to-1 looks like when the builder has 15 years of domain expertise.
+
+**For design understanding**
+The Meridian Oracle design system was not designed for one product. It was designed for a brand family. OrixLink is the flagship. The dark palette, Cormorant Garamond display type, and gold accent signal clinical authority to both clinicians and patients without feeling cold. Every urgency state, every error condition, and every empty state has a designed response. The system is consistent across the assessment funnel, dashboard, history, account, legal pages, email templates, and print output.
+
+### Business model framing
+
+Four live consumer tiers from free to Lifetime one-time. Credit packs for over-cap access. Family plans with shared pools. A Clinical B2B tier is planned for a future phase pending B2C validation and legal review of the clinical practice context. The tier architecture was designed from the start to support enterprise expansion without a rebuild when that phase is ready.
+
+### What this demonstrates for the roles I am targeting
+
+**Production-grade prompt engineering for clinical AI.** The OrixLink system prompt is the most technically demanding prompt engineering work in this portfolio. It must produce structured output, enforce clinical attribution language, surface urgency discretely, and handle the full range of symptom presentations from benign to life-threatening without hallucinating diagnoses or missing red flags. That is a different problem than summarization or translation, and it requires a different level of constraint design. The system prompt is the product IP.
+
+**Universal scope as a deliberate product decision.** Any symptom, any person, no prior diagnosis required is a positioning choice that most clinical AI products explicitly avoid. Existing tools narrow their scope to reduce liability and engineering complexity. OrixLink accepts the full scope and manages it through prompt constraint rather than feature limitation. That is a more ambitious product bet, and it required clinical confidence to make it.
+
+**Design systems thinking at brand scale.** The Meridian Oracle system was not designed for OrixLink alone. It was designed as the foundation for the Rohimaya Health AI brand family, with patient-facing education products using a distinct but related system. Maintaining visual coherence across multiple products while differentiating by audience is a Head of Product competency, not just a design competency.
+
+**Clinical knowledge as a product constraint.** OrixLink was built by someone who has worked clinical floors for 15 years. The red flag logic, the urgency taxonomy, the care pathway recommendations, and the attribution language all reflect real clinical knowledge applied as product constraint. That is not replicable by a product manager without clinical experience, and it shows in the output quality.
+
+**0-to-1 ownership across every layer.** Product strategy, conversation design, system prompt engineering, full-stack implementation, billing architecture, and clinical validation all came from one person. This is the portfolio evidence for what that combination looks like at production scale.
 
 ---
 
-*Case study updated March 2026. Hannah Kraulik Pagade, Rohimaya Health AI.*
-*Do not share externally without review. Contains unreleased product roadmap and pricing strategy.*
+## Section 8 — Citations
+
+1. Singh, H., Meyer, A. N., and Thomas, E. J. (2014). The frequency of diagnostic errors in outpatient care: Estimations from three large observational studies involving US adult populations. BMJ Quality and Safety, 23(9), 727-731.
+
+2. National Academy of Medicine. (2015). Improving Diagnosis in Health Care. Committee on Diagnostic Error in Health Care. The National Academies Press.
+
+3. Newman-Toker, D. E., et al. (2021). Rate of diagnostic errors and serious misdiagnosis-related harms for major vascular events, infections, and cancers: Toward a national incidence estimate using the Big Three. Diagnosis, 8(1), 67-84.
+
+4. Gunderson, C. G., et al. (2020). Prevalence of harmful diagnostic errors in hospitalised adults: A systematic review and meta-analysis. BMJ Quality and Safety, 29(12), 1008-1018.
+
+5. BMJ Group. (2024). Harmful diagnostic errors may occur in 1 in every 14 general medical hospital patients. BMJ Quality and Safety.
+
+6. Sax, D. R., et al. (2025). Emergency department triage accuracy and delays in care for high-risk conditions. JAMA Network Open.
+
+7. Levine, D. M., et al. (2024). The diagnostic and triage accuracy of the GPT-3 artificial intelligence model: An observational study. The Lancet Digital Health, 6(10).
+
+8. Semigran, H. L., et al. (2015). Evaluation of symptom checkers for self diagnosis and triage: Audit study. BMJ, 351.
+
+9. Graber, M. L., et al. (2014). Cognitive interventions to reduce diagnostic error: A narrative review. BMJ Quality and Safety, 21(7), 535-557.
+
+10. Singh, H., et al. (2013). Types and origins of diagnostic errors in primary care settings. JAMA Internal Medicine, 173(6), 418-425.
+
+11. PSNet, AHRQ. Diagnostic errors. Agency for Healthcare Research and Quality Patient Safety Network.
+
+12. Suamchaiyaphum, K., Jones, A. R., and Markaki, A. (2024). Triage accuracy of emergency nurses: An evidence-based review. Journal of Emergency Nursing, 50(1), 44-54.
+
+---
+
+*Case study updated April 2026. Hannah Kraulik Pagade, Rohimaya Health AI.*
