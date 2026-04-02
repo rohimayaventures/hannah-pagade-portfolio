@@ -11,7 +11,10 @@ test.describe("smoke", () => {
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
       "OrixLink AI"
     );
-    await expect(page.getByRole("heading", { name: "Process" })).toBeVisible();
+    // OrixLink uses ProcessSideNav (no h2 "Process"); other studies use ProcessSection.
+    await expect(
+      page.getByRole("navigation", { name: "Process steps" }),
+    ).toBeVisible();
   });
 
   test("about page and in-page anchor target exist", async ({ page }) => {
