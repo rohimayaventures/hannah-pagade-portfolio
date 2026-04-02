@@ -15,27 +15,11 @@ import ShippedGrid from "@/components/ShippedGrid";
 import StackRow from "@/components/StackRow";
 import StatsRow from "@/components/StatsRow";
 import WhatThisDemonstrates from "@/components/WhatThisDemonstrates";
-import {
-  caseStudies,
-  getCaseStudyBySlug,
-  type CaseStudy,
-} from "@/content/caseStudies";
+import { caseStudies, getCaseStudyBySlug } from "@/content/caseStudies";
 import { ogDescription } from "@/lib/seo";
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
-}
-
-function getNextStudy(current: CaseStudy): CaseStudy | null {
-  const ordered = [...caseStudies].sort((a, b) => {
-    const soon = (s: CaseStudy["status"]) => (s === "coming-soon" ? 1 : 0);
-    const byStatus = soon(a.status) - soon(b.status);
-    if (byStatus !== 0) return byStatus;
-    return a.order - b.order;
-  });
-  const idx = ordered.findIndex((s) => s.slug === current.slug);
-  if (idx < 0) return null;
-  return ordered[(idx + 1) % ordered.length] ?? null;
 }
 
 /** Cancels root `mt-12` on ProcessSection / ProcessSideNav / ShippedGrid / StackRow / HonestSummary when using parent `gap-12` (matches ProcessSection vertical rhythm). */
@@ -99,10 +83,6 @@ export default async function CaseStudyPage({
   const study = getCaseStudyBySlug(slug);
   if (!study) notFound();
   const isComingSoon = study.status === "coming-soon";
-
-  const nextStudy = getNextStudy(study);
-  const nextHref =
-    nextStudy ? `/work/${nextStudy.slug}` as const : undefined;
 
   const hasInteractive =
     study.processStepsInteractive &&
@@ -209,8 +189,6 @@ export default async function CaseStudyPage({
                   primaryHref={
                     study.liveUrl?.trim() ? study.liveUrl : undefined
                   }
-                  outlineLabel={nextHref ? "View next project" : undefined}
-                  outlineHref={nextHref}
                 />
               : null}
             </div>

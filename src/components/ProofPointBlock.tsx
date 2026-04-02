@@ -25,7 +25,7 @@ export default function ProofPointBlock({ proofPoint }: ProofPointBlockProps) {
           {proofPoint.label}
         </p>
         <p
-          className="font-display mt-6 max-w-3xl text-xl font-light leading-relaxed sm:text-2xl md:text-3xl"
+          className="font-display mt-6 max-w-3xl text-lg font-light leading-relaxed sm:text-xl md:text-2xl"
           style={{ color: "rgba(244, 239, 230, 0.72)" }}
         >
           {proofPoint.body}
