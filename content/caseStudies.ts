@@ -27,6 +27,55 @@ export type CaseStudy = {
   timeline?: string;
   /** One-line outcome for recruiter scan */
   keyOutcome?: string;
+
+  proofPoint?: {
+    label: string;
+    body: string;
+    verdict: string;
+  };
+
+  stats?: Array<{
+    number: string;
+    label: string;
+    source: string;
+  }>;
+
+  processStepsInteractive?: Array<{
+    number: string;
+    label: string;
+    phase: string;
+    title: string;
+    body: string;
+  }>;
+
+  pivots?: Array<{
+    tag: string;
+    title: string;
+    body: string;
+    lesson: string;
+  }>;
+
+  shippedCards?: Array<{
+    title: string;
+    body: string;
+  }>;
+
+  stackHighlighted?: string[];
+  stackStandard?: string[];
+
+  whatThisDemonstrates?: Array<{
+    title: string;
+    tag: string;
+    body: string;
+  }>;
+
+  honestSummary?: {
+    technical: { label: string; body: string };
+    product: { label: string; body: string };
+    design: { label: string; body: string };
+  };
+
+  impactQuote?: string;
 };
 
 export const caseStudies: CaseStudy[] = [
