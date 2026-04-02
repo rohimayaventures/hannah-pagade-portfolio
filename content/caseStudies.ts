@@ -440,18 +440,32 @@ export const caseStudies: CaseStudy[] = [
     order: 4,
     featured: false,
     slug: "onboarding-agent",
-    title: "Onboarding Agent",
+    title: "Arc Onboarding Agent",
+    tagline: "Design the conversation. Not the form.",
     embedUrl: "",
     embedType: "coming-soon",
     liveUrl: "",
     status: "coming-soon",
     subtitle:
-      "A multi-turn conversational onboarding agent for a fictional B2B HR platform. The Claude-powered agent adapts its question sequence based on company size and team structure, ends with a structured setup summary, and includes a full conversation design artifact showing every branch and terminal state.",
-    tags: ["ENTERPRISE-SAAS", "CONVERSATIONAL-AI", "FULL-STACK"],
+      "A real-time conversational AI design platform. Ori asks one question at a time and builds your starter conversation architecture live. Powered by Claude API.",
+    tags: [
+      "CONVERSATIONAL-AI",
+      "PRODUCT-DESIGN",
+      "FULL-STACK",
+      "CLAUDE-API",
+    ],
     coverImage: "",
     projectDescription:
-      "A multi-turn conversational onboarding agent for a fictional B2B HR platform. The Claude-powered agent adapts its question sequence based on company size and team structure, ends with a structured setup summary, and includes a full conversation design artifact showing every branch and terminal state.",
+      "Arc is a conversational AI design platform. Ori, the onboarding agent, asks one question at a time, listens to your answers, and builds a personalized conversation architecture live in the right panel as you talk. Powered by Claude API in real time. Built on Next.js 15, Supabase session persistence, and a shareable URL for every completed session. The one-question-per-turn discipline is the entire design argument: this is what separates a conversation from a form with a chat wrapper.",
+    problemStatement:
+      "Enterprise onboarding fails when it hands new users a form. Arc is a conversational AI design platform powered by Ori, a real-time Claude-powered agent that learns what you are building and generates a starter conversation architecture tailored to your product. One question per turn. No forms. No scripts. Every path is different.",
     processAngle: "Coming soon.",
+    cardSummary:
+      "A real-time conversational AI design platform. Ori asks one question at a time and builds your starter conversation architecture live. Powered by Claude API.",
+    stackHighlighted: ["Claude API", "Next.js 15", "Supabase"],
+    stackStandard: ["TypeScript", "Tailwind v4", "Space Grotesk", "Vercel"],
+    impactQuote:
+      "Most portfolio onboarding agents demonstrate that you can wire a chat interface to an AI. Arc demonstrates that you understand conversational design as a discipline.",
   },
   {
     featured: false,

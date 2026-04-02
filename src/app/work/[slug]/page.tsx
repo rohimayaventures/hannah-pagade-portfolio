@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import Layout from "@/components/Layout";
 import CaseStudyHero from "@/components/CaseStudyHero";
@@ -14,9 +15,19 @@ import ProofPointBlock from "@/components/ProofPointBlock";
 import ShippedGrid from "@/components/ShippedGrid";
 import StackRow from "@/components/StackRow";
 import StatsRow from "@/components/StatsRow";
+import TagChip from "@/components/TagChip";
 import WhatThisDemonstrates from "@/components/WhatThisDemonstrates";
 import { caseStudies, getCaseStudyBySlug } from "@/content/caseStudies";
 import { ogDescription } from "@/lib/seo";
+
+const comingSoonNotifyButtonClass =
+  "inline-flex min-h-[44px] items-center justify-center rounded-full border border-gold px-6 py-2.5 font-body text-sm text-gold transition-colors hover:bg-[rgba(200,169,110,0.08)]";
+
+const arcPreviewPoints = [
+  "Ori — real-time Claude-powered agent, one question per turn",
+  "Live architecture panel — builds as you talk, not after you finish",
+  "Shareable URL — every completed session gets a permanent link",
+] as const;
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
@@ -98,26 +109,75 @@ export default async function CaseStudyPage({
 
         <div className="mx-auto max-w-6xl px-6 pb-16 pt-10 sm:px-8 md:px-16">
           {isComingSoon ? (
-            <section
-              className="rounded-xl p-8"
-              style={{
-                border: "1px solid rgba(200, 169, 110, 0.2)",
-                backgroundColor: "rgba(255, 255, 255, 0.05)",
-              }}
-            >
-              <h2 className="font-display text-2xl text-cream">
-                In Progress
-              </h2>
-              <p
-                className="mt-4 max-w-3xl font-body"
-                style={{ color: "rgba(244, 239, 230, 0.8)" }}
-              >
-                {study.projectDescription}
-              </p>
-              <div className="mt-6 inline-flex items-center rounded-full border border-gold px-4 py-2 text-sm font-body text-gold">
-                This project is currently in development.
+            <div className="flex flex-col gap-12">
+              <section className="mt-0">
+                <div
+                  className="rounded-xl p-6 md:p-8"
+                  style={{
+                    border: "1px solid rgba(200, 169, 110, 0.2)",
+                    backgroundColor: "rgba(255, 255, 255, 0.05)",
+                  }}
+                >
+                  <span
+                    className="inline-flex items-center rounded-full border px-3 py-1 font-body text-[10px] uppercase tracking-widest"
+                    style={{
+                      borderColor: "rgba(200, 169, 110, 0.4)",
+                      color: "var(--gold)",
+                      backgroundColor: "rgba(200, 169, 110, 0.06)",
+                    }}
+                  >
+                    In development
+                  </span>
+                  <p
+                    className="mt-6 max-w-3xl font-body text-[15px] leading-relaxed md:text-base"
+                    style={{ color: "rgba(244, 239, 230, 0.85)" }}
+                  >
+                    {study.projectDescription}
+                  </p>
+                  <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+                    {arcPreviewPoints.map((line) => (
+                      <div
+                        key={line}
+                        className="rounded-xl p-6"
+                        style={{
+                          border: "1px solid rgba(200, 169, 110, 0.2)",
+                          backgroundColor: "rgba(255, 255, 255, 0.05)",
+                        }}
+                      >
+                        <p
+                          className="font-body text-[15px] leading-relaxed md:text-base"
+                          style={{ color: "rgba(244, 239, 230, 0.85)" }}
+                        >
+                          {line}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  <p
+                    className="mt-8 font-body text-sm md:text-base"
+                    style={{ color: "rgba(244, 239, 230, 0.72)" }}
+                  >
+                    Full build and live demo in progress.
+                  </p>
+                  <div className="mt-6">
+                    <Link
+                      href="/contact"
+                      className={comingSoonNotifyButtonClass}
+                    >
+                      Get notified when it launches
+                    </Link>
+                  </div>
+                </div>
+              </section>
+
+              <div className="flex flex-wrap gap-2">
+                {study.tags.map((tag) => (
+                  <TagChip key={tag} tag={tag} />
+                ))}
               </div>
-            </section>
+
+              <NextStudyCard current={study} />
+            </div>
           ) : (
             <div className="flex flex-col gap-12">
               {study.proofPoint ?
@@ -193,7 +253,9 @@ export default async function CaseStudyPage({
               : null}
             </div>
           )}
-          <NextStudyCard current={study} />
+          {!isComingSoon ?
+            <NextStudyCard current={study} />
+          : null}
         </div>
       </article>
     </Layout>
