@@ -96,15 +96,15 @@ export const caseStudies: CaseStudy[] = [
     projectDescription:
       "OrixLink AI accepts any symptom in natural language and returns a structured clinical differential, red flag criteria, four-tier urgency classification, and plain-language next steps. Built by a 15-year LPN for the intake gap that causes an estimated 12 million diagnostic errors a year in outpatient settings. Monetized with tiered subscriptions, credit packs, Google OAuth, Stripe with idempotent credit delivery (unique constraint on payment intent), and a lifetime access offer.",
     problemStatement:
-      "At least 12 million Americans experience a diagnostic error in outpatient settings each year. Most happen not because clinicians lack knowledge, but because the intake process gives them no structured way to connect a patient's full symptom picture to a working differential. OrixLink is the tool that closes that gap—any symptom, any person, no prior diagnosis required. Validated in March 2026 against a real compartment syndrome presentation.",
+      "At least 12 million Americans experience a diagnostic error in outpatient settings each year. Most happen not because clinicians lack knowledge, but because the intake process gives them no structured way to connect a patient's full symptom picture to a working differential before the encounter begins. OrixLink is the tool that closes that gap: any symptom, any person, no prior diagnosis required.",
     processSteps: [
-      "I did not need to conduct user research for this product. I have conducted it for 15 years on every shift. The intake failure pattern is not hypothetical. It is the first 90 seconds of every clinical encounter, repeated across every setting I have worked in.",
-      "The hardest problem was the output contract. The Claude system prompt had to accept unconstrained natural language, return a structured differential with likelihood rankings, surface red flags as a discrete layer, assign a four-tier urgency level, and frame everything as clinical support without being a disclaimer wall or a dangerously confident diagnosis. Every word of that prompt was iterated until a triage nurse would trust it. Then the output was parsed by a typed consumer so the UI never breaks regardless of language or phrasing variation.",
-      "A conversational clinical triage tool with natural language intake, structured differential output, red flag cards, urgency tiers, follow-up prompting, legal overlay, Supabase persistence, full authentication with Google OAuth and email plus anonymous session migration, tiered Stripe billing with atomic usage enforcement, idempotent credit delivery using a unique constraint on Stripe payment intent, credit packs, a follow-up reminder system via Resend and pg_cron, admin dashboard, Meridian Oracle dark design system across all surfaces, PWA with offline fallback, and a compliance-aware legal layer including HIPAA scope, anonymous data disclosure, and session timeout policy. Validated in March 2026 against a real compartment syndrome presentation that matched the clinical workup.",
-      "Production SQL fix — the RPC boundary bug: at the subscription cap, attempt_assessment could mis-classify the last included assessment as over-cap and consume a credit (ghost credit). Diagnosed in the Supabase SQL editor by tracing subscription usage before and after the cap check. Fixed with v_used_before logic so subscription-funded sessions never fall through to credits incorrectly. Credit purchases also use a unique constraint on stripe_payment_intent_id so duplicate Stripe webhook retries cannot double-apply credits.",
+      "Clinical constraint set: the output had to be structured the way a triage nurse actually thinks. Urgency tiers, differential ranking, and red flag framing were all drawn from 15 years of clinical observation before a single line of prompt engineering was written.",
+      "Output contract before UI: the system prompt enforces fixed section tokens that the parser maps into typed UI components. The contract was defined first. The UI was built to consume it. The system prompt is the product IP.",
+      "Monetization before the first user: billing architecture, credit data model, and the atomic attempt/rollback RPC pairing were all designed before launch. Three production-class billing bugs were caught and fixed during build.",
+      "Delivery and validation: validated against a real clinical scenario before marketing began. The compartment syndrome presentation matched the clinical workup. 28-item launch checklist covering clinical accuracy, billing integrity, auth flows, mobile layout, and legal compliance.",
     ],
     impactLine:
-      "OrixLink exists because the intake gap is real, the diagnostic error rate is real, and 15 years of clinical experience is worth more than a user research sprint. The proof point is not a demo. It is a real patient whose symptom cluster the product correctly flagged as an emergency before a clinician saw him.",
+      "The intake gap and diagnostic error statistics are real. Fifteen years at the bedside is the research program. The proof point is a real patient whose emergency presentation the product surfaced before a clinician saw him.",
     processAngle:
       "Next.js 16 App Router, Claude API (Sonnet for paid tiers, Haiku for free), Supabase (Google OAuth and email auth, persistence, RLS, pg_cron, pg_net), Stripe (checkout, webhooks, billing portal, idempotent credits via unique constraint on payment intent), Resend for transactional email, typed assessment output via parseAssessment, Meridian Oracle design system. Live at triage.rohimaya.ai, early commercial pilot.",
     cardSummary:
@@ -113,6 +113,168 @@ export const caseStudies: CaseStudy[] = [
     timeline: "2025 — Present",
     keyOutcome:
       "Early commercial pilot: Stripe subscriptions, credit packs, Google OAuth, atomic usage caps with rollback and idempotent credit webhooks, Resend reminders; March 2026 validation matched clinical workup on a compartment syndrome presentation",
+    proofPoint: {
+      label: "The proof point",
+      body: "Seven days after my spouse had a radial artery cardiac catheterization with stent placement, he developed forearm swelling, a hard and tight forearm to palpation, pain that had returned after initial improvement, pain waking him from sleep, and progressive grip weakness. I ran OrixLink. It flagged the cluster as a red-flag emergency consistent with compartment syndrome, returned a structured differential, identified four present red flag criteria, and recommended going to the emergency room now. He was seen. The assessment matched the clinical workup.",
+      verdict: "This is not a demo. This is what the product is for.",
+    },
+    stats: [
+      {
+        number: "12M+",
+        label:
+          "Americans experience a diagnostic error in outpatient settings each year",
+        source: "National Academies, 2015",
+      },
+      {
+        number: "32.9%",
+        label:
+          "of malpractice payments are diagnosis-related, the single highest category",
+        source: "Newman-Toker et al., 2021",
+      },
+      {
+        number: "74.9%",
+        label:
+          "of diagnosis-related malpractice outcomes resulted in death or permanent disability",
+        source: "Newman-Toker et al., 2021",
+      },
+      {
+        number: "85%",
+        label:
+          "of harmful diagnostic errors in hospital patients were likely preventable",
+        source: "BMJ Quality and Safety, 2024",
+      },
+    ],
+    processStepsInteractive: [
+      {
+        number: "01",
+        label: "Discovery",
+        phase: "STEP 01 — DISCOVERY",
+        title: "Discovery",
+        body: "I did not need to conduct user research for this product. I have conducted it for 15 years on every shift. The intake failure pattern is not hypothetical. It is the first 90 seconds of every clinical encounter, repeated across every acute care, post-acute, rehabilitation, and senior living setting I have worked in. The constraints came directly from the floor, not a whiteboard.",
+      },
+      {
+        number: "02",
+        label: "Design",
+        phase: "STEP 02 — DESIGN AND BUILD",
+        title: "Design and build",
+        body: "The hardest problem was the output contract. The Claude system prompt had to accept unconstrained natural language and return a structured differential a triage nurse would trust. Every word was iterated until the output was clinically defensible. The contract was defined first. The UI was built to consume it. The system prompt is the product IP.",
+      },
+      {
+        number: "03",
+        label: "Architecture",
+        phase: "STEP 03 — ARCHITECTURE",
+        title: "Architecture",
+        body: "Full-stack clinical tool: natural language intake, structured differential output, red flag cards, urgency tiers, follow-up prompting, anonymous session gate, Supabase persistence, tiered Stripe billing with atomic usage enforcement, idempotent credit delivery, follow-up reminder system, admin dashboard, Meridian Oracle design system across all surfaces, PWA with offline fallback, and a compliance-aware legal layer with HIPAA non-covered-entity disclosure.",
+      },
+      {
+        number: "04",
+        label: "Delivery",
+        phase: "STEP 04 — DELIVERY AND VALIDATION",
+        title: "Delivery and validation",
+        body: "Validated against a real clinical scenario before marketing began. The compartment syndrome presentation matched the clinical workup. Three production-class billing bugs were diagnosed and fixed before any paying user encountered them. The launch checklist covered 28 items across clinical accuracy, billing integrity, auth flows, mobile layout, and legal compliance.",
+      },
+    ],
+    pivots: [
+      {
+        tag: "ENFORCEMENT",
+        title: "Anonymous enforcement moved server-side",
+        body: "Early enforcement leaned on localStorage. A determined user could clear storage and run unlimited free assessments. At roughly $0.014 per Haiku session, that is a real cost leak. The fix moved enforcement server-side: fingerprint and IP stored in the database with a 24-hour window and 30-day retention. The legal disclosure was added at the same time.",
+        lesson:
+          "Client-side enforcement is a UX signal, not a security gate. Any enforcement that matters lives at the data layer.",
+      },
+      {
+        tag: "BILLING",
+        title: "Credit data model drift caught before real money moved",
+        body: "Credit packs initially wrote to a credits_balance column on usage_tracking while attempt_assessment read a separate credits table. A user could purchase a credit pack, see a confirmation, and still hit a cap wall on their next assessment. Real money was moving. The fix aligned webhook writes with RPC reads before any paid user hit the flow.",
+        lesson:
+          "Billing data model decisions compound quickly. Every column storing money-adjacent state needs an explicit contract with the function that reads it.",
+      },
+      {
+        tag: "DATABASE",
+        title: "RPC boundary bug diagnosed in the Supabase SQL editor",
+        body: "attempt_assessment could treat the last included subscription assessment as over-cap and pull from credits incorrectly. A user at exactly their monthly limit would have a credit consumed for a free subscription assessment. The fix reads v_used_before before incrementing and only enters the credits path when the subscription increment did not fire.",
+        lesson:
+          "Atomic database functions require explicit boundary definitions, not implicit assumptions about when paths fire.",
+      },
+    ],
+    shippedCards: [
+      {
+        title: "Clinical assessment engine",
+        body: "3-step intake, 7 roles, 12 languages, 4-tier urgency, ranked differential, red flag cards, follow-up prompts, multi-turn conversation.",
+      },
+      {
+        title: "Monetization architecture",
+        body: "4 subscription tiers, credit packs, family plans with shared pool, atomic usage enforcement, Stripe Checkout plus full webhook lifecycle.",
+      },
+      {
+        title: "Auth and sessions",
+        body: "Google OAuth, email/password, anonymous gate with server-side enforcement, session migration, 30-minute inactivity timeout with warning banner.",
+      },
+      {
+        title: "Family system",
+        body: "Email and code invite flow, 600-assessment shared pool, 6 members, 10 per day per-member limit, cancellation cascade, usage dashboard.",
+      },
+      {
+        title: "Compliance and legal",
+        body: "First-use legal overlay, full legal page, HIPAA non-covered-entity disclosure, anonymous data retention policy, RLS on all database tables.",
+      },
+      {
+        title: "Infrastructure",
+        body: "Meridian Oracle design system, PWA with offline fallback, pg_cron reminders, admin dashboard, env validation at startup, Vercel deploy.",
+      },
+    ],
+    stackHighlighted: ["Claude API", "Next.js 16", "Supabase", "Stripe"],
+    stackStandard: [
+      "TypeScript",
+      "Tailwind v4",
+      "Resend",
+      "pg_cron",
+      "pg_net",
+      "Vercel",
+    ],
+    whatThisDemonstrates: [
+      {
+        title: "Production-grade prompt engineering for clinical AI",
+        tag: "TECHNICAL",
+        body: "The OrixLink system prompt must produce structured output, enforce clinical attribution language, surface urgency discretely, and handle the full range of symptom presentations without hallucinating diagnoses or missing red flags. The system prompt is the product IP.",
+      },
+      {
+        title: "Universal scope as a deliberate product decision",
+        tag: "PRODUCT",
+        body: "Any symptom, any person, no prior diagnosis required is a positioning choice that most clinical AI products explicitly avoid. Existing tools narrow scope to reduce liability. OrixLink accepts the full scope and manages it through prompt constraint rather than feature limitation.",
+      },
+      {
+        title: "Design systems thinking at brand scale",
+        tag: "DESIGN",
+        body: "The Meridian Oracle system was not designed for OrixLink alone. It was designed as the foundation for the Rohimaya Health AI brand family. Maintaining visual coherence across multiple products while differentiating by audience is a Head of Product competency, not just a design competency.",
+      },
+      {
+        title: "Clinical knowledge applied as product constraint",
+        tag: "PRODUCT",
+        body: "The red flag logic, urgency taxonomy, care pathway recommendations, and attribution language all reflect 15 years of real clinical knowledge applied as product constraint. That is not replicable by a product manager without clinical experience.",
+      },
+      {
+        title: "0-to-1 ownership across every layer",
+        tag: "FULL-STACK",
+        body: "Product strategy, conversation design, system prompt engineering, full-stack implementation, billing architecture, and clinical validation all came from one person. This is the portfolio evidence for what that combination looks like at production scale.",
+      },
+    ],
+    honestSummary: {
+      technical: {
+        label: "For engineers and architects",
+        body: "Typed output contract via parseAssessment plus attempt_assessment and rollback_assessment RPC pairing plus Stripe claim-after-process idempotency and stripe_payment_intent_id dedup, built and shipped by one person with a clinical license and a code editor.",
+      },
+      product: {
+        label: "For product and clinical teams",
+        body: "The monetization architecture, system prompt, full-stack implementation, three production-class billing bug fixes, and clinical validation against a real emergency presentation all came from one builder with 15 years of domain expertise. This is what 0-to-1 looks like when the domain knowledge is not borrowed.",
+      },
+      design: {
+        label: "For design and brand teams",
+        body: "The Meridian Oracle system was not designed for one product. It was designed for a brand family. OrixLink is the flagship. The dark palette, Cormorant Garamond display type, and gold accent signal clinical authority to both clinicians and patients without feeling cold. Every urgency state, error condition, and empty state has a designed response across the assessment funnel, dashboard, history, account, legal pages, email templates, and print output.",
+      },
+    },
+    impactQuote:
+      "The intake gap and diagnostic error statistics are real. Fifteen years at the bedside is the research program. The proof point is a real patient whose emergency presentation the product surfaced before a clinician saw him.",
   },
   {
     featured: false,
