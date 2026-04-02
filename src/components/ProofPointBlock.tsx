@@ -17,7 +17,7 @@ export default function ProofPointBlock({ proofPoint }: ProofPointBlockProps) {
         borderBottom: "1px solid rgba(255,255,255,0.07)",
       }}
     >
-      <div className="mx-auto max-w-6xl px-6 py-12 sm:px-8 md:px-16 md:py-14">
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-8 sm:py-12 md:px-16 md:py-14">
         <p
           className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold"
           style={{ opacity: 0.9 }}
@@ -25,7 +25,7 @@ export default function ProofPointBlock({ proofPoint }: ProofPointBlockProps) {
           {proofPoint.label}
         </p>
         <p
-          className="font-display mt-6 max-w-3xl text-lg font-light leading-relaxed sm:text-xl md:text-2xl"
+          className="font-display mt-6 max-w-3xl break-words text-lg font-light leading-relaxed sm:text-xl md:text-2xl"
           style={{ color: "rgba(244, 239, 230, 0.72)" }}
         >
           {proofPoint.body}

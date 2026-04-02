@@ -68,7 +68,7 @@ export default function ContactForm() {
         <button
           type="button"
           onClick={() => setStatus("idle")}
-          className="mt-8 font-body text-sm uppercase tracking-widest text-gold underline decoration-gold/50 underline-offset-4 transition-opacity hover:opacity-80"
+          className="mt-8 inline-flex min-h-[44px] items-center font-body text-sm uppercase tracking-widest text-gold underline decoration-gold/50 underline-offset-4 transition-opacity hover:opacity-80"
         >
           Send another message
         </button>
@@ -151,7 +151,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="inline-flex w-fit items-center justify-center rounded-sm border border-gold px-8 py-3.5 font-body text-sm uppercase tracking-widest text-gold transition-colors hover:bg-gold hover:text-obsidian disabled:opacity-50"
+        className="inline-flex min-h-[44px] w-fit items-center justify-center rounded-sm border border-gold px-8 py-3.5 font-body text-sm uppercase tracking-widest text-gold transition-colors hover:bg-gold hover:text-obsidian disabled:opacity-50"
       >
         {status === "sending" ? "Sending…" : "Send message"}
       </button>

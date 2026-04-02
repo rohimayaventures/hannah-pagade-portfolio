@@ -28,7 +28,7 @@ export default function ProcessSideNav({ steps }: ProcessSideNavProps) {
         }}
       >
         <nav
-          className="flex w-full shrink-0 flex-row gap-1 overflow-x-auto border-[rgba(255,255,255,0.08)] p-3 md:w-[160px] md:flex-col md:gap-0 md:border-r md:p-0"
+          className="flex w-full shrink-0 flex-row gap-1 overflow-x-auto scroll-pl-3 border-[rgba(255,255,255,0.08)] p-3 md:w-[160px] md:flex-col md:gap-0 md:border-r md:p-0"
           aria-label="Process steps"
         >
           {steps.map((step, i) => {
@@ -38,9 +38,12 @@ export default function ProcessSideNav({ steps }: ProcessSideNavProps) {
                 key={`${step.number}-${step.label}`}
                 type="button"
                 onClick={() => setActive(i)}
-                className="flex min-w-[120px] flex-col items-start gap-1 rounded-md border-l-2 border-transparent px-3 py-3 text-left transition-colors md:w-full md:rounded-none md:px-4"
+                className={`flex min-h-[44px] min-w-[120px] shrink-0 snap-start flex-col items-start justify-center gap-1 rounded-md border-b-2 border-l-2 px-3 py-2 text-left transition-colors md:min-h-0 md:w-full md:rounded-none md:border-b-0 md:border-l-2 md:px-4 md:py-3 ${
+                  isActive
+                    ? "border-b-gold border-l-transparent md:border-l-gold"
+                    : "border-transparent"
+                }`}
                 style={{
-                  borderLeftColor: isActive ? "#C8A96E" : "transparent",
                   backgroundColor: isActive
                     ? "rgba(200, 169, 110, 0.08)"
                     : "transparent",

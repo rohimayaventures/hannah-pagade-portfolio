@@ -99,14 +99,14 @@ export default function HonestSummary({ summary }: HonestSummaryProps) {
                   style={{ backgroundColor: "rgba(255,255,255,0.08)" }}
                 />
                 <div
-                  className={`font-body mt-4 text-sm leading-relaxed md:text-[15px] ${expanded ? "" : "line-clamp-3"}`}
+                  className={`font-body mt-4 text-sm leading-relaxed md:text-[15px] ${expanded ? "" : "line-clamp-3 max-md:line-clamp-none"}`}
                   style={{ color: "rgba(244, 239, 230, 0.72)" }}
                 >
                   {block.body}
                 </div>
                 <button
                   type="button"
-                  className="font-body mt-4 w-fit text-left text-sm text-gold transition-opacity hover:opacity-90"
+                  className="mt-4 inline-flex min-h-[44px] w-fit items-center font-body text-left text-sm text-gold transition-opacity hover:opacity-90"
                   onClick={() => setOpenKey(expanded ? null : key)}
                 >
                   {expanded ? "Show less" : "Read more"}

@@ -33,7 +33,7 @@ export default function ImpactClose({
     >
       <div className="mx-auto max-w-3xl px-6 py-14 text-center sm:px-8 md:py-16">
         <blockquote
-          className="font-display text-xl font-light italic leading-relaxed text-cream sm:text-2xl md:text-3xl"
+          className="break-words font-display text-lg font-light italic leading-relaxed text-cream sm:text-xl md:text-2xl lg:text-3xl"
           style={{ color: "rgba(244, 239, 230, 0.85)" }}
         >
           {quote}

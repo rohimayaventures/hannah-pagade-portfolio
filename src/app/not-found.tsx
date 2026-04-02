@@ -35,10 +35,10 @@ export default function NotFound() {
           The page you&apos;re looking for doesn&apos;t exist or has been moved.
           Let&apos;s get you back on track.
         </p>
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
           <Link
             href="/"
-            className="rounded-sm px-6 py-3 font-body text-sm font-medium tracking-wide transition-colors duration-200"
+            className="inline-flex min-h-[44px] w-full items-center justify-center rounded-sm px-6 py-3 font-body text-sm font-medium tracking-wide transition-colors duration-200 sm:w-auto"
             style={{
               backgroundColor: "var(--gold)",
               color: "var(--obsidian)",
@@ -48,7 +48,7 @@ export default function NotFound() {
           </Link>
           <Link
             href="/contact"
-            className="rounded-sm border px-6 py-3 font-body text-sm font-medium tracking-wide transition-colors duration-200"
+            className="inline-flex min-h-[44px] w-full items-center justify-center rounded-sm border px-6 py-3 font-body text-sm font-medium tracking-wide transition-colors duration-200 sm:w-auto"
             style={{
               borderColor: "var(--gold-on-light)",
               color: "var(--gold-on-light)",

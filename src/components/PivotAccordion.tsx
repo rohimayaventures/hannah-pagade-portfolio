@@ -66,7 +66,7 @@ export default function PivotAccordion({ pivots }: PivotAccordionProps) {
           >
             <button
               type="button"
-              className="flex w-full items-center gap-3 px-4 py-4 text-left md:px-5"
+              className="flex min-h-[44px] w-full flex-wrap items-center gap-2 px-4 py-4 text-left md:gap-3 md:px-5"
               onClick={() => setOpenIndex(open ? null : i)}
               aria-expanded={open}
             >
@@ -80,7 +80,7 @@ export default function PivotAccordion({ pivots }: PivotAccordionProps) {
               >
                 {pivot.tag}
               </span>
-              <span className="min-w-0 flex-1 font-body text-sm font-medium text-cream md:text-base">
+              <span className="min-w-0 flex-1 basis-[min(100%,12rem)] break-words font-body text-sm font-medium text-cream md:basis-auto md:text-base">
                 {pivot.title}
               </span>
               <span

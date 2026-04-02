@@ -76,15 +76,15 @@ export default function WhatThisDemonstrates({
           >
             <button
               type="button"
-              className="flex w-full items-start justify-between gap-4 px-4 py-4 text-left md:px-5"
+              className="flex min-h-[44px] w-full flex-col items-stretch gap-2 px-4 py-3 text-left md:flex-row md:items-start md:justify-between md:gap-4 md:px-5 md:py-4"
               onClick={() => toggle(i)}
               aria-expanded={isOpen}
             >
-              <span className="font-body text-sm font-medium text-cream md:text-base">
+              <span className="min-w-0 break-words font-body text-sm font-medium text-cream md:text-base">
                 {item.title}
               </span>
               <span
-                className="shrink-0 rounded-full border px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider"
+                className="w-fit shrink-0 self-start rounded-full border px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider md:self-auto"
                 style={{
                   backgroundColor: styles.bg,
                   color: styles.color,

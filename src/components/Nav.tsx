@@ -95,12 +95,12 @@ export default function Nav() {
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-2 md:flex md:gap-6 lg:gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-[13px] font-body uppercase tracking-widest no-underline transition-opacity hover:opacity-100"
+              className="inline-flex min-h-[44px] items-center px-1 text-[13px] font-body uppercase tracking-widest no-underline transition-opacity hover:opacity-100 lg:px-2"
               style={{ color: "var(--cream)" }}
             >
               {link.label}
@@ -110,7 +110,7 @@ export default function Nav() {
             href="https://www.linkedin.com/in/hannah-pagade"
             target="_blank"
             rel="noreferrer"
-            className="text-[13px] font-body uppercase tracking-widest no-underline transition-opacity hover:opacity-100"
+            className="inline-flex min-h-[44px] items-center px-1 text-[13px] font-body uppercase tracking-widest no-underline transition-opacity hover:opacity-100 lg:px-2"
             style={{ color: "var(--cream)" }}
           >
             LinkedIn
@@ -173,7 +173,7 @@ export default function Nav() {
               href={link.href}
               tabIndex={open ? undefined : -1}
               onClick={() => setOpen(false)}
-              className="block py-3 text-[15px] font-body uppercase tracking-widest no-underline transition-opacity hover:opacity-100"
+              className="flex min-h-[44px] items-center py-3 text-[15px] font-body uppercase tracking-widest no-underline transition-opacity hover:opacity-100"
               style={{ color: "var(--cream)" }}
             >
               {link.label}
@@ -185,7 +185,7 @@ export default function Nav() {
             rel="noreferrer"
             tabIndex={open ? undefined : -1}
             onClick={() => setOpen(false)}
-            className="block py-3 text-[15px] font-body uppercase tracking-widest no-underline transition-opacity hover:opacity-100"
+            className="flex min-h-[44px] items-center py-3 text-[15px] font-body uppercase tracking-widest no-underline transition-opacity hover:opacity-100"
             style={{ color: "var(--cream)" }}
           >
             LinkedIn

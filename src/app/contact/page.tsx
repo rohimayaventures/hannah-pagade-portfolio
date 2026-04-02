@@ -108,7 +108,7 @@ export default function ContactPage() {
                 href="https://www.linkedin.com/in/hannah-pagade"
                 target="_blank"
                 rel="noreferrer"
-                className="text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
+                className="inline-flex min-h-[44px] items-center text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
               >
                 Connect with me there
               </a>
@@ -118,7 +118,7 @@ export default function ContactPage() {
             <div className="mt-14">
               <Link
                 href="/#work"
-                className="inline-flex items-center gap-2 font-body text-sm uppercase tracking-widest text-gold transition-opacity hover:opacity-80"
+                className="inline-flex min-h-[44px] items-center gap-2 font-body text-sm uppercase tracking-widest text-gold transition-opacity hover:opacity-80"
               >
                 View selected work →
               </Link>

@@ -31,21 +31,21 @@ export default function Footer() {
         >
           <Link
             href="/#work"
-            className="inline-block py-2 no-underline transition-opacity hover:opacity-100"
+            className="inline-flex min-h-[44px] items-center py-2 no-underline transition-opacity hover:opacity-100"
             style={{ color: "rgba(244, 239, 230, 0.85)" }}
           >
             Work
           </Link>
           <Link
             href="/about"
-            className="inline-block py-2 no-underline transition-opacity hover:opacity-100"
+            className="inline-flex min-h-[44px] items-center py-2 no-underline transition-opacity hover:opacity-100"
             style={{ color: "rgba(244, 239, 230, 0.85)" }}
           >
             About
           </Link>
           <Link
             href="/contact"
-            className="inline-block py-2 no-underline transition-opacity hover:opacity-100"
+            className="inline-flex min-h-[44px] items-center py-2 no-underline transition-opacity hover:opacity-100"
             style={{ color: "rgba(244, 239, 230, 0.85)" }}
           >
             Contact
@@ -54,7 +54,7 @@ export default function Footer() {
             href="https://www.linkedin.com/in/hannah-pagade"
             target="_blank"
             rel="noreferrer"
-            className="inline-block py-2 no-underline transition-opacity hover:opacity-100"
+            className="inline-flex min-h-[44px] items-center py-2 no-underline transition-opacity hover:opacity-100"
             style={{ color: "rgba(244, 239, 230, 0.85)" }}
           >
             LinkedIn

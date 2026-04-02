@@ -21,12 +21,12 @@ export default function CaseStudyHero({
                 {caseStudy.tagline}
               </p>
             ) : null}
-            <h1 className="font-display text-3xl leading-tight text-cream sm:text-4xl md:text-6xl">
+            <h1 className="break-words font-display text-3xl leading-tight text-cream sm:text-4xl md:text-6xl">
               {caseStudy.title}
             </h1>
             <GoldRule />
             <p
-              className="mt-6 max-w-3xl font-body text-base sm:text-lg md:text-2xl"
+              className="mt-6 max-w-3xl break-words font-body text-base sm:text-lg md:text-2xl"
               style={{ color: "rgba(244, 239, 230, 0.8)" }}
             >
               {caseStudy.problemStatement ?? caseStudy.subtitle}
@@ -35,11 +35,17 @@ export default function CaseStudyHero({
 
           {(caseStudy.role || caseStudy.timeline) && (
             <div
-              className="flex flex-wrap items-center gap-x-4 gap-y-1 font-body text-sm"
+              className="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-1 font-body text-sm"
               style={{ color: "rgba(244, 239, 230, 0.8)" }}
             >
-              {caseStudy.role && <span>{caseStudy.role}</span>}
-              {caseStudy.timeline && <span>{caseStudy.timeline}</span>}
+              {caseStudy.role && (
+                <span className="min-w-0 break-words">{caseStudy.role}</span>
+              )}
+              {caseStudy.timeline && (
+                <span className="min-w-0 shrink-0 break-words">
+                  {caseStudy.timeline}
+                </span>
+              )}
             </div>
           )}
 

@@ -243,7 +243,7 @@ export default function AboutPage() {
                   <li key={id}>
                     <a
                       href={`#${id}`}
-                      className="font-body text-sm underline-offset-4 transition-opacity hover:opacity-90 hover:underline"
+                      className="inline-flex min-h-[44px] items-center font-body text-sm underline-offset-4 transition-opacity hover:opacity-90 hover:underline"
                       style={{ color: "rgba(244, 239, 230, 0.82)" }}
                     >
                       {label}
@@ -669,7 +669,7 @@ export default function AboutPage() {
             <div className="mt-10">
               <Link
                 href="/#work"
-                className="inline-flex items-center gap-2 rounded-sm border px-5 py-3 font-body text-xs uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 sm:px-6 sm:text-sm"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-sm border px-5 py-3 font-body text-xs uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 sm:px-6 sm:text-sm"
                 style={{
                   borderColor: "rgba(200, 169, 110, 0.4)",
                   color: "var(--gold)",

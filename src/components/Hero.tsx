@@ -97,7 +97,7 @@ export default function Hero() {
             <Link
               key={pill.label}
               href={pill.href}
-              className="hero-pill group inline-flex items-center rounded-full border px-4 py-2.5 text-[11px] font-body uppercase tracking-widest shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-gold hover:shadow-[0_0_24px_rgba(200,169,110,0.24)] active:scale-[0.98]"
+              className="hero-pill group inline-flex min-h-[44px] items-center rounded-full border px-4 py-2.5 text-[11px] font-body uppercase tracking-widest shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-gold hover:shadow-[0_0_24px_rgba(200,169,110,0.24)] active:scale-[0.98]"
               style={{
                 borderColor: "rgba(200, 169, 110, 0.42)",
                 backgroundColor: "rgba(8, 12, 20, 0.88)",
@@ -117,10 +117,10 @@ export default function Hero() {
               "linear-gradient(90deg, var(--gold), rgba(200, 169, 110, 0.15))",
           }}
         />
-        <div className="flex flex-wrap gap-3 sm:gap-4">
+        <div className="flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:gap-4">
           <Link
             href="/#work"
-            className="hero-cta-primary inline-flex items-center rounded-sm border px-5 py-3 text-[13px] font-body uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(200,169,110,0.55)] sm:px-6 sm:py-3.5 sm:text-sm"
+            className="hero-cta-primary inline-flex min-h-[44px] w-full items-center justify-center rounded-sm border px-5 py-3 text-[13px] font-body uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(200,169,110,0.55)] sm:w-auto sm:px-6 sm:py-3.5 sm:text-sm"
             style={{
               borderColor: "var(--gold)",
               backgroundColor: "var(--gold)",
@@ -131,7 +131,7 @@ export default function Hero() {
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center rounded-sm border px-5 py-3 text-[13px] font-body uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 sm:px-6 sm:py-3.5 sm:text-sm"
+            className="inline-flex min-h-[44px] w-full items-center justify-center rounded-sm border px-5 py-3 text-[13px] font-body uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 sm:w-auto sm:px-6 sm:py-3.5 sm:text-sm"
             style={{
               borderColor: "rgba(244,239,230,0.65)",
               backgroundColor: "rgba(8, 12, 20, 0.92)",
@@ -144,7 +144,7 @@ export default function Hero() {
             href="https://www.linkedin.com/in/hannah-pagade"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center rounded-sm border px-5 py-3 text-[13px] font-body uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 sm:px-6 sm:py-3.5 sm:text-sm"
+            className="inline-flex min-h-[44px] w-full items-center justify-center rounded-sm border px-5 py-3 text-[13px] font-body uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 sm:w-auto sm:px-6 sm:py-3.5 sm:text-sm"
             style={{
               borderColor: "rgba(200, 169, 110, 0.45)",
               color: "var(--cream)",

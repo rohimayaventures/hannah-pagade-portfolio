@@ -85,7 +85,7 @@ export default function EmbedBlock({
   }
 
   const openInNewTabClass =
-    "inline-flex shrink-0 items-center justify-center rounded-full border border-gold bg-obsidian px-4 py-2 text-center text-sm font-body text-cream transition-colors hover:bg-gold hover:text-obsidian max-sm:w-full sm:min-w-[10rem]";
+    "inline-flex min-h-[44px] shrink-0 items-center justify-center rounded-full border border-gold bg-obsidian px-4 py-2.5 text-center text-sm font-body text-cream transition-colors hover:bg-gold hover:text-obsidian max-sm:w-full sm:min-w-[10rem]";
 
   return (
     <section

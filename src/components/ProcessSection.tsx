@@ -33,7 +33,7 @@ function MobileProcessStep({
       open={expanded}
       onToggle={(e) => setExpanded(e.currentTarget.open)}
     >
-      <summary className="flex cursor-pointer items-center justify-between gap-3 px-4 py-3 text-left select-none">
+      <summary className="flex min-h-[44px] cursor-pointer items-center justify-between gap-3 px-4 py-3 text-left select-none">
         <span className="flex min-w-0 items-center gap-3">
           <span
             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border text-sm font-body"

@@ -17,8 +17,6 @@ const statusDot: Record<string, string> = {
 
 export default function CaseStudyCard({ study }: { study: CaseStudy }) {
   const summary = study.cardSummary ?? study.subtitle;
-  const displaySummary =
-    summary.length > 120 ? `${summary.slice(0, 120).trim()}…` : summary;
 
   return (
     <Link
@@ -122,10 +120,10 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
           </p>
         )}
         <p
-          className="mb-4 font-body text-sm leading-relaxed"
+          className="mb-4 break-words font-body text-sm leading-relaxed"
           style={{ color: "rgba(8, 12, 20, 0.72)" }}
         >
-          {displaySummary}
+          {summary}
         </p>
         <div className="flex items-center justify-between">
           <div className="flex flex-wrap gap-1.5">
