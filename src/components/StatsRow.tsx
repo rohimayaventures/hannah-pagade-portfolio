@@ -10,6 +10,7 @@ export type StatItem = {
 
 type StatsRowProps = {
   stats: StatItem[];
+  id?: string;
 };
 
 const ANIM_MS = 1400;
@@ -123,9 +124,10 @@ function AnimatedStat({ stat }: { stat: StatItem }) {
   );
 }
 
-export default function StatsRow({ stats }: StatsRowProps) {
+export default function StatsRow({ stats, id = "the-problem" }: StatsRowProps) {
   return (
     <section
+      id={id}
       className="w-full"
       style={{
         borderTop: "1px solid rgba(255,255,255,0.07)",

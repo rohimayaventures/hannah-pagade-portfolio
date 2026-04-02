@@ -13,6 +13,7 @@ type HonestSummaryProps = {
     product: SummaryBlock;
     design: SummaryBlock;
   };
+  id?: string;
 };
 
 const CARDS: Array<{
@@ -49,13 +50,16 @@ const CARDS: Array<{
   },
 ];
 
-export default function HonestSummary({ summary }: HonestSummaryProps) {
+export default function HonestSummary({
+  summary,
+  id = "the-honest-summary",
+}: HonestSummaryProps) {
   const [openKey, setOpenKey] = useState<
     "technical" | "product" | "design" | null
   >(null);
 
   return (
-    <section className="mt-12 w-full">
+    <section id={id} className="mt-12 w-full">
       <div className="mx-auto max-w-6xl">
         <p
           className="font-mono text-[10px] uppercase tracking-[0.2em]"

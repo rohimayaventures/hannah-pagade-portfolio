@@ -11,6 +11,7 @@ export type PivotItem = {
 
 type PivotAccordionProps = {
   pivots: PivotItem[];
+  id?: string;
 };
 
 function tagStyles(tag: string): {
@@ -47,11 +48,14 @@ function tagStyles(tag: string): {
   }
 }
 
-export default function PivotAccordion({ pivots }: PivotAccordionProps) {
+export default function PivotAccordion({
+  pivots,
+  id = "pivots",
+}: PivotAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className="flex flex-col gap-[10px]">
+    <div id={id} className="flex flex-col gap-[10px]">
       {pivots.map((pivot, i) => {
         const open = openIndex === i;
         const styles = tagStyles(pivot.tag);

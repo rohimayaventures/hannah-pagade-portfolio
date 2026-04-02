@@ -9,6 +9,7 @@ type EmbedBlockProps = {
   embedType: EmbedType;
   embedUrl: string;
   title: string;
+  id?: string;
 };
 
 const SLOW_AFTER_MS = 6_000;
@@ -18,6 +19,7 @@ export default function EmbedBlock({
   embedType,
   embedUrl,
   title,
+  id = "live-demo",
 }: EmbedBlockProps) {
   void embedType;
   const [loadStatus, setLoadStatus] = useState<LoadStatus>("loading");
@@ -66,6 +68,7 @@ export default function EmbedBlock({
   if (!resolvedUrl) {
     return (
       <section
+        id={id}
         className="rounded-xl p-6"
         style={{
           border: "1px solid rgba(200, 169, 110, 0.2)",
@@ -89,6 +92,7 @@ export default function EmbedBlock({
 
   return (
     <section
+      id={id}
       className="rounded-xl p-0"
       style={{
         border: "1px solid rgba(200, 169, 110, 0.2)",

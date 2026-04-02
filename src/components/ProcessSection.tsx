@@ -74,11 +74,13 @@ function MobileProcessStep({
 type ProcessSectionProps = {
   steps: [string, string, string] | [string, string, string, string];
   impactLine?: string;
+  id?: string;
 };
 
 export default function ProcessSection({
   steps,
   impactLine,
+  id = "process",
 }: ProcessSectionProps) {
   const labels =
     steps.length === 4 ? stepLabels4 : stepLabels3;
@@ -88,7 +90,7 @@ export default function ProcessSection({
       : "mt-8 flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-5";
 
   return (
-    <section className="mt-12">
+    <section id={id} className="mt-12">
       <FadeIn>
         <div className="flex items-end justify-between gap-6">
           <div>

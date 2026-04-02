@@ -7,15 +7,17 @@ type ShippedGridProps = {
   cards: ShippedCard[];
   eyebrow?: string;
   title?: string;
+  id?: string;
 };
 
 export default function ShippedGrid({
   cards,
   eyebrow,
   title,
+  id = "what-shipped",
 }: ShippedGridProps) {
   return (
-    <section className="mt-12 w-full">
+    <section id={id} className="mt-12 w-full">
       <div className="mx-auto max-w-6xl">
         {eyebrow ? (
           <p

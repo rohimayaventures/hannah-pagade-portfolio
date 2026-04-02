@@ -12,14 +12,18 @@ export type ProcessInteractiveStep = {
 
 type ProcessSideNavProps = {
   steps: ProcessInteractiveStep[];
+  id?: string;
 };
 
-export default function ProcessSideNav({ steps }: ProcessSideNavProps) {
+export default function ProcessSideNav({
+  steps,
+  id = "process",
+}: ProcessSideNavProps) {
   const [active, setActive] = useState(0);
   const current = steps[active];
 
   return (
-    <section className="mt-12 w-full">
+    <section id={id} className="mt-12 w-full">
       <div
         className="flex flex-col overflow-hidden rounded-xl md:flex-row"
         style={{

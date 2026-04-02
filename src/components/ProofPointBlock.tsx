@@ -6,11 +6,16 @@ type ProofPoint = {
 
 type ProofPointBlockProps = {
   proofPoint: ProofPoint;
+  id?: string;
 };
 
-export default function ProofPointBlock({ proofPoint }: ProofPointBlockProps) {
+export default function ProofPointBlock({
+  proofPoint,
+  id = "proof-point",
+}: ProofPointBlockProps) {
   return (
     <section
+      id={id}
       className="w-full bg-[rgba(200,169,110,0.04)]"
       style={{
         borderTop: "1px solid rgba(255,255,255,0.07)",

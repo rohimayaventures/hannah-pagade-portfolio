@@ -10,6 +10,7 @@ export type DemonstratesItem = {
 
 type WhatThisDemonstratesProps = {
   items: DemonstratesItem[];
+  id?: string;
 };
 
 function tagStyles(tag: string): {
@@ -53,6 +54,7 @@ function tagStyles(tag: string): {
 
 export default function WhatThisDemonstrates({
   items,
+  id = "what-this-demonstrates",
 }: WhatThisDemonstratesProps) {
   const [open, setOpen] = useState<Record<number, boolean>>({});
 
@@ -61,7 +63,7 @@ export default function WhatThisDemonstrates({
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div id={id} className="flex flex-col gap-3">
       {items.map((item, i) => {
         const isOpen = !!open[i];
         const styles = tagStyles(item.tag);

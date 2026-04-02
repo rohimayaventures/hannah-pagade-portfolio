@@ -3,6 +3,7 @@ type StackRowProps = {
   standard: string[];
   eyebrow?: string;
   title?: string;
+  id?: string;
 };
 
 const pillBase =
@@ -13,9 +14,10 @@ export default function StackRow({
   standard,
   eyebrow,
   title,
+  id = "tech-stack",
 }: StackRowProps) {
   return (
-    <section className="mt-12 w-full">
+    <section id={id} className="mt-12 w-full">
       <div className="mx-auto max-w-6xl">
         {eyebrow ? (
           <p

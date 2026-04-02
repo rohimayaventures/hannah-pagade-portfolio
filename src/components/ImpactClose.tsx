@@ -6,6 +6,7 @@ type ImpactCloseProps = {
   primaryHref?: string;
   outlineLabel?: string;
   outlineHref?: string;
+  id?: string;
 };
 
 function isInternal(href: string) {
@@ -18,6 +19,7 @@ export default function ImpactClose({
   primaryHref,
   outlineLabel,
   outlineHref,
+  id = "impact",
 }: ImpactCloseProps) {
   const primaryClasses =
     "inline-flex min-h-[44px] items-center justify-center rounded-full px-6 py-2.5 font-body text-sm text-obsidian transition-colors hover:opacity-95";
@@ -26,6 +28,7 @@ export default function ImpactClose({
 
   return (
     <section
+      id={id}
       className="w-full bg-[rgba(200,169,110,0.04)]"
       style={{
         borderTop: "1px solid rgba(255,255,255,0.07)",

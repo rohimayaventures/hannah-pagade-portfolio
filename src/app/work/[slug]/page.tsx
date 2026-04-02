@@ -16,6 +16,7 @@ import ShippedGrid from "@/components/ShippedGrid";
 import StackRow from "@/components/StackRow";
 import StatsRow from "@/components/StatsRow";
 import TagChip from "@/components/TagChip";
+import StickyWorkNav from "@/components/StickyWorkNav";
 import WhatThisDemonstrates from "@/components/WhatThisDemonstrates";
 import { caseStudies, getCaseStudyBySlug } from "@/content/caseStudies";
 import { ogDescription } from "@/lib/seo";
@@ -102,12 +103,92 @@ export default async function CaseStudyPage({
     (study.stackHighlighted && study.stackHighlighted.length > 0) ||
     (study.stackStandard && study.stackStandard.length > 0);
 
+  const workNavSectionDefs = [
+    {
+      id: "proof-point",
+      label: "Proof point",
+      show: Boolean(study.proofPoint),
+    },
+    {
+      id: "the-problem",
+      label: "The problem",
+      show: Boolean(study.stats?.length),
+    },
+    {
+      id: "live-demo",
+      label: "Live demo",
+      show: study.status === "live",
+    },
+    {
+      id: "process",
+      label: "Process",
+      show: Boolean(
+        study.processStepsInteractive?.length || study.processSteps?.length,
+      ),
+    },
+    {
+      id: "pivots",
+      label: "Pivots",
+      show: Boolean(study.pivots?.length),
+    },
+    {
+      id: "what-shipped",
+      label: "What shipped",
+      show: Boolean(study.shippedCards?.length),
+    },
+    {
+      id: "tech-stack",
+      label: "Tech stack",
+      show: Boolean(
+        study.stackHighlighted?.length || study.stackStandard?.length,
+      ),
+    },
+    {
+      id: "what-this-demonstrates",
+      label: "What this demonstrates",
+      show: Boolean(study.whatThisDemonstrates?.length),
+    },
+    {
+      id: "the-honest-summary",
+      label: "The honest summary",
+      show: Boolean(study.honestSummary),
+    },
+    {
+      id: "impact",
+      label: "Impact",
+      show: Boolean(study.impactQuote),
+    },
+  ] as const;
+
+  const workNavSections = workNavSectionDefs
+    .filter((s) => s.show)
+    .map(({ id, label }) => ({ id, label }));
+
+  const showWorkNav =
+    !isComingSoon && workNavSections.length >= 2;
+
   return (
     <Layout>
       <article className="bg-obsidian text-cream">
         <CaseStudyHero caseStudy={study} />
 
-        <div className="mx-auto max-w-6xl px-6 pb-16 pt-10 sm:px-8 md:px-16">
+        <div
+          className={
+            showWorkNav ?
+              "mx-auto flex w-full max-w-6xl flex-col px-6 pb-16 pt-10 sm:px-8 md:px-16 lg:max-w-[calc(72rem+2.5rem+10.5rem)] lg:flex-row lg:items-start lg:gap-10"
+            : "mx-auto max-w-6xl px-6 pb-16 pt-10 sm:px-8 md:px-16"
+          }
+        >
+          {showWorkNav ?
+            <aside className="hidden shrink-0 lg:block">
+              <StickyWorkNav sections={workNavSections} />
+            </aside>
+          : null}
+          <div
+            className={
+              showWorkNav ? "min-w-0 flex-1 max-w-6xl" : undefined
+            }
+          >
           {isComingSoon ? (
             <div className="flex flex-col gap-12">
               <section className="mt-0">
@@ -256,6 +337,7 @@ export default async function CaseStudyPage({
           {!isComingSoon ?
             <NextStudyCard current={study} />
           : null}
+          </div>
         </div>
       </article>
     </Layout>
