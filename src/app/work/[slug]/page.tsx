@@ -1,18 +1,46 @@
+import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Layout from "@/components/Layout";
 import CaseStudyHero from "@/components/CaseStudyHero";
 import EmbedBlock from "@/components/EmbedBlock";
-import ProcessSection from "@/components/ProcessSection";
+import HonestSummary from "@/components/HonestSummary";
+import ImpactClose from "@/components/ImpactClose";
 import NextStudyCard from "@/components/NextStudyCard";
+import PivotAccordion from "@/components/PivotAccordion";
+import ProcessSection from "@/components/ProcessSection";
+import ProcessSideNav from "@/components/ProcessSideNav";
+import ProofPointBlock from "@/components/ProofPointBlock";
+import ShippedGrid from "@/components/ShippedGrid";
+import StackRow from "@/components/StackRow";
+import StatsRow from "@/components/StatsRow";
+import WhatThisDemonstrates from "@/components/WhatThisDemonstrates";
 import {
   caseStudies,
   getCaseStudyBySlug,
+  type CaseStudy,
 } from "@/content/caseStudies";
 import { ogDescription } from "@/lib/seo";
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
+}
+
+function getNextStudy(current: CaseStudy): CaseStudy | null {
+  const ordered = [...caseStudies].sort((a, b) => {
+    const soon = (s: CaseStudy["status"]) => (s === "coming-soon" ? 1 : 0);
+    const byStatus = soon(a.status) - soon(b.status);
+    if (byStatus !== 0) return byStatus;
+    return a.order - b.order;
+  });
+  const idx = ordered.findIndex((s) => s.slug === current.slug);
+  if (idx < 0) return null;
+  return ordered[(idx + 1) % ordered.length] ?? null;
+}
+
+/** Cancels root `mt-12` on ProcessSection / ProcessSideNav / ShippedGrid / StackRow / HonestSummary when using parent `gap-12` (matches ProcessSection vertical rhythm). */
+function StripSectionTopMargin({ children }: { children: ReactNode }) {
+  return <div className="[&>section]:mt-0">{children}</div>;
 }
 
 export async function generateMetadata({
@@ -72,6 +100,17 @@ export default async function CaseStudyPage({
   if (!study) notFound();
   const isComingSoon = study.status === "coming-soon";
 
+  const nextStudy = getNextStudy(study);
+  const nextHref =
+    nextStudy ? `/work/${nextStudy.slug}` as const : undefined;
+
+  const hasInteractive =
+    study.processStepsInteractive &&
+    study.processStepsInteractive.length > 0;
+  const showStackRow =
+    (study.stackHighlighted && study.stackHighlighted.length > 0) ||
+    (study.stackStandard && study.stackStandard.length > 0);
+
   return (
     <Layout>
       <article className="bg-obsidian text-cream">
@@ -100,20 +139,81 @@ export default async function CaseStudyPage({
               </div>
             </section>
           ) : (
-            <>
+            <div className="flex flex-col gap-12">
+              {study.proofPoint ?
+                <ProofPointBlock proofPoint={study.proofPoint} />
+              : null}
+
+              {study.stats && study.stats.length > 0 ?
+                <StatsRow stats={study.stats} />
+              : null}
+
               <EmbedBlock
                 key={study.slug}
                 embedType={study.embedType}
                 embedUrl={study.embedUrl}
                 title={study.title}
               />
-              {study.processSteps ? (
-                <ProcessSection
-                  steps={study.processSteps}
-                  impactLine={study.impactLine}
+
+              {hasInteractive ?
+                <StripSectionTopMargin>
+                  <ProcessSideNav steps={study.processStepsInteractive!} />
+                </StripSectionTopMargin>
+              : study.processSteps ?
+                <StripSectionTopMargin>
+                  <ProcessSection
+                    steps={study.processSteps}
+                    impactLine={study.impactLine}
+                  />
+                </StripSectionTopMargin>
+              : null}
+
+              {study.pivots && study.pivots.length > 0 ?
+                <PivotAccordion pivots={study.pivots} />
+              : null}
+
+              {study.shippedCards && study.shippedCards.length > 0 ?
+                <StripSectionTopMargin>
+                  <ShippedGrid cards={study.shippedCards} />
+                </StripSectionTopMargin>
+              : null}
+
+              {showStackRow ?
+                <StripSectionTopMargin>
+                  <StackRow
+                    highlighted={study.stackHighlighted ?? []}
+                    standard={study.stackStandard ?? []}
+                  />
+                </StripSectionTopMargin>
+              : null}
+
+              {study.whatThisDemonstrates &&
+              study.whatThisDemonstrates.length > 0 ?
+                <WhatThisDemonstrates items={study.whatThisDemonstrates} />
+              : null}
+
+              {study.honestSummary ?
+                <StripSectionTopMargin>
+                  <HonestSummary summary={study.honestSummary} />
+                </StripSectionTopMargin>
+              : null}
+
+              {study.impactQuote ?
+                <ImpactClose
+                  quote={study.impactQuote}
+                  primaryLabel={
+                    study.liveUrl?.trim() ?
+                      `Try ${study.title}`
+                    : undefined
+                  }
+                  primaryHref={
+                    study.liveUrl?.trim() ? study.liveUrl : undefined
+                  }
+                  outlineLabel={nextHref ? "View next project" : undefined}
+                  outlineHref={nextHref}
                 />
-              ) : null}
-            </>
+              : null}
+            </div>
           )}
           <NextStudyCard current={study} />
         </div>
@@ -121,4 +221,3 @@ export default async function CaseStudyPage({
     </Layout>
   );
 }
-
