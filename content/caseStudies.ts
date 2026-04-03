@@ -434,7 +434,7 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     impactQuote:
-      "If someone cannot read or act on discharge instructions, the care plan never really starts. HealthLiteracy is built so plain language, reading level, language, and urgent items are part of the product, not an afterthought.",
+      "HealthLiteracy AI was built on a simple premise: if a patient cannot understand their discharge instructions, the care plan never starts.",
   },
   {
     order: 4,

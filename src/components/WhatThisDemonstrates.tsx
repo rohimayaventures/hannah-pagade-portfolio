@@ -10,6 +10,8 @@ export type DemonstratesItem = {
 
 type WhatThisDemonstratesProps = {
   items: DemonstratesItem[];
+  eyebrow?: string;
+  title?: string;
   id?: string;
 };
 
@@ -54,6 +56,8 @@ function tagStyles(tag: string): {
 
 export default function WhatThisDemonstrates({
   items,
+  eyebrow,
+  title,
   id = "what-this-demonstrates",
 }: WhatThisDemonstratesProps) {
   const [open, setOpen] = useState<Record<number, boolean>>({});
@@ -64,59 +68,76 @@ export default function WhatThisDemonstrates({
 
   return (
     <div id={id} className="flex flex-col gap-3">
-      {items.map((item, i) => {
-        const isOpen = !!open[i];
-        const styles = tagStyles(item.tag);
-        return (
-          <div
-            key={`${item.title}-${i}`}
-            className="overflow-hidden rounded-xl"
-            style={{
-              border: "1px solid rgba(255,255,255,0.08)",
-              backgroundColor: "rgba(255,255,255,0.04)",
-            }}
+      <div className="mx-auto max-w-6xl">
+        {eyebrow ? (
+          <p
+            className="font-mono text-[10px] uppercase tracking-[0.2em]"
+            style={{ color: "rgba(244, 239, 230, 0.5)" }}
           >
-            <button
-              type="button"
-              className="flex min-h-[44px] w-full flex-col items-stretch gap-2 px-4 py-3 text-left md:flex-row md:items-start md:justify-between md:gap-4 md:px-5 md:py-4"
-              onClick={() => toggle(i)}
-              aria-expanded={isOpen}
-            >
-              <span className="min-w-0 break-words font-body text-sm font-medium text-cream md:text-base">
-                {item.title}
-              </span>
-              <span
-                className="w-fit shrink-0 self-start rounded-full border px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider md:self-auto"
-                style={{
-                  backgroundColor: styles.bg,
-                  color: styles.color,
-                  borderColor: styles.border,
-                }}
-              >
-                {item.tag}
-              </span>
-            </button>
+            {eyebrow}
+          </p>
+        ) : null}
+        {title ? (
+          <h2 className="font-display mt-4 text-2xl text-cream md:text-3xl">
+            {title}
+          </h2>
+        ) : null}
+      </div>
+      <div className={`flex flex-col gap-3 ${eyebrow || title ? "mt-8" : ""}`}>
+        {items.map((item, i) => {
+          const isOpen = !!open[i];
+          const styles = tagStyles(item.tag);
+          return (
             <div
-              className="grid transition-[grid-template-rows] duration-300 ease-out"
-              style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+              key={`${item.title}-${i}`}
+              className="overflow-hidden rounded-xl"
+              style={{
+                border: "1px solid rgba(255,255,255,0.08)",
+                backgroundColor: "rgba(255,255,255,0.04)",
+              }}
             >
-              <div className="min-h-0 overflow-hidden">
-                <div
-                  className="border-t px-4 pb-4 pt-2 md:px-5"
-                  style={{ borderColor: "rgba(255,255,255,0.08)" }}
+              <button
+                type="button"
+                className="flex min-h-[44px] w-full flex-col items-stretch gap-2 px-4 py-3 text-left md:flex-row md:items-start md:justify-between md:gap-4 md:px-5 md:py-4"
+                onClick={() => toggle(i)}
+                aria-expanded={isOpen}
+              >
+                <span className="min-w-0 break-words font-body text-sm font-medium text-cream md:text-base">
+                  {item.title}
+                </span>
+                <span
+                  className="w-fit shrink-0 self-start rounded-full border px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider md:self-auto"
+                  style={{
+                    backgroundColor: styles.bg,
+                    color: styles.color,
+                    borderColor: styles.border,
+                  }}
                 >
-                  <p
-                    className="font-body text-sm leading-relaxed md:text-[15px]"
-                    style={{ color: "rgba(244, 239, 230, 0.72)" }}
+                  {item.tag}
+                </span>
+              </button>
+              <div
+                className="grid transition-[grid-template-rows] duration-300 ease-out"
+                style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+              >
+                <div className="min-h-0 overflow-hidden">
+                  <div
+                    className="border-t px-4 pb-4 pt-2 md:px-5"
+                    style={{ borderColor: "rgba(255,255,255,0.08)" }}
                   >
-                    {item.body}
-                  </p>
+                    <p
+                      className="font-body text-sm leading-relaxed md:text-[15px]"
+                      style={{ color: "rgba(244, 239, 230, 0.72)" }}
+                    >
+                      {item.body}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }

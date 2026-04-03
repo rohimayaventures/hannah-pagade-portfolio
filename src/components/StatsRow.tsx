@@ -10,6 +10,8 @@ export type StatItem = {
 
 type StatsRowProps = {
   stats: StatItem[];
+  eyebrow?: string;
+  title?: string;
   id?: string;
 };
 
@@ -124,7 +126,12 @@ function AnimatedStat({ stat }: { stat: StatItem }) {
   );
 }
 
-export default function StatsRow({ stats, id = "the-problem" }: StatsRowProps) {
+export default function StatsRow({
+  stats,
+  eyebrow,
+  title,
+  id = "the-problem",
+}: StatsRowProps) {
   return (
     <section
       id={id}
@@ -134,8 +141,25 @@ export default function StatsRow({ stats, id = "the-problem" }: StatsRowProps) {
         borderBottom: "1px solid rgba(255,255,255,0.07)",
       }}
     >
-      <div className="mx-auto max-w-6xl px-6 sm:px-8 md:px-16">
-        <div className="grid grid-cols-2 lg:grid-cols-4 [&>div]:border-r [&>div]:border-[rgba(255,255,255,0.07)] max-lg:[&>div:nth-child(2n)]:border-r-0 lg:[&>div:nth-child(4n)]:border-r-0">
+      <div
+        className={`mx-auto max-w-6xl px-6 sm:px-8 md:px-16 ${eyebrow || title ? "pb-8 pt-10 sm:pb-10 sm:pt-12" : ""}`}
+      >
+        {eyebrow ? (
+          <p
+            className="font-mono text-[10px] uppercase tracking-[0.2em]"
+            style={{ color: "rgba(244, 239, 230, 0.5)" }}
+          >
+            {eyebrow}
+          </p>
+        ) : null}
+        {title ? (
+          <h2 className="font-display mt-4 text-2xl text-cream md:text-3xl">
+            {title}
+          </h2>
+        ) : null}
+        <div
+          className={`grid grid-cols-2 lg:grid-cols-4 [&>div]:border-r [&>div]:border-[rgba(255,255,255,0.07)] max-lg:[&>div:nth-child(2n)]:border-r-0 lg:[&>div:nth-child(4n)]:border-r-0 ${eyebrow || title ? "mt-8" : ""}`}
+        >
           {stats.map((stat, i) => (
             <div key={`${stat.number}-${stat.label}-${i}`}>
               <AnimatedStat stat={stat} />

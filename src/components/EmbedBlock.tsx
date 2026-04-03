@@ -163,7 +163,7 @@ export default function EmbedBlock({
           <iframe
             title={`${title} embed`}
             src={resolvedUrl}
-            className="h-[min(520px,72dvh)] w-full min-h-[280px] border-0 bg-obsidian"
+            className="h-[min(600px,80dvh)] w-full border-0 bg-obsidian md:h-[min(520px,72dvh)]"
             onLoad={handleIframeLoad}
           />
         </div>

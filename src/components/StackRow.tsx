@@ -51,9 +51,9 @@ export default function StackRow({
               key={item}
               className={pillBase}
               style={{
-                color: "rgba(244, 239, 230, 0.55)",
-                borderColor: "rgba(255,255,255,0.08)",
-                backgroundColor: "rgba(255,255,255,0.04)",
+                color: "#C8A96E",
+                borderColor: "rgba(200, 169, 110, 0.35)",
+                backgroundColor: "rgba(200, 169, 110, 0.1)",
               }}
             >
               {item}

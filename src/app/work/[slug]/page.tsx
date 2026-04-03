@@ -266,7 +266,11 @@ export default async function CaseStudyPage({
               : null}
 
               {study.stats && study.stats.length > 0 ?
-                <StatsRow stats={study.stats} />
+                <StatsRow
+                  stats={study.stats}
+                  eyebrow="The problem"
+                  title="The stakes are not abstract"
+                />
               : null}
 
               <EmbedBlock
@@ -278,7 +282,11 @@ export default async function CaseStudyPage({
 
               {hasInteractive ?
                 <StripSectionTopMargin>
-                  <ProcessSideNav steps={study.processStepsInteractive!} />
+                  <ProcessSideNav
+                    steps={study.processStepsInteractive!}
+                    eyebrow="Process"
+                    title="How it was built"
+                  />
                 </StripSectionTopMargin>
               : study.processSteps ?
                 <StripSectionTopMargin>
@@ -290,12 +298,20 @@ export default async function CaseStudyPage({
               : null}
 
               {study.pivots && study.pivots.length > 0 ?
-                <PivotAccordion pivots={study.pivots} />
+                <PivotAccordion
+                  pivots={study.pivots}
+                  eyebrow="Pivots"
+                  title="What changed and why"
+                />
               : null}
 
               {study.shippedCards && study.shippedCards.length > 0 ?
                 <StripSectionTopMargin>
-                  <ShippedGrid cards={study.shippedCards} />
+                  <ShippedGrid
+                    cards={study.shippedCards}
+                    eyebrow="What shipped"
+                    title="Every layer, production-ready"
+                  />
                 </StripSectionTopMargin>
               : null}
 
@@ -310,7 +326,11 @@ export default async function CaseStudyPage({
 
               {study.whatThisDemonstrates &&
               study.whatThisDemonstrates.length > 0 ?
-                <WhatThisDemonstrates items={study.whatThisDemonstrates} />
+                <WhatThisDemonstrates
+                  items={study.whatThisDemonstrates}
+                  eyebrow="What this demonstrates"
+                  title="For every audience"
+                />
               : null}
 
               {study.honestSummary ?
