@@ -1,6 +1,33 @@
 # Hannah Kraulik Pagade — Portfolio
 
-Next.js portfolio for UX strategy and conversational AI design work.
+This repo powers a portfolio that shows **end-to-end product building from real domain expertise**, not slideware. The work spans **clinical intake and assessment** (OrixLink), **patient-facing health equity and plain-language translation** (HealthLiteracy), **regulated-style document intelligence** (FinanceLens), and **enterprise multi-channel conversational design** (ClearChannel). Case studies connect strategy, conversation and system design, and full-stack implementation to **live URLs** and on-page embeds, plus **Kai**, the on-site assistant for recruiter-facing questions. Rohimaya Health AI is the product umbrella for the shipped clinical and literacy tools.
+
+**Production:** [hannahkraulikpagade.com](https://hannahkraulikpagade.com). **Stack:** Next.js 16 (App Router), React 18, TypeScript, Tailwind CSS v4.
+
+**Professional links:** [Email](mailto:hannah.pagade@gmail.com) · [LinkedIn](https://www.linkedin.com/in/hannah-pagade) · [GitHub](https://github.com/rohimayaventures)
+
+## If you are reviewing this repository
+
+**Recruiters and hiring managers:** The fastest signal is the **live site**: full case narratives, working embeds, and contact flows. Use this repo to see that the portfolio is a real codebase (CI, tests, typed content) rather than a static export only. For role fit, the site About page states target roles and background explicitly.
+
+**Product and design:** Case study **structure** matches how work is told on the site: problem framing, process, pivots, what shipped, stacks, and honest tradeoffs live as structured data in `content/caseStudies.ts` and render through `src/app/work/[slug]/page.tsx` and shared components. Longer narrative drafts sit in repo-root `*.md` files for depth; the TypeScript file is what ships publicly.
+
+**Engineering:** App Router routes under `src/app/` (`/`, `/about`, `/contact`, `/work/[slug]`). API routes: `src/app/api/contact`, `concierge`, `notify`. UI in `src/components/`. Work-page sections (stats, process nav, embeds, accordions, etc.) are composed in the work template and fed from `caseStudies`. **Node:** use **20.x** locally to match CI (`.github/workflows/ci.yml`). Package manager: **npm**.
+
+This is a **personal portfolio codebase**, not a published open-source library. Code and copy are for evaluation and hiring context unless clearly stated otherwise.
+
+## Repository layout (quick reference)
+
+| Path | Purpose |
+|------|--------|
+| `src/app/` | Routes, layouts, metadata |
+| `src/app/api/` | Contact email, Kai concierge (Anthropic), Slack notify |
+| `src/components/` | Page and case-study UI |
+| `content/caseStudies.ts` | Canonical case study data and URLs |
+| `src/content/caseStudies.ts` | Re-export of `content/caseStudies.ts` for `@/content` imports |
+| `src/lib/` | Shared utilities (e.g. Kai appendix builder, rate limiting) |
+| `scripts/verify-content.ts` | Content and Kai-appendix checks (also run in CI) |
+| `*.md` (repo root) | Authoring-length case writeups; sync important facts into `caseStudies.ts` |
 
 ## Development
 
@@ -11,35 +38,53 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-## Contact form (production)
+## Environment variables
 
-The `/contact` page posts to `/api/contact`. Configure **one** of these in Vercel (or `.env.local` locally):
+Copy `.env.example` to `.env.local` and fill in values. **Do not commit** `.env` or `.env.local`. Vercel project settings should mirror the same keys for production.
 
-**Resend** (recommended if you have a verified sending domain):
+| Area | Variables | Notes |
+|------|-----------|--------|
+| Site metadata | `NEXT_PUBLIC_SITE_URL` | Optional; Open Graph uses `VERCEL_URL` on Vercel when unset. |
+| Contact (`/contact` → `/api/contact`) | `CONTACT_TO_EMAIL` | Required for the form to send mail. |
+| | `GMAIL_USER`, `GMAIL_APP_PASSWORD` | Optional Gmail sender (used **first** if both Gmail and Resend are set). |
+| | `RESEND_API_KEY`, `RESEND_FROM_EMAIL` | Optional [Resend](https://resend.com) sender; from-address domain must be verified. |
+| Kai concierge (`/api/concierge`) | `ANTHROPIC_API_KEY` | Required for the floating **Kai** assistant; without it the API returns a configuration error. |
+| Lead pings (`/api/notify`) | `SLACK_WEBHOOK_URL` | Optional Slack incoming webhook when visitors leave contact info from chat. |
 
-- `CONTACT_TO_EMAIL` — where inquiries are delivered
-- `RESEND_API_KEY` — from [Resend](https://resend.com)
-- `RESEND_FROM_EMAIL` — e.g. `Hannah Kraulik Pagade <hello@yourdomain.com>`
-
-**Gmail** (optional; sends from your Gmail via App Password):
-
-- `CONTACT_TO_EMAIL`
-- `GMAIL_USER`
-- `GMAIL_APP_PASSWORD` — [Google App Passwords](https://myaccount.google.com/apppasswords)
-
-If both Gmail and Resend are set, Gmail is used first.
-
-Copy `.env.example` to `.env.local` and fill in values. **Do not commit** `.env` or `.env.local`.
+Details and comments for each key live in `.env.example`.
 
 ## Case study content
 
-The site reads case study data from `content/caseStudies.ts` (including work pages and the home grid). Long-form drafts in repo-root files such as `*-CASE-STUDY.md` are references for you; when you change shipped copy, update both so they stay aligned. CI runs `npm run verify-content` to catch duplicate or broken slugs, missing titles, and **non-HTTPS `embedUrl`** values when an embed is set.
+**Source of truth for the public site:** `content/caseStudies.ts`. The App Router imports it via `src/content/caseStudies.ts` (re-export only). Work pages (`/work/[slug]`), the home grid, and embeds all read this file.
 
-When you change **live product URLs**, **headline facts**, or **case study blurbs** in `content/caseStudies.ts`, also update the **`SYSTEM_PROMPT`** in `src/app/api/concierge/route.ts` so the on-site Kai assistant stays consistent with the public site.
+**Long-form drafts** in the repo root are for authoring and alignment only, for example:
+
+- `ORIXLINK-CASE-STUDY.md`
+- `HEALTHLITERACY-AI-CASE-STUDY.md`
+- `FINANCELENS-AI-CASE-STUDY.md`
+- `ClearChannel-Case-Study.md`
+
+When shipped copy on the site changes, update `content/caseStudies.ts` and keep these drafts in sync if you still use them as references.
+
+### `npm run verify-content`
+
+CI and local checks validate:
+
+- Duplicate or missing slugs, missing title/subtitle, `getCaseStudyBySlug` consistency
+- **HTTPS** `embedUrl` when a non-empty embed is set
+- **Forbidden fragments** in `content/caseStudies.ts` (legacy hosts Kai must not treat as canonical): `orixlink.vercel.app`, `health-literacy-ai.vercel.app`, `moonlstudios.com`
+- **Kai appendix size:** the string from `buildKaiCaseStudyAppendix()` must not exceed `KAI_APPENDIX_MAX_CHARS` in `src/lib/kaiCaseStudyAppendix.ts`
+
+### Kai (concierge) and content sync
+
+- **Policy and canonical product URLs:** `SYSTEM_PROMPT` in `src/app/api/concierge/route.ts`
+- **Per-project facts** (stats, pivots, quotes, etc.), derived from the same data as `/work/*`: `src/lib/kaiCaseStudyAppendix.ts` builds an appendix from `content/caseStudies.ts` and it is concatenated into Kai’s system message at request time
+
+When you change live URLs, identity rules, or global assistant behavior, edit `SYSTEM_PROMPT`. When you add public case study detail, put it in `caseStudies.ts` so the site and appendix stay aligned. If markdown drafts contain alternate URLs or exploratory copy you do **not** want on the site, keep that material out of `caseStudies.ts` or add a short vetted paragraph only to `SYSTEM_PROMPT` rather than growing the appendix without review.
 
 ### Performance and Lighthouse (what matters)
 
-Lighthouse often reports **unused JavaScript**, **legacy JavaScript**, and **render-blocking resources** for Next.js and analytics-heavy sites. Much of that is **framework and vendor baseline**: routing, hydration, and scripts you keep on purpose. The estimated kilobyte savings can be small next to what you need for a normal app shell. Scores in the **high 90s** are usually fine for a portfolio; chasing a perfect 100 everywhere usually means stripping features, deferring third parties, or fighting the framework—worth it only when you have a **measured** problem (for example, poor LCP on real mobile networks) or a specific heavy asset to fix. Use Lighthouse as a **trend and regression** signal, not a single pass/fail bar.
+Lighthouse often reports **unused JavaScript**, **legacy JavaScript**, and **render-blocking resources** for Next.js and analytics-heavy sites. Much of that is **framework and vendor baseline**: routing, hydration, and scripts you keep on purpose. The estimated kilobyte savings can be small next to what you need for a normal app shell. Scores in the **high 90s** are usually fine for a portfolio; chasing a perfect 100 everywhere usually means stripping features, deferring third parties, or fighting the framework, worth it only when you have a **measured** problem (for example, poor LCP on real mobile networks) or a specific heavy asset to fix. Use Lighthouse as a **trend and regression** signal, not a single pass/fail bar.
 
 ### Security headers and embeds
 
@@ -56,8 +101,16 @@ npm run build
 npm run test:e2e
 ```
 
-CI runs `npm audit --audit-level=high`, then installs Chromium for Playwright and runs `npm run test:e2e` after the build.
+## Continuous integration
+
+On push and pull requests to `main`, CI runs in order:
+
+1. `npm run lint`
+2. `npm run verify-content`
+3. `npm run build`
+4. `npm audit --audit-level=high`
+5. Install Playwright Chromium, then `npm run test:e2e`
 
 ## Deploy
 
-Deploy on [Vercel](https://vercel.com). Add the same environment variables in the project settings.
+Deploy on [Vercel](https://vercel.com). Add the same environment variables in the project settings as in `.env.example`.

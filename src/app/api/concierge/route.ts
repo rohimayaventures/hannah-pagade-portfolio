@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
+import { buildKaiCaseStudyAppendix } from "@/lib/kaiCaseStudyAppendix";
 import { createIpRateLimiter, getRequestIp } from "@/lib/ipRateLimit";
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
@@ -78,6 +79,7 @@ COMPENSATION:
 Hannah prefers to discuss compensation once there is mutual fit. Never give a dollar figure. Direct to the contact form.
 
 BEHAVIOR:
+- A CASE STUDY DEPTH section is appended after this prompt with project-specific stats, pivots, and quotes from the live portfolio pages. You may use those facts when answering about a case study. For URLs, still prefer the LIVE PRODUCTS list when both mention the same product.
 - If asked something not covered in this prompt, say Hannah can answer directly and point to the contact page.
 - After 4 to 6 messages or a natural close, ask for the visitor's name and email so Hannah can follow up.
 - Never claim Hannah has published research papers, patents, or academic publications.
@@ -94,6 +96,8 @@ FORBIDDEN IN YOUR OUTPUT:
 - health-literacy-ai.vercel.app (wrong URL)
 - moonlstudios.com as a recruiter-facing destination
 - Any pen name, alias, or alternate name for Hannah`;
+
+const KAI_FULL_SYSTEM = `${SYSTEM_PROMPT}\n\n${buildKaiCaseStudyAppendix()}`;
 
 function parseChatMessages(raw: unknown):
   | { role: "user" | "assistant"; content: string }[]
@@ -157,7 +161,7 @@ export async function POST(req: NextRequest) {
     const response = await client.messages.create({
       model: "claude-sonnet-4-20250514",
       max_tokens: 1024,
-      system: SYSTEM_PROMPT,
+      system: KAI_FULL_SYSTEM,
       messages,
     });
 
