@@ -474,7 +474,7 @@ export const caseStudies: CaseStudy[] = [
     title: "FinanceLens AI",
     tagline: "Financial documents, in plain English.",
     subtitle:
-      "FinanceLens analyzes earnings calls, 10-K filings, and regulatory notices into structured intelligence: plain language, interpretation, key numbers, drift with quoted phrases, flags, source anchors, and an evidence-based confidence rubric (not investment advice). Compare two documents, export a branded PDF, generate PPTX briefing decks from a Claude-built slide outline, and share full-screen deck views via 30-day links. Haiku by default for latency, Sonnet for deeper passes. Assistive analysis only, not financial advice.",
+      "FinanceLens turns earnings calls, 10-K filings, and regulatory notices into structured intelligence (not a summary): six analytical sections including plain-language translation, interpretation with hedging surfaced, key numbers, language drift with hedge versus firm tags and quoted phrases, items worth a closer look, and source anchors. Claude Sonnet 4 throughout analyze, compare, and briefing. Zod-validated JSON with one structured repair turn. Compare two documents for delta analysis (accordion UI: highest-signal sections open first). Branded PDF (pdf-lib), PPTX (pptxgenjs), and 30-day share URLs at /deck/[slug] via Supabase. Assistive analysis only, not financial advice.",
     tags: ["FINTECH", "AI-PRODUCT", "FULL-STACK", "DOCUMENT-INTELLIGENCE"],
     embedType: "live",
     embedUrl: "https://financelens-ai.vercel.app",
@@ -482,108 +482,224 @@ export const caseStudies: CaseStudy[] = [
     status: "live",
     coverImage: "/images/financelens-ai-landing.png",
     projectDescription:
-      "FinanceLens analyzes earnings calls, 10-K filings, and regulatory notices into structured intelligence: plain language, interpretation, key numbers, drift with quoted phrases, flags, source anchors, and an evidence-based confidence rubric (not investment advice). Compare two documents, export a branded PDF, generate PPTX briefing decks from a Claude-built slide outline, and share full-screen deck views via 30-day links. Haiku by default for latency, Sonnet for deeper passes. Assistive analysis only, not financial advice.",
+      "FinanceLens AI translates financial documents into structured intelligence. Six distinct analytical sections with source anchors when present, language drift detection, and a toggleable 0-to-100 confidence rubric on evidence density (not a stock recommendation). Compare mode uses a diff-aware prompt and accordion layout so claim shifts and new language open first. Share output as branded PDF, seven-slide PPTX from a Claude JSON outline, or a 30-day URL at the in-app deck viewer. WSJ Editorial light design system (Fraunces, Georgia, IBM Plex Mono).",
     problemStatement:
-      "Executives write earnings calls and regulatory filings to communicate selectively. The language is deliberate. Most readers lack tools to see what the language is signaling, not just what it says. FinanceLens was built to make that signal visible. Analysts and operators who read these documents carefully lose hours turning a read-through into something shareable without institutional tooling or a Bloomberg terminal. No accessible tool combines plain-language translation, language drift detection, confidence scoring, two-document comparison, and shareable presentation generation in one workflow for non-institutional users.",
+      "Financial documents are written for lawyers and analysts. They are among the most consequential documents a company publishes, yet nearly inaccessible without a trained framework. Summarization removes complexity; it does not show what the language signals, what changed quarter to quarter, or where management hedged versus committed. FinanceLens is built on the thesis that structured intelligence is a different product than summarization.",
     processSteps: [
-      "The difference between FinanceLens and a document summarizer is translation versus intelligence: translation removes complexity; intelligence reveals what deliberately simple language is doing. Constraints included drift as a discrete quoted signal, confidence tied to evidence density in the excerpt (not stock recommendations), document-type-specific prompts for earnings calls, 10-Ks, and regulatory notices, shareable outputs, and persistent assistive-only guardrails.",
-      "The original architecture specified the Canva Connect API for branded decks; Canva app review blocked programmatic access. The stack pivoted to an owned presentation layer: Claude-built 7-slide JSON, Unsplash with attribution or Pollinations fallback, pptxgenjs PPTX download, slide JSON in Supabase, and a branded full-screen viewer at /deck/[slug] with 30-day TTL — no third-party OAuth dependency for the core path.",
-      "Shipped: single-document analyze with PDF text extraction, six output areas including source anchors and optional confidence, compare mode with sample pairs and shared layouts, briefing modal with PPTX and share links, /deck/[slug] scroll and presenter views, branded PDF export via pdf-lib, methodology page, and claudeJsonWithRetry with Zod validation across analyze, compare, and briefing routes. Next.js 16, React 19, TypeScript, Tailwind CSS v4, Vercel.",
+      "The product thesis: summarization is a solved problem in the market; intelligence is not. Every output section has a distinct analytical purpose wired into the Claude system prompt as typed JSON, not headers bolted onto a free-form summary. Source anchors are a trust architecture decision: claims tie to passages when the model supplies them. Document type (earnings call, 10-K, regulatory notice) steers different analytical framing.",
+      "Architecture: claude-sonnet-4-20250514 for translate, verify, compare, and briefing. No Haiku routing. claudeJsonWithRetry provides one repair turn if JSON is invalid or fails Zod schema validation before an error state surfaces. Compare mode is a separate diff-aware prompt, not two single-document runs pasted together.",
+      "Pivot stack: Canva Connect was the original presentation output; app review blocked API access with no timeline. Hannah owned the layer: Claude deck outline, pptxgenjs PPTX, pdf-lib branded PDF, custom /deck/[slug] viewer with HTTP 404 for unknown slugs and 410 for expired shares (middleware plus branded HTML). Secondary pivots: Sharp-based optimize-assets script for hero and OG images; portfolio attribution (PortfolioSiteCredit) and metadataBase; Supabase-backed 30-day share rows with graceful degradation if insert fails; compare results rebuilt as accordions with summary lines in collapsed headers.",
+      "Shipped: /analyze and /results with PDF text-layer upload; /compare with six sample pairs and maxDuration 120s; briefing modal; Unsplash plus Pollinations image pipeline; /methodology; .fl-* CSS-heavy UI on a Tailwind v4 base; iframe embed headers for hannahkraulikpagade.com.",
     ],
     impactLine:
-      "Structured financial intelligence — plain language, drift detection, source anchors, confidence rubric — across single-document analysis and two-document comparison, with branded PDF share, LLM-built briefing decks with Unsplash imagery, PPTX download, full-screen presenter view at a 30-day share URL (/deck/[slug]), and an explicit methodology and trust layer. Assistive only. Never financial advice.",
+      "Structured financial intelligence with six sections, drift and anchors, Sonnet-only pipeline, Zod plus repair, compare accordions, owned presentation layer, 30-day deck URLs, and explicit methodology. Assistive only. Not financial advice.",
     processAngle:
-      "Next.js 16, React 19, Claude (Haiku and Sonnet), Zod plus JSON retry, Supabase, pdf-lib, pptxgenjs, Unsplash and Pollinations. WSJ Editorial UI. Canva Connect planned after approval, not required for the core workflow.",
+      "Next.js 16, React 19, Claude Sonnet 4, Zod, claudeJsonWithRetry, Supabase financelens_sessions, pdf-lib, pptxgenjs, Unsplash, Pollinations, Tailwind CSS v4, Vercel. Canva Connect remains roadmap as additive output.",
     cardSummary:
-      "Earnings calls, 10-Ks, and regulatory filings → structured analysis, two-document compare, shareable PDF, and exportable slides — with explicit trust framing and a validated JSON pipeline from document to shareable artifact.",
+      "Earnings calls, 10-Ks, and regulatory filings into six structured sections; two-document compare with accordion deltas; branded PDF, PPTX, and 30-day /deck/[slug] viewer; methodology and validated JSON pipeline.",
     role: "Product design, prompt architecture, implementation",
     timeline: "2026",
     keyOutcome:
-      "Structured financial intelligence with drift, anchors, and confidence rubric; compare mode; branded PDF; briefing decks, PPTX, and 30-day /deck URLs; methodology and trust layer. Assistive only. Not financial advice.",
+      "Structured financial document intelligence with six-section output, compare mode, Zod plus repair, branded PDF and PPTX, Supabase 30-day share URLs, methodology page, and WSJ Editorial presentation layer without Canva dependency.",
+    proofPoint: {
+      label: "The proof point",
+      body: 'The shift from "we will deliver" to "we believe we are well positioned to deliver" is not a stylistic choice. It is information. Management language in earnings calls and filings is deliberate: hedges and passive constructions signal risk and earn persistence research has tied to readability and complexity for decades.',
+      verdict:
+        "Translation is the minimum. Intelligence is the product: what it signals, where language drifted, what changed from last quarter, and what deserves a closer look.",
+    },
+    stats: [
+      {
+        number: "6",
+        label:
+          "structured analysis sections per document (distinct analytical purposes, not one summary)",
+        source: "FinanceLens product spec",
+      },
+      {
+        number: "2",
+        label:
+          "document compare mode with diff-aware prompt and accordion delta layout",
+        source: "Shipped Q1 2026",
+      },
+      {
+        number: "5",
+        label:
+          "documented pivot decisions from Canva block through share URLs and compare UX",
+        source: "Case study Section 3",
+      },
+      {
+        number: "30",
+        label: "day TTL on Supabase-backed share links with expiry in the deck viewer",
+        source: "financelens_sessions",
+      },
+    ],
     processStepsInteractive: [
       {
         number: "01",
-        label: "Insight",
-        phase: "STEP 01 — CORE INSIGHT",
+        label: "Thesis",
+        phase: "STEP 01 — PRODUCT THESIS",
         title: "Translation versus intelligence",
-        body: "FinanceLens must tell you what language means and signals, not only what was said. Drift is a discrete signal with quoted phrases. Confidence reflects evidence density in the excerpt, not a stock recommendation. Document type steers the analysis logic. Outputs are shareable; guardrails frame everything as assistive analysis.",
+        body: "The brief was explicit: FinanceLens is not a summarizer. Six structured sections in sequence, each a different kind of analytical work. Source anchors make analysis verifiable. Confidence is a rubric on evidence density in the excerpt, not a recommendation. WSJ Editorial light signals editorial analysis, not consumer fintech chrome.",
       },
       {
         number: "02",
-        label: "Constraints",
-        phase: "STEP 02 — CONSTRAINT SET",
-        title: "Product and compliance constraints",
-        body: "Earnings calls, 10-Ks, and regulatory notices each get different prompt logic. The UI and methodology page explain confidence, image sourcing, sessionStorage scope, and the assistive-only disclaimer so the product never reads as a financial advisor.",
+        label: "Contract",
+        phase: "STEP 02 — OUTPUT CONTRACT",
+        title: "Six sections and Zod validation",
+        body: "Shipped labels: What they said, What it actually means, Key numbers, Language drift, Worth a closer look, Source anchors. Every response passes Zod; one structured repair turn runs before the user sees failure. Compare uses its own diff-aware contract with claim shift objects and default-open sections for highest signal.",
       },
       {
         number: "03",
-        label: "Pivot",
-        phase: "STEP 03 — PRESENTATION LAYER PIVOT",
-        title: "Owned decks instead of Canva",
-        body: "Canva Connect was blocked pending app review. The architecture owns the presentation layer: Claude JSON slide outlines, pptxgenjs blob downloads, Supabase persistence, and /deck/[slug] in the WSJ Editorial system. Canva remains roadmap as an additive path, not a dependency for the core workflow.",
+        label: "Compare",
+        phase: "STEP 03 — COMPARE MODE",
+        title: "Delta in the accordion",
+        body: "The most revealing read is period-over-period. Compare loads two transcripts and surfaces deltas: new language, dropped language, claim shifts with direction, metrics narrative. Accordion layout: claim shifts and new language expanded by default; other sections show summary line and item count when collapsed. 44px touch targets, CSS max-height transitions, no external accordion library.",
       },
       {
         number: "04",
-        label: "Delivery",
-        phase: "STEP 04 — WHAT SHIPPED",
-        title: "Shipped surfaces",
-        body: "Analyze and compare with Zod-validated JSON and a repair retry path; PDF upload via pdf-parse; briefing flow with PPTX and clipboard share URLs; deck viewer with scroll and full-screen modes; branded PDF export; methodology and in-product trust hints; graceful degradation if Supabase insert fails.",
+        label: "Pivots",
+        phase: "STEP 04 — WHAT CHANGED AND WHY",
+        title: "From Canva to owned artifacts",
+        body: "Canva API blocked: owned PPTX, PDF, and /deck viewer. Hero assets: Sharp pipeline for webp, og-image, icons. Attribution and metadata as shipping criteria. Share URLs as first-class persistence. Compare UX tuned for scanability before depth.",
       },
     ],
     pivots: [
       {
         tag: "DESIGN",
         title: "Canva Connect blocked — own the presentation layer",
-        body: "The original spec called for the Canva Connect API as the presentation output. During build, Canva's app review process blocked access pending approval — a real-world constraint with no timeline. Rather than stall the ship, the architecture was redesigned to own the presentation layer entirely: Claude JSON outlines, pptxgenjs for the file download, and a custom /deck/[slug] viewer built inside the app using the WSJ Editorial design system.",
+        body: "Original spec relied on Canva Connect for shareable decks. Review blocked programmatic access with no timeline. Redesign: Claude 7-slide JSON, pptxgenjs download, pdf-lib branded PDF, custom deck viewer at 30-day Supabase URLs. Removed OAuth dependency and shipped faster than waiting on approval.",
         lesson:
-          "The result removed a third-party OAuth dependency, gave full control over the branded output, and shipped faster. Canva API remains on the roadmap as an additive feature, not a requirement for the core workflow to function.",
+          "A third-party dependency on a feature not yet approved is schedule risk. Owning the layer eliminates it and produced a stronger portfolio artifact than an embed would have.",
+      },
+      {
+        tag: "DESIGN",
+        title: "Hero assets to production media pipeline",
+        body: "Multi-megabyte PNG and SVG exports from design tools hurt LCP and git history. scripts/optimize-assets.mjs uses Sharp for hero.webp, og-image.jpg, and rasterized icons with Windows same-file edge cases handled in the script.",
+        lesson:
+          "Media is a build artifact with defined outputs, not whatever the design tool exported last.",
+      },
+      {
+        tag: "PRODUCT",
+        title: "Metadata and portfolio attribution as shipping criteria",
+        body: "metadataBase from NEXT_PUBLIC_SITE_URL with Vercel fallbacks, OG and Twitter images wired to optimized assets, PortfolioSiteCredit on landing, shell, deck viewer, and PDF footer — consistent thread to hannahkraulikpagade.com.",
+        lesson:
+          "Shipping is how the product looks when linked on LinkedIn and how ownership reads next to AI output.",
+      },
+      {
+        tag: "TECHNICAL",
+        title: "Share URLs as first-class persistence",
+        body: "sessionStorage dies with the tab. On successful analyze, compare, and briefing flows, rows go to financelens_sessions with nanoid slug and expires_at. 410 branded state when expired; core downloads still work if Supabase insert fails.",
+        lesson:
+          "Traded account complexity for time-boxed link-based sharing; the artifact is the unit of share.",
+      },
+      {
+        tag: "DESIGN",
+        title: "Compare accordion for scannable deltas",
+        body: "Stacked always-visible deltas forced long scrolls before knowing what mattered. Converted to accordion: default-open on highest-signal sections, summary plus counts in headers when collapsed.",
+        lesson:
+          "Information reveal order is a product decision.",
       },
     ],
     shippedCards: [
       {
         title: "Single-document analysis",
-        body: "Paste or PDF upload with text-layer extraction (scanned PDFs require paste). Document-type-specific prompts. Outputs: what they said, what it means, key numbers, language drift with hedge versus firm tags, flags, source anchors, optional confidence toggle. Haiku default on analyze; Sonnet for deeper work.",
+        body: "Paste or PDF upload (text layer via pdf-parse; scanned PDFs need paste). Six sections: What they said, What it actually means, Key numbers, Language drift, Worth a closer look, Source anchors. Toggleable confidence. Claude Sonnet 4 only.",
       },
       {
         title: "Compare mode",
-        body: "Two documents, one structured JSON response: period shift overview, new and dropped language, claim shifts, metrics narrative, dual confidence scores. Six built-in sample pairs. Share saves to Supabase with compare layout in DeckViewer. maxDuration 120s on the route.",
+        body: "Two documents, diff-aware JSON: overview, new and dropped language, claim shifts, metrics, dual confidence. Six sample pairs. Accordion UI. Share to /deck/[slug]. maxDuration 120s.",
       },
       {
         title: "Briefing decks and PPTX",
-        body: "Seven-slide JSON from Claude; Unsplash search with attribution or Pollinations fallback; modal preview; PPTX download via pptxgenjs after async image fetch; share copies /deck/[slug] to clipboard.",
+        body: "Claude 7-slide outline; Unsplash with attribution and download ping or Pollinations fallback; modal preview; async image fetch then pptxgenjs blob; share copies URL to clipboard.",
       },
       {
-        title: "Shareable deck viewer",
-        body: "/deck/[slug] for analysis, briefing, or compare: 30-day TTL, scroll view and full-screen presenter mode, WSJ Editorial styling, expiry called out in the UI, branded error state for missing or expired slugs.",
+        title: "Deck viewer and expiry",
+        body: "/deck/[slug]: scroll and full-screen presenter modes, WSJ Editorial styling, expiry in header, branded 404/410 for missing or expired slugs.",
       },
       {
-        title: "PDF export and methodology",
-        body: "Branded PDF via pdf-lib on Node with FinanceLens identity and disclaimers. Dedicated /methodology page plus on-page hints for confidence and evidence framing.",
+        title: "PDF and methodology",
+        body: "Branded pdf-lib export on Node. /methodology explains AI use, confidence, images, validation, sessionStorage scope, assistive-only scope.",
       },
       {
-        title: "Validation and deploy",
-        body: "claudeJsonWithRetry with one repair turn on invalid JSON or failed Zod validation. Supabase financelens_sessions with RLS. Vercel deploy; extended maxDuration on analyze, compare, export, and parse routes as documented in the case study.",
+        title: "Validation and infrastructure",
+        body: "claudeJsonWithRetry across analyze, compare, briefing. Supabase RLS. Vercel with extended maxDuration on heavy routes. Optional Unsplash key; graceful share degradation.",
       },
     ],
     stackHighlighted: [
-      "Next.js 16",
-      "Claude API",
-      "Supabase",
-      "Zod",
+      "Claude API (Sonnet 4, Zod six-section contract)",
+      "pptxgenjs",
+      "pdf-lib",
+      "Supabase (30-day shares)",
     ],
     stackStandard: [
+      "Next.js 16",
       "React 19",
       "TypeScript",
       "Tailwind CSS v4",
-      "pdf-lib",
-      "pptxgenjs",
+      "Zod",
       "pdf-parse",
       "Vercel",
       "Unsplash",
       "Pollinations",
     ],
+    whatThisDemonstrates: [
+      {
+        title: "Structured AI output with Zod and repair",
+        tag: "TECHNICAL",
+        body: "Typed JSON contracts across analyze, compare, and briefing with one repair turn before failure. Source anchors and drift are first-class schema concerns.",
+      },
+      {
+        title: "Summarization versus intelligence as product positioning",
+        tag: "PRODUCT",
+        body: "Every section answers a different analytical question. The product hypothesis is explicit in the case study and in the shipped labels.",
+      },
+      {
+        title: "Five pivots with constraint, decision, and outcome",
+        tag: "PRODUCT",
+        body: "Canva, media pipeline, attribution, share persistence, compare accordion — each documented as a real tradeoff, not retroactive polish.",
+      },
+      {
+        title: "Compare UX as information architecture",
+        tag: "DESIGN",
+        body: "Default-open sections carry the most delta signal; collapsed headers stay scannable. 44px targets, no dependency accordion.",
+      },
+      {
+        title: "Owned presentation layer",
+        tag: "TECHNICAL",
+        body: "No third-party OAuth required to close analyze-to-shareable-artifact loop. Custom viewer matches brand.",
+      },
+      {
+        title: "Media and metadata discipline",
+        tag: "TECHNICAL",
+        body: "Sharp pipeline for production images; OG and icons wired; build hygiene as feature work.",
+      },
+      {
+        title: "Financial domain fluency",
+        tag: "PRODUCT",
+        body: "Earnings calls, 10-K structure, investor language drift, and assistive-only guardrails reflected in prompts and methodology.",
+      },
+      {
+        title: "End-to-end shareable artifact",
+        tag: "FULL-STACK",
+        body: "From paste to PDF, PPTX, and time-boxed public URLs with correct HTTP semantics for missing versus expired resources.",
+      },
+    ],
+    honestSummary: {
+      technical: {
+        label: "For engineers",
+        body: "Sonnet 4 end-to-end; supportingEvidence optional in Zod so anchors are prompt-pushed but not always hard-fail. No streaming on analyze yet. No rate limiting or structured observability before a traffic or monetization push. Compare and analyze are architecturally different prompts.",
+      },
+      product: {
+        label: "For product",
+        body: "Honest gaps in the case study: scanned PDF OCR not shipped; Canva remains roadmap; confidence is a useful rubric, not calibrated across models. Strength is the owned loop from document to shareable deck without waiting on a vendor gate.",
+      },
+      design: {
+        label: "For design",
+        body: "Fraunces on landing, Georgia in app surfaces, IBM Plex Mono for data. PPTX body uses Calibri as Office-safe default; brand color on chrome. Deck scroll versus full-screen serves read versus present modes.",
+      },
+    },
     impactQuote:
-      "FinanceLens closes the loop from financial document to shareable artifact using Claude, Zod validation, pdf-lib, pptxgenjs, and Supabase-backed 30-day share URLs — not a thin summarizer, and every architectural decision in the case study matches what is actually wired in the repo.",
+      "The intelligence is in the delta. What changed from last quarter. Where management stopped committing and started hedging. What was disclosed in a footnote for the first time. FinanceLens surfaces the signal that the document format hides.",
   },
   {
     featured: false,
@@ -592,124 +708,257 @@ export const caseStudies: CaseStudy[] = [
     title: "ClearChannel by Vestara",
     tagline: "Design the conversation. Across every channel.",
     subtitle:
-      "ClearChannel demonstrates what it means to design a conversational AI system for all channels simultaneously rather than one at a time. Type or speak any investor utterance and watch Claude generate IVR script, Chatbot response, and Agent Assist content in real time, with a full NLU architecture breakdown per utterance. Three override protocols handle bereavement, fraud, and barge-in before any intent classification runs.",
-    tags: ["CONVERSATION-DESIGN", "NLU-ARCHITECTURE", "ENTERPRISE-AI", "FINTECH"],
+      "Conversational design lab for Vestara, a fictional enterprise financial firm: one investor utterance in, simultaneous IVR, Chatbot, and Agent Assist out, streamed over SSE with progressive panel fill. claude-sonnet-4-6, structured JSON contract. Three critical overrides before general intent classification: bereavement, fraud, barge-in. Market anxiety and panic-selling route through MARKET_ANXIETY intent plus behavioral coaching and concerned sentiment. Five-way sentiment theming: data-sentiment on the root drives a full CSS token cascade (distressed purple, urgent red, concerned amber, confused blue, neutral teal). Eleven sample utterances; OpenAI Realtime Live Call as primary empty-state CTA alongside samples; MediaRecorder plus Whisper /api/transcribe; IVR audio via TTS to Blob URL and HTMLAudioElement for iOS Safari. Static /design-artifact documents the NLU architecture. Portfolio artifact only; no named real bank; generic financial-services knowledge in the prompt.",
+    tags: [
+      "CONVERSATION-DESIGN",
+      "NLU-ARCHITECTURE",
+      "ENTERPRISE-FINTECH",
+      "PORTFOLIO-ARTIFACT",
+    ],
     embedType: "live",
     embedUrl: "https://clearchannel-vestara.vercel.app/",
     liveUrl: "https://clearchannel-vestara.vercel.app/",
     status: "live",
     coverImage: "/images/clearchannel-landing.png",
     projectDescription:
-      "ClearChannel demonstrates what it means to design a conversational AI system for all channels simultaneously rather than one at a time. Type or speak any investor utterance and watch Claude generate IVR script, Chatbot response, and Agent Assist content in real time, with a full NLU architecture breakdown per utterance. Three override protocols handle bereavement, fraud, and barge-in before any intent classification runs.",
+      "ClearChannel is a conversational design lab. A user types or speaks an investor utterance; the tool generates simultaneous IVR, Chatbot, and Agent Assist outputs plus a full NLU architecture card, streamed via SSE so parallel structure is visible as it arrives. A semantic sentiment system shifts the entire interface across five emotional states. OpenAI Realtime powers a persistent Live Call mode promoted on the empty state. A static /design-artifact page documents intents, overrides, entities, routing matrix, and sentiment map from lib/designArtifactData.ts.",
     problemStatement:
-      "Most conversational AI design optimizes for one channel. Enterprise contact centers run three simultaneously. A customer who calls about a deceased spouse is also potentially in the chatbot, and a live agent may be watching the same interaction. The design consequences of routing decisions are invisible across channels unless you can see all three fire at once. ClearChannel makes that visible, interactive, and auditable.",
+      "Enterprise conversational AI is never one channel. IVR, chatbot, and agent assist run at once with shared customers and compliance needs but different output constraints. Most designers optimize one channel. ClearChannel shows all three from the same utterance so cross-channel tradeoffs and failures (for example bereavement routed like a balance inquiry) are visible and auditable.",
     processSteps: [
-      "The three hard override rules are the most important product decisions in this build. Bereavement, fraud, and barge-in fire before intent classification — because in enterprise financial services, getting those wrong is not a UX failure, it is an institutional trust failure. The bereavement protocol opens with acknowledgment and an 800ms pause before any transactional language, which mirrors the same principle used in clinical communication: acknowledgment before action, always.",
-      "Channel responses are generated simultaneously: IVR script, Chatbot response, and Agent Assist content in a single API call so practitioners see all three within seconds of submitting an utterance. That makes design tradeoffs visible that are typically invisible — for example, a containment decision that looks reasonable in the chatbot panel may produce an agent assist script that contradicts it.",
-      "Confidence is surfaced prominently in the intent bar and NLU architecture section, with intent-specific thresholds so bereavement, fraud, and barge-in can trigger on weaker signal when the protocol requires it. Agent Assist uses verbatim-ready spoken scripts plus policy references, not only abstract recommendations.",
-      "The streaming architecture was chosen because perceived latency matters more than actual latency in a design tool. Claude streams via Server-Sent Events; the client uses a brace-depth JSON section extractor so each completed section (IVR, chatbot, agent_assist, NLU) hydrates its panel as it arrives — under about two seconds for the first panel versus six to eight seconds for a blocking response.",
+      "Constraint set: one utterance, three channel outputs simultaneously; lab opens empty with two paths (sample utterances or Live Call); sentiment is architectural (data-sentiment retints every major surface, not a badge); confidence score plus threshold bar signals NLU-system literacy.",
+      "Claude API (claude-sonnet-4-6) streams one structured JSON response over SSE; client brace-depth extraction hydrates IVR, Chatbot, Agent Assist, and NLU as sections complete. System prompt uses generic enterprise financial knowledge only; no named external firm.",
+      "Voice: MediaRecorder to /api/transcribe (Whisper) for accuracy over Web Speech API; IVR playback via /api/speak (OpenAI TTS), fetch to Blob URL, HTMLAudioElement.play() for reliable iOS Safari tap-to-play. OpenAI Realtime for Live Call: /api/realtime-session token, RealtimeSession WebSocket lifecycle.",
+      "Layout: IVR ~44% width as primary audible channel; Chatbot and Agent Assist stacked on the right; NLU collapsible below. Mobile: hamburger drawer, vertical stack, horizontal NLU scroll with fade, 100dvh, 44px targets. Welcome flow scroll-safe on small screens.",
     ],
     impactLine:
-      "ClearChannel makes that visible, interactive, and auditable: one utterance, three simultaneous channel outputs, emotional override protocols, and streaming NLU you can watch populate in real time.",
+      "One utterance, three simultaneous channel outputs, SSE-visible parallelism, five sentiment themes on the full UI, three pre-classification overrides plus market-anxiety coaching, Whisper and Realtime voice paths, and /design-artifact as a second deliverable.",
     processAngle:
-      "Designed for enterprise conversational governance: emotional overrides, simultaneous channel outputs, confidence legibility, and verbatim-ready agent assist.",
+      "Next.js 16, React 19, TypeScript, Tailwind CSS, Claude (claude-sonnet-4-6) with SSE, OpenAI Whisper, TTS, Realtime, Vercel. IBM Plex Sans and IBM Plex Mono. Honest gaps: no production NLU engine integration; no user-facing JSON parse error state yet.",
     cardSummary:
-      "Enterprise NLU routing simulator. One utterance drives three simultaneous channel outputs — IVR, Chatbot, Agent Assist — with full intent taxonomy, confidence scoring, sentiment detection, and three emotional override protocols.",
-    role: "Product & Conversation UX",
-    timeline: "2025",
+      "Type or speak an utterance; watch IVR, Chatbot, and Agent Assist stream in parallel, NLU card fill, and the whole app retint to sentiment. Live Call on the hero. Eleven edge-case samples. /design-artifact for full NLU documentation.",
+    role: "Conversation design, NLU architecture, product design, full-stack build",
+    timeline: "March 2026",
     keyOutcome:
-      "Live multi-channel NLU simulator: 18 intents, simultaneous IVR/Chatbot/Agent Assist, three emotional overrides, streaming SSE with progressive panel hydration, sentiment-driven UI, and voice input/output (Whisper, TTS, Realtime).",
+      "Live lab: simultaneous multi-channel output, 18 intents, SSE progressive fill, five sentiment CSS themes, three overrides before classification, Whisper and Realtime voice, empty state plus welcome flow, mobile drawer layout, /design-artifact static docs.",
+    proofPoint: {
+      label: "The proof point",
+      body: "When someone calls to say their spouse just died, the system must not open by asking for an account number. On the bereavement sample, ClearChannel classifies distressed sentiment, fires the bereavement override, suppresses verification, routes to a senior specialist, and shifts the entire application to distressed purple. The UI does not just label sentiment. It inhabits it.",
+      verdict:
+        "That is not decoration. That is the proof that emotional state handling was designed in, not added on.",
+    },
     stats: [
       {
-        number: "81%",
+        number: "11",
         label:
-          "had abandoned at least one call to a business in the past year because they reached an IVR",
-        source: "Vonage (2019). IVR Customer Experience Survey. Opinion Matters. n=4,019 adults, UK and US.",
+          "curated sample utterances from balance inquiry through bereavement, fraud, and barge-in",
+        source: "ClearChannel product scope",
       },
       {
-        number: "51%",
+        number: "3",
         label:
-          "reported having stopped using a business entirely as a direct result of a frustrating IVR interaction",
-        source: "Vonage (2019). IVR Customer Experience Survey. Opinion Matters. n=4,019 adults, UK and US.",
+          "channel outputs rendered in parallel per utterance (IVR, Chatbot, Agent Assist)",
+        source: "Shipped architecture",
       },
       {
-        number: "14%",
+        number: "5",
         label:
-          "higher productivity on average for agents with access to a generative AI assistant (issues resolved per hour)",
-        source: "Li, Brynjolfsson & Raymond (2023). Generative AI at Work. NBER Working Paper 31161. 5,179 agents.",
+          "sentiment states driving full-environment CSS tokens via data-sentiment",
+        source: "Design system",
       },
       {
-        number: "25%",
+        number: "18",
         label:
-          "decline in requests to speak to a manager (customer sentiment)",
-        source: "Li, Brynjolfsson & Raymond (2023). Generative AI at Work. NBER Working Paper 31161.",
+          "classified intents in NLU card with override priority rules in prompt",
+        source: "NLU architecture",
       },
     ],
     processStepsInteractive: [
       {
         number: "01",
-        label: "Overrides",
-        phase: "STEP 01 — EMOTIONAL OVERRIDE PROTOCOLS",
-        title: "Bereavement, fraud, and barge-in before intent",
-        body: "The three hard override rules fire before standard intent classification. Getting them wrong is an institutional trust failure, not a UX nit. The bereavement protocol opens with acknowledgment and an 800ms pause before transactional language — acknowledgment before action, the same principle as strong clinical communication.",
+        label: "Brief",
+        phase: "STEP 01 — THE BRIEF",
+        title: "The brief and constraint set",
+        body: "Read the enterprise conversational-channels brief as a product spec: prove IVR, chatbot, and agent assist as one system. Eleven utterances chosen for edge cases that define architecture quality, not median balance inquiries.",
       },
       {
         number: "02",
-        label: "Channels",
-        phase: "STEP 02 — SIMULTANEOUS MULTI-CHANNEL OUTPUT",
-        title: "IVR, Chatbot, and Agent Assist together",
-        body: "One utterance produces IVR script, Chatbot response, and Agent Assist content in one call so you can see cross-channel consequences immediately — including when a containment choice in one channel clashes with the script another channel needs.",
+        label: "SSE",
+        phase: "STEP 02 — STREAMING",
+        title: "SSE streaming architecture",
+        body: "One Claude call streams JSON over SSE; brace-depth extraction fills intent bar and panels as sections complete. Thesis is simultaneous channels; blocking JSON would hide that structure.",
       },
       {
         number: "03",
-        label: "Legibility",
-        phase: "STEP 03 — CONFIDENCE AND AGENT-READY COPY",
-        title: "Confidence you can read; scripts you can say",
-        body: "Confidence scores surface in the intent bar and NLU card with differentiated thresholds for high-stakes intents. Agent Assist delivers verbatim-ready spoken English plus policy references so agents are not left to improvise under pressure.",
+        label: "Sentiment",
+        phase: "STEP 03 — THEMING",
+        title: "Sentiment theming system",
+        body: "data-sentiment on the root cascades tokens through topbar, background, accents, borders, pills. Override logic in the prompt and CSS change together. Distressed, urgent, concerned, confused, neutral each have defined palette roles.",
       },
       {
         number: "04",
-        label: "Streaming",
-        phase: "STEP 04 — STREAMING ARCHITECTURE",
-        title: "Perceived latency under ~2 seconds for the first panel",
-        body: "Streaming via Claude Server-Sent Events and a brace-depth JSON section extractor fires setResult as each section completes, so panels hydrate progressively instead of waiting six to eight seconds on a blocking JSON blob.",
+        label: "Voice",
+        phase: "STEP 04 — VOICE",
+        title: "Voice input and OpenAI Realtime",
+        body: "Whisper server-side for transcripts; Blob URL plus HTMLAudioElement for IVR playback on iOS. Realtime WebSocket session for Live Call, surfaced as primary CTA next to samples.",
+      },
+      {
+        number: "05",
+        label: "Pivots",
+        phase: "STEP 05 — PIVOTS",
+        title: "Pivot stories",
+        body: "Empty state over pre-seed; SSE over blocking JSON; IVR audio path for Safari; sentiment as full environment; welcome and 44px mobile craft; Live Call promoted to hero.",
+      },
+      {
+        number: "06",
+        label: "Shipped",
+        phase: "STEP 06 — WHAT SHIPPED",
+        title: "What shipped",
+        body: "Samples, channels, NLU grid, overrides, voice stack, streaming, design artifact page, mobile layout, custom utterance input. Known gap: no user-facing error when JSON parse fails.",
+      },
+    ],
+    pivots: [
+      {
+        tag: "DESIGN",
+        title: "Empty state instead of pre-seeded dashboard",
+        body: "The lab originally opened with a pre-loaded analysis to look live on first paint. Review showed a busy data dump that skipped the story, especially on mobile. Rebuilt to start empty: samples or Live Call as the two paths.",
+        lesson: "Clarity over looking live on load. The first screen is the brief.",
+      },
+      {
+        tag: "TECHNICAL",
+        title: "SSE streaming for progressive panel fill",
+        body: "Blocking JSON waited for the full response before any panel rendered, hiding the one-utterance-many-channels thesis. SSE with section extraction makes parallel outputs visible as they arrive.",
+        lesson: "Implementation should match the product argument.",
+      },
+      {
+        tag: "TECHNICAL",
+        title: "IVR audio and iOS Safari",
+        body: "AudioContext and decoded buffers broke user-gesture chains across await on iOS, causing silent tap-to-play failures. Switched to fetch, Blob URL, HTMLAudioElement with cleanup.",
+        lesson: "Reliable phone playback is core to the IVR story, not an edge case.",
+      },
+      {
+        tag: "DESIGN",
+        title: "Sentiment as full-environment signal",
+        body: "A badge-only sentiment label let reviewers miss that emotion changes routing and copy. data-sentiment now retints the full chrome and panels with transitions.",
+        lesson: "The environment should echo bereavement, urgency, and confusion at a glance.",
+      },
+      {
+        tag: "DESIGN",
+        title: "Welcome flow and mobile craft",
+        body: "Welcome could not scroll to completion on small screens; several controls missed 44px targets. Rebuilt with backdrop scrolling, 100dvh, readable labels, tighter Realtime header on narrow widths.",
+        lesson: "Portfolio demos are shipped software; onboarding is part of the proof.",
+      },
+      {
+        tag: "PRODUCT",
+        title: "Live Call as first-class story",
+        body: "Realtime lived in an easy-to-miss slot. Typed samples show NLU; live voice shows contact-center reality. Promoted Live Call to the empty-state hero beside samples with stronger topbar entry.",
+        lesson: "Do not bury a differentiator that proves a second input mode.",
       },
     ],
     shippedCards: [
       {
-        title: "Live simulator scope",
-        body: "Live demo at clearchannel-vestara.vercel.app with no login or setup. 18 intent categories with confidence scoring and sentiment detection. Three simultaneous channel outputs per utterance: IVR, Chatbot, and Agent Assist. NLU architecture card per utterance: intent taxonomy, entity schema, training phrases, confidence thresholds.",
+        title: "Sample coverage",
+        body: "Eleven utterances: transfers, fraud, balance, retirement, bereavement, panic-selling, repeat caller, barge-in, vague distress, cognitive accessibility, time pressure.",
       },
       {
-        title: "Emotional override protocols",
-        body: "Three hard rules before intent classification: bereavement detection, fraud detection, and barge-in detection — each wired to the routing and copy patterns described in the case study.",
+        title: "Channel outputs",
+        body: "IVR with prosody and routing. Chatbot with quick replies and handoff context. Agent Assist with suggested script, policy references, compliance flags, escalation path.",
       },
       {
-        title: "Sentiment-driven UI",
-        body: "Five sentiment states (neutral, concerned, urgent, distressed, confused) each trigger a full UI theme shift via CSS custom properties so tenor is visible before an operator reads the scripts.",
+        title: "NLU architecture",
+        body: "Primary intent, confidence and threshold visualization, entity schema, training phrase suggestions, 18 intents, collapsible four-column grid below channels.",
       },
       {
-        title: "Streaming NLU pipeline",
-        body: "Analyze route streams Claude via Server-Sent Events with a brace-depth section extractor for progressive panel hydration and sub–two-second perceived time to first panel.",
+        title: "Sentiment and overrides",
+        body: "Five sentiment themes on the full UI. Overrides before classification: bereavement, fraud escalation, market-anxiety coaching (concerned), barge-in simplified re-prompt.",
       },
       {
-        title: "Voice input and audio",
-        body: "Voice input via OpenAI Whisper; IVR spoken response via OpenAI TTS-1 (alloy) as streaming audio through a Blob URL for mobile compatibility. OpenAI Realtime API for bidirectional voice with a Vestara AI persona.",
+        title: "Voice, audio, Realtime",
+        body: "MediaRecorder plus Whisper /api/transcribe through the same pipeline as type. TTS to Blob URL for IVR. Pulse on play. OpenAI Realtime Live Call with token route and WebSocket component.",
       },
       {
-        title: "Samples and design system",
-        body: "11 curated sample utterances spanning standard and edge-case emotional scenarios. Vestara Institutional design system applied consistently across surfaces.",
+        title: "SSE and empty state",
+        body: "Progressive fill from streamed JSON. Empty hero with samples plus Live Call CTAs; welcome modal for recruiter context.",
+      },
+      {
+        title: "Design artifact and mobile",
+        body: "/design-artifact static docs from designArtifactData.ts. Mobile drawer, stacked panels, NLU horizontal scroll with fade, 44px targets.",
+      },
+      {
+        title: "Infrastructure",
+        body: "Next.js 16, React 19, claude-sonnet-4-6, OpenAI APIs, Vercel. No login. Generic prompt knowledge only.",
       },
     ],
     stackHighlighted: [
-      "Claude API",
-      "Next.js 16",
+      "Claude API (claude-sonnet-4-6, SSE)",
       "OpenAI (Whisper, TTS, Realtime)",
-      "Tailwind CSS v4",
+      "data-sentiment CSS token system",
     ],
-    stackStandard: ["TypeScript", "Vercel", "Server-Sent Events"],
+    stackStandard: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS",
+      "Vercel",
+      "Server-Sent Events",
+    ],
+    whatThisDemonstrates: [
+      {
+        title: "Multi-channel conversational system design",
+        tag: "PRODUCT",
+        body: "IVR, Chatbot, and Agent Assist as one architecture from one utterance, not three separate demos.",
+      },
+      {
+        title: "Semantic CSS for emotional state",
+        tag: "DESIGN",
+        body: "Five states retint the whole app from a single root attribute, aligned with prompt overrides.",
+      },
+      {
+        title: "NLU architecture storytelling",
+        tag: "TECHNICAL",
+        body: "18 intents, entities, thresholds, and training phrases surfaced as practitioner-readable evidence.",
+      },
+      {
+        title: "Full voice pipeline",
+        tag: "TECHNICAL",
+        body: "Whisper transcription, TTS IVR with mobile-safe playback, Realtime for live conversation.",
+      },
+      {
+        title: "SSE aligned to product thesis",
+        tag: "TECHNICAL",
+        body: "Parallel outputs visible as they stream instead of one blocking blob.",
+      },
+      {
+        title: "Requirement-to-build literacy",
+        tag: "PRODUCT",
+        body: "Enterprise channels brief treated as a ship spec, not a slide.",
+      },
+      {
+        title: "Visual NLU documentation",
+        tag: "DESIGN",
+        body: "/design-artifact as a second deliverable most portfolios skip.",
+      },
+      {
+        title: "Honest status matrix",
+        tag: "PRODUCT",
+        body: "Acknowledges simulated NLU via Claude, parse failure UX gap, and no Dialogflow or LUIS integration.",
+      },
+    ],
+    honestSummary: {
+      technical: {
+        label: "For engineers",
+        body: "SSE plus client-side progressive parse; final JSON.parse with no server repair pass and no user-facing error on partial failure yet. NLU output is Claude-generated, not wired to a production NLU engine. Whisper and Blob URL IVR paths chosen for accuracy and iOS reliability.",
+      },
+      product: {
+        label: "For product",
+        body: "Built to make a hiring team see system-level conversational design: overrides, cross-channel tension, sentiment as policy, and Live Call as second proof mode. Six pivots in the long-form case study are each a real tradeoff.",
+      },
+      design: {
+        label: "For design",
+        body: "IBM Plex Sans for UI, IBM Plex Mono for classification output. Panel hierarchy matches practitioner reading order. Mobile is a drawer and stack, not a squashed desktop.",
+      },
+    },
     impactQuote:
-      "ClearChannel demonstrates multi-channel conversational AI system design: simultaneous NLU routing across IVR, Chatbot, and Agent Assist with emotional override protocols, streaming architecture, sentiment-driven UI state, and voice input/output — built as a live, portable portfolio artifact with no login barrier.",
+      "The bereavement utterance is the one that matters. The system suppresses the account verification prompt, routes to a senior specialist, and the entire application turns purple. That is not decoration. That is the proof that emotional state handling was designed in, not added on.",
   },
 ];
 
