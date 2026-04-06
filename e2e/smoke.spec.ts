@@ -3,7 +3,12 @@ import { expect, test } from "@playwright/test";
 test.describe("smoke", () => {
   test("home loads with hero", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator("h1")).toContainText("Product");
+    const hero = page.locator("h1");
+    await expect(hero).toContainText("Hannah Kraulik Pagade");
+    await expect(hero).toContainText("AI product leader");
+    await expect(
+      page.getByText("Product management & UX design", { exact: false })
+    ).toBeVisible();
   });
 
   test("case study with embed loads", async ({ page }) => {
