@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/next";
 import { Cormorant_Garamond, DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 import KaiWidget from "@/components/KaiWidget";
-import { Analytics } from '@vercel/analytics/next';
 
 const displayFont = Cormorant_Garamond({
   subsets: ["latin"],
