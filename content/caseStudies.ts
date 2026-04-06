@@ -283,7 +283,7 @@ export const caseStudies: CaseStudy[] = [
     title: "HealthLiteracy AI",
     tagline: "Your medical records, in your language.",
     subtitle:
-      "Clinical document translation into plain language across 12 languages and 3 reading levels. Urgent action items surfaced before the translation body. Built-in AI verification pass checks the translation against the original for omissions before showing it to the patient.",
+      "Free patient document translation in twelve languages and three reading levels (Simple, Clear, Complete). Urgent items surface first. User-initiated verification pass compares translation to the original and returns issue cards with THOROUGH CHECK, PARTIAL CHECK, and QUICK CHECK badges. No auto re-render: the patient decides next steps. Voice via Web Speech API (Chrome and Edge best). Paste, type, upload (.txt or PDF text-layer), or speak. No login. 90-day shareable sessions. claude-sonnet-4-20250514 for translate and verify only.",
     tags: ["HEALTH-EQUITY", "PATIENT-FACING", "FULL-STACK", "MULTILINGUAL"],
     embedType: "live",
     embedUrl: "https://literacy.rohimaya.ai",
@@ -291,150 +291,200 @@ export const caseStudies: CaseStudy[] = [
     status: "live",
     coverImage: "/images/healthliteracy-ai-landing.png",
     projectDescription:
-      "HealthLiteracy AI translates discharge summaries, lab results, and clinical notes into plain language a patient can actually act on. Three input methods. Twelve languages. Three reading levels with descriptive labels. A reverse-check verification step sends the translation back through Claude before the patient sees it. Urgent items are surfaced as visual cards above the translation body so a patient who reads only the top of the page still knows what to do.",
+      "HealthLiteracy AI translates clinical documents into plain language. Any of twelve supported languages. Reading levels Simple, Clear, or Complete. Urgent items render as cards above the translation. Medical terms explained in the same sentence. Attribution language prevents the output from being read as a diagnosis. User-initiated second Claude pass (Check for Missing Info) returns issue cards and THOROUGH CHECK / PARTIAL CHECK / QUICK CHECK badges. Side-by-side original and translation. Copy, share, PDF export with disclaimer. Supabase sessions with 90-day expiry and 410 on expired links. literacy.rohimaya.ai.",
     problemStatement:
-      "88% of Americans have less-than-proficient health literacy. The average discharge summary is written at a 9th or 10th grade reading level. The average patient reads at an 8th grade level at best — often lower — and may not read English at home. Patients who understand their discharge instructions are 30% less likely to be readmitted. That gap is a product problem.",
+      "Clinical documentation is written for providers. Patients receive the same documents at discharge, often scared, sometimes in pain, frequently in a language they do not read fluently, and are expected to manage their own care from them. 88% of American adults have less-than-proficient health literacy. Patients who understand their discharge instructions are 30% less likely to be readmitted. That gap is not inevitable. It is addressable with a well-designed AI tool.",
     processSteps: [
-      "I did not need to conduct user research for this project. I have conducted it for 15 years on every shift. The constraints were clear before the first line of code: no login, no setup, urgent items at the top, built-in translation in the languages my actual patients speak. The tool had to serve patients who might be scared, tired, medicated, or not literate in English — all at once.",
-      "The core product decision was the Claude system prompt. Translation is easy. A translation that a nurse would trust to hand to a patient requires specific constraints: every medical term explained in the same sentence, urgent items returned as a structured array separate from the translation body, attribution language that prevents the tool from being read as a diagnosis, and a verification pass that checks its own work for omissions. Twelve languages and voice input were built at launch, not deferred, because the population this serves is not well-served by English-only MVP thinking.",
-      "A free, no-login patient document translation tool with three input methods, twelve languages, three reading levels, urgent item cards, side-by-side view, copy and share, and a built-in AI verification pass that checks the translation against the original for omissions. Deployed on Vercel at literacy.rohimaya.ai, sessions persisted in Supabase, built on Next.js 15 and the Claude API.",
+      "The constraint set — No login. No setup. Urgent items first. Medical terms explained in the same sentence. Twelve languages at launch, not deferred. Attribution language in the output, not the footer. Every constraint came from fifteen years of watching what patients actually do when they leave a care setting.",
+      "The core architecture decision — One-pass Claude translation produces a translation. Two-pass produces a translation that can be checked against itself. The second call is user-initiated and returns issue cards flagging omissions. The patient decides what to do next. Verification is a tool the patient controls, not a pipeline step that adds delay to every interaction.",
+      "What shipped — A free, no-login patient document translation tool with paste, type, voice, and upload input, twelve languages, three reading levels, urgent item extraction, side-by-side view, user-initiated verification with issue cards and THOROUGH CHECK / PARTIAL CHECK / QUICK CHECK badges, copy and share, PDF export, 90-day session persistence, rate limiting on translate, verify, share, and parse. Deployed at literacy.rohimaya.ai.",
     ],
     impactLine:
       "If someone cannot read or act on discharge instructions, the care plan never really starts. HealthLiteracy is built so plain language, reading level, language, and urgent items are part of the product, not an afterthought.",
     processAngle:
-      "Built around health equity constraints with twelve-language output, low-friction input modes, and AI verification for omission checking.",
+      "Next.js 15 App Router, TypeScript, Tailwind CSS v4, Claude API (claude-sonnet-4-20250514 for translate and verify), Zod on API request bodies, manual validation on Claude responses with retry on transport failures, rate limiting, Supabase with versioned SQL migrations and 90-day expiry, Web Speech API for voice, Vercel.",
     cardSummary:
-      "Patient document translation. 12 languages, 3 reading levels, urgent items surfaced first. Built-in AI verification pass. No login required. Free by design.",
-    role: "Product and Conversation Design",
+      "Free patient document translation in twelve languages and three reading levels. Paste, type, upload, or speak. Urgent items first, user-initiated verification with issue cards, no login. Live at literacy.rohimaya.ai.",
+    role: "Product design, conversation design, full-stack build",
     timeline: "2025 — Present",
-    keyOutcome: "Twelve-language translation with AI verification, three reading levels, and shareable sessions",
+    keyOutcome:
+      "Free, no-login patient document translation with twelve-language support, three reading levels, user-initiated AI verification, voice input, and 90-day shareable sessions",
+    proofPoint: {
+      label: "The proof point",
+      body: "Fifteen years of watching patients fold their discharge papers into a bag and go home without understanding them. This tool closes one piece of that gap, for free, in twelve languages, with no login required.",
+      verdict: "This tool exists because that gap is preventable. Not later. Now.",
+    },
     stats: [
       {
+        number: "12",
+        label: "languages at launch",
+        source: "HealthLiteracy product spec (Arabic, French, Hindi, Japanese, Korean, Mandarin, Portuguese, Russian, Spanish, Tagalog, Vietnamese, English)",
+      },
+      {
+        number: "3",
+        label: "reading levels (Simple, Clear, Complete)",
+        source: "Patient-facing labels; internally mapped to depth tiers, not shown as grades in UI",
+      },
+      {
         number: "88%",
-        label:
-          "of American adults have less-than-proficient health literacy",
-        source: "U.S. Department of Health and Human Services",
-      },
-      {
-        number: "88.7%",
-        label:
-          "of discharge instructions analyzed were inaccessible to the patients they were intended for",
-        source: "Zhong et al., Journal of General Internal Medicine, 2021",
-      },
-      {
-        number: "30%",
-        label:
-          "lower likelihood of readmission or ED return when patients understand after-hospital care instructions",
-        source: "Agency for Healthcare Research and Quality (cited in case study)",
-      },
-      {
-        number: "78%",
-        label:
-          "of ED-discharged patients show comprehension deficits for at least one discharge instruction component",
-        source: "Menchine & Baraff, Annals of Emergency Medicine, 1994",
+        label: "of Americans lack proficient health literacy",
+        source: "U.S. Department of Health and Human Services, Healthy People 2030",
       },
     ],
     processStepsInteractive: [
       {
         number: "01",
-        label: "Discovery",
-        phase: "STEP 01 — DISCOVERY",
-        title: "Discovery",
-        body: "I did not need to conduct user research for this project. I have conducted it for 15 years on every shift. The constraints were clear before the first line of code: no login, no setup, urgent items at the top, built-in translation in the languages my actual patients speak. The tool had to serve patients who might be scared, tired, medicated, or not literate in English — all at once.",
+        label: "Constraints",
+        phase: "STEP 01 — CONSTRAINT SET",
+        title: "The Constraint Set",
+        body: "No login. No setup. Urgent items first. Medical terms explained in the same sentence. Twelve languages at launch, not deferred. Attribution language in the output, not the footer. Every constraint came from fifteen years of watching what patients actually do when they leave a care setting.",
       },
       {
         number: "02",
-        label: "Design",
-        phase: "STEP 02 — DESIGN AND BUILD",
-        title: "Design and build",
-        body: "The core product decision was the Claude system prompt. Translation is easy. A translation that a nurse would trust to hand to a patient requires specific constraints: every medical term explained in the same sentence, urgent items returned as a structured array separate from the translation body, attribution language that prevents the tool from being read as a diagnosis, and a verification pass that checks its own work for omissions. Twelve languages and voice input were built at launch, not deferred, because the population this serves is not well-served by English-only MVP thinking.",
+        label: "Architecture",
+        phase: "STEP 02 — TWO-PASS",
+        title: "Two-Pass Architecture",
+        body: "The first Claude call always runs and produces the translation. The second call is user-initiated: when a patient or caregiver requests a second check, it compares the translation against the original and returns issue cards flagging omissions. Verification is a tool the patient controls, not a pipeline step that adds delay to every interaction.",
       },
       {
         number: "03",
-        label: "Delivery",
-        phase: "STEP 03 — WHAT SHIPPED",
-        title: "What shipped",
-        body: "A free, no-login patient document translation tool with three input methods, twelve languages, three reading levels, urgent item cards, side-by-side view, copy and share, and a built-in AI verification pass that checks the translation against the original for omissions. Deployed on Vercel at literacy.rohimaya.ai, sessions persisted in Supabase, built on Next.js 15 and the Claude API.",
+        label: "Reading levels",
+        phase: "STEP 03 — READING LEVELS",
+        title: "Reading Level System",
+        body: "Three reading levels: Simple, Clear, Complete. Patient-facing labels never show grade numbers because grade labels shame patients under stress. Each level has a distinct prompt instruction set for sentence structure, explanation depth, and concept unpacking. The selector is surfaced at the top of the interface.",
+      },
+      {
+        number: "04",
+        label: "Pivots",
+        phase: "STEP 04 — PIVOTS",
+        title: "Pivot Stories",
+        body: "Four documented pivots: language selection principle, reading level labeling, user-initiated verification design, and Sonnet for clinical text quality.",
+      },
+      {
+        number: "05",
+        label: "Shipped",
+        phase: "STEP 05 — WHAT SHIPPED",
+        title: "What Shipped",
+        body: "A free, no-login patient document translation tool with paste, upload, and voice input, twelve languages, three reading levels, urgent item extraction, side-by-side view, user-initiated verification with THOROUGH CHECK / PARTIAL CHECK / QUICK CHECK badges, and 90-day shareable sessions. Deployed at literacy.rohimaya.ai.",
       },
     ],
     pivots: [
       {
-        tag: "DESIGN",
-        title: "Reading level selector: descriptive labels instead of grade levels",
-        body: "An early iteration used grade-level labels (5th Grade, 8th Grade, College). These were replaced with descriptive labels (Simple, Clear, Complete) because grade levels require meta-cognition — a patient has to assess their own reading ability and select accordingly.",
+        tag: "PRODUCT",
+        title: "Language selection: principle over convenience",
+        body: "The standard MVP pattern is English and Spanish first, more languages later. That pattern was rejected before the first commit. The launch set was chosen for coverage and script diversity across the largest underserved U.S. patient populations: Arabic, Mandarin, Hindi, Russian, Vietnamese, Tagalog, Korean, Japanese, French, Portuguese, and Spanish alongside English.",
         lesson:
-          "Descriptive labels communicate the output quality, not a judgment about the reader. A patient picking Simple is choosing a format, not identifying a deficit.",
+          "Deferring language support is a product decision about whose needs wait. This product made the opposite choice.",
+      },
+      {
+        tag: "DESIGN",
+        title: "Reading levels: patient language over institutional labels",
+        body: "Internally the system maps to 5th grade, 8th grade, and college-equivalent depth. The UI shipped Simple, Clear, and Complete because grade labels confuse family members and shame patients. Same constraint as the discharge paperwork problem this product exists to solve.",
+        lesson:
+          "Grade numbers shame patients under stress. Plain labels serve the people actually using the product.",
       },
       {
         tag: "SAFETY",
-        title: "Reverse-check verification as a second Claude pass",
-        body: "A reverse-check pass runs as a second API call after translation. Claude is prompted to act as a QA auditor comparing the translation against the original for omissions and inaccuracies, returning a structured pass/fail result with itemized flags.",
+        title: "Verification: second pass on the patient's terms",
+        body: "The original spec called for automatic verification on every translation. The shipped version is user-initiated. Doubling latency and cost on every free session prioritizes pipeline architecture over the patient's experience. Making verification explicit and on-demand respects autonomy, controls cost, and keeps the patient in control of what happens next.",
         lesson:
-          "A patient who cannot catch a translation error should never be in a position where catching it was their responsibility.",
+          "Automated is not always more trustworthy. Visible and explicit builds more trust than silent in a clinical context.",
+      },
+      {
+        tag: "TECHNICAL",
+        title: "Sonnet for clinical text",
+        body: "The product uses claude-sonnet-4-20250514 for both translation and verification with no smaller model path and no model router. High-stakes plain language for patients making medical decisions is not generic chat. Retries fire on transport failures. Zod validates request bodies. Claude responses use manual validation.",
+        lesson:
+          "Model selection is a product safety decision in clinical contexts. Default to the model that gets the clinical output right.",
       },
     ],
     shippedCards: [
       {
-        title: "Inputs and reading levels",
-        body: "Paste text, upload PDF (server-side pdf-parse), or voice input (Web Speech API). Reading levels: Simple, Clear, Complete. Twelve-language output including English, Spanish, Haitian Creole, Portuguese, French, Mandarin, Vietnamese, Tagalog, Korean, Arabic, Hindi, and Russian.",
+        title: "Input and Access",
+        body: "Paste, upload (PDF and .txt text-layer only), or voice (Web Speech API, Chrome and Edge best). No login, no setup, no cost. Works on mobile, tablet, and desktop.",
       },
       {
-        title: "Urgent items and layout",
-        body: "Urgent item cards rendered above the translation body for follow-up appointments, medication changes, and return precautions. Side-by-side view: original clinical document and plain-language translation. Copy to clipboard supported.",
+        title: "Translation Engine",
+        body: "12 languages: Arabic, French, Hindi, Japanese, Korean, Mandarin, Portuguese, Russian, Spanish, Tagalog, Vietnamese, English. 3 reading levels: Simple, Clear, Complete. Medical term explanation in every output. Attribution language preventing misreading as diagnosis. Claude Sonnet (claude-sonnet-4-20250514).",
       },
       {
-        title: "Verification pipeline",
-        body: "Two-call pipeline: translate, then verify. Second Claude call audits the translation for omissions, inaccuracies, and meaning drift with structured pass/fail, confidence, and itemized flags.",
+        title: "Output and Verification",
+        body: "Urgent item extraction as separate structured card array. Side-by-side view (original and translation). User-initiated verification pass (Check for Missing Info button). Issue cards flagging detected omissions or inaccuracies. THOROUGH CHECK / PARTIAL CHECK / QUICK CHECK badges. Copy and share, PDF export with disclaimer. Session persistence via Supabase (90-day TTL, 410 on expiry).",
       },
       {
-        title: "Share and persistence",
-        body: "Shareable URLs via Supabase-persisted sessions. Public read by session ID, public insert, no authentication required. Row Level Security enabled.",
+        title: "Infrastructure and Quality",
+        body: "Next.js 15, App Router, TypeScript. Tailwind CSS v4. Claude API (claude-sonnet-4-20250514), timeouts and retries on transport failures. Zod validation on API request bodies; manual validation on Claude responses. Rate limiting on translate, verify, share (POST and GET), and parse routes. Supabase (90-day expires_at, 410 on expiry, versioned SQL migrations). Vercel.",
       },
       {
-        title: "Candlelight Clarity design system",
-        body: "Cream, forest green, and amber palette; Cormorant Garamond, DM Sans, DM Mono; WCAG AA contrast; hero ring motion for calm, warm register; urgent cards use amber border instead of clinical red.",
-      },
-      {
-        title: "Deploy and runtime",
-        body: "Next.js 15 App Router, TypeScript, Tailwind CSS v4, Claude API (claude-sonnet-4-20250514), Vercel at literacy.rohimaya.ai, Cloudflare DNS. PDF parsing on Node.js runtime; edge runtime excluded for parsing reliability.",
+        title: "Accessibility",
+        body: "Skip link. Full keyboard navigation and tab semantics. Focus-to-results after translation completes. prefers-reduced-motion respected. Visible error states for PDF extraction and share failures.",
       },
     ],
-    stackHighlighted: ["Claude API", "Next.js 15", "Supabase", "Tailwind CSS v4"],
+    stackHighlighted: [
+      "Claude API (claude-sonnet-4-20250514, two-pass with user-initiated verify)",
+      "Next.js 15 (App Router)",
+      "Supabase (90-day session expiry, versioned migrations)",
+    ],
     stackStandard: [
       "TypeScript",
-      "pdf-parse",
+      "Tailwind CSS v4",
+      "Zod (request validation)",
       "Web Speech API",
       "Vercel",
     ],
     whatThisDemonstrates: [
       {
-        title: "AI architecture for clinical-safe document processing",
-        tag: "TECHNICAL",
-        body: "The two-call pipeline (translate, then verify) and structured JSON output show how to constrain LLM behavior for clinical contexts. This is not a chatbot. It is a deterministic document processing pipeline with AI as the engine.",
-      },
-      {
-        title: "Health equity as a product value, not a feature",
+        title: "Designing for emotionally vulnerable, non-technical users",
         tag: "PRODUCT",
-        body: "Twelve languages and voice input were included at launch rather than deferred. Reading level was made accessible via descriptive labels rather than grade levels. Each decision traded speed-to-ship for who the product actually serves.",
+        body: "Zero tolerance for friction: no login, urgent items first, plain reading level labels.",
       },
       {
-        title: "Separation of concerns in prompt engineering",
+        title: "Two-pass AI with user-initiated verification",
         tag: "TECHNICAL",
-        body: "The system prompt lives as a standalone TypeScript module; the verification prompt is separate with different constraints. That reflects production-grade thinking about prompt versioning and auditability.",
+        body: "Issue cards and badges, not automatic re-render on every translation.",
       },
       {
-        title: "Design system differentiation in a product family",
+        title: "Patient safety in model and verification UX",
+        tag: "PRODUCT",
+        body: "Sonnet for translate and verify; verification explicit and on-demand.",
+      },
+      {
+        title: "Multilingual launch with accessibility as a requirement",
         tag: "DESIGN",
-        body: "Candlelight Clarity and Meridian Oracle share a font stack but differ in palette and emotional register: patient-facing warmth versus clinical authority, with brand coherence across Rohimaya products.",
+        body: "Twelve languages at ship; skip link, keyboard nav, focus-to-results, reduced motion.",
       },
       {
-        title: "Portfolio breadth in one domain",
+        title: "Abuse resistance on a free, no-login product",
+        tag: "TECHNICAL",
+        body: "Zod on request bodies, rate limiting on translate, verify, share, and parse routes.",
+      },
+      {
+        title: "Full-stack with versioned database migrations",
+        tag: "FULL-STACK",
+        body: "Problem definition through deployed product with Supabase schema discipline.",
+      },
+      {
+        title: "Clinical operations as product constraint",
         tag: "PRODUCT",
-        body: "HealthLiteracy applies the same document-processing discipline as OrixLink in a patient-facing context rather than an assessment context, alongside ClearChannel extending conversational architecture outside healthcare.",
+        body: "Fifteen years at the bedside informing every pivot and constraint.",
       },
     ],
+    honestSummary: {
+      technical: {
+        label: "For engineers",
+        body: "Claude Sonnet (claude-sonnet-4-20250514) runs both the translate and verify calls. No smaller model default or model router. Zod validates incoming API request bodies. Claude JSON responses use manual validation with retry logic on transport failures, not parse errors. Rate limiting is applied to translate, verify, share (POST and GET), and parse routes. Supabase sessions use 90-day expiry with versioned SQL migrations. Expired links return 410. Voice input uses the Web Speech API with browser support checks and inline fallback messaging. PDF and .txt only, no OCR.",
+      },
+      product: {
+        label: "For product",
+        body: "Every design constraint came from a clinical observation. No login because discharged patients will not create an account. Urgent items first because safety-critical information must not be buried. Twelve languages at launch because deferring is a choice about whose needs wait. Verification user-initiated rather than automatic because doubling latency on a free tool prioritizes pipeline over patient experience. The four pivot stories each represent a real product decision with a real tradeoff. The honest gaps are PDF scanned document support and a production model router for cost optimization at scale.",
+      },
+      design: {
+        label: "For design",
+        body: "The interface is built for a specific emotional state: worried, possibly unfamiliar with the language on the page, needing information immediately. Reading level labels are Simple, Clear, and Complete because grade framing adds shame to a moment that already carries enough. The side-by-side view was built for a secondary use case: a caregiver verifying accuracy before presenting to a patient. Accessibility patterns including skip link, keyboard navigation, focus-to-results, and prefers-reduced-motion are launch requirements, not roadmap items.",
+      },
+    },
     impactQuote:
-      "HealthLiteracy AI was built on a simple premise: if a patient cannot understand their discharge instructions, the care plan never starts.",
+      "This project exists because discharge instructions written at a 12th-grade reading level do not help a patient who reads at a 5th-grade level, speaks Vietnamese or Tagalog at home, and is scared. That gap is preventable with a two-second API call. The research agrees.",
   },
   {
     order: 4,
@@ -487,7 +537,7 @@ export const caseStudies: CaseStudy[] = [
       "Financial documents are written for lawyers and analysts. They are among the most consequential documents a company publishes, yet nearly inaccessible without a trained framework. Summarization removes complexity; it does not show what the language signals, what changed quarter to quarter, or where management hedged versus committed. FinanceLens is built on the thesis that structured intelligence is a different product than summarization.",
     processSteps: [
       "The product thesis: summarization is a solved problem in the market; intelligence is not. Every output section has a distinct analytical purpose wired into the Claude system prompt as typed JSON, not headers bolted onto a free-form summary. Source anchors are a trust architecture decision: claims tie to passages when the model supplies them. Document type (earnings call, 10-K, regulatory notice) steers different analytical framing.",
-      "Architecture: claude-sonnet-4-20250514 for translate, verify, compare, and briefing. No Haiku routing. claudeJsonWithRetry provides one repair turn if JSON is invalid or fails Zod schema validation before an error state surfaces. Compare mode is a separate diff-aware prompt, not two single-document runs pasted together.",
+      "Architecture: claude-sonnet-4-20250514 for translate, verify, compare, and briefing only. claudeJsonWithRetry provides one repair turn if JSON is invalid or fails Zod schema validation before an error state surfaces. Compare mode is a separate diff-aware prompt, not two single-document runs pasted together.",
       "Pivot stack: Canva Connect was the original presentation output; app review blocked API access with no timeline. Hannah owned the layer: Claude deck outline, pptxgenjs PPTX, pdf-lib branded PDF, custom /deck/[slug] viewer with HTTP 404 for unknown slugs and 410 for expired shares (middleware plus branded HTML). Secondary pivots: Sharp-based optimize-assets script for hero and OG images; portfolio attribution (PortfolioSiteCredit) and metadataBase; Supabase-backed 30-day share rows with graceful degradation if insert fails; compare results rebuilt as accordions with summary lines in collapsed headers.",
       "Shipped: /analyze and /results with PDF text-layer upload; /compare with six sample pairs and maxDuration 120s; briefing modal; Unsplash plus Pollinations image pipeline; /methodology; .fl-* CSS-heavy UI on a Tailwind v4 base; iframe embed headers for hannahkraulikpagade.com.",
     ],
@@ -503,32 +553,25 @@ export const caseStudies: CaseStudy[] = [
       "Structured financial document intelligence with six-section output, compare mode, Zod plus repair, branded PDF and PPTX, Supabase 30-day share URLs, methodology page, and WSJ Editorial presentation layer without Canva dependency.",
     proofPoint: {
       label: "The proof point",
-      body: 'The shift from "we will deliver" to "we believe we are well positioned to deliver" is not a stylistic choice. It is information. Management language in earnings calls and filings is deliberate: hedges and passive constructions signal risk and earn persistence research has tied to readability and complexity for decades.',
+      body: 'The shift from "we will deliver" to "we believe we are well positioned to deliver" is not a stylistic choice. It is information. FinanceLens structures financial documents into six sections of analysis, surfaces where the language shifted, ties claims to source passages when present, and closes the loop at a 30-day shareable URL.',
       verdict:
         "Translation is the minimum. Intelligence is the product: what it signals, where language drifted, what changed from last quarter, and what deserves a closer look.",
     },
     stats: [
       {
         number: "6",
-        label:
-          "structured analysis sections per document (distinct analytical purposes, not one summary)",
+        label: "structured analysis sections",
         source: "FinanceLens product spec",
-      },
-      {
-        number: "2",
-        label:
-          "document compare mode with diff-aware prompt and accordion delta layout",
-        source: "Shipped Q1 2026",
       },
       {
         number: "5",
         label:
-          "documented pivot decisions from Canva block through share URLs and compare UX",
+          "pivot decisions from Canva API block through media pipeline, attribution, share URLs, and compare UX",
         source: "Case study Section 3",
       },
       {
         number: "30",
-        label: "day TTL on Supabase-backed share links with expiry in the deck viewer",
+        label: "day TTL on all Supabase-backed share URLs (410 on expiry)",
         source: "financelens_sessions",
       },
     ],
@@ -537,165 +580,165 @@ export const caseStudies: CaseStudy[] = [
         number: "01",
         label: "Thesis",
         phase: "STEP 01 — PRODUCT THESIS",
-        title: "Translation versus intelligence",
-        body: "The brief was explicit: FinanceLens is not a summarizer. Six structured sections in sequence, each a different kind of analytical work. Source anchors make analysis verifiable. Confidence is a rubric on evidence density in the excerpt, not a recommendation. WSJ Editorial light signals editorial analysis, not consumer fintech chrome.",
+        title: "The product thesis",
+        body: "Summarization is a solved problem. Intelligence is not. The brief was to build a tool that structures financial documents into distinct analytical sections, each with a defined purpose, with claims tied to source passages when present. Six sections, Zod-validated, with language drift detection as the most analytically novel capability.",
       },
       {
         number: "02",
         label: "Contract",
         phase: "STEP 02 — OUTPUT CONTRACT",
-        title: "Six sections and Zod validation",
-        body: "Shipped labels: What they said, What it actually means, Key numbers, Language drift, Worth a closer look, Source anchors. Every response passes Zod; one structured repair turn runs before the user sees failure. Compare uses its own diff-aware contract with claim shift objects and default-open sections for highest signal.",
+        title: "The output contract",
+        body: "Claude Sonnet 4 (claude-sonnet-4-20250514) with a typed JSON output contract via lib/claudeJsonWithRetry.ts. Source anchors are prompt-required and surfaced when returned; the Zod schema treats supportingEvidence as optional, not a hard validation gate. One structured repair turn fires before error state surfaces.",
       },
       {
         number: "03",
         label: "Compare",
         phase: "STEP 03 — COMPARE MODE",
-        title: "Delta in the accordion",
-        body: "The most revealing read is period-over-period. Compare loads two transcripts and surfaces deltas: new language, dropped language, claim shifts with direction, metrics narrative. Accordion layout: claim shifts and new language expanded by default; other sections show summary line and item count when collapsed. 44px touch targets, CSS max-height transitions, no external accordion library.",
+        title: "Compare mode architecture",
+        body: "A standard analysis prompt applied to two documents produces two analyses. A diff-aware prompt produces the delta. Compare mode renders as an accordion: claim shifts and new language expanded by default, all other sections collapsible with a summary line and item count visible in the collapsed header.",
       },
       {
         number: "04",
         label: "Pivots",
-        phase: "STEP 04 — WHAT CHANGED AND WHY",
-        title: "From Canva to owned artifacts",
-        body: "Canva API blocked: owned PPTX, PDF, and /deck viewer. Hero assets: Sharp pipeline for webp, og-image, icons. Attribution and metadata as shipping criteria. Share URLs as first-class persistence. Compare UX tuned for scanability before depth.",
+        phase: "STEP 04 — PIVOT STORIES",
+        title: "Pivot stories",
+        body: "Five documented pivots: Canva API to owned presentation layer, design exports to production media pipeline, metadata and attribution as shipping criteria, share URLs as first-class persistence (30-day TTL), and compare accordion as information reveal design.",
       },
     ],
     pivots: [
       {
         tag: "DESIGN",
-        title: "Canva Connect blocked — own the presentation layer",
-        body: "Original spec relied on Canva Connect for shareable decks. Review blocked programmatic access with no timeline. Redesign: Claude 7-slide JSON, pptxgenjs download, pdf-lib branded PDF, custom deck viewer at 30-day Supabase URLs. Removed OAuth dependency and shipped faster than waiting on approval.",
+        title: "Canva Connect API to owned presentation layer",
+        body: "The original spec called for Canva Connect API. App review blocked access with no timeline. The architecture was redesigned: Claude generates a JSON deck outline, pptxgenjs renders the PPTX (Calibri, Office-safe), pdf-lib generates the branded PDF (WSJ Editorial typography), and a custom deck viewer at /deck/[slug] serves the 30-day Supabase-backed URL.",
         lesson:
-          "A third-party dependency on a feature not yet approved is schedule risk. Owning the layer eliminates it and produced a stronger portfolio artifact than an embed would have.",
+          "A roadmap dependency on a pending API approval is a schedule risk. Own the layer.",
       },
       {
         tag: "DESIGN",
-        title: "Hero assets to production media pipeline",
-        body: "Multi-megabyte PNG and SVG exports from design tools hurt LCP and git history. scripts/optimize-assets.mjs uses Sharp for hero.webp, og-image.jpg, and rasterized icons with Windows same-file edge cases handled in the script.",
+        title: "Design exports to production media pipeline",
+        body: "Landing hero and OG assets were originally multi-megabyte raw exports. scripts/optimize-assets.mjs uses Sharp to produce public/hero.webp, public/og-image.jpg, and rasterized icons at every required size. Edge cases handled in the script, not the UI.",
         lesson:
-          "Media is a build artifact with defined outputs, not whatever the design tool exported last.",
+          "Shipping design exports as-is confuses handoff with production delivery. Media is a build artifact.",
       },
       {
         tag: "PRODUCT",
-        title: "Metadata and portfolio attribution as shipping criteria",
-        body: "metadataBase from NEXT_PUBLIC_SITE_URL with Vercel fallbacks, OG and Twitter images wired to optimized assets, PortfolioSiteCredit on landing, shell, deck viewer, and PDF footer — consistent thread to hannahkraulikpagade.com.",
+        title: "Metadata and attribution as shipping criteria",
+        body: "metadataBase set from env (NEXT_PUBLIC_SITE_URL with Vercel fallbacks). OG and Twitter images wired to optimized og-image.jpg. PortfolioSiteCredit component added across landing, shell, deck viewer, and PDF footer pointing to hannahkraulikpagade.com.",
         lesson:
-          "Shipping is how the product looks when linked on LinkedIn and how ownership reads next to AI output.",
+          "Shipping is not only features. It is how the product looks when linked on LinkedIn.",
       },
       {
         tag: "TECHNICAL",
         title: "Share URLs as first-class persistence",
-        body: "sessionStorage dies with the tab. On successful analyze, compare, and briefing flows, rows go to financelens_sessions with nanoid slug and expires_at. 410 branded state when expired; core downloads still work if Supabase insert fails.",
+        body: "sessionStorage dies with the tab. Analyze, compare, and briefing flows insert rows into financelens_sessions with nanoid slugs and 30-day expires_at. Expired slugs return 410. Graceful degradation: Supabase failure does not block PPTX or PDF download.",
         lesson:
-          "Traded account complexity for time-boxed link-based sharing; the artifact is the unit of share.",
+          "The artifact, not the login, is the unit of sharing.",
       },
       {
         tag: "DESIGN",
-        title: "Compare accordion for scannable deltas",
-        body: "Stacked always-visible deltas forced long scrolls before knowing what mattered. Converted to accordion: default-open on highest-signal sections, summary plus counts in headers when collapsed.",
+        title: "Compare accordion as information reveal design",
+        body: "Compare results originally rendered all delta sections as always-visible stacked content. Accordion layout: claim shifts and new language expanded by default because those carry the most analytical signal. All other sections collapsible with summary line and item count in the collapsed header.",
         lesson:
-          "Information reveal order is a product decision.",
+          "The order in which information reveals itself is a product decision.",
       },
     ],
     shippedCards: [
       {
-        title: "Single-document analysis",
-        body: "Paste or PDF upload (text layer via pdf-parse; scanned PDFs need paste). Six sections: What they said, What it actually means, Key numbers, Language drift, Worth a closer look, Source anchors. Toggleable confidence. Claude Sonnet 4 only.",
+        title: "Input",
+        body: "Text paste. PDF upload (text-layer only via pdf-parse; scanned PDFs require paste). Six sample document pairs including compare mode pairs.",
+      },
+      {
+        title: "Analysis engine",
+        body: "What they said (plain language). What it actually means (interpretation, hedging removed). Key numbers (values with direction and context). Language drift (hedge/firm tags with quoted phrases). Worth a closer look (evidence-oriented flags). Source anchors (prompt-required, surfaced when present). Toggleable confidence score (0–100 evidence density rubric). Zod plus lib/claudeJsonWithRetry one repair turn on failure.",
       },
       {
         title: "Compare mode",
-        body: "Two documents, diff-aware JSON: overview, new and dropped language, claim shifts, metrics, dual confidence. Six sample pairs. Accordion UI. Share to /deck/[slug]. maxDuration 120s.",
+        body: "Two-document delta analysis (diff-aware system prompt). Accordion layout: claim shifts and new language expanded by default. All sections independently collapsible, summary line visible when collapsed. Six built-in sample pairs. 30-day share URL with compare-specific layout.",
       },
       {
-        title: "Briefing decks and PPTX",
-        body: "Claude 7-slide outline; Unsplash with attribution and download ping or Pollinations fallback; modal preview; async image fetch then pptxgenjs blob; share copies URL to clipboard.",
+        title: "Output and sharing",
+        body: "Branded PDF via pdf-lib (WSJ Editorial typography). PPTX via pptxgenjs (Calibri, Office-safe). Claude 7-slide deck outline. Unsplash plus Pollinations image pipeline with attribution. Full-screen and scroll deck viewer at /deck/[slug]. 30-day Supabase-backed share URLs, 410 on expiry. /methodology trust and transparency page.",
       },
       {
-        title: "Deck viewer and expiry",
-        body: "/deck/[slug]: scroll and full-screen presenter modes, WSJ Editorial styling, expiry in header, branded 404/410 for missing or expired slugs.",
-      },
-      {
-        title: "PDF and methodology",
-        body: "Branded pdf-lib export on Node. /methodology explains AI use, confidence, images, validation, sessionStorage scope, assistive-only scope.",
-      },
-      {
-        title: "Validation and infrastructure",
-        body: "claudeJsonWithRetry across analyze, compare, briefing. Supabase RLS. Vercel with extended maxDuration on heavy routes. Optional Unsplash key; graceful share degradation.",
+        title: "Infrastructure",
+        body: "Next.js 16, React 19, TypeScript. Tailwind CSS v4 (utility base) plus custom .fl-* CSS classes. Claude Sonnet 4 (claude-sonnet-4-20250514) throughout. Zod schema validation. pdf-lib, pptxgenjs (owned presentation layer). scripts/optimize-assets.mjs (Sharp media pipeline). PortfolioSiteCredit component. Supabase (financelens_sessions, 30-day TTL, 410 expiry). Vercel (maxDuration 120s on analyze/compare, 60s on export-pdf).",
       },
     ],
     stackHighlighted: [
-      "Claude API (Sonnet 4, Zod six-section contract)",
-      "pptxgenjs",
-      "pdf-lib",
-      "Supabase (30-day shares)",
+      "Claude API (claude-sonnet-4-20250514, Zod-validated six-section contract, lib/claudeJsonWithRetry)",
+      "pptxgenjs + pdf-lib (owned presentation layer, no Canva OAuth dependency)",
+      "Supabase (financelens_sessions, 30-day TTL, 410 on expiry)",
     ],
     stackStandard: [
       "Next.js 16",
       "React 19",
       "TypeScript",
       "Tailwind CSS v4",
+      "Vercel",
       "Zod",
       "pdf-parse",
-      "Vercel",
       "Unsplash",
       "Pollinations",
     ],
     whatThisDemonstrates: [
       {
-        title: "Structured AI output with Zod and repair",
+        title: "Structured AI output with typed contracts",
         tag: "TECHNICAL",
-        body: "Typed JSON contracts across analyze, compare, and briefing with one repair turn before failure. Source anchors and drift are first-class schema concerns.",
+        body: "Typed JSON contracts and Zod validation with one structured repair turn before failure.",
       },
       {
-        title: "Summarization versus intelligence as product positioning",
+        title: "Summarization versus intelligence",
         tag: "PRODUCT",
-        body: "Every section answers a different analytical question. The product hypothesis is explicit in the case study and in the shipped labels.",
+        body: "Product-level distinction between a summary and six analytical sections with distinct purposes.",
       },
       {
-        title: "Five pivots with constraint, decision, and outcome",
+        title: "Source anchors as trust architecture",
         tag: "PRODUCT",
-        body: "Canva, media pipeline, attribution, share persistence, compare accordion — each documented as a real tradeoff, not retroactive polish.",
+        body: "Prompt-required, schema-optional: anchors surface when the model returns them; supportingEvidence is optional in Zod, not a hard gate.",
       },
       {
-        title: "Compare UX as information architecture",
+        title: "Five documented pivots",
+        tag: "PRODUCT",
+        body: "Each pivot has a real constraint, decision, and outcome — Canva through compare accordion.",
+      },
+      {
+        title: "Compare accordion as information reveal",
         tag: "DESIGN",
-        body: "Default-open sections carry the most delta signal; collapsed headers stay scannable. 44px targets, no dependency accordion.",
+        body: "Order of reveal is a product decision: highest-signal sections open first; collapsed headers stay scannable.",
       },
       {
         title: "Owned presentation layer",
         tag: "TECHNICAL",
-        body: "No third-party OAuth required to close analyze-to-shareable-artifact loop. Custom viewer matches brand.",
+        body: "No third-party OAuth required to close analyze-to-shareable-artifact loop; custom deck viewer at 30-day URLs.",
       },
       {
-        title: "Media and metadata discipline",
+        title: "Media pipeline discipline",
         tag: "TECHNICAL",
-        body: "Sharp pipeline for production images; OG and icons wired; build hygiene as feature work.",
+        body: "Design exports treated as build artifacts via Sharp and optimize-assets, not raw deploys.",
       },
       {
         title: "Financial domain fluency",
         tag: "PRODUCT",
-        body: "Earnings calls, 10-K structure, investor language drift, and assistive-only guardrails reflected in prompts and methodology.",
+        body: "Earnings calls, 10-K structure, language drift in investor communications, assistive-only guardrails.",
       },
       {
-        title: "End-to-end shareable artifact",
+        title: "Deployed shareable artifact",
         tag: "FULL-STACK",
-        body: "From paste to PDF, PPTX, and time-boxed public URLs with correct HTTP semantics for missing versus expired resources.",
+        body: "From product definition to live app with 30-day share URLs and correct 404/410 semantics.",
       },
     ],
     honestSummary: {
       technical: {
         label: "For engineers",
-        body: "Sonnet 4 end-to-end; supportingEvidence optional in Zod so anchors are prompt-pushed but not always hard-fail. No streaming on analyze yet. No rate limiting or structured observability before a traffic or monetization push. Compare and analyze are architecturally different prompts.",
+        body: "Claude Sonnet 4 (claude-sonnet-4-20250514) is used for all analyze, compare, and briefing calls. Sonnet only; no secondary model routing. Source anchors are prompt-required; supportingEvidence is optional in the Zod schema, not a hard validation gate. claudeJsonWithRetry fires one structured repair turn before error state surfaces. Compare mode uses a diff-aware system prompt, architecturally distinct from standard analysis. Presentation layer: Claude deck outline, pptxgenjs PPTX (Calibri for Office compatibility), pdf-lib PDF (WSJ Editorial typography), custom deck viewer at 30-day Supabase URLs with 410 on expiry. Media pipeline: scripts/optimize-assets.mjs produces hero.webp, og-image.jpg, and rasterized icons. UI is mostly custom .fl-* CSS; Tailwind provides the reset and utility base. metadataBase from NEXT_PUBLIC_SITE_URL.",
       },
       product: {
         label: "For product",
-        body: "Honest gaps in the case study: scanned PDF OCR not shipped; Canva remains roadmap; confidence is a useful rubric, not calibrated across models. Strength is the owned loop from document to shareable deck without waiting on a vendor gate.",
+        body: "The product hypothesis is that structured intelligence and summarization are different products. Five pivot decisions are documented in the process section: Canva to owned presentation layer, design exports to build pipeline, attribution as shipping criteria, share URLs as the unit of sharing (30-day TTL), and compare accordion as information reveal design. Honest gaps: source anchors are prompt-required but schema-optional; no streaming on analyze; no rate limiting before public traffic; no observability before monetization.",
       },
       design: {
         label: "For design",
-        body: "Fraunces on landing, Georgia in app surfaces, IBM Plex Mono for data. PPTX body uses Calibri as Office-safe default; brand color on chrome. Deck scroll versus full-screen serves read versus present modes.",
+        body: "WSJ Editorial light has three distinct typeface roles: Fraunces for landing and display headings, Georgia for app and report surfaces, IBM Plex Mono for financial data and labels. The compare accordion layout is a product design decision: claim shifts and new language expanded by default because those carry the most analytical signal. All other sections show a summary line and item count in the collapsed header. PPTX uses Calibri because it is the Office-safe default, not the brand choice. The deck viewer scroll and full-screen modes serve different use cases: scroll for reading, full-screen for presenting.",
       },
     },
     impactQuote:
@@ -727,7 +770,7 @@ export const caseStudies: CaseStudy[] = [
     processSteps: [
       "Constraint set: one utterance, three channel outputs simultaneously; lab opens empty with two paths (sample utterances or Live Call); sentiment is architectural (data-sentiment retints every major surface, not a badge); confidence score plus threshold bar signals NLU-system literacy.",
       "Claude API (claude-sonnet-4-6) streams one structured JSON response over SSE; client brace-depth extraction hydrates IVR, Chatbot, Agent Assist, and NLU as sections complete. System prompt uses generic enterprise financial knowledge only; no named external firm.",
-      "Voice: MediaRecorder to /api/transcribe (Whisper) for accuracy over Web Speech API; IVR playback via /api/speak (OpenAI TTS), fetch to Blob URL, HTMLAudioElement.play() for reliable iOS Safari tap-to-play. OpenAI Realtime for Live Call: /api/realtime-session token, RealtimeSession WebSocket lifecycle.",
+      "Voice: MediaRecorder to /api/transcribe (Whisper) for server-side transcription versus browser-native speech recognition; IVR playback via /api/speak (OpenAI TTS), fetch to Blob URL, HTMLAudioElement.play() for reliable iOS Safari tap-to-play. OpenAI Realtime for Live Call: /api/realtime-session token, RealtimeSession WebSocket lifecycle.",
       "Layout: IVR ~44% width as primary audible channel; Chatbot and Agent Assist stacked on the right; NLU collapsible below. Mobile: hamburger drawer, vertical stack, horizontal NLU scroll with fade, 100dvh, 44px targets. Welcome flow scroll-safe on small screens.",
     ],
     impactLine:
@@ -742,33 +785,24 @@ export const caseStudies: CaseStudy[] = [
       "Live lab: simultaneous multi-channel output, 18 intents, SSE progressive fill, five sentiment CSS themes, three overrides before classification, Whisper and Realtime voice, empty state plus welcome flow, mobile drawer layout, /design-artifact static docs.",
     proofPoint: {
       label: "The proof point",
-      body: "When someone calls to say their spouse just died, the system must not open by asking for an account number. On the bereavement sample, ClearChannel classifies distressed sentiment, fires the bereavement override, suppresses verification, routes to a senior specialist, and shifts the entire application to distressed purple. The UI does not just label sentiment. It inhabits it.",
+      body: "When the bereavement utterance fires, the system suppresses account verification, routes to a senior specialist, and the entire application turns purple. The UI does not just label sentiment. It inhabits it.",
       verdict:
         "That is not decoration. That is the proof that emotional state handling was designed in, not added on.",
     },
     stats: [
       {
         number: "11",
-        label:
-          "curated sample utterances from balance inquiry through bereavement, fraud, and barge-in",
+        label: "sample utterances covering emotional edge cases",
         source: "ClearChannel product scope",
       },
       {
-        number: "3",
-        label:
-          "channel outputs rendered in parallel per utterance (IVR, Chatbot, Agent Assist)",
-        source: "Shipped architecture",
-      },
-      {
         number: "5",
-        label:
-          "sentiment states driving full-environment CSS tokens via data-sentiment",
+        label: "sentiment states driving the full CSS token system",
         source: "Design system",
       },
       {
         number: "18",
-        label:
-          "classified intents in NLU card with override priority rules in prompt",
+        label: "classified intents with priority override rules",
         source: "NLU architecture",
       },
     ],
@@ -778,120 +812,119 @@ export const caseStudies: CaseStudy[] = [
         label: "Brief",
         phase: "STEP 01 — THE BRIEF",
         title: "The brief and constraint set",
-        body: "Read the enterprise conversational-channels brief as a product spec: prove IVR, chatbot, and agent assist as one system. Eleven utterances chosen for edge cases that define architecture quality, not median balance inquiries.",
+        body: "An enterprise conversational channels team needed a designer who understood IVR, chatbot, and agent assist as a system. I read that requirement as a product spec and built the tool that would make a hiring team say she already understands our system. The lab opens empty: no pre-seeded result, two paths — open a sample or start a Live Call. The first screen is the brief.",
       },
       {
         number: "02",
         label: "SSE",
         phase: "STEP 02 — STREAMING",
         title: "SSE streaming architecture",
-        body: "One Claude call streams JSON over SSE; brace-depth extraction fills intent bar and panels as sections complete. Thesis is simultaneous channels; blocking JSON would hide that structure.",
+        body: "One Claude API call (claude-sonnet-4-6) streams over SSE. The client accumulates the text stream and extracts complete JSON sections as braces close. Intent bar and channel panels fill progressively as each block arrives. The streaming implementation matches the product argument: one utterance, three channels, unfolding simultaneously.",
       },
       {
         number: "03",
         label: "Sentiment",
         phase: "STEP 03 — THEMING",
         title: "Sentiment theming system",
-        body: "data-sentiment on the root cascades tokens through topbar, background, accents, borders, pills. Override logic in the prompt and CSS change together. Distressed, urgent, concerned, confused, neutral each have defined palette roles.",
+        body: "The data-sentiment CSS token architecture drives every color surface from a single attribute on the root element. Five states: neutral (teal), concerned (amber), distressed (purple), urgent (red), confused (blue). When the system classifies an utterance, the override fires in the prompt logic and the CSS attribute changes simultaneously. The environment echoes the emotional state at a glance.",
       },
       {
         number: "04",
         label: "Voice",
         phase: "STEP 04 — VOICE",
         title: "Voice input and OpenAI Realtime",
-        body: "Whisper server-side for transcripts; Blob URL plus HTMLAudioElement for IVR playback on iOS. Realtime WebSocket session for Live Call, surfaced as primary CTA next to samples.",
+        body: "Voice input uses MediaRecorder and OpenAI Whisper via /api/transcribe for reliable server-side transcription. IVR audio uses OpenAI TTS via /api/speak with a Blob URL and HTMLAudioElement specifically for iOS Safari reliability. Live Call uses the OpenAI Realtime API for a persistent WebSocket session: a second input mode that shows what a real contact-center conversation feels like alongside designed edge case utterances.",
       },
       {
         number: "05",
         label: "Pivots",
         phase: "STEP 05 — PIVOTS",
         title: "Pivot stories",
-        body: "Empty state over pre-seed; SSE over blocking JSON; IVR audio path for Safari; sentiment as full environment; welcome and 44px mobile craft; Live Call promoted to hero.",
-      },
-      {
-        number: "06",
-        label: "Shipped",
-        phase: "STEP 06 — WHAT SHIPPED",
-        title: "What shipped",
-        body: "Samples, channels, NLU grid, overrides, voice stack, streaming, design artifact page, mobile layout, custom utterance input. Known gap: no user-facing error when JSON parse fails.",
+        body: "Six documented pivots: empty state over pre-seeded dashboard, SSE streaming for progressive fill, Blob URL for iOS IVR audio, sentiment as full-environment signal, mobile welcome craft, and Live Call promotion to first-class CTA. Each is a product decision with a real tradeoff, not a technical accident.",
       },
     ],
     pivots: [
       {
         tag: "DESIGN",
         title: "Empty state instead of pre-seeded dashboard",
-        body: "The lab originally opened with a pre-loaded analysis to look live on first paint. Review showed a busy data dump that skipped the story, especially on mobile. Rebuilt to start empty: samples or Live Call as the two paths.",
-        lesson: "Clarity over looking live on load. The first screen is the brief.",
+        body: "The lab originally opened with a pre-loaded analysis result. A busy first screen read as a data dump on mobile and bypassed the product story. The decision was to start empty with two paths: open a sample or start a Live Call. Analysis only appears after the user acts.",
+        lesson:
+          "We chose clarity over looking live on load. The first screen is the brief.",
       },
       {
         tag: "TECHNICAL",
         title: "SSE streaming for progressive panel fill",
-        body: "Blocking JSON waited for the full response before any panel rendered, hiding the one-utterance-many-channels thesis. SSE with section extraction makes parallel outputs visible as they arrive.",
-        lesson: "Implementation should match the product argument.",
+        body: "Analysis originally waited for one full JSON response before rendering. The thesis is one utterance, many channels simultaneously. A blocking response hides that structure. Moving to SSE with progressive section extraction makes the parallel outputs visible as they arrive.",
+        lesson:
+          "Align implementation with the product argument. The same reasoning surfaces across all channels, not as a sequential reveal, but as one response unfolding in real time.",
       },
       {
         tag: "TECHNICAL",
         title: "IVR audio and iOS Safari",
-        body: "AudioContext and decoded buffers broke user-gesture chains across await on iOS, causing silent tap-to-play failures. Switched to fetch, Blob URL, HTMLAudioElement with cleanup.",
-        lesson: "Reliable phone playback is core to the IVR story, not an edge case.",
+        body: "IVR audio originally used AudioContext and decoded buffers. On iOS Safari, user-gesture chains break across await, causing silent failures on tap-to-play. The pattern was changed to fetch to Blob URL to HTMLAudioElement.play() with cleanup on end and unmount.",
+        lesson:
+          "IVR is audible-first. Mobile playback is a product requirement, not a nice-to-have.",
       },
       {
         tag: "DESIGN",
         title: "Sentiment as full-environment signal",
-        body: "A badge-only sentiment label let reviewers miss that emotion changes routing and copy. data-sentiment now retints the full chrome and panels with transitions.",
-        lesson: "The environment should echo bereavement, urgency, and confusion at a glance.",
+        body: "The original design used a small badge to label sentiment state. If only a badge changes color, reviewers miss the point that emotional state changes routing, copy, and system behavior. Semantic CSS variables driven by data-sentiment now retint background, topbar, accents, panels, and prosody indicators with smooth transitions.",
+        lesson:
+          "The UI does not just label sentiment. It inhabits it.",
       },
       {
         tag: "DESIGN",
         title: "Welcome flow and mobile craft",
-        body: "Welcome could not scroll to completion on small screens; several controls missed 44px targets. Rebuilt with backdrop scrolling, 100dvh, readable labels, tighter Realtime header on narrow widths.",
-        lesson: "Portfolio demos are shipped software; onboarding is part of the proof.",
+        body: "The welcome experience could not be scrolled to completion on small screens and several controls did not meet 44px touch targets. Rebuilt with backdrop scrolling (not a trapped modal), 100dvh, 44px touch targets throughout, and readable label sizes on small screens.",
+        lesson:
+          "Portfolio demos are shipped software. Onboarding and thumb-sized UI are part of the proof.",
       },
       {
         tag: "PRODUCT",
         title: "Live Call as first-class story",
-        body: "Realtime lived in an easy-to-miss slot. Typed samples show NLU; live voice shows contact-center reality. Promoted Live Call to the empty-state hero beside samples with stronger topbar entry.",
-        lesson: "Do not bury a differentiator that proves a second input mode.",
+        body: "Live Call originally lived in an easy-to-miss location. Typed samples show NLU design. Live voice shows contact-center reality. Promoted to the empty-state hero as a primary CTA alongside sample utterances, with stronger topbar control and a header layout that does not break on narrow widths.",
+        lesson:
+          "We run two proofs in one lab: designed utterances for edge cases, and live speech for what a call feels like.",
       },
     ],
     shippedCards: [
       {
         title: "Sample coverage",
-        body: "Eleven utterances: transfers, fraud, balance, retirement, bereavement, panic-selling, repeat caller, barge-in, vague distress, cognitive accessibility, time pressure.",
+        body: "IRA to brokerage fund transfer. Unauthorized transaction / fraud detection. Balance inquiry (baseline). Retirement planning. Bereavement / beneficiary update (death of spouse). Market anxiety / panic-selling. Repeat caller frustration. Barge-in escalation. Vague distress. Cognitive accessibility (family member managing account). Time pressure / urgent deadline.",
       },
       {
         title: "Channel outputs",
-        body: "IVR with prosody and routing. Chatbot with quick replies and handoff context. Agent Assist with suggested script, policy references, compliance flags, escalation path.",
+        body: "IVR: spoken script with prosody annotations, entities, routing, fallback. Chatbot: bot response, quick replies, containment decision, handoff context. Agent Assist: suggested script, policy references, compliance flags, escalation path.",
       },
       {
         title: "NLU architecture",
-        body: "Primary intent, confidence and threshold visualization, entity schema, training phrase suggestions, 18 intents, collapsible four-column grid below channels.",
+        body: "18 intents with priority override rules. Confidence score and threshold visualization. Entity schema. Training phrase suggestions. Collapsible four-column grid.",
       },
       {
-        title: "Sentiment and overrides",
-        body: "Five sentiment themes on the full UI. Overrides before classification: bereavement, fraud escalation, market-anxiety coaching (concerned), barge-in simplified re-prompt.",
+        title: "Sentiment theming",
+        body: "Five states: neutral (teal #0891B2), concerned (amber #D97706), distressed (purple #7C3AED), urgent (red #DC2626), confused (blue #3B82F6). data-sentiment attribute cascades through all CSS token surfaces. Smooth transitions on topbar, background, accents, borders, pills, prosody indicators.",
       },
       {
-        title: "Voice, audio, Realtime",
-        body: "MediaRecorder plus Whisper /api/transcribe through the same pipeline as type. TTS to Blob URL for IVR. Pulse on play. OpenAI Realtime Live Call with token route and WebSocket component.",
+        title: "Override rules",
+        body: "Bereavement: verification suppressed, senior specialist routing, distressed theme. Fraud escalation: urgent theme. Market anxiety behavioral coaching guardrail: concerned theme. Barge-in interruption detection.",
       },
       {
-        title: "SSE and empty state",
-        body: "Progressive fill from streamed JSON. Empty hero with samples plus Live Call CTAs; welcome modal for recruiter context.",
+        title: "Voice and audio",
+        body: "MediaRecorder plus OpenAI Whisper (/api/transcribe) for voice input. OpenAI TTS (/api/speak) plus Blob URL plus HTMLAudioElement for IVR playback. OpenAI Realtime (/api/realtime-session) for persistent Live Call mode. SSE streaming with progressive panel fill.",
       },
       {
-        title: "Design artifact and mobile",
-        body: "/design-artifact static docs from designArtifactData.ts. Mobile drawer, stacked panels, NLU horizontal scroll with fade, 44px targets.",
+        title: "Design artifact page",
+        body: "/design-artifact: static page, no API calls. Intent taxonomy: all 18 intents with category, threshold, sentiment state. Override priority rules with structural changes and channel behavior. Entity schema with intent associations. Channel routing matrix. Sentiment state map with design token swatches from globals.css. Data from lib/designArtifactData.ts.",
       },
       {
         title: "Infrastructure",
-        body: "Next.js 16, React 19, claude-sonnet-4-6, OpenAI APIs, Vercel. No login. Generic prompt knowledge only.",
+        body: "Next.js 16, React 19, TypeScript, Tailwind CSS. Claude API (claude-sonnet-4-6), structured JSON, SSE streaming. OpenAI Whisper, TTS, Realtime. Vercel.",
       },
     ],
     stackHighlighted: [
-      "Claude API (claude-sonnet-4-6, SSE)",
-      "OpenAI (Whisper, TTS, Realtime)",
-      "data-sentiment CSS token system",
+      "Claude API (claude-sonnet-4-6, SSE streaming, progressive panel fill)",
+      "OpenAI (Whisper · TTS · Realtime)",
+      "data-sentiment CSS token architecture (five emotional state themes)",
     ],
     stackStandard: [
       "Next.js 16",
@@ -905,60 +938,60 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "Multi-channel conversational system design",
         tag: "PRODUCT",
-        body: "IVR, Chatbot, and Agent Assist as one architecture from one utterance, not three separate demos.",
+        body: "IVR, Chatbot, and Agent Assist as a unified architecture from one utterance, not three separate demos.",
       },
       {
-        title: "Semantic CSS for emotional state",
+        title: "Semantic CSS token architecture",
         tag: "DESIGN",
-        body: "Five states retint the whole app from a single root attribute, aligned with prompt overrides.",
+        body: "Emotional state-driven UI theming across five states from a single root data-sentiment attribute.",
       },
       {
         title: "NLU architecture storytelling",
         tag: "TECHNICAL",
-        body: "18 intents, entities, thresholds, and training phrases surfaced as practitioner-readable evidence.",
+        body: "18 intents, entity schema, confidence threshold, priority override rules surfaced as practitioner-readable evidence.",
       },
       {
         title: "Full voice pipeline",
         tag: "TECHNICAL",
-        body: "Whisper transcription, TTS IVR with mobile-safe playback, Realtime for live conversation.",
+        body: "MediaRecorder, OpenAI Whisper, TTS audio playback, OpenAI Realtime Live Call.",
       },
       {
-        title: "SSE aligned to product thesis",
+        title: "SSE streaming and progressive UI",
         tag: "TECHNICAL",
-        body: "Parallel outputs visible as they stream instead of one blocking blob.",
-      },
-      {
-        title: "Requirement-to-build literacy",
-        tag: "PRODUCT",
-        body: "Enterprise channels brief treated as a ship spec, not a slide.",
+        body: "Progressive fill aligned to the product thesis: parallel outputs visible as they stream.",
       },
       {
         title: "Visual NLU documentation",
         tag: "DESIGN",
-        body: "/design-artifact as a second deliverable most portfolios skip.",
+        body: "Design artifact page and lib/designArtifactData.ts as a second deliverable.",
+      },
+      {
+        title: "Six documented pivots",
+        tag: "PRODUCT",
+        body: "Each pivot documents a real constraint, decision, and tradeoff.",
       },
       {
         title: "Honest status matrix",
         tag: "PRODUCT",
-        body: "Acknowledges simulated NLU via Claude, parse failure UX gap, and no Dialogflow or LUIS integration.",
+        body: "Acknowledges what is and is not implemented: simulated NLU via Claude, parse failure UX gap, no Dialogflow or LUIS integration.",
       },
     ],
     honestSummary: {
       technical: {
         label: "For engineers",
-        body: "SSE plus client-side progressive parse; final JSON.parse with no server repair pass and no user-facing error on partial failure yet. NLU output is Claude-generated, not wired to a production NLU engine. Whisper and Blob URL IVR paths chosen for accuracy and iOS reliability.",
+        body: "The Claude API call (claude-sonnet-4-6) streams over SSE. The client accumulates the text stream and extracts complete JSON sections as braces close, allowing progressive panel fill without blocking. There is no server-side JSON repair pass. A final JSON.parse on the accumulated stream fails silently with no user-facing error state. That is the honest current implementation and it is in the status matrix. Voice uses MediaRecorder and OpenAI Whisper server-side via /api/transcribe, not browser Web Speech. IVR audio uses OpenAI TTS via /api/speak with a Blob URL and HTMLAudioElement specifically for iOS Safari reliability. OpenAI Realtime manages a persistent WebSocket session for Live Call mode, a distinct architecture from the standard transcribe-then-analyze path.",
       },
       product: {
         label: "For product",
-        body: "Built to make a hiring team see system-level conversational design: overrides, cross-channel tension, sentiment as policy, and Live Call as second proof mode. Six pivots in the long-form case study are each a real tradeoff.",
+        body: "This project is built from a product brief: an enterprise conversational channels team that needed a designer who understood IVR, chatbot, and agent assist as a unified system. The six pivot stories each represent a real product decision with a real tradeoff: empty state, SSE streaming, iOS audio path, full-environment sentiment theming, mobile craft, and Live Call promotion. The design artifact page at /design-artifact is a second deliverable produced from the same build, demonstrating that this designer thinks about conversation architecture as a documentation problem, not just an implementation problem.",
       },
       design: {
         label: "For design",
-        body: "IBM Plex Sans for UI, IBM Plex Mono for classification output. Panel hierarchy matches practitioner reading order. Mobile is a drawer and stack, not a squashed desktop.",
+        body: "The CSS token architecture is the design centerpiece. Five named sentiment states, each driving a complete color system through a single data-sentiment attribute on the root. IBM Plex Sans for interface text, IBM Plex Mono for financial data and classification output. Navy #1B2E4B, teal #0891B2 as the base palette. The panel layout hierarchy reflects practitioner reading order: IVR at 44%, Chatbot and Agent Assist stacked on the right, NLU collapsible below. Mobile is a drawer, not a collapsed state. 44px touch targets, 100dvh, backdrop scrolling.",
       },
     },
     impactQuote:
-      "The bereavement utterance is the one that matters. The system suppresses the account verification prompt, routes to a senior specialist, and the entire application turns purple. That is not decoration. That is the proof that emotional state handling was designed in, not added on.",
+      "The bereavement utterance fires. The system suppresses account verification, routes to a senior specialist, and the entire application turns purple. That is not decoration. That is the proof that emotional state handling was designed in, not added on.",
   },
 ];
 
