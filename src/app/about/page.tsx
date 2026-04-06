@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 const aboutDesc =
-  "Hannah Kraulik Pagade, LPN and founder of Rohimaya Health AI. Live AI products: OrixLink AI, HealthLiteracy AI, ClearChannel, FinanceLens AI. MS AI/ML at CU Boulder (in progress). hannahkraulikpagade.com.";
+  "Hannah Kraulik Pagade: AI product leader spanning product management and UX design for LLM-powered products. Fifteen years in healthcare operations; shipped live apps in clinical, patient, fintech, and enterprise conversation (OrixLink, HealthLiteracy, ClearChannel, FinanceLens). MS AI/ML, CU Boulder (in progress). Open to AI PM and AI product design roles.";
 
 export const metadata: Metadata = {
   title: "About",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Hannah Kraulik Pagade — LPN, Rohimaya Health AI, live AI products",
+        alt: "Hannah Kraulik Pagade — AI product leader, PM and UX design for live AI products",
       },
     ],
   },
@@ -34,57 +34,70 @@ export const metadata: Metadata = {
 
 const productSkills = [
   "0-to-1 Product Development",
-  "Discovery & User Research",
-  "Outcome-Driven Roadmapping",
-  "Data-Informed Prioritization",
-  "Stakeholder Alignment",
-  "Workflow Analysis & Redesign",
-  "Regulated Environments",
-  "Cross-Functional Leadership",
-  "User Story Mapping",
-  "Sprint Planning & Delivery",
+  "Discovery & Problem Framing",
+  "Roadmapping & Prioritization",
+  "PRDs & Acceptance Criteria",
   "AI Product Strategy",
+  "Stakeholder Alignment",
+  "Regulated & High-Stakes Domains",
+  "Workflow Analysis",
+  "Cross-Functional Leadership",
+  "Sprint Planning & Delivery",
 ];
 
 const aiUxSkills = [
+  "UX for LLM Products",
   "Conversation Design",
-  "IVR & Chatbot Design",
-  "Agent Assist UX",
-  "Intent Architecture",
-  "NLU Model Development",
+  "Intent & NLU Architecture",
   "Prompt Engineering",
-  "Multi-Turn Dialogue Systems",
+  "Trust, Safety & Guardrail UX",
+  "Multi-Turn & Voice UX",
+  "IVR, Chatbot & Agent Assist",
   "Role-Adaptive Flows",
   "Escalation Design",
-  "Voice UX & TTS",
 ];
 
-const techStack = [
+const techStackCore = [
   "Next.js",
   "TypeScript",
-  "Tailwind CSS",
   "React",
+  "Tailwind CSS",
   "Claude API",
   "OpenAI API",
-  "FastAPI",
-  "Python",
-  "ElevenLabs",
   "Supabase",
-  "Cloudflare",
   "Stripe",
+  "Zod",
   "Vercel",
   "Figma",
-  "Cursor",
   "Git",
 ];
 
-const products = [
+const techStackAlso =
+  "Python · FastAPI · Cloudflare · ElevenLabs · pdf-lib · pptxgenjs · Cursor — see case studies for product-specific stacks.";
+
+type AboutProduct = {
+  name: string;
+  url: string;
+  urlDisplay: string;
+  slug: string;
+  summary: string;
+  productDecision: string;
+  designCall: string;
+  stack: string;
+};
+
+const products: AboutProduct[] = [
   {
     name: "OrixLink AI",
     url: "https://triage.rohimaya.ai",
     urlDisplay: "triage.rohimaya.ai",
-    description:
-      "Universal clinical triage: structured differential, red flags, four-tier urgency, follow-up chat. Early commercial pilot with Stripe subscriptions, credit packs, usage caps, and email reminders.",
+    slug: "orixlink-ai",
+    summary:
+      "Clinical intake and triage: structured assessment, red-flag surfacing, urgency tiers, history, and billing. Early commercial pilot with subscriptions, credit packs, and server-side usage enforcement.",
+    productDecision:
+      "Defined paid vs. free tiers, credit packs, and enforcement that moved server-side after real per-session cost exposure—not pricing on slides only.",
+    designCall:
+      "Meridian Oracle system across funnel, errors, and email so the product reads as clinical authority without feeling cold; typed assessment output reviewers can audit, not an unstructured chat log.",
     stack:
       "Next.js 16 · TypeScript · Tailwind v4 · Claude API (Sonnet/Haiku) · Supabase · Stripe · Resend · Vercel",
   },
@@ -92,31 +105,50 @@ const products = [
     name: "HealthLiteracy AI",
     url: "https://literacy.rohimaya.ai",
     urlDisplay: "literacy.rohimaya.ai",
-    description:
-      "Free patient-facing tool that translates clinical discharge documents into plain language at three reading levels across 12 languages.",
-    stack: "Next.js · Claude API · Supabase · PDF upload · Voice input",
+    slug: "healthliteracy-ai",
+    summary:
+      "Free, no-login translation of clinical documents into plain language—twelve languages, Simple / Clear / Complete reading levels, urgent items first, user-initiated verification, 90-day shareable sessions.",
+    productDecision:
+      "Shipped user-initiated verification (Check for Missing Info) with issue cards instead of silently re-running every translation—traded always-on latency and cost for patient control and trust.",
+    designCall:
+      "Plain reading-level labels (not grade numbers) and THOROUGH CHECK / PARTIAL CHECK / QUICK CHECK badges so verification is legible; side-by-side and accessibility patterns as launch requirements.",
+    stack:
+      "Next.js 15 · Claude Sonnet · Zod (API requests) · Supabase (90-day) · Web Speech API · Vercel",
   },
   {
     name: "ClearChannel by Vestara",
     url: "https://clearchannel-vestara.vercel.app",
     urlDisplay: "clearchannel-vestara.vercel.app",
-    description:
-      "Enterprise NLU routing simulator demonstrating IVR, chatbot, and agent assist channel handling for a fictional financial services firm. 18-intent NLU architecture with OpenAI voice integration.",
-    stack: "Next.js 15 · Claude API · OpenAI Whisper · TTS",
+    slug: "clearchannel-vestara",
+    summary:
+      "Conversational lab: one utterance drives IVR, chatbot, and agent assist in parallel with NLU surfaced; SSE streaming, five sentiment themes, Whisper transcription, OpenAI Realtime Live Call.",
+    productDecision:
+      "Empty state plus Live Call as primary paths so the story reads on mobile; SSE so parallel channels unfold in real time instead of one blocking JSON blob.",
+    designCall:
+      "data-sentiment retints the full chrome—bereavement and urgency are environmental, as on the bereavement path—not a badge bolted on after layout.",
+    stack:
+      "Next.js 16 · Claude (SSE) · OpenAI Whisper · TTS · Realtime · Vercel",
   },
   {
     name: "FinanceLens AI",
     url: "https://financelens-ai.vercel.app",
     urlDisplay: "financelens-ai.vercel.app",
-    description:
-      "Structured analysis for filings and calls: drift, anchors, confidence rubric, compare mode, branded PDF, PPTX decks, 30-day share links. Assistive only, not financial advice.",
-    stack: "Next.js 16 · React 19 · Claude API · Zod · Supabase · pdf-lib · pptxgenjs",
+    slug: "financelens-ai",
+    summary:
+      "Six-section structured intelligence for earnings calls and filings—not a summary—plus compare-with-accordion, branded PDF/PPTX, 30-day Supabase deck URLs. Assistive only, not financial advice.",
+    productDecision:
+      "When Canva Connect was blocked, owned the deck layer: Claude outline, pptxgenjs, pdf-lib, and a custom /deck viewer—removed dependency on a vendor gate.",
+    designCall:
+      "Source anchors prompt-pushed with schema-soft validation; compare opens highest-signal deltas first so users scan before they deep-read.",
+    stack:
+      "Next.js 16 · React 19 · Claude Sonnet · Zod · Supabase · pdf-lib · pptxgenjs · Vercel",
   },
 ];
 
 const ABOUT_TOC = [
+  { id: "at-a-glance", label: "At a glance" },
   { id: "how-i-work", label: "How I work" },
-  { id: "what-i-built", label: "What I built" },
+  { id: "what-i-built", label: "What I built & shipped" },
   { id: "my-background", label: "My background" },
   { id: "looking-for", label: "What I'm looking for" },
   { id: "skills", label: "Skills" },
@@ -158,7 +190,8 @@ export default function AboutPage() {
               className="mt-2 font-body text-xs uppercase tracking-[0.14em]"
               style={{ color: "var(--gold)", opacity: 0.75 }}
             >
-              AI Product Manager&nbsp;&nbsp;·&nbsp;&nbsp;AI Builder&nbsp;&nbsp;·&nbsp;&nbsp;UX Strategist
+              AI product leader&nbsp;&nbsp;·&nbsp;&nbsp;Product management
+              &amp; UX design
             </p>
             <div
               className="mt-4 h-px w-14 opacity-60"
@@ -169,18 +202,40 @@ export default function AboutPage() {
           <FadeIn delay={100}>
             <p
               className="mt-8 max-w-2xl font-body text-base leading-relaxed sm:text-lg"
-              style={{ color: "rgba(244, 239, 230, 0.9)" }}
+              style={{ color: "rgba(244, 239, 230, 0.92)" }}
+            >
+              I own strategy and launch for AI products in high-stakes domains:
+              what to ship first, what success means, and how users should trust
+              model output. My proof is live software—clinical intake, patient
+              literacy, regulated-style document intelligence, and
+              enterprise-style conversational channels—not decks alone.
+            </p>
+            <p
+              className="mt-6 max-w-2xl font-body text-base leading-relaxed sm:text-lg"
+              style={{ color: "rgba(244, 239, 230, 0.88)" }}
+            >
+              On product management, I frame scope, priorities, and tradeoffs
+              with engineering. On design, I define flows, empty and failure
+              states, and how the AI behaves in the UI. On solo or early work I
+              hold both; on a team I partner and flex where the gap is largest.
+            </p>
+            <p
+              className="mt-6 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
+              style={{ color: "rgba(244, 239, 230, 0.85)" }}
             >
               I&apos;m a Licensed Practical Nurse at PAM Health Rehabilitation
-              Hospital of Westminster in Westminster, Colorado. I&apos;m also
-              the founder of Rohimaya Health AI, where I design and build live
-              AI products with working URLs, not mockups. I work in Cursor and
-              ship with the Claude API. I&apos;m pursuing an MS in Artificial
-              Intelligence and Machine Learning at CU Boulder, expected 2026
-              (in progress, not completed). I co-founded Two Peaks Chai Co.
-              with my spouse: a live artisan chai brand here in
-              Westminster, rooted in my Southern US roots and his Mumbai
-              heritage. Customers can order at{" "}
+              Hospital of Westminster, Colorado, and founder of Rohimaya Health
+              AI. I prototype and ship in the stack when the team is
+              small—Next.js, Vercel, Claude API—so product decisions are tested
+              against real documents, transcripts, and utterances, not theory
+              alone. MS in Artificial Intelligence and Machine Learning at CU
+              Boulder, expected 2026 (in progress).
+            </p>
+            <p
+              className="mt-4 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
+              style={{ color: "rgba(244, 239, 230, 0.72)" }}
+            >
+              Outside tech: co-founded{" "}
               <a
                 href="https://twopeakschai.com"
                 target="_blank"
@@ -188,9 +243,9 @@ export default function AboutPage() {
                 className="underline underline-offset-4 transition-opacity hover:opacity-90"
                 style={{ color: "var(--gold)" }}
               >
-                twopeakschai.com
-              </a>
-              .
+                Two Peaks Chai Co.
+              </a>{" "}
+              with my spouse—artisan chai in Westminster.
             </p>
           </FadeIn>
 
@@ -256,6 +311,82 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* At a glance */}
+      <section
+        id="at-a-glance"
+        className="scroll-mt-24 w-full px-6 py-12 sm:px-8 sm:py-14 md:px-16"
+        style={{ backgroundColor: "#0c1119" }}
+      >
+        <div className="mx-auto max-w-3xl">
+          <FadeIn>
+            <h2
+              className="font-display text-xl sm:text-2xl"
+              style={{ color: "var(--cream)" }}
+            >
+              At a glance
+            </h2>
+            <div
+              className="mt-3 h-px w-10 opacity-50"
+              style={{ backgroundColor: "var(--gold)" }}
+            />
+            <ul
+              className="mt-6 list-none space-y-3 font-body text-sm leading-relaxed sm:text-base"
+              style={{ color: "rgba(244, 239, 230, 0.88)" }}
+            >
+              <li className="flex gap-3">
+                <span
+                  className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full"
+                  style={{ backgroundColor: "var(--gold)" }}
+                  aria-hidden
+                />
+                <span>
+                  <span style={{ color: "var(--cream)" }}>Four live AI products</span>{" "}
+                  you can try today (clinical triage, patient literacy,
+                  enterprise conversation lab, financial document intelligence).
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span
+                  className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full"
+                  style={{ backgroundColor: "var(--gold)" }}
+                  aria-hidden
+                />
+                <span>
+                  <span style={{ color: "var(--cream)" }}>15 years</span> in
+                  healthcare operations leadership—staff scale, audits, cost
+                  outcomes—before shipping software; domain judgment carries into
+                  product and UX calls.
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span
+                  className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full"
+                  style={{ backgroundColor: "var(--gold)" }}
+                  aria-hidden
+                />
+                <span>
+                  <span style={{ color: "var(--cream)" }}>MS AI/ML</span> at CU
+                  Boulder (in progress, expected 2026); founder of Rohimaya Health
+                  AI.
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span
+                  className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full"
+                  style={{ backgroundColor: "var(--gold)" }}
+                  aria-hidden
+                />
+                <span>
+                  <span style={{ color: "var(--cream)" }}>Hiring target:</span>{" "}
+                  AI Product Manager and/or AI product design roles; open to
+                  relocation. Full case studies on this site.
+                </span>
+              </li>
+            </ul>
+          </FadeIn>
+        </div>
+      </section>
+
       {/* How I work */}
       <section
         id="how-i-work"
@@ -304,6 +435,12 @@ export default function AboutPage() {
                 Someone using the product should know what it does, what it refuses to do,
                 and what to do next, without mistaking an assistive tool for an authority
                 they should not rely on alone.
+              </li>
+              <li>
+                <span style={{ color: "var(--cream)" }}>I collaborate like a product partner.</span>{" "}
+                Specs, acceptance criteria, and review of model behavior with engineering;
+                design feedback that accounts for latency, cost, and failure modes—not
+                only ideal paths.
               </li>
             </ol>
           </FadeIn>
@@ -355,13 +492,36 @@ export default function AboutPage() {
                     className="mt-2 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
                     style={{ color: "rgba(244, 239, 230, 0.85)" }}
                   >
-                    {p.description}
+                    {p.summary}
                   </p>
                   <p
-                    className="mt-1.5 font-body text-xs"
+                    className="mt-3 max-w-2xl font-body text-sm leading-relaxed sm:text-[13px]"
+                    style={{ color: "rgba(244, 239, 230, 0.78)" }}
+                  >
+                    <span style={{ color: "var(--cream)" }}>Product: </span>
+                    {p.productDecision}
+                  </p>
+                  <p
+                    className="mt-2 max-w-2xl font-body text-sm leading-relaxed sm:text-[13px]"
+                    style={{ color: "rgba(244, 239, 230, 0.78)" }}
+                  >
+                    <span style={{ color: "var(--cream)" }}>UX &amp; AI behavior: </span>
+                    {p.designCall}
+                  </p>
+                  <p
+                    className="mt-3 font-body text-xs"
                     style={{ color: "rgba(244, 239, 230, 0.4)" }}
                   >
                     {p.stack}
+                  </p>
+                  <p className="mt-2">
+                    <Link
+                      href={`/work/${p.slug}`}
+                      className="font-body text-xs underline underline-offset-4 transition-opacity hover:opacity-90 sm:text-[13px]"
+                      style={{ color: "rgba(200, 169, 110, 0.85)" }}
+                    >
+                      Case study →
+                    </Link>
                   </p>
                 </div>
               </FadeIn>
@@ -423,6 +583,15 @@ export default function AboutPage() {
               className="mt-6 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
               style={{ color: "rgba(244, 239, 230, 0.85)" }}
             >
+              That work trained the muscles product teams need: operating under
+              regulation, aligning nursing and leadership under pressure,
+              communicating risk clearly, and improving workflows when the
+              downside of a bad decision is real—not a postmortem slide.
+            </p>
+            <p
+              className="mt-6 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
+              style={{ color: "rgba(244, 239, 230, 0.85)" }}
+            >
               I did not come from a product whiteboard. I came from the floor.
               Those 15 years were field research.
             </p>
@@ -454,9 +623,11 @@ export default function AboutPage() {
               className="mt-8 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
               style={{ color: "rgba(244, 239, 230, 0.85)" }}
             >
-              I&apos;m targeting AI Product Manager, Head of Product, UX
-              Strategist, Conversational AI Designer, and Founding PM roles.
-              I&apos;m open to relocation. If this sounds like a fit, use the{" "}
+              I&apos;m focused on AI Product Manager and senior AI product design
+              roles (product designer or UX designer owning AI-native flows). I
+              also consider founding PM and Head of Product where scope includes
+              both strategy and hands-on AI UX. Open to relocation and hybrid.
+              If this sounds like a fit, use the{" "}
               <Link
                 href="/contact"
                 className="underline underline-offset-4 transition-opacity hover:opacity-90"
@@ -493,7 +664,7 @@ export default function AboutPage() {
               className="font-display text-2xl"
               style={{ color: "var(--cream)" }}
             >
-              Product
+              Product &amp; strategy
             </h2>
             <div
               className="mt-3 h-px w-10 opacity-50"
@@ -521,7 +692,7 @@ export default function AboutPage() {
               className="font-display text-2xl"
               style={{ color: "var(--cream)" }}
             >
-              Conversational AI &amp; UX
+              AI &amp; product design
             </h2>
             <div
               className="mt-3 h-px w-10 opacity-50"
@@ -549,14 +720,21 @@ export default function AboutPage() {
               className="font-display text-2xl"
               style={{ color: "var(--cream)" }}
             >
-              Technical Stack
+              Core technical stack
             </h2>
+            <p
+              className="mt-3 max-w-2xl font-body text-sm leading-relaxed"
+              style={{ color: "rgba(244, 239, 230, 0.55)" }}
+            >
+              Execution leverage with engineering—not a backend specialist.
+              Depth varies by product; case studies list the exact bindings.
+            </p>
             <div
               className="mt-3 h-px w-10 opacity-50"
               style={{ backgroundColor: "var(--gold)" }}
             />
             <div className="mt-6 flex flex-wrap gap-2">
-              {techStack.map((tech) => (
+              {techStackCore.map((tech) => (
                 <span
                   key={tech}
                   className="inline-block rounded-full border px-3 py-1.5 font-body font-mono text-xs sm:text-[13px]"
@@ -570,6 +748,12 @@ export default function AboutPage() {
                 </span>
               ))}
             </div>
+            <p
+              className="mt-5 max-w-2xl font-body text-xs leading-relaxed sm:text-[13px]"
+              style={{ color: "rgba(244, 239, 230, 0.45)" }}
+            >
+              {techStackAlso}
+            </p>
           </FadeIn>
 
         </div>
@@ -595,6 +779,15 @@ export default function AboutPage() {
             />
             <p
               className="mt-6 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
+              style={{ color: "rgba(244, 239, 230, 0.9)" }}
+            >
+              I&apos;m interested in conversations about AI product management,
+              AI product design, and founding-team roles where both strategy and
+              shipped UX matter. Recruiters: share the stack, stage, and how AI
+              shows up in the roadmap.
+            </p>
+            <p
+              className="mt-5 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
               style={{ color: "rgba(244, 239, 230, 0.9)" }}
             >
               Use the{" "}

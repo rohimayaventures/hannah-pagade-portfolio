@@ -173,7 +173,7 @@ async function sendVisitorConfirmation(
         <p style="font-size: 16px; line-height: 1.7; margin-top: 0;">
           <strong>Hannah Kraulik Pagade</strong><br/>
           <span style="color: #888; font-size: 14px;">
-            LPN, PAM Health Rehabilitation Hospital of Westminster | Founder, Rohimaya Health AI<br/>
+            AI product leader · PM &amp; UX design · LPN, PAM Health Westminster · Founder, Rohimaya Health AI<br/>
             <a href="https://hannahkraulikpagade.com" style="color: #C8A96E;">hannahkraulikpagade.com</a>
           </span>
         </p>

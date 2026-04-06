@@ -34,7 +34,7 @@ const defaultTitle =
   "Hannah Kraulik Pagade | AI Product Leader — Product Management & UX Design";
 
 const defaultDescription =
-  "LPN, founder of Rohimaya Health AI. Live products: OrixLink AI, HealthLiteracy AI, ClearChannel, FinanceLens AI (financial document intelligence at financelens-ai.vercel.app). MS AI/ML at CU Boulder in progress. Portfolio: hannahkraulikpagade.com.";
+  "Hannah Kraulik Pagade: AI product leader across product management and UX design for LLM products. LPN; founder of Rohimaya Health AI. Live: OrixLink, HealthLiteracy, ClearChannel, FinanceLens. MS AI/ML at CU Boulder (in progress). hannahkraulikpagade.com.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

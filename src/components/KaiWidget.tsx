@@ -11,7 +11,7 @@ type Message = {
 const INITIAL_MESSAGE: Message = {
   role: "assistant",
   content:
-    "Hi, I'm Kai. Ask me about Hannah's live products, Rohimaya Health AI, or how she builds. Drop your name and email when you're ready to connect.",
+    "Hi, I'm Kai. Ask about Hannah's AI product work (PM and UX), her live products and case studies, or Rohimaya Health AI. Drop your name and email when you're ready to connect.",
 };
 
 export default function KaiWidget() {

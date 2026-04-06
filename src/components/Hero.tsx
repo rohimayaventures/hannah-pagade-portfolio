@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useState } from "react";
+import { useCallback, useState, type MouseEvent } from "react";
 
 const focusPills = [
   { label: "Product & discovery", href: "/#work" },
@@ -12,7 +12,7 @@ const focusPills = [
 export default function Hero() {
   const [glow, setGlow] = useState({ x: 50, y: 45 });
 
-  const onMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+  const onMove = useCallback((e: MouseEvent<HTMLElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     setGlow({
       x: ((e.clientX - r.left) / r.width) * 100,

@@ -138,7 +138,7 @@ export default function ContactForm() {
           disabled={status === "sending"}
           className={`${fieldClass} contact-field min-h-[140px] resize-y`}
           style={fieldStyle}
-          placeholder="How can I help?"
+          placeholder="Role, team stage, how AI shows up in the roadmap, or what you want to explore together"
         />
       </div>
 

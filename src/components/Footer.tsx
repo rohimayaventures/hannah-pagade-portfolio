@@ -18,11 +18,11 @@ export default function Footer() {
             Hannah Kraulik Pagade
           </p>
           <p
-            className="mt-2 max-w-xs font-body text-sm leading-relaxed"
+            className="mt-2 max-w-sm font-body text-sm leading-relaxed"
             style={{ color: "rgba(244, 239, 230, 0.7)" }}
           >
-            I build live AI products. Conversational design for high-stakes
-            environments. hannahkraulikpagade.com
+            AI product leader. Product management and UX design for LLM-powered
+            products. Live work in health, finance, and enterprise conversation.
           </p>
         </div>
         <nav

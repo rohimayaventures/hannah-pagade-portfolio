@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 const contactDesc =
-  "Get in touch about product, UX strategy, conversational AI design, or collaboration.";
+  "Contact Hannah Kraulik Pagade about AI product management, AI product design, live portfolio work, or collaboration.";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -76,9 +76,10 @@ export default function ContactPage() {
               className="mb-8 max-w-2xl font-body text-lg leading-relaxed opacity-90"
               style={{ color: "var(--cream)" }}
             >
-              Interested in working together? Send a message. I&apos;ll
-              respond from my inbox. For a faster connection, you can also reach
-              me on LinkedIn.
+              Interested in AI product management, AI product design, or
+              collaboration on LLM-powered products? Send a message. I&apos;ll
+              respond from my inbox. For a faster connection, reach me on
+              LinkedIn.
             </p>
             <div
               className="mb-10 h-px w-16 opacity-60"
