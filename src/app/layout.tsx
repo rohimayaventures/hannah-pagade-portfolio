@@ -31,7 +31,7 @@ const siteUrl =
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://hannahkraulikpagade.com");
 
 const defaultTitle =
-  "Hannah Kraulik Pagade | Rohimaya Health AI, Live AI Products, Conversational Design";
+  "Hannah Kraulik Pagade | AI Product Leader — Product Management & UX Design";
 
 const defaultDescription =
   "LPN, founder of Rohimaya Health AI. Live products: OrixLink AI, HealthLiteracy AI, ClearChannel, FinanceLens AI (financial document intelligence at financelens-ai.vercel.app). MS AI/ML at CU Boulder in progress. Portfolio: hannahkraulikpagade.com.";
@@ -46,7 +46,10 @@ export const metadata: Metadata = {
   keywords: [
     "Clinical AI",
     "Healthcare AI product",
-    "Conversational AI designer",
+    "AI product leader",
+    "Product management",
+    "UX design",
+    "Conversational AI",
     "NLU architecture",
     "AI product manager",
     "Healthcare UX",

@@ -63,32 +63,32 @@ export default function Hero() {
       />
 
       <div className="relative z-10 mx-auto max-w-4xl">
-        <p
-          className="mb-5 text-xs font-body uppercase tracking-[0.2em] opacity-90"
-          style={{ color: "var(--gold)" }}
-        >
-          Hannah Kraulik Pagade
-        </p>
         <h1
-          className="mb-3 font-display text-3xl leading-[1.08] tracking-tight sm:text-4xl md:text-6xl lg:text-7xl"
+          className="font-display tracking-tight"
           style={{ color: "var(--cream)" }}
         >
-          Product &amp; UX Strategist
+          <span className="mb-5 block text-4xl leading-[1.06] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+            Hannah Kraulik Pagade
+          </span>
+          <span className="mb-3 block text-3xl leading-[1.08] sm:text-4xl md:text-5xl lg:text-6xl">
+            AI product leader
+          </span>
         </h1>
         <p
-          className="mb-6 font-display text-2xl leading-tight tracking-tight sm:text-3xl md:text-5xl lg:text-6xl"
+          className="mb-6 font-display text-2xl leading-tight tracking-tight sm:text-3xl md:text-4xl lg:text-5xl"
         >
-          <span className="hero-gradient-text">Conversational AI</span>
-          <span style={{ color: "var(--cream)" }}> designer</span>
+          <span className="hero-gradient-text">
+            Product management &amp; UX design
+          </span>
         </p>
         <p
           className="mb-8 max-w-2xl font-body text-base leading-relaxed opacity-90 sm:text-lg md:text-xl"
           style={{ color: "var(--cream)" }}
         >
-          I build live AI products you can try today, not mockups. Multi-turn
-          dialogue, intent architecture, and role-adaptive flows in high-stakes
-          settings. OrixLink AI, HealthLiteracy AI, ClearChannel by Vestara, and
-          FinanceLens AI. I work in Cursor and ship with the Claude API.
+          I own strategy and launch for AI products: priorities and rollout, plus
+          multi-turn and high-stakes experience design—not only screens and
+          prototypes. Live work across health, finance, and enterprise
+          conversation, with hands-on execution when the team is small.
         </p>
 
         {/* Interactive focus chips */}
