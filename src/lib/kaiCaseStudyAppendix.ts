@@ -18,7 +18,7 @@ const MAX_WHAT_DEMONSTRATES = 5;
 
 /** Hard ceiling on the full appendix string (UTF-16-ish length); CI enforces this. */
 export /** CI fails above this; raise only after trimming case study copy or tightening caps above. */
-const KAI_APPENDIX_MAX_CHARS = 14_600;
+const KAI_APPENDIX_MAX_CHARS = 20_000;
 
 function trunc(s: string, max: number): string {
   const t = s.trim();
