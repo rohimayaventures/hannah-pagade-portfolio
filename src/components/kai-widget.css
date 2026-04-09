@@ -42,15 +42,15 @@
 /* ── Root ── */
 .kai-root {
   position: fixed;
-  bottom: 28px;
-  right: 28px;
+  bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  right: calc(28px + env(safe-area-inset-right, 0px));
   z-index: 9999;
 }
 
 @media (max-width: 639px) {
   .kai-root {
-    bottom: 20px;
-    right: 20px;
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    right: calc(20px + env(safe-area-inset-right, 0px));
   }
 }
 
@@ -59,7 +59,13 @@
   position: absolute;
   bottom: 100px;
   right: 0;
-  width: min(340px, calc(100vw - 2.5rem));
+  width: min(
+    340px,
+    calc(
+      100vw - 2.5rem - env(safe-area-inset-left, 0px) -
+        env(safe-area-inset-right, 0px)
+    )
+  );
   background: #0d1420;
   border: 1px solid rgba(200, 169, 110, 0.22);
   border-radius: 14px 14px 4px 14px;

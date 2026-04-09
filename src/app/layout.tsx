@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { Cormorant_Garamond, DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
@@ -35,6 +35,12 @@ const defaultTitle =
 
 const defaultDescription =
   "Hannah Kraulik Pagade: AI product leader across product management and UX design for LLM products. LPN; founder of Rohimaya Health AI. Live: OrixLink, HealthLiteracy, ClearChannel, FinanceLens. MS AI/ML at CU Boulder (in progress). hannahkraulikpagade.com.";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#080C14",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -88,7 +94,7 @@ export default function RootLayout({
       <body className="font-body antialiased">
         <a
           href="#main-content"
-          className="fixed left-4 top-4 z-[10001] inline-flex min-h-[44px] -translate-y-[150%] items-center justify-center rounded-sm bg-gold px-4 py-2.5 font-body text-sm font-medium text-obsidian shadow-md transition-transform focus:translate-y-4 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-obsidian"
+          className="fixed left-[max(1rem,env(safe-area-inset-left,0px))] top-[max(1rem,env(safe-area-inset-top,0px))] z-[10001] inline-flex min-h-[44px] -translate-y-[150%] items-center justify-center rounded-sm bg-gold px-4 py-2.5 font-body text-sm font-medium text-obsidian shadow-md transition-transform focus:translate-y-4 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-obsidian"
         >
           Skip to main content
         </a>

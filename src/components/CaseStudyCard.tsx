@@ -133,8 +133,9 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
             ))}
           </div>
           <span
-            className="text-xs font-body opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            className="text-xs font-body opacity-100 transition-opacity duration-300 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100"
             style={{ color: "var(--gold-on-light)" }}
+            aria-hidden
           >
             View →
           </span>

@@ -68,9 +68,17 @@ export default function AskHannahMcpConnectSection() {
         className="mx-auto mt-4 max-w-2xl font-body text-xs leading-relaxed"
         style={{ color: "rgba(244, 239, 230, 0.55)" }}
       >
-        The live demo below hits the public{" "}
-        <code style={{ color: "var(--gold)" }}>/health</code> JSON to prove the
-        server is up. Your Claude connector should use the streamable{" "}
+        Optional: open{" "}
+        <a
+          href="https://ask-hannah-mcp-production.up.railway.app/health"
+          target="_blank"
+          rel="noreferrer"
+          className="underline decoration-gold/40 underline-offset-2 transition-colors hover:text-gold"
+          style={{ color: "var(--gold)" }}
+        >
+          <code className="font-mono text-[11px] md:text-xs">/health</code>
+        </a>{" "}
+        in a new tab for raw JSON status. Claude must use the streamable{" "}
         <code style={{ color: "var(--gold)" }}>/mcp</code> URL above.
       </p>
     </section>
