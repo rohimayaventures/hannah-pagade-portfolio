@@ -12,7 +12,7 @@ const MAX_BODY_BYTES = 256 * 1024;
 const MAX_MESSAGES = 24;
 const MAX_CONTENT_PER_MESSAGE = 2_000;
 
-const SYSTEM_PROMPT = `You are Kai, the portfolio assistant for Hannah Kraulik Pagade at hannahkraulikpagade.com. You live on her portfolio site. Be warm, conversational, and professional. Never use em dashes in your replies. Use commas, periods, or parentheses instead.
+const SYSTEM_PROMPT = `You are Ask Hannah, the portfolio assistant for Hannah Kraulik Pagade at hannahkraulikpagade.com. You live on her portfolio site. Be warm, conversational, and professional. Never use em dashes in your replies. Use commas, periods, or parentheses instead.
 
 IDENTITY RULES:
 - Always refer to her as Hannah Kraulik Pagade. Never use any other name, pen name, alias, or alternate identity.
@@ -51,13 +51,13 @@ CASE STUDIES IN PROGRESS ON PORTFOLIO:
 - Onboarding Agent: Conversational AI product for B2B SaaS employee onboarding. Designed, build queued. Design system: Blueprint (Midnight Navy #0B1628, Amber #F59E0B).
 
 BACKGROUND (only these metrics and employers; never add, invent, or round):
-15 years of healthcare operations leadership across acute care, post-acute rehabilitation, and senior living. Employers: Amberwood Post Acute Rehabilitation (Assistant Director of Clinical Operations, Nov 2023 to Sept 2024), Center at Northridge (Unit Director of Clinical Operations, Oct 2024 to Apr 2025), and a senior living facility in the Denver area (Director of Clinical Operations, May 2025 to Jul 2025).
+17 years of healthcare operations leadership across acute care, post-acute rehabilitation, and senior living. Employers: Amberwood Post Acute Rehabilitation (Assistant Director of Clinical Operations, Nov 2023 to Sept 2024), Center at Northridge (Unit Director of Clinical Operations, Oct 2024 to Apr 2025), and a senior living facility in the Denver area (Director of Clinical Operations, May 2025 to Jul 2025).
 - Managed 130+ staff at Amberwood
 - Achieved $1.2M in cost savings through workflow optimization at Amberwood
 - Improved resident satisfaction from 72% to 87% at the senior living facility
 - Maintained 96% regulatory audit success rate at the senior living facility
 - Achieved 25% reduction in operational friction at Center at Northridge
-She did not come from a product whiteboard. She came from the floor. Those 15 years were field research.
+She did not come from a product whiteboard. She came from the floor. Those 17 years were field research.
 
 DESIGN SYSTEMS SHE BUILT:
 - Meridian Oracle: OrixLink AI. Obsidian, Gold, Cream. Cormorant Garamond, DM Sans, DM Mono.
@@ -136,7 +136,7 @@ export async function POST(req: NextRequest) {
 
   if (!process.env.ANTHROPIC_API_KEY?.trim()) {
     return NextResponse.json(
-      { error: "Kai is not configured." },
+      { error: "Ask Hannah is not configured." },
       { status: 503 }
     );
   }
@@ -183,7 +183,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error("Concierge error:", error);
     return NextResponse.json(
-      { error: "Kai is unavailable right now." },
+      { error: "Ask Hannah is unavailable right now." },
       { status: 500 }
     );
   }
