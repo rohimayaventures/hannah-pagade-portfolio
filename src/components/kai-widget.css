@@ -1,38 +1,23 @@
-/* Kai floating chat — layout and motion (colors align with Meridian Oracle) */
+/* Ask Hannah widget — layout and motion (Meridian Oracle design system) */
+/* Kai identity retired. Widget is now Hannah's portfolio assistant. */
 
 @keyframes kai-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes kai-spin-r {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(-360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
 }
 
 @keyframes kai-aura {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scale(1.4);
-    opacity: 0;
-  }
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.4); opacity: 0; }
 }
 
 @keyframes kai-core {
-  0%,
-  100% {
+  0%, 100% {
     box-shadow:
       0 0 0 0 rgba(200, 169, 110, 0),
       0 0 8px rgba(200, 169, 110, 0.3);
@@ -45,29 +30,16 @@
 }
 
 @keyframes kai-slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(16px) scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @keyframes kai-bounce {
-  0%,
-  80%,
-  100% {
-    opacity: 0.3;
-    transform: scale(0.85);
-  }
-  40% {
-    opacity: 1;
-    transform: scale(1.1);
-  }
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.85); }
+  40% { opacity: 1; transform: scale(1.1); }
 }
 
+/* ── Root ── */
 .kai-root {
   position: fixed;
   bottom: 28px;
@@ -82,11 +54,12 @@
   }
 }
 
+/* ── Panel ── */
 .kai-panel.kai-panel-shell {
   position: absolute;
   bottom: 100px;
   right: 0;
-  width: min(320px, calc(100vw - 2.5rem));
+  width: min(340px, calc(100vw - 2.5rem));
   background: #0d1420;
   border: 1px solid rgba(200, 169, 110, 0.22);
   border-radius: 14px 14px 4px 14px;
@@ -95,6 +68,7 @@
   animation: kai-slide-up 0.25s ease-out forwards;
 }
 
+/* ── Header ── */
 .kai-header {
   display: flex;
   align-items: center;
@@ -104,16 +78,11 @@
   background: rgba(200, 169, 110, 0.04);
 }
 
-.kai-avatar-ring {
-  display: flex;
-  flex-shrink: 0;
-  width: 30px;
-  height: 30px;
-  align-items: center;
-  justify-content: center;
+.kai-header-avatar {
   border-radius: 50%;
-  background: rgba(200, 169, 110, 0.1);
-  border: 1px solid rgba(200, 169, 110, 0.3);
+  border: 1.5px solid rgba(200, 169, 110, 0.5);
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .kai-title-block {
@@ -160,6 +129,48 @@
   line-height: 1;
 }
 
+/* ── Intake flow ── */
+.kai-intake {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kai-intake-greeting {
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+}
+
+.kai-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding-left: 33px;
+}
+
+.kai-chip {
+  padding: 9px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(200, 169, 110, 0.3);
+  background: rgba(200, 169, 110, 0.06);
+  color: #f4efe6;
+  font-size: 12px;
+  font-family: var(--font-body), sans-serif;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, border-color 0.15s;
+  line-height: 1.4;
+}
+
+.kai-chip:hover {
+  background: rgba(200, 169, 110, 0.14);
+  border-color: rgba(200, 169, 110, 0.55);
+  color: #c8a96e;
+}
+
+/* ── Messages ── */
 .kai-messages {
   display: flex;
   max-height: 320px;
@@ -171,6 +182,8 @@
 
 .kai-msg-row {
   display: flex;
+  align-items: flex-end;
+  gap: 7px;
   animation: kai-slide-up 0.2s ease-out forwards;
 }
 
@@ -182,8 +195,16 @@
   justify-content: flex-start;
 }
 
+.kai-msg-avatar {
+  border-radius: 50%;
+  border: 1px solid rgba(200, 169, 110, 0.35);
+  overflow: hidden;
+  flex-shrink: 0;
+  align-self: flex-end;
+}
+
 .kai-bubble {
-  max-width: 82%;
+  max-width: 78%;
   padding: 9px 12px;
   font-size: 12.5px;
   line-height: 1.55;
@@ -203,8 +224,11 @@
   border: 1px solid rgba(200, 169, 110, 0.32);
 }
 
+/* ── Typing indicator ── */
 .kai-typing {
   display: flex;
+  align-items: flex-end;
+  gap: 7px;
   justify-content: flex-start;
 }
 
@@ -226,18 +250,50 @@
   display: inline-block;
 }
 
-.kai-dot-1 {
-  animation: kai-bounce 1.4s ease-in-out infinite 0s;
+.kai-dot-1 { animation: kai-bounce 1.4s ease-in-out infinite 0s; }
+.kai-dot-2 { animation: kai-bounce 1.4s ease-in-out infinite 0.2s; }
+.kai-dot-3 { animation: kai-bounce 1.4s ease-in-out infinite 0.4s; }
+
+/* ── Contextual CTA buttons ── */
+.kai-cta-block {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 4px 0;
+  padding-left: 33px;
 }
 
-.kai-dot-2 {
-  animation: kai-bounce 1.4s ease-in-out infinite 0.2s;
+.kai-cta-btn {
+  display: block;
+  padding: 9px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(200, 169, 110, 0.5);
+  background: #c8a96e;
+  color: #080c14;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-body), sans-serif;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.15s;
 }
 
-.kai-dot-3 {
-  animation: kai-bounce 1.4s ease-in-out infinite 0.4s;
+.kai-cta-btn:hover {
+  background: #d4b87e;
 }
 
+.kai-cta-btn--secondary {
+  background: transparent;
+  color: #c8a96e;
+  border-color: rgba(200, 169, 110, 0.3);
+}
+
+.kai-cta-btn--secondary:hover {
+  background: rgba(200, 169, 110, 0.08);
+}
+
+/* ── Notification toast ── */
 .kai-notify-toast {
   padding: 9px 12px;
   border-radius: 8px;
@@ -249,6 +305,7 @@
   text-align: center;
 }
 
+/* ── Input bar ── */
 .kai-input-bar {
   display: flex;
   align-items: center;
@@ -267,6 +324,10 @@
   color: #f4efe6;
   font-family: var(--font-body), sans-serif;
   outline: none;
+}
+
+.kai-input::placeholder {
+  color: rgba(244, 239, 230, 0.3);
 }
 
 .kai-send {
@@ -301,6 +362,7 @@
   stroke-width: 1.5;
 }
 
+/* ── Launcher button ── */
 .kai-launcher {
   position: relative;
   display: flex;
@@ -384,24 +446,28 @@
   height: 4px;
 }
 
-.kai-core-disc {
+/* Hannah photo in launcher core */
+.kai-core-photo {
   position: relative;
   z-index: 2;
   display: flex;
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: #c8a96e;
+  overflow: hidden;
+  border: 1.5px solid #c8a96e;
   animation: kai-core 3s ease-in-out infinite;
 }
 
-.kai-core-pupil {
-  width: 10px;
-  height: 10px;
+/* Reusable photo avatar element */
+.hannah-avatar {
   border-radius: 50%;
-  background: #080c14;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -413,14 +479,14 @@
   .kai-ring-1,
   .kai-ring-2,
   .kai-ring-3,
-  .kai-core-disc,
+  .kai-core-photo,
   .kai-dot-1,
   .kai-dot-2,
   .kai-dot-3 {
     animation: none;
   }
 
-  .kai-core-disc {
+  .kai-core-photo {
     box-shadow: 0 0 8px rgba(200, 169, 110, 0.3);
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import Image from "next/image";
 import "./kai-widget.css";
 
 type Message = {
@@ -8,15 +9,64 @@ type Message = {
   content: string;
 };
 
-const INITIAL_MESSAGE: Message = {
-  role: "assistant",
-  content:
-    "Hi, I'm Kai. Ask about Hannah's AI product work (PM and UX), her live products and case studies, or Rohimaya Health AI. Drop your name and email when you're ready to connect.",
+type IntentType = "hiring" | "work" | "collaborate" | "other" | null;
+
+const INTAKE_GREETING =
+  "Hi, I'm Hannah's portfolio assistant. What brings you here today?";
+
+const INTENT_MESSAGES: Record<string, string> = {
+  hiring:
+    "I'm hiring or recruiting and want to learn about Hannah for a role.",
+  work: "I want to explore Hannah's work and live products.",
+  collaborate:
+    "I'm a potential collaborator or client and want to learn more.",
+  other: "Something else.",
 };
+
+const INTENT_OPENERS: Record<string, string> = {
+  hiring:
+    "Great. I can walk you through Hannah's background, her live products, her validated metrics, and help generate a tailored resume or cover letter for your role. What kind of position are you hiring for?",
+  work: "Happy to take you through what she has built. Hannah has four live products across healthcare AI, fintech, and enterprise conversational AI, and two more in active development. Which area interests you most, or would you like a full overview?",
+  collaborate:
+    "Hannah takes on select freelance and collaborative work. Drop your name and email and she will reach out directly.",
+  other:
+    "No problem. Ask me anything about Hannah's work, background, products, or how to reach her.",
+};
+
+function HannahAvatar({
+  size = 30,
+  className = "",
+}: {
+  size?: number;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`hannah-avatar ${className}`}
+      style={{ width: size, height: size, minWidth: size }}
+    >
+      <Image
+        src="/images/hannah-avatar.jpg"
+        alt="Hannah Kraulik Pagade"
+        width={size}
+        height={size}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          objectPosition: "center top",
+          borderRadius: "50%",
+        }}
+        priority
+      />
+    </div>
+  );
+}
 
 export default function KaiWidget() {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
+  const [intent, setIntent] = useState<IntentType>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [notified, setNotified] = useState(false);
@@ -33,16 +83,16 @@ export default function KaiWidget() {
   useEffect(() => {
     if (open) {
       bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-      setTimeout(() => inputRef.current?.focus(), 300);
+      if (intent !== null) {
+        setTimeout(() => inputRef.current?.focus(), 300);
+      }
     }
-  }, [open, messages]);
+  }, [open, messages, intent]);
 
   useEffect(() => {
     if (!open) return;
-
     const container = panelRef.current;
     if (!container) return;
-
     const getFocusable = (): HTMLElement[] => {
       const sel =
         'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -50,7 +100,6 @@ export default function KaiWidget() {
         (el) => !el.hasAttribute("disabled")
       );
     };
-
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         e.preventDefault();
@@ -62,10 +111,8 @@ export default function KaiWidget() {
       if (focusables.length === 0) return;
       const active = document.activeElement as HTMLElement | null;
       if (!active || !container.contains(active)) return;
-
       const first = focusables[0];
       const last = focusables[focusables.length - 1];
-
       if (e.shiftKey) {
         if (active === first) {
           e.preventDefault();
@@ -76,7 +123,6 @@ export default function KaiWidget() {
         first.focus();
       }
     };
-
     document.addEventListener("keydown", onKeyDown, true);
     return () => document.removeEventListener("keydown", onKeyDown, true);
   }, [open, closePanel]);
@@ -114,14 +160,26 @@ export default function KaiWidget() {
           visitorName: visitorName || "Unknown",
           visitorEmail,
           messages: msgs,
+          intent: intent ?? "unknown",
         }),
       });
-      if (res.ok) {
-        setNotified(true);
-      }
+      if (res.ok) setNotified(true);
     } catch (err) {
       console.error("Notification failed:", err);
     }
+  };
+
+  const handleIntentSelect = async (selectedIntent: string) => {
+    setIntent(selectedIntent as IntentType);
+    const userMsg: Message = {
+      role: "user",
+      content: INTENT_MESSAGES[selectedIntent],
+    };
+    const openerMsg: Message = {
+      role: "assistant",
+      content: INTENT_OPENERS[selectedIntent],
+    };
+    setMessages([userMsg, openerMsg]);
   };
 
   const handleSend = async () => {
@@ -135,13 +193,12 @@ export default function KaiWidget() {
       const res = await fetch("/api/concierge", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: updatedMessages }),
+        body: JSON.stringify({
+          messages: updatedMessages,
+          intent: intent ?? "general",
+        }),
       });
-      const data = (await res.json()) as {
-        text?: string;
-        hasEmail?: boolean;
-      };
-
+      const data = (await res.json()) as { text?: string; hasEmail?: boolean };
       if (!res.ok) {
         setMessages((prev) => [
           ...prev,
@@ -153,11 +210,10 @@ export default function KaiWidget() {
         ]);
         return;
       }
-
       const replyText =
         typeof data.text === "string" && data.text.length > 0
           ? data.text
-          : "Something went wrong on my end. Please try again in a moment.";
+          : "Something went wrong. You can reach Hannah at the contact page.";
       const assistantMessage: Message = {
         role: "assistant",
         content: replyText,
@@ -170,7 +226,8 @@ export default function KaiWidget() {
         ...prev,
         {
           role: "assistant",
-          content: "Something went wrong. You can reach Hannah through the contact page at /contact.",
+          content:
+            "Something went wrong. You can reach Hannah at the contact page.",
         },
       ]);
     } finally {
@@ -191,21 +248,16 @@ export default function KaiWidget() {
           aria-labelledby="kai-chat-title"
           className="kai-panel kai-panel-shell"
         >
+          {/* Header */}
           <div className="kai-header">
-            <div className="kai-avatar-ring">
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden>
-                <circle cx="10" cy="10" r="4" fill="#C8A96E" />
-                <circle cx="10" cy="10" r="7" stroke="#C8A96E" strokeWidth="0.8" fill="none" opacity="0.4" />
-                <circle cx="10" cy="10" r="9.5" stroke="#C8A96E" strokeWidth="0.5" fill="none" opacity="0.2" />
-              </svg>
-            </div>
+            <HannahAvatar size={34} className="kai-header-avatar" />
             <div className="kai-title-block">
               <div id="kai-chat-title" className="kai-title">
-                Kai
+                Hannah&apos;s Assistant
               </div>
               <div className="kai-subtitle">
                 <span className="kai-status-dot" aria-hidden />
-                Hannah&apos;s assistant
+                Ask me anything about her work
               </div>
             </div>
             <button
@@ -218,75 +270,149 @@ export default function KaiWidget() {
             </button>
           </div>
 
-          <div className="kai-messages">
-            {messages.map((msg, i) => (
-              <div
-                key={i}
-                className={`kai-msg-row ${msg.role === "user" ? "kai-msg-row--user" : "kai-msg-row--assistant"}`}
-              >
-                <div
-                  className={`kai-bubble ${msg.role === "assistant" ? "kai-bubble--assistant" : "kai-bubble--user"}`}
-                >
-                  {msg.content}
+          {/* Intake flow — shown before intent is selected */}
+          {intent === null ? (
+            <div className="kai-intake">
+              <div className="kai-intake-greeting">
+                <HannahAvatar size={26} className="kai-msg-avatar" />
+                <div className="kai-bubble kai-bubble--assistant">
+                  {INTAKE_GREETING}
                 </div>
               </div>
-            ))}
-
-            {isLoading && (
-              <div className="kai-typing">
-                <div className="kai-typing-inner">
-                  <span className="kai-typing-dot kai-dot-1" aria-hidden />
-                  <span className="kai-typing-dot kai-dot-2" aria-hidden />
-                  <span className="kai-typing-dot kai-dot-3" aria-hidden />
-                </div>
+              <div className="kai-chips">
+                {[
+                  { key: "hiring", label: "I'm hiring or recruiting" },
+                  { key: "work", label: "I want to see Hannah's work" },
+                  { key: "collaborate", label: "I'm a potential collaborator" },
+                  { key: "other", label: "Something else" },
+                ].map((chip) => (
+                  <button
+                    key={chip.key}
+                    type="button"
+                    className="kai-chip"
+                    onClick={() => handleIntentSelect(chip.key)}
+                  >
+                    {chip.label}
+                  </button>
+                ))}
               </div>
-            )}
+            </div>
+          ) : (
+            <>
+              {/* Main chat messages */}
+              <div className="kai-messages">
+                {messages.map((msg, i) => (
+                  <div
+                    key={i}
+                    className={`kai-msg-row ${
+                      msg.role === "user"
+                        ? "kai-msg-row--user"
+                        : "kai-msg-row--assistant"
+                    }`}
+                  >
+                    {msg.role === "assistant" && (
+                      <HannahAvatar size={26} className="kai-msg-avatar" />
+                    )}
+                    <div
+                      className={`kai-bubble ${
+                        msg.role === "assistant"
+                          ? "kai-bubble--assistant"
+                          : "kai-bubble--user"
+                      }`}
+                    >
+                      {msg.content}
+                    </div>
+                  </div>
+                ))}
 
-            {notified && (
-              <div className="kai-notify-toast">
-                Hannah has been notified. She will be in touch soon.
+                {isLoading && (
+                  <div className="kai-typing">
+                    <HannahAvatar size={26} className="kai-msg-avatar" />
+                    <div className="kai-typing-inner">
+                      <span className="kai-typing-dot kai-dot-1" aria-hidden />
+                      <span className="kai-typing-dot kai-dot-2" aria-hidden />
+                      <span className="kai-typing-dot kai-dot-3" aria-hidden />
+                    </div>
+                  </div>
+                )}
+
+                {/* Contextual CTAs based on intent */}
+                {intent === "hiring" && messages.length >= 4 && !notified && (
+                  <div className="kai-cta-block">
+                    <a
+                      href="/connect"
+                      className="kai-cta-btn"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Generate a tailored resume
+                    </a>
+                    <a
+                      href="/contact"
+                      className="kai-cta-btn kai-cta-btn--secondary"
+                    >
+                      Book a call
+                    </a>
+                  </div>
+                )}
+
+                {notified && (
+                  <div className="kai-notify-toast">
+                    Hannah has been notified. She will be in touch soon.
+                  </div>
+                )}
+                <div ref={bottomRef} />
               </div>
-            )}
-            <div ref={bottomRef} />
-          </div>
 
-          <div className="kai-input-bar">
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
-              placeholder="Ask Kai anything..."
-              disabled={isLoading}
-              className="kai-input"
-            />
-            <button
-              type="button"
-              onClick={handleSend}
-              disabled={!sendReady}
-              className={`kai-send ${sendReady ? "kai-send--ready" : ""}`}
-              aria-label="Send message"
-            >
-              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden>
-                <path
-                  d="M1 6.5h11M7.5 2l4.5 4.5L7.5 11"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              {/* Input bar */}
+              <div className="kai-input-bar">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) =>
+                    e.key === "Enter" && !e.shiftKey && handleSend()
+                  }
+                  placeholder="Ask about Hannah's work..."
+                  disabled={isLoading}
+                  className="kai-input"
                 />
-              </svg>
-            </button>
-          </div>
+                <button
+                  type="button"
+                  onClick={handleSend}
+                  disabled={!sendReady}
+                  className={`kai-send ${sendReady ? "kai-send--ready" : ""}`}
+                  aria-label="Send message"
+                >
+                  <svg
+                    width="13"
+                    height="13"
+                    viewBox="0 0 13 13"
+                    fill="none"
+                    aria-hidden
+                  >
+                    <path
+                      d="M1 6.5h11M7.5 2l4.5 4.5L7.5 11"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </>
+          )}
         </div>
       )}
 
+      {/* Launcher — orbital rings with Hannah photo in the core */}
       <button
         ref={launcherRef}
         type="button"
         onClick={() => setOpen((v) => !v)}
         className="kai-launcher"
-        aria-label="Chat with Kai"
+        aria-label="Chat with Hannah's assistant"
         aria-expanded={open}
         aria-controls={open ? "kai-chat-panel" : undefined}
       >
@@ -304,8 +430,20 @@ export default function KaiWidget() {
           <span className="kai-ring-dot kai-ring-dot--sm" />
         </span>
 
-        <span className="kai-core-disc" aria-hidden>
-          <span className="kai-core-pupil" />
+        <span className="kai-core-photo" aria-hidden>
+          <Image
+            src="/images/hannah-avatar.jpg"
+            alt=""
+            width={28}
+            height={28}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center top",
+              borderRadius: "50%",
+            }}
+          />
         </span>
       </button>
     </div>
