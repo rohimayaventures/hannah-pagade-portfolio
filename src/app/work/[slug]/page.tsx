@@ -123,7 +123,8 @@ export default async function CaseStudyPage({
     {
       id: "live-demo",
       label: "Live demo",
-      show: study.status === "live",
+      show:
+        study.status === "live" && study.slug !== "ask-hannah-mcp",
     },
     {
       id: "process",
@@ -283,12 +284,14 @@ export default async function CaseStudyPage({
                 <AskHannahMcpConnectSection />
               : null}
 
-              <EmbedBlock
-                key={study.slug}
-                embedType={study.embedType}
-                embedUrl={study.embedUrl}
-                title={study.title}
-              />
+              {study.slug !== "ask-hannah-mcp" ?
+                <EmbedBlock
+                  key={study.slug}
+                  embedType={study.embedType}
+                  embedUrl={study.embedUrl}
+                  title={study.title}
+                />
+              : null}
 
               {hasInteractive ?
                 <StripSectionTopMargin>
