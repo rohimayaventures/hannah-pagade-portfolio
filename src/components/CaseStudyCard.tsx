@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import AskHannahMcpCardCover from "./AskHannahMcpCardCover";
+import CaseStudyCardCoverImage from "./CaseStudyCardCoverImage";
 import TagChip from "./TagChip";
 import type { CaseStudy } from "@/content/caseStudies";
 
@@ -35,19 +35,11 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
         className="card-image-wrap relative h-[200px] w-full overflow-hidden"
         style={{ backgroundColor: "var(--obsidian)" }}
       >
-        {study.slug === "ask-hannah-mcp" && study.coverImage ? (
+        {study.slug === "ask-hannah-mcp" && study.coverImage ?
           <AskHannahMcpCardCover />
-        ) : study.coverImage ? (
-          <Image
-            src={study.coverImage}
-            alt={study.title}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="transition-transform duration-500 ease-out group-hover:scale-105"
-            style={{ objectFit: "cover" }}
-          />
-        ) : (
-          <div
+        : study.coverImage ?
+          <CaseStudyCardCoverImage study={study} />
+        : <div
             className="relative flex h-full w-full items-end p-5"
             style={{
               background:
@@ -76,7 +68,7 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
               {study.title.charAt(0)}
             </span>
           </div>
-        )}
+        }
         <div
           className="absolute right-3 top-3 z-10 flex items-center gap-1.5 rounded-sm border px-2.5 py-1"
           style={{
@@ -103,7 +95,7 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
         {(study.role || study.timeline) && (
           <div
             className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-0 font-body text-xs"
-            style={{ color: "rgba(8, 12, 20, 0.72)" }}
+            style={{ color: "rgba(8, 12, 20, 0.88)" }}
           >
             {study.role && <span>{study.role}</span>}
             {study.role && study.timeline && (
@@ -121,13 +113,16 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
           {study.title}
         </h3>
         {showKeyOutcome && (
-          <p className="mb-2 font-body text-sm font-medium" style={{ color: "rgba(8, 12, 20, 0.9)" }}>
+          <p
+            className="mb-2 font-body text-sm font-medium"
+            style={{ color: "rgba(8, 12, 20, 0.9)" }}
+          >
             {study.keyOutcome}
           </p>
         )}
         <p
           className="mb-4 break-words font-body text-sm leading-relaxed"
-          style={{ color: "rgba(8, 12, 20, 0.72)" }}
+          style={{ color: "rgba(8, 12, 20, 0.84)" }}
         >
           {summary}
         </p>

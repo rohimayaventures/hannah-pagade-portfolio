@@ -69,7 +69,7 @@ export default function EmbedBlock({
     return (
       <section
         id={id}
-        className="rounded-xl p-6"
+        className="rounded-xl p-6 text-center"
         style={{
           border: "1px solid rgba(200, 169, 110, 0.2)",
           backgroundColor: "rgba(255, 255, 255, 0.05)",
@@ -77,7 +77,7 @@ export default function EmbedBlock({
       >
         <div className="font-display text-xl text-cream">Live demo</div>
         <div
-          className="mt-2 font-body"
+          className="mx-auto mt-2 max-w-md font-body"
           style={{ color: "rgba(244, 239, 230, 0.8)" }}
         >
           A live embed for this project will be available when the demo is
@@ -100,7 +100,7 @@ export default function EmbedBlock({
       }}
     >
       <div
-        className="flex flex-col gap-3 px-6 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+        className="flex flex-col items-center gap-3 px-6 py-4 text-center sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4"
         style={{ borderBottom: "1px solid rgba(200, 169, 110, 0.2)" }}
       >
         <div
@@ -121,7 +121,7 @@ export default function EmbedBlock({
 
       {loadStatus === "slow" && (
         <div
-          className="border-b px-6 py-2.5 font-body text-xs sm:text-sm"
+          className="border-b px-6 py-2.5 text-center font-body text-xs sm:text-sm"
           style={{
             borderColor: "rgba(200, 169, 110, 0.15)",
             color: "rgba(244, 239, 230, 0.75)",
@@ -137,12 +137,12 @@ export default function EmbedBlock({
       )}
 
       {loadStatus === "blocked" ? (
-        <div className="flex min-h-[min(22rem,50dvh)] flex-col items-start justify-center px-6 py-10">
+        <div className="flex min-h-[min(22rem,50dvh)] flex-col items-center justify-center px-6 py-10 text-center">
           <div className="font-display text-xl text-cream">
             Could not load embed
           </div>
           <div
-            className="mt-2 max-w-prose font-body"
+            className="mx-auto mt-2 max-w-prose font-body"
             style={{ color: "rgba(244, 239, 230, 0.8)" }}
           >
             The demo did not finish loading in time (it may be blocked by your

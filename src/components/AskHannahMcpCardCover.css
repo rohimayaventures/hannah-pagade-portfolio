@@ -48,8 +48,25 @@
   position: absolute;
   inset: 0;
   display: flex;
+  flex-direction: column;
   min-height: 200px;
   background: #080c14;
+}
+
+/* Photo + title row; bottom strip matches other case study cards (CaseStudyCardCoverImage). */
+.ah-mcp-cover__row {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.ah-mcp-cover__strip {
+  z-index: 8;
+  flex-shrink: 0;
+  border-top: 1px solid rgba(200, 169, 110, 0.28);
+  background-color: rgba(8, 12, 20, 0.94);
+  box-shadow: 0 -12px 28px rgba(8, 12, 20, 0.45);
+  padding: 0.625rem 0.75rem;
 }
 
 .ah-mcp-cover__photo {
@@ -66,7 +83,7 @@
 
 /* Narrow grid columns: stack so rings + face stay legible */
 @media (max-width: 380px) {
-  .ah-mcp-cover {
+  .ah-mcp-cover__row {
     flex-direction: column;
   }
 

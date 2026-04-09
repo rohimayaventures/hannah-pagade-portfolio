@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Layout from "@/components/Layout";
+import AskHannahMcpConnectSection from "@/components/AskHannahMcpConnectSection";
 import CaseStudyHero from "@/components/CaseStudyHero";
 import EmbedBlock from "@/components/EmbedBlock";
 import HonestSummary from "@/components/HonestSummary";
@@ -113,6 +114,11 @@ export default async function CaseStudyPage({
       id: "the-problem",
       label: "The problem",
       show: Boolean(study.stats?.length),
+    },
+    {
+      id: "mcp-connect",
+      label: "Use in Claude",
+      show: study.slug === "ask-hannah-mcp",
     },
     {
       id: "live-demo",
@@ -271,6 +277,10 @@ export default async function CaseStudyPage({
                   eyebrow="The problem"
                   title="The stakes are not abstract"
                 />
+              : null}
+
+              {study.slug === "ask-hannah-mcp" ?
+                <AskHannahMcpConnectSection />
               : null}
 
               <EmbedBlock

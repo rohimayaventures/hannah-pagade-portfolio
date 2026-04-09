@@ -18,7 +18,7 @@ export default function StackRow({
 }: StackRowProps) {
   return (
     <section id={id} className="mt-12 w-full">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-6xl text-center">
         {eyebrow ? (
           <p
             className="font-mono text-[10px] uppercase tracking-[0.2em]"
@@ -32,7 +32,7 @@ export default function StackRow({
             {title}
           </h2>
         ) : null}
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-6 flex flex-wrap justify-center gap-2">
           {highlighted.map((item) => (
             <span
               key={item}

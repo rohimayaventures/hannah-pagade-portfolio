@@ -60,7 +60,7 @@ export default function HonestSummary({
 
   return (
     <section id={id} className="mt-12 w-full">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-6xl text-center">
         <p
           className="font-mono text-[10px] uppercase tracking-[0.2em]"
           style={{ color: "rgba(244, 239, 230, 0.5)" }}

@@ -106,7 +106,7 @@ function AnimatedStat({ stat }: { stat: StatItem }) {
       : parsed.render(value);
 
   return (
-    <div className="flex h-full flex-col gap-2 px-4 py-6 sm:px-6">
+    <div className="flex h-full flex-col items-center gap-2 px-4 py-6 text-center sm:px-6">
       <div className="font-display text-3xl text-gold sm:text-4xl md:text-[2.75rem] leading-none">
         {display}
       </div>
@@ -146,14 +146,14 @@ export default function StatsRow({
       >
         {eyebrow ? (
           <p
-            className="font-mono text-[10px] uppercase tracking-[0.2em]"
+            className="text-center font-mono text-[10px] uppercase tracking-[0.2em]"
             style={{ color: "rgba(244, 239, 230, 0.5)" }}
           >
             {eyebrow}
           </p>
         ) : null}
         {title ? (
-          <h2 className="font-display mt-4 text-2xl text-cream md:text-3xl">
+          <h2 className="font-display mt-4 text-center text-2xl text-cream md:text-3xl">
             {title}
           </h2>
         ) : null}

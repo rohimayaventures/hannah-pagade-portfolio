@@ -22,7 +22,7 @@ export default function ProofPointBlock({
         borderBottom: "1px solid rgba(255,255,255,0.07)",
       }}
     >
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-8 sm:py-12 md:px-16 md:py-14">
+      <div className="mx-auto max-w-6xl px-4 py-8 text-center sm:px-8 sm:py-12 md:px-16 md:py-14">
         <p
           className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold"
           style={{ opacity: 0.9 }}
@@ -30,14 +30,13 @@ export default function ProofPointBlock({
           {proofPoint.label}
         </p>
         <p
-          className="font-display mt-6 max-w-3xl break-words text-lg font-light leading-relaxed sm:text-xl md:text-2xl"
+          className="font-display mx-auto mt-6 max-w-3xl break-words text-lg font-light leading-relaxed sm:text-xl md:text-2xl"
           style={{ color: "rgba(244, 239, 230, 0.72)" }}
         >
           {proofPoint.body}
         </p>
         <p
-          className="font-body mt-8 border-l-2 border-gold pl-4 text-base text-gold sm:text-lg"
-          style={{ borderLeftWidth: 2 }}
+          className="mx-auto mt-8 max-w-3xl border-t border-gold pt-6 font-body text-base text-gold sm:text-lg"
         >
           {proofPoint.verdict}
         </p>

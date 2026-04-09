@@ -23,7 +23,7 @@ export default function NextStudyCard({
 
   return (
     <section
-      className="mt-14 w-full max-w-full rounded-xl p-6"
+      className="mt-14 w-full max-w-full rounded-xl p-6 text-center"
       style={{
         border: "1px solid rgba(200, 169, 110, 0.2)",
         backgroundColor: "rgba(255, 255, 255, 0.05)",
@@ -38,20 +38,20 @@ export default function NextStudyCard({
           href={`/work/${next.slug}`}
           className="group block min-w-0"
         >
-          <div className="flex min-w-0 flex-col gap-4">
+          <div className="flex min-w-0 flex-col items-center gap-4">
             <div className="min-w-0">
               <div className="break-words font-display text-2xl text-cream">
                 {next.title}
               </div>
               <div
-                className="mt-2 break-words font-body"
+                className="mx-auto mt-2 max-w-2xl break-words font-body"
                 style={{ color: "rgba(244, 239, 230, 0.8)" }}
               >
                 {next.subtitle}
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap justify-center gap-2">
               {next.tags.slice(0, 3).map((tag) => (
                 <TagChip key={tag} tag={tag} />
               ))}

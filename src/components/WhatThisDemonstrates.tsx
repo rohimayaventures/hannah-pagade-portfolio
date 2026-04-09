@@ -68,7 +68,7 @@ export default function WhatThisDemonstrates({
 
   return (
     <div id={id} className="flex flex-col gap-3">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-6xl text-center">
         {eyebrow ? (
           <p
             className="font-mono text-[10px] uppercase tracking-[0.2em]"

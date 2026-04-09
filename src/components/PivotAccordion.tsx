@@ -60,7 +60,7 @@ export default function PivotAccordion({
 
   return (
     <div id={id} className="flex flex-col gap-[10px]">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-6xl text-center">
         {eyebrow ? (
           <p
             className="font-mono text-[10px] uppercase tracking-[0.2em]"

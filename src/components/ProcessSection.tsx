@@ -92,11 +92,9 @@ export default function ProcessSection({
   return (
     <section id={id} className="mt-12">
       <FadeIn>
-        <div className="flex items-end justify-between gap-6">
-          <div>
-            <h2 className="font-display text-2xl text-cream">Process</h2>
-            <GoldRule />
-          </div>
+        <div className="flex flex-col items-center text-center">
+          <h2 className="font-display text-2xl text-cream">Process</h2>
+          <GoldRule centered />
         </div>
       </FadeIn>
 
