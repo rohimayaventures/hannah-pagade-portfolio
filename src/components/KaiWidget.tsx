@@ -26,9 +26,9 @@ const INTENT_MESSAGES: Record<string, string> = {
 const INTENT_OPENERS: Record<string, string> = {
   hiring:
     "Great. I can walk you through Hannah's background, her live products, her validated metrics, and help generate a tailored resume or cover letter for your role. What kind of position are you hiring for?",
-  work: "Happy to take you through what she has built. Hannah has four live products across healthcare AI, fintech, and enterprise conversational AI, and two more in active development. Which area interests you most, or would you like a full overview?",
+  work: "Happy to take you through what she has built. Hannah has four live products across healthcare AI, fintech, and enterprise conversational AI, and additional products in active development. Which area interests you most, or would you like a full overview?",
   collaborate:
-    "Hannah takes on select freelance and collaborative work. Drop your name and email and she will reach out directly.",
+    "Hannah takes on select freelance and collaboration projects. Drop your name and email and she will reach out directly.",
   other:
     "No problem. Ask me anything about Hannah's work, background, products, or how to reach her.",
 };
