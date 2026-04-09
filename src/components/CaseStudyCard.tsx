@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import AskHannahMcpCardCover from "./AskHannahMcpCardCover";
 import TagChip from "./TagChip";
 import type { CaseStudy } from "@/content/caseStudies";
 
@@ -17,6 +18,9 @@ const statusDot: Record<string, string> = {
 
 export default function CaseStudyCard({ study }: { study: CaseStudy }) {
   const summary = study.cardSummary ?? study.subtitle;
+  /** `cardSummary` is written for the grid card; showing `keyOutcome` too usually duplicates it. */
+  const showKeyOutcome =
+    Boolean(study.keyOutcome) && study.cardSummary == null;
 
   return (
     <Link
@@ -31,7 +35,9 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
         className="card-image-wrap relative h-[200px] w-full overflow-hidden"
         style={{ backgroundColor: "var(--obsidian)" }}
       >
-        {study.coverImage ? (
+        {study.slug === "ask-hannah-mcp" && study.coverImage ? (
+          <AskHannahMcpCardCover />
+        ) : study.coverImage ? (
           <Image
             src={study.coverImage}
             alt={study.title}
@@ -114,7 +120,7 @@ export default function CaseStudyCard({ study }: { study: CaseStudy }) {
         >
           {study.title}
         </h3>
-        {study.keyOutcome && (
+        {showKeyOutcome && (
           <p className="mb-2 font-body text-sm font-medium" style={{ color: "rgba(8, 12, 20, 0.9)" }}>
             {study.keyOutcome}
           </p>

@@ -1,0 +1,261 @@
+/* Ask Hannah MCP grid card — launcher-style rings (matches kai-widget launcher, scaled) */
+
+@keyframes ah-mcp-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ah-mcp-spin-r {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes ah-mcp-aura {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+@keyframes ah-mcp-core {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(200, 169, 110, 0),
+      0 0 8px rgba(200, 169, 110, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 0 8px rgba(200, 169, 110, 0.08),
+      0 0 22px rgba(200, 169, 110, 0.55);
+  }
+}
+
+.ah-mcp-cover {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  min-height: 200px;
+  background: #080c14;
+}
+
+.ah-mcp-cover__photo {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  width: 172px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(200, 169, 110, 0.1);
+  background: linear-gradient(135deg, #080c14 0%, #0d1420 100%);
+}
+
+/* Narrow grid columns: stack so rings + face stay legible */
+@media (max-width: 380px) {
+  .ah-mcp-cover {
+    flex-direction: column;
+  }
+
+  .ah-mcp-cover__photo {
+    width: 100%;
+    height: 118px;
+    border-right: none;
+    border-bottom: 1px solid rgba(200, 169, 110, 0.1);
+  }
+
+  .ah-mcp-launcher {
+    transform: scale(0.72);
+  }
+
+  .ah-mcp-cover__panel {
+    flex: 1;
+    min-height: 0;
+  }
+
+  .ah-mcp-cover__title {
+    padding: 0.65rem 1rem 0.85rem;
+    justify-content: center;
+  }
+}
+
+.ah-mcp-cover__panel {
+  position: relative;
+  min-width: 0;
+  flex: 1;
+  background: linear-gradient(125deg, #0a1018 0%, #0d1420 45%, #141d2e 100%);
+}
+
+.ah-mcp-cover__panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  background-image: radial-gradient(
+    rgba(200, 169, 110, 0.12) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.ah-mcp-cover__panel::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 40%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(200, 169, 110, 0.35) 0%,
+    rgba(200, 169, 110, 0.08) 45%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.ah-mcp-cover__title {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 1rem 1.25rem 1rem 1rem;
+}
+
+@media (max-width: 480px) {
+  .ah-mcp-cover__title .ah-mcp-cover__headline {
+    font-size: 1.15rem;
+  }
+  .ah-mcp-cover__title .ah-mcp-cover__sub {
+    display: none;
+  }
+}
+
+/* ── Launcher (64px kai → 168px card) scale ≈ 2.625 ── */
+.ah-mcp-launcher {
+  position: relative;
+  display: flex;
+  width: 168px;
+  height: 168px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.ah-mcp-aura {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(200, 169, 110, 0.14);
+}
+
+.ah-mcp-aura--0 {
+  width: 168px;
+  height: 168px;
+  animation: ah-mcp-aura 3s ease-in-out infinite 0s;
+}
+
+.ah-mcp-aura--1 {
+  width: 142px;
+  height: 142px;
+  animation: ah-mcp-aura 3s ease-in-out infinite 0.6s;
+}
+
+.ah-mcp-aura--2 {
+  width: 116px;
+  height: 116px;
+  animation: ah-mcp-aura 3s ease-in-out infinite 1.2s;
+}
+
+.ah-mcp-ring {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.ah-mcp-ring--1 {
+  width: 163px;
+  height: 163px;
+  border: 1px solid rgba(200, 169, 110, 0.3);
+  animation: ah-mcp-spin 18s linear infinite;
+}
+
+.ah-mcp-ring--2 {
+  width: 126px;
+  height: 126px;
+  border: 1px solid rgba(200, 169, 110, 0.22);
+  animation: ah-mcp-spin-r 12s linear infinite;
+}
+
+.ah-mcp-ring--3 {
+  width: 92px;
+  height: 92px;
+  border: 1px solid rgba(200, 169, 110, 0.4);
+  animation: ah-mcp-spin 8s linear infinite;
+}
+
+.ah-mcp-ring-dot {
+  position: absolute;
+  border-radius: 50%;
+  background: #c8a96e;
+}
+
+.ah-mcp-ring-dot--lg {
+  top: -6px;
+  left: calc(50% - 6px);
+  width: 13px;
+  height: 13px;
+}
+
+.ah-mcp-ring-dot--sm {
+  top: -5px;
+  left: calc(50% - 5px);
+  width: 10px;
+  height: 10px;
+}
+
+.ah-mcp-core {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 74px;
+  height: 74px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1.5px solid #c8a96e;
+  animation: ah-mcp-core 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ah-mcp-aura--0,
+  .ah-mcp-aura--1,
+  .ah-mcp-aura--2,
+  .ah-mcp-ring--1,
+  .ah-mcp-ring--2,
+  .ah-mcp-ring--3,
+  .ah-mcp-core {
+    animation: none;
+  }
+
+  .ah-mcp-core {
+    box-shadow: 0 0 8px rgba(200, 169, 110, 0.3);
+  }
+}

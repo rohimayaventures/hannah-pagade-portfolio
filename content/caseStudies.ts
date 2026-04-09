@@ -746,6 +746,148 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     featured: false,
+    order: 6,
+    slug: "ask-hannah-mcp",
+    title: "Ask Hannah MCP",
+    tagline: "Queryable professional data for AI systems.",
+    subtitle:
+      "A live MCP server that turns Hannah's portfolio into a queryable data layer for AI systems.",
+    tags: ["mcp", "agentic-ai", "infrastructure", "developer-tooling"],
+    coverImage: "/images/ask-hannah-mcp-cover.jpg",
+    embedType: "live",
+    embedUrl: "https://ask-hannah-mcp-production.up.railway.app/health",
+    liveUrl: "https://ask-hannah-mcp-production.up.railway.app",
+    status: "live",
+    projectDescription:
+      "Ask Hannah MCP is a live Model Context Protocol server deployed to Railway. Ten tools expose profile, voice, projects, metrics, skills, FAQ answers, a role-focused hiring brief, and resume and cover letter generation from structured data only. Registered as a public connector in Claude.ai so hiring managers can query Hannah's professional facts inside the tools they already use.",
+    problemStatement:
+      "Most portfolios are static websites. Hiring workflows increasingly run inside AI assistants. Ask Hannah MCP is structured professional data as a live HTTP endpoint, not a PDF and not a nav bar, so downstream models can synthesize grounded answers from a source Hannah controls.",
+    processSteps: [
+      "Tool schema design: ten tools, each scoped to a single job, with schema clarity first because downstream synthesis is only as good as the structure it receives.",
+      "Data contract and voice: hannah-data.ts is the single source of truth for professional content; voice answers stay first-person for human-facing synthesis.",
+      "Transport and operations: stdio worked locally; Claude.ai required HTTP streamable MCP. Rebuilt on Express and Railway with Zod on inputs, strict generation contracts, and automated tests.",
+    ],
+    processAngle:
+      "Node.js 20, TypeScript, MCP SDK, Express with HTTP MCP transport, Zod, Anthropic SDK for generation tools, Railway auto-deploy. Stateless: no database, data at compile time in hannah-data.ts.",
+    cardSummary:
+      "Live MCP over HTTP on Railway. Ten tools, Claude.ai connector, Zod validation, strict resume and cover letter contracts, hiring brief with conversion path.",
+    role: "Product Lead, MCP Architect, Full-Stack Implementation",
+    timeline: "April 2026",
+    keyOutcome:
+      "Live HTTP MCP on Railway, registered Claude.ai connector, ten tools with shared data module, stateless architecture, automated tests.",
+    proofPoint: {
+      label: "Live in Claude.ai",
+      body: "Ask Hannah MCP is registered as a live connector in Claude.ai. Any hiring manager, recruiter, or peer who connects it can open a new Claude chat and query Hannah's background, projects, metrics, and voice statements directly. The product demonstrates in its own structure what it claims about the builder: she understands how AI systems connect to each other, how to design tools for agentic workflows, and how to ship infrastructure that works.",
+      verdict: "The medium is the message.",
+    },
+    stats: [
+      {
+        number: "10",
+        label: "live MCP tools",
+        source: "Deployed to Railway",
+      },
+      {
+        number: "1",
+        label: "Claude.ai connector",
+        source: "Publicly registered",
+      },
+      {
+        number: "0",
+        label: "databases required",
+        source: "Stateless by design",
+      },
+    ],
+    processStepsInteractive: [
+      {
+        number: "01",
+        label: "Schema",
+        phase: "STEP 01 — TOOL SCHEMA",
+        title: "Tool schema design",
+        body: "Ten tools, each scoped to a single job. Profile, voice, projects, metrics, skills, FAQ answers, hiring brief, and generation. Schema clarity was the first decision because downstream AI synthesis is only as good as the structure it receives.\n\nStack: TypeScript, Zod, MCP SDK",
+      },
+      {
+        number: "02",
+        label: "Data",
+        phase: "STEP 02 — DATA CONTRACT",
+        title: "Data contract and voice consistency",
+        body: "hannah-data.ts is the single source of truth for professional content. Voice statements are first-person and human, not formal third-person summaries, because the downstream audience is a human reading AI-synthesized output. The distinction shapes how every tool response reads.\n\nStack: TypeScript, Anthropic SDK",
+      },
+      {
+        number: "03",
+        label: "Transport",
+        phase: "STEP 03 — TRANSPORT",
+        title: "Transport, reliability, and conversion",
+        body: "The stdio build worked locally and failed at registration. The HTTP MCP transport rebuild was one pivot but a necessary one. Railway auto-deploys on push. Ten tools, one endpoint, zero database. Later passes added trust metadata, hiring brief depth, explicit contact ordering, and automated tests.\n\nStack: Express, Railway, HTTP MCP Transport",
+      },
+    ],
+    pivots: [
+      {
+        tag: "TECHNICAL",
+        title: "The stdio to HTTP transport swap",
+        body: "The first working build used stdio transport. It compiled clean and passed all local tests. Claude.ai expects a public HTTP endpoint. Stdio does not expose a URL. The entire transport layer had to be rebuilt around Express and streamable HTTP before the server could be registered.",
+        lesson:
+          "When building for an external platform's integration spec, read the integration spec first, not the SDK quickstart. They are not the same document.",
+      },
+      {
+        tag: "PRODUCT",
+        title: "The resume output contract",
+        body: "The first resume tool used a loosely structured prompt. Outputs were good but inconsistent across runs. Enforced a strict output contract: model returns document body only, uses only verified data, maps failures to explicit error codes.",
+        lesson:
+          "Generation tools in production need a contract, not a suggestion. The model does what the prompt allows.",
+      },
+      {
+        tag: "PRODUCT",
+        title: "Scoping out fit scoring",
+        body: "Early design included a tool that would score Hannah's fit against a job description in real time. Cut it. A tool that can return a low fit score is a liability in a job search context.",
+        lesson:
+          "Scope is a product decision. Not every technically interesting feature belongs in the product.",
+      },
+    ],
+    stackHighlighted: [
+      "MCP SDK (official SDK for Claude.ai connector compatibility)",
+      "Express and HTTP transport (public connector registration; stdio only works locally)",
+      "Railway (auto-deploy on push; stateless redeploys)",
+      "Zod (schema enforcement on all tool inputs before handlers run)",
+    ],
+    stackStandard: ["Node.js 20", "TypeScript", "Anthropic SDK"],
+    whatThisDemonstrates: [
+      {
+        title: "Agentic architecture",
+        tag: "TECHNICAL",
+        body: "Built a live MCP server and registered it as a Claude.ai connector. Understands how AI systems connect to each other, not just how to build chat interfaces.",
+      },
+      {
+        title: "Tool design for synthesis",
+        tag: "PRODUCT",
+        body: "Each tool was designed with the downstream AI synthesis step in mind. Schema clarity, voice separation, and return shape are all product decisions that affect how the output reads to a human.",
+      },
+      {
+        title: "Production discipline",
+        tag: "TECHNICAL",
+        body: "Stateless architecture, Zod validation, strict generation contracts, automated tests, modular handlers. Built to stay credible as it grows.",
+      },
+    ],
+    honestSummary: {
+      technical: {
+        label: "Technical understanding",
+        body: "Understands MCP transport architecture well enough to identify and fix the stdio versus HTTP mismatch that blocked public registration. Applied strict generation contracts and standardized error handling. Refactored into modules with automated tests so changes do not regress silently.",
+      },
+      product: {
+        label: "Product understanding",
+        body: "Scoped out a fit-scoring tool that would have been technically interesting but created product liability in a job search context. Made the voice tool distinct from the profile tool because the downstream synthesis use case for each is different. Added a hiring brief and conversion path so screening does not dead-end after reading.",
+      },
+      design: {
+        label: "Design understanding",
+        body: "The UX of an MCP tool is its schema. Field names, return shape, and the structure of voice answers are all design decisions that affect how synthesized output reads to a human. That distinction was designed, not accidental.",
+      },
+    },
+    impactLine:
+      "A live MCP connector in Claude.ai: ten tools, one Railway endpoint, structured data Hannah controls, and a clear conversion path in the hiring brief.",
+    impactQuote:
+      "Any hiring manager with a Claude.ai account can connect this server right now and ask it anything. It will answer from structured data Hannah controls. That is a different kind of leave-behind.",
+  },
+  {
+    featured: false,
     order: 3,
     slug: "clearchannel-vestara",
     title: "ClearChannel by Vestara",
