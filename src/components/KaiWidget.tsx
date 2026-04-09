@@ -23,6 +23,11 @@ const INTENT_MESSAGES: Record<string, string> = {
   other: "Something else.",
 };
 
+/** Open the assistant automatically after this delay if the visitor has not dismissed it this session. */
+const AUTO_OPEN_DELAY_MS = 10_000;
+
+const SESSION_AUTO_OPEN_SUPPRESS_KEY = "hkp-portfolio-assistant-auto-suppress";
+
 const INTENT_OPENERS: Record<string, string> = {
   hiring:
     "Great. I can walk you through Hannah's background, her live products, her validated metrics, and help generate a tailored resume or cover letter for your role. What kind of position are you hiring for?",
@@ -75,9 +80,40 @@ export default function KaiWidget() {
   const panelRef = useRef<HTMLDivElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
 
+  const suppressAutoOpenForSession = useCallback(() => {
+    try {
+      sessionStorage.setItem(SESSION_AUTO_OPEN_SUPPRESS_KEY, "1");
+    } catch {
+      /* private mode or quota */
+    }
+  }, []);
+
   const closePanel = useCallback(() => {
+    suppressAutoOpenForSession();
     setOpen(false);
     queueMicrotask(() => launcherRef.current?.focus());
+  }, [suppressAutoOpenForSession]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    try {
+      if (sessionStorage.getItem(SESSION_AUTO_OPEN_SUPPRESS_KEY) === "1") {
+        return;
+      }
+    } catch {
+      /* continue; timer still runs */
+    }
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const id = window.setTimeout(() => {
+      setOpen((wasOpen) => (wasOpen ? wasOpen : true));
+    }, AUTO_OPEN_DELAY_MS);
+
+    return () => window.clearTimeout(id);
   }, []);
 
   useEffect(() => {

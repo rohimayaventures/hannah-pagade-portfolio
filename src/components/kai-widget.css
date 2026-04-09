@@ -74,6 +74,42 @@
   animation: kai-slide-up 0.25s ease-out forwards;
 }
 
+@media (max-width: 639px) {
+  .kai-panel.kai-panel-shell {
+    width: min(
+      300px,
+      calc(
+        100vw - 1.25rem - env(safe-area-inset-left, 0px) -
+          env(safe-area-inset-right, 0px)
+      )
+    );
+    bottom: 88px;
+    max-height: min(72dvh, 440px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .kai-messages {
+    max-height: min(200px, 36dvh);
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .kai-header {
+    padding: 10px 12px;
+    flex-shrink: 0;
+  }
+
+  .kai-intake {
+    padding: 12px;
+    flex-shrink: 0;
+  }
+
+  .kai-input-bar {
+    flex-shrink: 0;
+  }
+}
+
 /* ── Header ── */
 .kai-header {
   display: flex;
