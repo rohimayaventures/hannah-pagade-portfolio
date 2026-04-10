@@ -214,25 +214,6 @@
   color: #c8a96e;
 }
 
-/* iOS/Android often hide scrollbars; hint helps. Hidden on desktop where bars may show. */
-.kai-intake-scroll-hint {
-  display: none;
-  flex-shrink: 0;
-  margin: 0;
-  padding-top: 4px;
-  text-align: center;
-  font-size: 10px;
-  line-height: 1.35;
-  color: rgba(244, 239, 230, 0.45);
-  font-family: var(--font-body), sans-serif;
-}
-
-@media (max-width: 639px) {
-  .kai-intake-scroll-hint {
-    display: block;
-  }
-}
-
 /* ── Messages ── */
 .kai-messages {
   display: flex;

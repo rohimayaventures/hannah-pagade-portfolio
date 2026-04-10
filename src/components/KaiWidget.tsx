@@ -220,18 +220,31 @@ export default function KaiWidget() {
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
-    const userMessage: Message = { role: "user", content: input.trim() };
-    const updatedMessages = [...messages, userMessage];
+    const text = input.trim();
+    const fromIntake = intent === null;
+    if (fromIntake) {
+      setIntent("other");
+    }
+
+    const userMessage: Message = { role: "user", content: text };
+    const updatedMessages =
+      fromIntake && messages.length === 0 ?
+        [userMessage]
+      : [...messages, userMessage];
+
     setMessages(updatedMessages);
     setInput("");
     setIsLoading(true);
+
+    const apiIntent = fromIntake ? "other" : (intent ?? "general");
+
     try {
       const res = await fetch("/api/concierge", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           messages: updatedMessages,
-          intent: intent ?? "general",
+          intent: apiIntent,
         }),
       });
       const data = (await res.json()) as { text?: string; hasEmail?: boolean };
@@ -306,8 +319,7 @@ export default function KaiWidget() {
             </button>
           </div>
 
-          {/* Intake flow — shown before intent is selected */}
-          {intent === null ? (
+          {intent === null ?
             <div className="kai-intake">
               <div className="kai-intake-greeting">
                 <HannahAvatar size={26} className="kai-msg-avatar" />
@@ -332,116 +344,110 @@ export default function KaiWidget() {
                   </button>
                 ))}
               </div>
-              <p className="kai-intake-scroll-hint">
-                Swipe in this area if you don&apos;t see all choices.
-              </p>
             </div>
-          ) : (
-            <>
-              {/* Main chat messages */}
-              <div className="kai-messages">
-                {messages.map((msg, i) => (
+          : <div className="kai-messages">
+              {messages.map((msg, i) => (
+                <div
+                  key={i}
+                  className={`kai-msg-row ${
+                    msg.role === "user" ? "kai-msg-row--user" : "kai-msg-row--assistant"
+                  }`}
+                >
+                  {msg.role === "assistant" && (
+                    <HannahAvatar size={26} className="kai-msg-avatar" />
+                  )}
                   <div
-                    key={i}
-                    className={`kai-msg-row ${
-                      msg.role === "user"
-                        ? "kai-msg-row--user"
-                        : "kai-msg-row--assistant"
+                    className={`kai-bubble ${
+                      msg.role === "assistant"
+                        ? "kai-bubble--assistant"
+                        : "kai-bubble--user"
                     }`}
                   >
-                    {msg.role === "assistant" && (
-                      <HannahAvatar size={26} className="kai-msg-avatar" />
-                    )}
-                    <div
-                      className={`kai-bubble ${
-                        msg.role === "assistant"
-                          ? "kai-bubble--assistant"
-                          : "kai-bubble--user"
-                      }`}
-                    >
-                      {msg.content}
-                    </div>
+                    {msg.content}
                   </div>
-                ))}
+                </div>
+              ))}
 
-                {isLoading && (
-                  <div className="kai-typing">
-                    <HannahAvatar size={26} className="kai-msg-avatar" />
-                    <div className="kai-typing-inner">
-                      <span className="kai-typing-dot kai-dot-1" aria-hidden />
-                      <span className="kai-typing-dot kai-dot-2" aria-hidden />
-                      <span className="kai-typing-dot kai-dot-3" aria-hidden />
-                    </div>
+              {isLoading && (
+                <div className="kai-typing">
+                  <HannahAvatar size={26} className="kai-msg-avatar" />
+                  <div className="kai-typing-inner">
+                    <span className="kai-typing-dot kai-dot-1" aria-hidden />
+                    <span className="kai-typing-dot kai-dot-2" aria-hidden />
+                    <span className="kai-typing-dot kai-dot-3" aria-hidden />
                   </div>
-                )}
+                </div>
+              )}
 
-                {/* Contextual CTAs based on intent */}
-                {intent === "hiring" && messages.length >= 4 && !notified && (
-                  <div className="kai-cta-block">
-                    <a
-                      href="/connect"
-                      className="kai-cta-btn"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Generate a tailored resume
-                    </a>
-                    <a
-                      href="/contact"
-                      className="kai-cta-btn kai-cta-btn--secondary"
-                    >
-                      Book a call
-                    </a>
-                  </div>
-                )}
-
-                {notified && (
-                  <div className="kai-notify-toast">
-                    Hannah has been notified. She will be in touch soon.
-                  </div>
-                )}
-                <div ref={bottomRef} />
-              </div>
-
-              {/* Input bar */}
-              <div className="kai-input-bar">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) =>
-                    e.key === "Enter" && !e.shiftKey && handleSend()
-                  }
-                  placeholder="Ask about Hannah's work..."
-                  disabled={isLoading}
-                  className="kai-input"
-                />
-                <button
-                  type="button"
-                  onClick={handleSend}
-                  disabled={!sendReady}
-                  className={`kai-send ${sendReady ? "kai-send--ready" : ""}`}
-                  aria-label="Send message"
-                >
-                  <svg
-                    width="13"
-                    height="13"
-                    viewBox="0 0 13 13"
-                    fill="none"
-                    aria-hidden
+              {intent === "hiring" && messages.length >= 4 && !notified && (
+                <div className="kai-cta-block">
+                  <a
+                    href="/connect"
+                    className="kai-cta-btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <path
-                      d="M1 6.5h11M7.5 2l4.5 4.5L7.5 11"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </>
-          )}
+                    Generate a tailored resume
+                  </a>
+                  <a
+                    href="/contact"
+                    className="kai-cta-btn kai-cta-btn--secondary"
+                  >
+                    Book a call
+                  </a>
+                </div>
+              )}
+
+              {notified && (
+                <div className="kai-notify-toast">
+                  Hannah has been notified. She will be in touch soon.
+                </div>
+              )}
+              <div ref={bottomRef} />
+            </div>
+          }
+
+          <div className="kai-input-bar">
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) =>
+                e.key === "Enter" && !e.shiftKey && handleSend()
+              }
+              placeholder={
+                intent === null ?
+                  "Type a message, or choose an option above…"
+                : "Ask about Hannah's work…"
+              }
+              disabled={isLoading}
+              className="kai-input"
+              aria-label="Message to Hannah's assistant"
+            />
+            <button
+              type="button"
+              onClick={handleSend}
+              disabled={!sendReady}
+              className={`kai-send ${sendReady ? "kai-send--ready" : ""}`}
+              aria-label="Send message"
+            >
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 13 13"
+                fill="none"
+                aria-hidden
+              >
+                <path
+                  d="M1 6.5h11M7.5 2l4.5 4.5L7.5 11"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       )}
 
