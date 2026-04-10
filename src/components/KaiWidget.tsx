@@ -12,7 +12,7 @@ type Message = {
 type IntentType = "hiring" | "work" | "collaborate" | "other" | null;
 
 const INTAKE_GREETING =
-  "Hi, I'm Hannah's portfolio assistant. What brings you here today?";
+  "Hi — glad you're here. I'm Hannah's assistant. I can help you explore her work, see live products, or find the right way to connect. Where would you like to start?";
 
 const INTENT_MESSAGES: Record<string, string> = {
   hiring:
