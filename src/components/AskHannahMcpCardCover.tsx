@@ -50,16 +50,10 @@ export default function AskHannahMcpCardCover() {
             >
               Ask Hannah MCP
             </span>
-            <span
-              className="ah-mcp-cover__sub font-body text-[10px] uppercase tracking-[0.22em] sm:text-[11px]"
-              style={{ color: "#c8a96e" }}
-            >
+            <span className="ah-mcp-cover__sub font-body text-[10px] uppercase tracking-[0.2em] text-gold sm:text-[11px]">
               Live server · Claude · Ten tools
             </span>
-            <span
-              className="font-body text-xs leading-snug sm:text-[13px]"
-              style={{ color: "rgba(244, 239, 230, 0.42)" }}
-            >
+            <span className="font-body text-xs leading-snug text-cream/45 sm:text-[13px]">
               Queryable professional data for agents
             </span>
           </div>
