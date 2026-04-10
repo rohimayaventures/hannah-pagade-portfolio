@@ -547,6 +547,76 @@
   animation: kai-core 3s ease-in-out infinite;
 }
 
+/* Larger launcher + panel offset on viewports with a mouse / roomy UI (keeps phone footprint small). */
+@media (min-width: 640px) {
+  .kai-launcher {
+    width: 96px;
+    height: 96px;
+  }
+
+  .kai-aura--0 {
+    width: 96px;
+    height: 96px;
+  }
+
+  .kai-aura--1 {
+    width: 81px;
+    height: 81px;
+  }
+
+  .kai-aura--2 {
+    width: 66px;
+    height: 66px;
+  }
+
+  .kai-ring-1 {
+    width: 93px;
+    height: 93px;
+  }
+
+  .kai-ring-2 {
+    width: 72px;
+    height: 72px;
+  }
+
+  .kai-ring-3 {
+    width: 53px;
+    height: 53px;
+  }
+
+  .kai-ring-dot--lg {
+    top: -3px;
+    left: calc(50% - 4px);
+    width: 8px;
+    height: 8px;
+  }
+
+  .kai-ring-dot--sm {
+    top: -3px;
+    left: calc(50% - 3px);
+    width: 6px;
+    height: 6px;
+  }
+
+  .kai-core-photo {
+    width: 42px;
+    height: 42px;
+    border-width: 2px;
+  }
+
+  /* 64px launcher + gap was ~100px; scale with 96px launcher */
+  .kai-panel.kai-panel-shell {
+    bottom: 132px;
+    width: min(
+      380px,
+      calc(
+        100vw - 2.5rem - env(safe-area-inset-left, 0px) -
+          env(safe-area-inset-right, 0px)
+      )
+    );
+  }
+}
+
 /* Reusable photo avatar element */
 .hannah-avatar {
   border-radius: 50%;

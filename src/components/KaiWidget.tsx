@@ -473,8 +473,8 @@ export default function KaiWidget() {
           <Image
             src="/images/hannah-avatar.jpg"
             alt=""
-            width={28}
-            height={28}
+            width={84}
+            height={84}
             style={{
               width: "100%",
               height: "100%",
