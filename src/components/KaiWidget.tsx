@@ -332,6 +332,9 @@ export default function KaiWidget() {
                   </button>
                 ))}
               </div>
+              <p className="kai-intake-scroll-hint">
+                Swipe in this area if you don&apos;t see all choices.
+              </p>
             </div>
           ) : (
             <>
