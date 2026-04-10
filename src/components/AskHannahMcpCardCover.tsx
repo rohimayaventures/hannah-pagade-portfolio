@@ -54,7 +54,7 @@ export default function AskHannahMcpCardCover() {
               Live server · Claude · Ten tools
             </span>
             <span className="font-body text-xs leading-snug text-cream/45 sm:text-[13px]">
-              Queryable professional data for agents
+              AI systems query Hannah&apos;s professional data directly
             </span>
           </div>
         </div>
