@@ -59,6 +59,8 @@
   position: absolute;
   bottom: 100px;
   right: 0;
+  display: flex;
+  max-height: min(85dvh, 600px);
   width: min(
     340px,
     calc(
@@ -66,6 +68,7 @@
         env(safe-area-inset-right, 0px)
     )
   );
+  flex-direction: column;
   background: #0d1420;
   border: 1px solid rgba(200, 169, 110, 0.22);
   border-radius: 14px 14px 4px 14px;
@@ -84,40 +87,25 @@
       )
     );
     bottom: 88px;
-    max-height: min(72dvh, 440px);
-    display: flex;
-    flex-direction: column;
-  }
-
-  .kai-messages {
-    max-height: min(200px, 36dvh);
-    flex: 1 1 auto;
-    min-height: 0;
-  }
-
-  .kai-header {
-    padding: 10px 12px;
-    flex-shrink: 0;
-  }
-
-  .kai-intake {
-    padding: 12px;
-    flex-shrink: 0;
-  }
-
-  .kai-input-bar {
-    flex-shrink: 0;
+    max-height: min(78dvh, 520px);
   }
 }
 
 /* ── Header ── */
 .kai-header {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   gap: 10px;
   padding: 12px 14px;
   border-bottom: 1px solid rgba(200, 169, 110, 0.12);
   background: rgba(200, 169, 110, 0.04);
+}
+
+@media (max-width: 639px) {
+  .kai-header {
+    padding: 10px 12px;
+  }
 }
 
 .kai-header-avatar {
@@ -173,10 +161,22 @@
 
 /* ── Intake flow ── */
 .kai-intake {
-  padding: 14px;
   display: flex;
+  min-height: 0;
+  flex: 1 1 auto;
   flex-direction: column;
   gap: 12px;
+  padding: 14px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 639px) {
+  .kai-intake {
+    padding: 12px;
+  }
 }
 
 .kai-intake-greeting {
@@ -215,11 +215,31 @@
 /* ── Messages ── */
 .kai-messages {
   display: flex;
-  max-height: 320px;
+  min-height: 0;
+  flex: 1 1 auto;
   flex-direction: column;
   gap: 10px;
   padding: 14px;
+  overflow-x: hidden;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.kai-intake::-webkit-scrollbar,
+.kai-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.kai-intake::-webkit-scrollbar-thumb,
+.kai-messages::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(200, 169, 110, 0.28);
+}
+
+.kai-intake::-webkit-scrollbar-track,
+.kai-messages::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.15);
 }
 
 .kai-msg-row {
@@ -350,6 +370,7 @@
 /* ── Input bar ── */
 .kai-input-bar {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   gap: 8px;
   padding: 10px 12px;
