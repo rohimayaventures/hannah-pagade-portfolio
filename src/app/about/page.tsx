@@ -20,7 +20,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Hannah Kraulik Pagade — AI product leader, PM and UX design for live AI products",
+        alt: "Hannah Kraulik Pagade — AI product leader, PM and UX design for live AI products and MCP infrastructure",
       },
     ],
   },
@@ -50,6 +50,8 @@ const aiUxSkills = [
   "Conversation Design",
   "Intent & NLU Architecture",
   "Prompt Engineering",
+  "Agentic Workflows & MCP Surfaces",
+  "Tool Schema Design for Downstream AI",
   "Trust, Safety & Guardrail UX",
   "Multi-Turn & Voice UX",
   "IVR, Chatbot & Agent Assist",
@@ -73,7 +75,7 @@ const techStackCore = [
 ];
 
 const techStackAlso =
-  "Python · FastAPI · Cloudflare · ElevenLabs · pdf-lib · pptxgenjs · Cursor — see case studies for product-specific stacks.";
+  "Python · FastAPI · Cloudflare · ElevenLabs · pdf-lib · pptxgenjs · Cursor · Node.js · Express · MCP SDK · Railway — see case studies for product-specific stacks.";
 
 type AboutProduct = {
   name: string;
@@ -451,9 +453,16 @@ export default function AboutPage() {
               </li>
               <li>
                 <span style={{ color: "var(--cream)" }}>I ship in small loops.</span>{" "}
-                I build in Cursor, deploy to Vercel, and test on real documents, transcripts,
+                I build in Cursor, deploy to Vercel or Railway, and test on real documents, transcripts,
                 and utterances. Then I iterate on the failure modes users would actually
                 hit in production, not just demo paths.
+              </li>
+              <li>
+                <span style={{ color: "var(--cream)" }}>I treat host integrations as the spec.</span>{" "}
+                When the distribution surface is a connector (for example Claude.ai and MCP),
+                the platform integration requirements win over the quickest SDK path. That
+                is how stdio-only prototypes become HTTP MCP, Zod-guarded tool inputs, and
+                deployments that still behave after redeploy.
               </li>
               <li>
                 <span style={{ color: "var(--cream)" }}>I judge success by clarity of scope.</span>{" "}

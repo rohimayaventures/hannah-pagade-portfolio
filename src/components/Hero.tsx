@@ -6,6 +6,7 @@ import { useCallback, useState, type MouseEvent } from "react";
 const focusPills = [
   { label: "Product & discovery", href: "/#work" },
   { label: "Conversational AI", href: "/#work" },
+  { label: "Agentic & MCP", href: "/work/ask-hannah-mcp" },
   { label: "Clinical & high-stakes UX", href: "/about" },
 ] as const;
 
@@ -88,7 +89,9 @@ export default function Hero() {
           I own strategy and launch for AI products: priorities and rollout, plus
           multi-turn and high-stakes experience design—not only screens and
           prototypes. Live work across health, finance, and enterprise
-          conversation, with hands-on execution when the team is small.
+          conversation, plus agentic infrastructure (Ask Hannah MCP: live HTTP MCP
+          on Railway, registered in Claude.ai), with hands-on execution when the
+          team is small.
         </p>
 
         {/* Interactive focus chips */}
