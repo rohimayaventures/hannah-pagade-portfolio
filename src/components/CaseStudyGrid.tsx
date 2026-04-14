@@ -42,6 +42,12 @@ export default function CaseStudyGrid() {
               className="mt-4 h-0.5 w-12 rounded-full bg-gradient-to-r from-gold-on-light to-gold-on-light/25"
               aria-hidden
             />
+            <p className="mt-6 max-w-2xl font-body text-sm leading-relaxed text-obsidian/80 md:text-base">
+              Five live builds across clinical triage, patient literacy, enterprise
+              conversation design, financial document intelligence, and agentic
+              infrastructure (Ask Hannah MCP on Railway, registered in Claude.ai),
+              plus one in-build case study you can open below.
+            </p>
           </div>
         </FadeIn>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3 lg:gap-8">
