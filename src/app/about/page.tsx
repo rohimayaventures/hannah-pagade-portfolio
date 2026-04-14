@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 const aboutDesc =
-  "Hannah Kraulik Pagade: AI product leader spanning product management and UX design for LLM-powered products. Fifteen years in healthcare operations; shipped live apps in clinical, patient, fintech, and enterprise conversation (OrixLink, HealthLiteracy, ClearChannel, FinanceLens). MS AI/ML, CU Boulder (in progress). Open to AI PM and AI product design roles.";
+  "Hannah Kraulik Pagade: AI product leader spanning product management and UX design for LLM-powered products. Seventeen years in healthcare operations; shipped live apps in clinical, patient, fintech, enterprise conversation, and agentic infrastructure (OrixLink, HealthLiteracy, ClearChannel, FinanceLens, Ask Hannah MCP). MS AI/ML, CU Boulder (in progress). Open to AI PM and AI product design roles.";
 
 export const metadata: Metadata = {
   title: "About",
@@ -143,6 +143,20 @@ const products: AboutProduct[] = [
     stack:
       "Next.js 16 · React 19 · Claude Sonnet · Zod · Supabase · pdf-lib · pptxgenjs · Vercel",
   },
+  {
+    name: "Ask Hannah MCP",
+    url: "https://ask-hannah-mcp-production.up.railway.app",
+    urlDisplay: "ask-hannah-mcp-production.up.railway.app",
+    slug: "ask-hannah-mcp",
+    summary:
+      "Live Model Context Protocol server on Railway: ten tools expose profile, projects, metrics, skills, voice, FAQ, a recruiter hiring brief, and resume and cover letter generation from structured data. Registered as a public connector in Claude.ai so hiring managers can query Hannah's professional facts inside the tools they already use.",
+    productDecision:
+      "Scoped for connector reality (HTTP streamable MCP, not stdio-only), strict generation contracts, and conversion (hiring brief contact ordering, UTM tagging)—a portfolio surface that still behaves like a product.",
+    designCall:
+      "The UX of an MCP tool is its schema: field shapes and first-person voice data are designed so downstream synthesis reads correctly to humans, not like a press release.",
+    stack:
+      "Node.js 20 · TypeScript · MCP SDK · Express · Zod · Anthropic API · Railway",
+  },
 ];
 
 const ABOUT_TOC = [
@@ -207,8 +221,10 @@ export default function AboutPage() {
               I own strategy and launch for AI products in high-stakes domains:
               what to ship first, what success means, and how users should trust
               model output. My proof is live software—clinical intake, patient
-              literacy, regulated-style document intelligence, and
-              enterprise-style conversational channels—not decks alone.
+              literacy, regulated-style document intelligence,
+              enterprise-style conversational channels, and agentic infrastructure
+              (Ask Hannah MCP: a live HTTP MCP server on Railway, registered in
+              Claude.ai, with ten structured tools)—not decks alone.
             </p>
             <p
               className="mt-6 max-w-2xl font-body text-base leading-relaxed sm:text-lg"
@@ -340,9 +356,18 @@ export default function AboutPage() {
                   aria-hidden
                 />
                 <span>
-                  <span style={{ color: "var(--cream)" }}>Four live AI products</span>{" "}
-                  you can try today (clinical triage, patient literacy,
-                  enterprise conversation lab, financial document intelligence).
+                  <span style={{ color: "var(--cream)" }}>Five live AI surfaces</span>{" "}
+                  on the work page—clinical triage, patient literacy, enterprise
+                  conversation lab, financial document intelligence, and Ask
+                  Hannah MCP (live MCP on Railway, registered in Claude.ai).{" "}
+                  <Link
+                    href="/work/onboarding-agent"
+                    className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                    style={{ color: "var(--gold)" }}
+                  >
+                    Onboarding Agent
+                  </Link>{" "}
+                  is in build (coming soon).
                 </span>
               </li>
               <li className="flex gap-3">
@@ -352,7 +377,7 @@ export default function AboutPage() {
                   aria-hidden
                 />
                 <span>
-                  <span style={{ color: "var(--cream)" }}>15 years</span> in
+                  <span style={{ color: "var(--cream)" }}>17 years</span> in
                   healthcare operations leadership—staff scale, audits, cost
                   outcomes—before shipping software; domain judgment carries into
                   product and UX calls.
@@ -572,7 +597,7 @@ export default function AboutPage() {
               className="mt-8 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
               style={{ color: "rgba(244, 239, 230, 0.85)" }}
             >
-              I have 15 years of healthcare operations leadership across acute
+              I have 17 years of healthcare operations leadership across acute
               care, post-acute rehabilitation, and senior living. Real employers
               include Amberwood Post Acute Rehabilitation, Center at Northridge,
               and a senior living facility in the Westminster area. I managed
@@ -593,7 +618,7 @@ export default function AboutPage() {
               style={{ color: "rgba(244, 239, 230, 0.85)" }}
             >
               I did not come from a product whiteboard. I came from the floor.
-              Those 15 years were field research.
+              Those 17 years were field research.
             </p>
           </FadeIn>
         </div>
@@ -838,7 +863,7 @@ export default function AboutPage() {
               >
                 ClearChannel by Vestara
               </a>
-              , and{" "}
+              ,{" "}
               <a
                 href="https://financelens-ai.vercel.app"
                 target="_blank"
@@ -847,6 +872,16 @@ export default function AboutPage() {
                 style={{ color: "var(--gold)" }}
               >
                 FinanceLens AI
+              </a>
+              , and{" "}
+              <a
+                href="https://ask-hannah-mcp-production.up.railway.app"
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-4 transition-opacity hover:opacity-90"
+                style={{ color: "var(--gold)" }}
+              >
+                Ask Hannah MCP
               </a>
               .
             </p>

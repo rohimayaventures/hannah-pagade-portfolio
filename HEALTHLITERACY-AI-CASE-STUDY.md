@@ -23,7 +23,7 @@
 
 ## SECTION 1 — THE PROOF POINT
 
-Every shift for fifteen years, I watched the same thing happen.
+Every shift for seventeen years, I watched the same thing happen.
 
 A patient would receive discharge instructions at the nurses' station. Maybe they had a procedure that morning. Maybe they had been in the hospital for a week. They would take the papers, fold them, and put them in a bag. Some of them could not read the papers. Some of them could read the words but not understand what they meant. Some of them spoke a different language at home and had been nodding politely throughout a conversation they were translating in their head.
 
@@ -60,7 +60,7 @@ Hiring a medical interpreter costs between $75 and $150 per hour. Plain-language
 
 ### The constraint set
 
-Before a single component was built, the constraints were locked. These are not constraints that came from user research. They came from fifteen years of watching what patients actually do when they leave a care setting.
+Before a single component was built, the constraints were locked. These are not constraints that came from user research. They came from seventeen years of watching what patients actually do when they leave a care setting.
 
 **No login.** A patient who just left the hospital and is scared will not create an account. They will close the tab. The entire product is accessible without any authentication.
 
@@ -214,7 +214,7 @@ Clinical plain-language translation is not a context where the faster, cheaper m
 ## SECTION 7 — PORTFOLIO COPY
 
 ### Proof point (short callout for site)
-Fifteen years of watching patients fold their discharge papers into a bag and go home without understanding them. This tool closes one piece of that gap, for free, in twelve languages, with no login required.
+Seventeen years of watching patients fold their discharge papers into a bag and go home without understanding them. This tool closes one piece of that gap, for free, in twelve languages, with no login required.
 
 ### Stats
 - 12 languages at launch
@@ -231,7 +231,7 @@ HealthLiteracy AI translates clinical documents into plain language. Any documen
 Clinical documentation is written for providers. Patients receive the same documents at discharge, often scared, sometimes in pain, frequently in a language they do not read fluently, and are expected to manage their own care from them. 88% of American adults have less-than-proficient health literacy. Patients who understand their discharge instructions are 30% less likely to be readmitted. That gap is not inevitable. It is addressable with a well-designed AI tool.
 
 ### Process steps (for interactive section on work page)
-1. **The constraint set** — No login. No setup. Urgent items first. Medical terms explained in the same sentence. Twelve languages at launch, not deferred. Attribution language in the output, not the footer. Every constraint came from fifteen years of watching what patients actually do when they leave a care setting.
+1. **The constraint set** — No login. No setup. Urgent items first. Medical terms explained in the same sentence. Twelve languages at launch, not deferred. Attribution language in the output, not the footer. Every constraint came from seventeen years of watching what patients actually do when they leave a care setting.
 2. **The core architecture decision** — One-pass Claude translation produces a translation. Two-pass produces a translation that has been checked against itself. The second call is user-initiated and returns issue cards flagging omissions. The patient decides what to do next. Verification is a tool the patient controls, not a pipeline step that adds delay to every interaction.
 3. **What shipped** — A free, no-login patient document translation tool with paste, type, voice, and upload input, twelve languages, three reading levels, urgent item extraction, side-by-side view, user-initiated verification with issue cards, copy and share, 90-day session persistence, and PDF export. Deployed at literacy.rohimaya.ai.
 

@@ -27,7 +27,7 @@ Confirm badge labels in code are THOROUGH CHECK / PARTIAL CHECK / QUICK CHECK be
 ### Fields that need to be ADDED (not currently in caseStudies.ts)
 
 ```ts
-proofPoint: `Fifteen years of watching patients fold their discharge papers into a bag and go home without understanding them. This tool closes one piece of that gap, for free, in twelve languages, with no login required.`,
+proofPoint: `Seventeen years of watching patients fold their discharge papers into a bag and go home without understanding them. This tool closes one piece of that gap, for free, in twelve languages, with no login required.`,
 
 stats: [
   { value: "12", label: "languages at launch" },
@@ -38,7 +38,7 @@ stats: [
 processStepsInteractive: [
   {
     title: "The Constraint Set",
-    body: "No login. No setup. Urgent items first. Medical terms explained in the same sentence. Twelve languages at launch, not deferred. Attribution language in the output, not the footer. Every constraint came from fifteen years of watching what patients actually do when they leave a care setting.",
+    body: "No login. No setup. Urgent items first. Medical terms explained in the same sentence. Twelve languages at launch, not deferred. Attribution language in the output, not the footer. Every constraint came from seventeen years of watching what patients actually do when they leave a care setting.",
   },
   {
     title: "Two-Pass Architecture",

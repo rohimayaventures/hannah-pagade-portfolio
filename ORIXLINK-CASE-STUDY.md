@@ -53,7 +53,7 @@ OrixLink sits in the gap: any symptom, any person, no prior diagnosis required, 
 
 ### A personal professional observation
 
-As a healthcare operations leader and Licensed Practical Nurse (LPN) with 15+ years across acute care, post-acute, rehabilitation, and senior living, I work with patients who arrived at their current level of care because something was missed or delayed upstream. A patient presenting with nonspecific complaints at a doctor's office, urgent care clinic, or emergency room that has no structured way to think through a differential is a patient at risk. That observation is not from a product spec. It is from 15+ years of shift work on the ground, living and breathing this problem. OrixLink exists because I have seen what happens when the intake gap is not closed and health problems are not addressed properly.
+As a healthcare operations leader and Licensed Practical Nurse (LPN) with 17+ years across acute care, post-acute, rehabilitation, and senior living, I work with patients who arrived at their current level of care because something was missed or delayed upstream. A patient presenting with nonspecific complaints at a doctor's office, urgent care clinic, or emergency room that has no structured way to think through a differential is a patient at risk. That observation is not from a product spec. It is from 17+ years of shift work on the ground, living and breathing this problem. OrixLink exists because I have seen what happens when the intake gap is not closed and health problems are not addressed properly.
 
 ### The data
 
@@ -92,7 +92,7 @@ The product had to do five things simultaneously and none of them could be sacri
 - Assign a four-tier urgency level that mirrors triage judgment in the first 90 seconds.
 - Frame every output as clinical support, not diagnosis, with a legal overlay present but not obstructive.
 
-The urgency tiers are judgment-based, encoded in the system prompt, not a shallow decision tree. Tier 1 is monitor at home. Tier 4 is go to the emergency department now. The criteria for each tier were drawn from 15 years of clinical observation across acute care, post-acute, and rehabilitation environments.
+The urgency tiers are judgment-based, encoded in the system prompt, not a shallow decision tree. Tier 1 is monitor at home. Tier 4 is go to the emergency department now. The criteria for each tier were drawn from 17 years of clinical observation across acute care, post-acute, and rehabilitation environments.
 
 The output contract matters as much as the clinical logic. The system prompt enforces fixed section tokens — differential, red flags, urgency, disclaimer, follow-up prompts — that `lib/parseAssessment.ts` maps into typed UI components. That keeps share text, print output, and reminder previews predictable regardless of how the model phrases its response. The parser includes regex fallbacks for minor formatting drift. The goal is stable structure, not a claim that the model can never deviate.
 
@@ -240,7 +240,7 @@ Twelve million Americans experience a diagnostic error in outpatient settings ev
 ### Process steps (for portfolio page)
 
 **Step 1 — Clinical constraint set**
-The core design constraint was not technical. It was clinical: the output had to be structured the way a triage nurse actually thinks, not the way a software team imagines triage works. Urgency tiers, differential ranking, and red flag framing were all drawn from 15 years of clinical observation before a single line of prompt engineering was written.
+The core design constraint was not technical. It was clinical: the output had to be structured the way a triage nurse actually thinks, not the way a software team imagines triage works. Urgency tiers, differential ranking, and red flag framing were all drawn from 17 years of clinical observation before a single line of prompt engineering was written.
 
 **Step 2 — Output contract before UI**
 The system prompt enforces fixed section tokens that the parser maps into typed UI components. The contract was defined first. The UI was built to consume it. That sequence is why share text, print output, and reminder previews are all consistent without separate formatting logic for each surface.
@@ -253,7 +253,7 @@ The product was validated against a real clinical scenario before marketing bega
 
 ### Impact line
 
-The intake gap and diagnostic error statistics are real. Fifteen years at the bedside is the research program. The proof point is a real patient whose emergency presentation the product surfaced before a clinician saw him.
+The intake gap and diagnostic error statistics are real. Seventeen years at the bedside is the research program. The proof point is a real patient whose emergency presentation the product surfaced before a clinician saw him.
 
 ### The honest summary
 
@@ -261,7 +261,7 @@ The intake gap and diagnostic error statistics are real. Fifteen years at the be
 Typed output contract via `parseAssessment` plus `attempt_assessment` and `rollback_assessment` RPC pairing plus Stripe claim-after-process idempotency and `stripe_payment_intent_id` dedup, built and shipped by one person with a clinical license and a code editor.
 
 **For product understanding**
-I designed the monetization architecture, wrote the system prompt, built the full-stack implementation, identified and fixed three production-class billing bugs during build, and validated the clinical output against a real emergency presentation. This is what 0-to-1 looks like when the builder has 15 years of domain expertise.
+I designed the monetization architecture, wrote the system prompt, built the full-stack implementation, identified and fixed three production-class billing bugs during build, and validated the clinical output against a real emergency presentation. This is what 0-to-1 looks like when the builder has 17 years of domain expertise.
 
 **For design understanding**
 The Meridian Oracle design system was not designed for one product. It was designed for a brand family. OrixLink is the flagship. The dark palette, Cormorant Garamond display type, and gold accent signal clinical authority to both clinicians and patients without feeling cold. Every urgency state, every error condition, and every empty state has a designed response. The system is consistent across the assessment funnel, dashboard, history, account, legal pages, email templates, and print output.
@@ -278,7 +278,7 @@ Four live consumer tiers from free to Lifetime one-time. Credit packs for over-c
 
 **Design systems thinking at brand scale.** The Meridian Oracle system was not designed for OrixLink alone. It was designed as the foundation for the Rohimaya Health AI brand family, with patient-facing education products using a distinct but related system. Maintaining visual coherence across multiple products while differentiating by audience is a Head of Product competency, not just a design competency.
 
-**Clinical knowledge as a product constraint.** OrixLink was built by someone who has worked clinical floors for 15 years. The red flag logic, the urgency taxonomy, the care pathway recommendations, and the attribution language all reflect real clinical knowledge applied as product constraint. That is not replicable by a product manager without clinical experience, and it shows in the output quality.
+**Clinical knowledge as a product constraint.** OrixLink was built by someone who has worked clinical floors for 17 years. The red flag logic, the urgency taxonomy, the care pathway recommendations, and the attribution language all reflect real clinical knowledge applied as product constraint. That is not replicable by a product manager without clinical experience, and it shows in the output quality.
 
 **0-to-1 ownership across every layer.** Product strategy, conversation design, system prompt engineering, full-stack implementation, billing architecture, and clinical validation all came from one person. This is the portfolio evidence for what that combination looks like at production scale.
 

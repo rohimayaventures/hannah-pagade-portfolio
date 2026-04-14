@@ -34,7 +34,7 @@ const defaultTitle =
   "Hannah Kraulik Pagade | AI Product Leader — Product Management & UX Design";
 
 const defaultDescription =
-  "Hannah Kraulik Pagade: AI product leader across product management and UX design for LLM products. LPN; founder of Rohimaya Health AI. Live: OrixLink, HealthLiteracy, ClearChannel, FinanceLens. MS AI/ML at CU Boulder (in progress). hannahkraulikpagade.com.";
+  "Hannah Kraulik Pagade: AI product leader across product management and UX design for LLM products. LPN; founder of Rohimaya Health AI. Seventeen years healthcare operations leadership. Live: OrixLink, HealthLiteracy, ClearChannel, FinanceLens, Ask Hannah MCP. MS AI/ML at CU Boulder (in progress). hannahkraulikpagade.com.";
 
 export const viewport: Viewport = {
   width: "device-width",

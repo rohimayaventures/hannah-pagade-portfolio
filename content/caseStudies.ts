@@ -86,7 +86,7 @@ export const caseStudies: CaseStudy[] = [
     title: "OrixLink AI",
     tagline: "Where every symptom finds its answer.",
     subtitle:
-      "OrixLink AI accepts any symptom in natural language and returns a structured clinical differential, red flag criteria, four-tier urgency classification, and plain-language next steps. Built by a 15-year LPN for the intake gap behind an estimated 12 million outpatient diagnostic errors a year. Monetized with tiered subscriptions, credit packs, Google OAuth, Stripe with idempotent credit delivery (unique constraint on payment intent), and a lifetime access offer.",
+      "OrixLink AI accepts any symptom in natural language and returns a structured clinical differential, red flag criteria, four-tier urgency classification, and plain-language next steps. Built by a 17-year LPN for the intake gap behind an estimated 12 million outpatient diagnostic errors a year. Monetized with tiered subscriptions, credit packs, Google OAuth, Stripe with idempotent credit delivery (unique constraint on payment intent), and a lifetime access offer.",
     tags: ["CLINICAL-AI", "CONVERSATIONAL", "FULL-STACK", "MONETIZED"],
     embedType: "live",
     embedUrl: "https://triage.rohimaya.ai",
@@ -94,17 +94,17 @@ export const caseStudies: CaseStudy[] = [
     status: "live",
     coverImage: "/images/orixlink-ai-landing.png",
     projectDescription:
-      "OrixLink AI accepts any symptom in natural language and returns a structured clinical differential, red flag criteria, four-tier urgency classification, and plain-language next steps. Built by a 15-year LPN for the intake gap that causes an estimated 12 million diagnostic errors a year in outpatient settings. Monetized with tiered subscriptions, credit packs, Google OAuth, Stripe with idempotent credit delivery (unique constraint on payment intent), and a lifetime access offer.",
+      "OrixLink AI accepts any symptom in natural language and returns a structured clinical differential, red flag criteria, four-tier urgency classification, and plain-language next steps. Built by a 17-year LPN for the intake gap that causes an estimated 12 million diagnostic errors a year in outpatient settings. Monetized with tiered subscriptions, credit packs, Google OAuth, Stripe with idempotent credit delivery (unique constraint on payment intent), and a lifetime access offer.",
     problemStatement:
       "At least 12 million Americans experience a diagnostic error in outpatient settings each year. Most happen not because clinicians lack knowledge, but because the intake process gives them no structured way to connect a patient's full symptom picture to a working differential before the encounter begins. OrixLink is the tool that closes that gap: any symptom, any person, no prior diagnosis required.",
     processSteps: [
-      "Clinical constraint set: the output had to be structured the way a triage nurse actually thinks. Urgency tiers, differential ranking, and red flag framing were all drawn from 15 years of clinical observation before a single line of prompt engineering was written.",
+      "Clinical constraint set: the output had to be structured the way a triage nurse actually thinks. Urgency tiers, differential ranking, and red flag framing were all drawn from 17 years of clinical observation before a single line of prompt engineering was written.",
       "Output contract before UI: the system prompt enforces fixed section tokens that the parser maps into typed UI components. The contract was defined first. The UI was built to consume it. The system prompt is the product IP.",
       "Monetization before the first user: billing architecture, credit data model, and the atomic attempt/rollback RPC pairing were all designed before launch. Three production-class billing bugs were caught and fixed during build.",
       "Delivery and validation: validated against a real clinical scenario before marketing began. The compartment syndrome presentation matched the clinical workup. 28-item launch checklist covering clinical accuracy, billing integrity, auth flows, mobile layout, and legal compliance.",
     ],
     impactLine:
-      "The intake gap and diagnostic error statistics are real. Fifteen years at the bedside is the research program. The proof point is a real patient whose emergency presentation the product surfaced before a clinician saw him.",
+      "The intake gap and diagnostic error statistics are real. Seventeen years at the bedside is the research program. The proof point is a real patient whose emergency presentation the product surfaced before a clinician saw him.",
     processAngle:
       "Next.js 16 App Router, Claude API (Sonnet for paid tiers, Haiku for free), Supabase (Google OAuth and email auth, persistence, RLS, pg_cron, pg_net), Stripe (checkout, webhooks, billing portal, idempotent credits via unique constraint on payment intent), Resend for transactional email, typed assessment output via parseAssessment, Meridian Oracle design system. Live at triage.rohimaya.ai, early commercial pilot.",
     cardSummary:
@@ -150,7 +150,7 @@ export const caseStudies: CaseStudy[] = [
         label: "Discovery",
         phase: "STEP 01 — DISCOVERY",
         title: "Discovery",
-        body: "I did not need to conduct user research for this product. I have conducted it for 15 years on every shift. The intake failure pattern is not hypothetical. It is the first 90 seconds of every clinical encounter, repeated across every acute care, post-acute, rehabilitation, and senior living setting I have worked in. The constraints came directly from the floor, not a whiteboard.",
+        body: "I did not need to conduct user research for this product. I have conducted it for 17 years on every shift. The intake failure pattern is not hypothetical. It is the first 90 seconds of every clinical encounter, repeated across every acute care, post-acute, rehabilitation, and senior living setting I have worked in. The constraints came directly from the floor, not a whiteboard.",
       },
       {
         number: "02",
@@ -251,7 +251,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "Clinical knowledge applied as product constraint",
         tag: "PRODUCT",
-        body: "The red flag logic, urgency taxonomy, care pathway recommendations, and attribution language all reflect 15 years of real clinical knowledge applied as product constraint. That is not replicable by a product manager without clinical experience.",
+        body: "The red flag logic, urgency taxonomy, care pathway recommendations, and attribution language all reflect 17 years of real clinical knowledge applied as product constraint. That is not replicable by a product manager without clinical experience.",
       },
       {
         title: "0-to-1 ownership across every layer",
@@ -266,7 +266,7 @@ export const caseStudies: CaseStudy[] = [
       },
       product: {
         label: "For product and clinical teams",
-        body: "The monetization architecture, system prompt, full-stack implementation, three production-class billing bug fixes, and clinical validation against a real emergency presentation all came from one builder with 15 years of domain expertise. This is what 0-to-1 looks like when the domain knowledge is not borrowed.",
+        body: "The monetization architecture, system prompt, full-stack implementation, three production-class billing bug fixes, and clinical validation against a real emergency presentation all came from one builder with 17 years of domain expertise. This is what 0-to-1 looks like when the domain knowledge is not borrowed.",
       },
       design: {
         label: "For design and brand teams",
@@ -274,7 +274,7 @@ export const caseStudies: CaseStudy[] = [
       },
     },
     impactQuote:
-      "The intake gap and diagnostic error statistics are real. Fifteen years at the bedside is the research program. The proof point is a real patient whose emergency presentation the product surfaced before a clinician saw him.",
+      "The intake gap and diagnostic error statistics are real. Seventeen years at the bedside is the research program. The proof point is a real patient whose emergency presentation the product surfaced before a clinician saw him.",
   },
   {
     featured: false,
@@ -295,7 +295,7 @@ export const caseStudies: CaseStudy[] = [
     problemStatement:
       "Clinical documentation is written for providers. Patients receive the same documents at discharge, often scared, sometimes in pain, frequently in a language they do not read fluently, and are expected to manage their own care from them. 88% of American adults have less-than-proficient health literacy. Patients who understand their discharge instructions are 30% less likely to be readmitted. That gap is not inevitable. It is addressable with a well-designed AI tool.",
     processSteps: [
-      "The constraint set — No login. No setup. Urgent items first. Medical terms explained in the same sentence. Twelve languages at launch, not deferred. Attribution language in the output, not the footer. Every constraint came from fifteen years of watching what patients actually do when they leave a care setting.",
+      "The constraint set — No login. No setup. Urgent items first. Medical terms explained in the same sentence. Twelve languages at launch, not deferred. Attribution language in the output, not the footer. Every constraint came from seventeen years of watching what patients actually do when they leave a care setting.",
       "The core architecture decision — One-pass Claude translation produces a translation. Two-pass produces a translation that can be checked against itself. The second call is user-initiated and returns issue cards flagging omissions. The patient decides what to do next. Verification is a tool the patient controls, not a pipeline step that adds delay to every interaction.",
       "What shipped — A free, no-login patient document translation tool with paste, type, voice, and upload input, twelve languages, three reading levels, urgent item extraction, side-by-side view, user-initiated verification with issue cards and THOROUGH CHECK / PARTIAL CHECK / QUICK CHECK badges, copy and share, PDF export, 90-day session persistence, rate limiting on translate, verify, share, and parse. Deployed at literacy.rohimaya.ai.",
     ],
@@ -311,7 +311,7 @@ export const caseStudies: CaseStudy[] = [
       "Free, no-login patient document translation with twelve-language support, three reading levels, user-initiated AI verification, voice input, and 90-day shareable sessions",
     proofPoint: {
       label: "The proof point",
-      body: "Fifteen years of watching patients fold their discharge papers into a bag and go home without understanding them. This tool closes one piece of that gap, for free, in twelve languages, with no login required.",
+      body: "Seventeen years of watching patients fold their discharge papers into a bag and go home without understanding them. This tool closes one piece of that gap, for free, in twelve languages, with no login required.",
       verdict: "This tool exists because that gap is preventable. Not later. Now.",
     },
     stats: [
@@ -337,7 +337,7 @@ export const caseStudies: CaseStudy[] = [
         label: "Constraints",
         phase: "STEP 01 — CONSTRAINT SET",
         title: "The Constraint Set",
-        body: "No login. No setup. Urgent items first. Medical terms explained in the same sentence. Twelve languages at launch, not deferred. Attribution language in the output, not the footer. Every constraint came from fifteen years of watching what patients actually do when they leave a care setting.",
+        body: "No login. No setup. Urgent items first. Medical terms explained in the same sentence. Twelve languages at launch, not deferred. Attribution language in the output, not the footer. Every constraint came from seventeen years of watching what patients actually do when they leave a care setting.",
       },
       {
         number: "02",
@@ -466,7 +466,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "Clinical operations as product constraint",
         tag: "PRODUCT",
-        body: "Fifteen years at the bedside informing every pivot and constraint.",
+        body: "Seventeen years at the bedside informing every pivot and constraint.",
       },
     ],
     honestSummary: {
