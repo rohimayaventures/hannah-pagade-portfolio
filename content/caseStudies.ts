@@ -283,7 +283,7 @@ export const caseStudies: CaseStudy[] = [
     title: "HealthLiteracy AI",
     tagline: "Your medical records, in your language.",
     subtitle:
-      "Free patient document translation in twelve languages and three reading levels (Simple, Clear, Complete). Urgent items surface first. User-initiated verification pass compares translation to the original and returns issue cards with THOROUGH CHECK, PARTIAL CHECK, and QUICK CHECK badges. No auto re-render: the patient decides next steps. Voice via Web Speech API (Chrome and Edge best). Paste, type, upload (.txt or PDF text-layer), or speak. No login. 90-day shareable sessions. claude-sonnet-4-20250514 for translate and verify only.",
+      "Free patient document translation in twelve languages and three reading levels (Simple, Clear, Complete). Urgent items surface first. User-initiated verification pass compares translation to the original and returns issue cards with THOROUGH CHECK, PARTIAL CHECK, and QUICK CHECK badges. No auto re-render: the patient decides next steps. Voice via Web Speech API (Chrome and Edge best). Paste, type, upload (.txt or PDF text-layer), or speak. No login. 90-day shareable sessions. Claude Sonnet (model set by configuration, with an automatic fallback) for translate and verify only.",
     tags: ["HEALTH-EQUITY", "PATIENT-FACING", "FULL-STACK", "MULTILINGUAL"],
     embedType: "live",
     embedUrl: "https://literacy.rohimaya.ai",
@@ -302,7 +302,7 @@ export const caseStudies: CaseStudy[] = [
     impactLine:
       "If someone cannot read or act on discharge instructions, the care plan never really starts. HealthLiteracy is built so plain language, reading level, language, and urgent items are part of the product, not an afterthought.",
     processAngle:
-      "Next.js 15 App Router, TypeScript, Tailwind CSS v4, Claude API (claude-sonnet-4-20250514 for translate and verify), Zod on API request bodies, manual validation on Claude responses with retry on transport failures, rate limiting, Supabase with versioned SQL migrations and 90-day expiry, Web Speech API for voice, Vercel.",
+      "Next.js 15 App Router, TypeScript, Tailwind CSS v4, Claude API (Claude Sonnet (model set by configuration, with an automatic fallback) for translate and verify), Zod on API request bodies, manual validation on Claude responses with retry on transport failures, rate limiting, Supabase with versioned SQL migrations and 90-day expiry, Web Speech API for voice, Vercel.",
     cardSummary:
       "Free patient document translation in twelve languages and three reading levels. Paste, type, upload, or speak. Urgent items first, user-initiated verification with issue cards, no login. Live at literacy.rohimaya.ai.",
     role: "Product design, conversation design, full-stack build",
@@ -393,7 +393,7 @@ export const caseStudies: CaseStudy[] = [
       {
         tag: "TECHNICAL",
         title: "Sonnet for clinical text",
-        body: "The product uses claude-sonnet-4-20250514 for both translation and verification with no smaller model path and no model router. High-stakes plain language for patients making medical decisions is not generic chat. Retries fire on transport failures. Zod validates request bodies. Claude responses use manual validation.",
+        body: "The product uses Claude Sonnet (model set by configuration, with an automatic fallback) for both translation and verification with no smaller model path and no model router. High-stakes plain language for patients making medical decisions is not generic chat. Retries fire on transport failures. Zod validates request bodies. Claude responses use manual validation.",
         lesson:
           "Model selection is a product safety decision in clinical contexts. Default to the model that gets the clinical output right.",
       },
@@ -405,7 +405,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         title: "Translation Engine",
-        body: "12 languages: Arabic, French, Hindi, Japanese, Korean, Mandarin, Portuguese, Russian, Spanish, Tagalog, Vietnamese, English. 3 reading levels: Simple, Clear, Complete. Medical term explanation in every output. Attribution language preventing misreading as diagnosis. Claude Sonnet (claude-sonnet-4-20250514).",
+        body: "12 languages: Arabic, French, Hindi, Japanese, Korean, Mandarin, Portuguese, Russian, Spanish, Tagalog, Vietnamese, English. 3 reading levels: Simple, Clear, Complete. Medical term explanation in every output. Attribution language preventing misreading as diagnosis. Claude Sonnet (model set by configuration, with an automatic fallback).",
       },
       {
         title: "Output and Verification",
@@ -413,7 +413,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         title: "Infrastructure and Quality",
-        body: "Next.js 15, App Router, TypeScript. Tailwind CSS v4. Claude API (claude-sonnet-4-20250514), timeouts and retries on transport failures. Zod validation on API request bodies; manual validation on Claude responses. Rate limiting on translate, verify, share (POST and GET), and parse routes. Supabase (90-day expires_at, 410 on expiry, versioned SQL migrations). Vercel.",
+        body: "Next.js 15, App Router, TypeScript. Tailwind CSS v4. Claude API (Claude Sonnet (model set by configuration, with an automatic fallback)), timeouts and retries on transport failures. Zod validation on API request bodies; manual validation on Claude responses. Rate limiting on translate, verify, share (POST and GET), and parse routes. Supabase (90-day expires_at, 410 on expiry, versioned SQL migrations). Vercel.",
       },
       {
         title: "Accessibility",
@@ -421,7 +421,7 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     stackHighlighted: [
-      "Claude API (claude-sonnet-4-20250514, two-pass with user-initiated verify)",
+      "Claude API (Claude Sonnet (model set by configuration, with an automatic fallback), two-pass with user-initiated verify)",
       "Next.js 15 (App Router)",
       "Supabase (90-day session expiry, versioned migrations)",
     ],
@@ -472,7 +472,7 @@ export const caseStudies: CaseStudy[] = [
     honestSummary: {
       technical: {
         label: "For engineers",
-        body: "Claude Sonnet (claude-sonnet-4-20250514) runs both the translate and verify calls. No smaller model default or model router. Zod validates incoming API request bodies. Claude JSON responses use manual validation with retry logic on transport failures, not parse errors. Rate limiting is applied to translate, verify, share (POST and GET), and parse routes. Supabase sessions use 90-day expiry with versioned SQL migrations. Expired links return 410. Voice input uses the Web Speech API with browser support checks and inline fallback messaging. PDF and .txt only, no OCR.",
+        body: "Claude Sonnet (model set by configuration, with an automatic fallback) runs both the translate and verify calls. No smaller model default or model router. Zod validates incoming API request bodies. Claude JSON responses use manual validation with retry logic on transport failures, not parse errors. Rate limiting is applied to translate, verify, share (POST and GET), and parse routes. Supabase sessions use 90-day expiry with versioned SQL migrations. Expired links return 410. Voice input uses the Web Speech API with browser support checks and inline fallback messaging. PDF and .txt only, no OCR.",
       },
       product: {
         label: "For product",

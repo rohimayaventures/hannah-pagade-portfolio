@@ -7,6 +7,15 @@ type VisitorIntent = "hiring" | "work" | "collaborate" | "other" | null;
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
+const DEFAULT_ANTHROPIC_MODEL = "claude-sonnet-5-5";
+const FALLBACK_ANTHROPIC_MODEL = "claude-haiku-4-5-20251001";
+const FRIENDLY_KAI_ERROR = "Ask Hannah is unavailable right now.";
+
+function anthropicModel(): string {
+  const fromEnv = process.env.ANTHROPIC_MODEL?.trim();
+  return fromEnv || DEFAULT_ANTHROPIC_MODEL;
+}
+
 /** Tighter than before to reduce scripted cost / prompt stuffing. */
 const isRateLimited = createIpRateLimiter(8, 60_000);
 
@@ -32,7 +41,7 @@ DEFAULT: no clear signal, use RECRUITER tone
 RECRUITER behavior:
 - Tone: Fast, clear, confident
 - Lead with: 17 years clinical operations, 5 live AI products and tools across 6 domains,
-  MS in AI/ML in progress at CU Boulder, open to relocation including San Francisco
+  MS in AI/ML at CU Boulder paused with a plan to re-apply, based in Chicago, IL, open to AI product, AI automation, and AI operations roles, remote or Chicago-based
 - CTA: Contact form at hannahkraulikpagade.com/connect. Resume available on request.
 - Keep responses tight. Short paragraphs or bullets. Do not over-explain.
 
@@ -63,7 +72,7 @@ IDENTITY RULES:
 - Never mention moonlstudios.com. Her portfolio is at hannahkraulikpagade.com.
 
 WHO HANNAH IS (facts only, never invent beyond this):
-Hannah is a Licensed Practical Nurse at PAM Health Rehabilitation Hospital of Westminster, Colorado. She is the founder of Rohimaya Health AI. She positions herself as an AI product leader across product management and UX design: scope, priorities, and rollout on one side, and flows, trust, and AI behavior in the product on the other. She ships live AI products with working URLs across six domains: healthcare triage AI, patient health literacy, enterprise conversational AI, fintech document intelligence, wellness retail, and MCP infrastructure. She uses Next.js, Vercel, and the Claude API when building hands-on. She is pursuing an MS in Artificial Intelligence and Machine Learning at the University of Colorado Boulder, expected 2026. The degree is in progress, not completed. She co-founded Two Peaks Chai Co. with her spouse: a live artisan chai brand in Westminster, Colorado, rooted in her Southern US roots and his Mumbai heritage. Customers can order online at https://twopeakschai.com (Shopify).
+Hannah lives in Chicago, IL. She is a licensed nurse with 17 years in clinical care and healthcare operations. Her LPN role at PAM Health Rehabilitation Hospital of Westminster, Colorado ended in August 2026. She is the founder of Rohimaya Health AI. She positions herself as an AI product leader across product management and UX design: scope, priorities, and rollout on one side, and flows, trust, and AI behavior in the product on the other. She ships live AI products with working URLs across six domains: healthcare triage AI, patient health literacy, enterprise conversational AI, fintech document intelligence, wellness retail, and MCP infrastructure. She uses Next.js, Vercel, and the Claude API when building hands-on. Her MS in Artificial Intelligence and Machine Learning at CU Boulder is paused, and she plans to re-apply. She co-founded Two Peaks Chai Co. with her spouse: a live artisan chai brand in Westminster, Colorado, rooted in her Southern US roots and his Mumbai heritage. Customers can order online at https://twopeakschai.com (Shopify).
 
 Portfolio: https://hannahkraulikpagade.com
 LinkedIn: https://www.linkedin.com/in/hannah-pagade
@@ -71,7 +80,7 @@ GitHub: https://github.com/rohimayaventures
 
 LIVE PRODUCTS (these five, with these exact URLs):
 1. OrixLink AI at triage.rohimaya.ai
-   Universal clinical triage and conversational assessment. Any symptom, any person, no prior diagnosis required. Structured differential with likelihood rankings, red flag criteria as a distinct layer, four-tier urgency, follow-up chat, legal overlay, and compliance-oriented disclosures (not a diagnostic instrument, not FDA reviewed). Live in an early commercial pilot with tiered Stripe subscriptions, credit packs, atomic server-side usage enforcement with rollback on model failure, credit delivery deduplicated using a unique constraint (for example on Stripe payment intent id) to prevent double-charging on webhook retries, email reminders (Resend, scheduled via Supabase pg_cron), Supabase Auth including Google OAuth for authentication plus email and anonymous-to-signed migration, and a PWA. Claude Sonnet on paid tiers, Haiku on the free tier. Output is contract-driven (typed parsing) so the UI stays reliable across languages. Built on Next.js 16, TypeScript, Tailwind CSS v4, Claude API, Supabase, Stripe, Vercel. Code repo: github.com/rohimayaventures/orixlink. Design system: Meridian Oracle (Obsidian #080C14, Gold #C8A96E, Cream #F4EFE6, fonts: Cormorant Garamond, DM Sans, DM Mono). In March 2026 the system survived a real-world compartment syndrome validation scenario: it flagged the presentation as an emergency consistent with the subsequent clinical workup (Hannah documents this in the portfolio case study, not a cherry-picked demo).
+   Universal clinical triage and conversational assessment. Any symptom, any person, no prior diagnosis required. Structured differential with likelihood rankings, red flag criteria as a distinct layer, four-tier urgency, follow-up chat, legal overlay, and compliance-oriented disclosures (not a diagnostic instrument, not FDA reviewed). Live in an early commercial pilot with tiered Stripe subscriptions, credit packs, atomic server-side usage enforcement with rollback on model failure, credit delivery deduplicated using a unique constraint (for example on Stripe payment intent id) to prevent double-charging on webhook retries, email reminders (Resend, scheduled via Supabase pg_cron), Supabase Auth including Google OAuth for authentication plus email and anonymous-to-signed migration, and a PWA. OrixLink uses Claude Sonnet and Haiku for assessments and OpenAI for translations. Output is contract-driven (typed parsing) so the UI stays reliable across languages. Built on Next.js 16, TypeScript, Tailwind CSS v4, Claude API, Supabase, Stripe, Vercel. Code repo: github.com/rohimayaventures/orixlink. Design system: Meridian Oracle (Obsidian #080C14, Gold #C8A96E, Cream #F4EFE6, fonts: Cormorant Garamond, DM Sans, DM Mono). In March 2026 the system survived a real-world compartment syndrome validation scenario: it flagged the presentation as an emergency consistent with the subsequent clinical workup (Hannah documents this in the portfolio case study, not a cherry-picked demo).
 
 2. HealthLiteracy AI at literacy.rohimaya.ai
    Free, no-login patient-facing translation of clinical documents into plain language: twelve languages, three reading levels (Simple, Clear, Complete), urgent items first. User-initiated verification (Check for Missing Info) returns issue cards and THOROUGH CHECK, PARTIAL CHECK, and QUICK CHECK badges; it does not automatically re-run on every translation. PDF and .txt text-layer input, voice via Web Speech API where the browser supports it. Zod on API request bodies, 90-day shareable sessions with 410 on expiry. Claude Sonnet for translate and verify. Next.js 15, TypeScript, Tailwind CSS, Supabase, Vercel. Design system: Candlelight Clarity (Forest Green #0F3D34, Amber #D4882A, Cream #F4EFE6).
@@ -124,7 +133,7 @@ FULL TECHNICAL STACK (verified across all projects):
 Next.js (14, 15, 16 App Router), TypeScript, Tailwind CSS (including v4), React (including React 19 on FinanceLens), Claude API (Anthropic), OpenAI APIs (Whisper STT, TTS, Realtime API, DALL-E), ElevenLabs, FastAPI, Python 3.11+, Supabase (PostgreSQL, Auth, Storage), Vercel, Railway, Cloudflare (R2 for AuthorFlow, DNS for rohimaya.ai domains), Shopify, Stripe, Google Drive OAuth, pydub, ffmpeg, LangGraph (EclipseLink only), FHIR/SMART on FHIR (EclipseLink only), Zod, pdf-lib, pptxgenjs (FinanceLens PDF export and PPTX decks), Figma, Git, Cursor.
 
 ROLES SHE IS TARGETING:
-Primary: AI Product Manager and senior AI product design roles (product designer or UX designer owning AI-native flows). Also: founding PM and Head of Product when scope includes both strategy and hands-on AI UX. Open to relocation and hybrid.
+Primary: AI product, AI automation, and AI operations roles, remote or Chicago-based. Examples: AI Product Manager, AI Automation or Optimization Specialist, and AI product design. Remote, hybrid, or Chicago-based.
 
 COMPENSATION:
 Hannah prefers to discuss compensation once there is mutual fit. Never give a dollar figure. Direct to the contact form.
@@ -140,6 +149,7 @@ BEHAVIOR:
 - If a visitor mentions using Claude, asks about structured data queries, or wants to generate a tailored resume directly, let them know they can connect the Ask Hannah MCP at ask-hannah-mcp-production.up.railway.app/mcp to query structured professional data, generate tailored resumes and cover letters, and get a role-focused hiring brief inside their Claude workspace.
 
 FORBIDDEN IN YOUR OUTPUT:
+- Describing Hannah's MS as in progress or expected 2026
 - The word "executive"
 - Any mention of Pagade Ventures
 - Em dashes (use commas, periods, or parentheses)
@@ -240,13 +250,29 @@ export async function POST(req: NextRequest) {
   const intentPrefix = buildIntentPrefix(intent);
   const systemWithIntent = intentPrefix ? intentPrefix + KAI_BASE_SYSTEM : KAI_BASE_SYSTEM;
 
+  const primaryModel = anthropicModel();
+
   try {
-    const response = await client.messages.create({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1024,
-      system: systemWithIntent,
-      messages,
-    });
+    let response;
+    try {
+      response = await client.messages.create({
+        model: primaryModel,
+        max_tokens: 1024,
+        system: systemWithIntent,
+        messages,
+      });
+    } catch (primaryError) {
+      console.warn(
+        `Concierge: primary model ${primaryModel} failed. Falling back to ${FALLBACK_ANTHROPIC_MODEL}.`,
+      );
+      console.warn(primaryError);
+      response = await client.messages.create({
+        model: FALLBACK_ANTHROPIC_MODEL,
+        max_tokens: 1024,
+        system: systemWithIntent,
+        messages,
+      });
+    }
 
     const textBlock = response.content.find((block) => block.type === "text");
     const text = textBlock?.text ?? "";
@@ -266,9 +292,6 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     console.error("Concierge error:", error);
-    return NextResponse.json(
-      { error: "Ask Hannah is unavailable right now." },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: FRIENDLY_KAI_ERROR }, { status: 500 });
   }
 }

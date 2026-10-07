@@ -76,8 +76,8 @@ export default function ContactPage() {
               className="mb-8 max-w-2xl font-body text-lg leading-relaxed opacity-90"
               style={{ color: "var(--cream)" }}
             >
-              Interested in AI product management, AI product design, or
-              collaboration on LLM-powered products? Send a message. I&apos;ll
+              Interested in AI product, AI automation, or collaboration on
+              LLM-powered products? Send a message. I&apos;ll
               respond from my inbox. For a faster connection, reach me on
               LinkedIn.
             </p>

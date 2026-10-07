@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 const aboutDesc =
-  "Hannah Kraulik Pagade: AI product leader spanning product management and UX design for LLM-powered products. Seventeen years in healthcare operations; shipped live apps in clinical, patient, fintech, enterprise conversation, and agentic infrastructure (OrixLink, HealthLiteracy, ClearChannel, FinanceLens, Ask Hannah MCP). MS AI/ML, CU Boulder (in progress). Open to AI PM and AI product design roles.";
+  "Hannah Kraulik Pagade: AI product leader spanning product management and UX design for LLM-powered products. Seventeen years in healthcare operations; shipped live apps in clinical, patient, fintech, enterprise conversation, and agentic infrastructure (OrixLink, HealthLiteracy, ClearChannel, FinanceLens, Ask Hannah MCP). MS in Artificial Intelligence and Machine Learning, CU Boulder (paused; plan to re-apply). Chicago-based. Open to AI product, AI automation, and AI operations roles.";
 
 export const metadata: Metadata = {
   title: "About",
@@ -101,7 +101,7 @@ const products: AboutProduct[] = [
     designCall:
       "Meridian Oracle system across funnel, errors, and email so the product reads as clinical authority without feeling cold; typed assessment output reviewers can audit, not an unstructured chat log.",
     stack:
-      "Next.js 16 · TypeScript · Tailwind v4 · Claude API (Sonnet/Haiku) · Supabase · Stripe · Resend · Vercel",
+      "Next.js 16 · TypeScript · Tailwind v4 · Claude API (Sonnet/Haiku) · OpenAI (translations) · Supabase · Stripe · Resend · Vercel",
   },
   {
     name: "HealthLiteracy AI",
@@ -241,29 +241,13 @@ export default function AboutPage() {
               className="mt-6 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
               style={{ color: "rgba(244, 239, 230, 0.85)" }}
             >
-              I&apos;m a Licensed Practical Nurse at PAM Health Rehabilitation
-              Hospital of Westminster, Colorado, and founder of Rohimaya Health
-              AI. I prototype and ship in the stack when the team is
-              small—Next.js, Vercel, Claude API—so product decisions are tested
-              against real documents, transcripts, and utterances, not theory
-              alone. MS in Artificial Intelligence and Machine Learning at CU
-              Boulder, expected 2026 (in progress).
-            </p>
-            <p
-              className="mt-4 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
-              style={{ color: "rgba(244, 239, 230, 0.72)" }}
-            >
-              Outside tech: co-founded{" "}
-              <a
-                href="https://twopeakschai.com"
-                target="_blank"
-                rel="noreferrer"
-                className="underline underline-offset-4 transition-opacity hover:opacity-90"
-                style={{ color: "var(--gold)" }}
-              >
-                Two Peaks Chai Co.
-              </a>{" "}
-              with my spouse—artisan chai in Westminster.
+              I&apos;m a licensed nurse with 17 years in clinical care and
+              healthcare operations, and the founder of Rohimaya Health AI.
+              I&apos;m based in Chicago. I prototype and ship in the stack when
+              the team is small (Next.js, Vercel, Claude API), so product
+              decisions are tested against real documents, transcripts, and
+              utterances, not theory alone. MS in Artificial Intelligence and
+              Machine Learning, CU Boulder (paused; plan to re-apply).
             </p>
           </FadeIn>
 
@@ -392,9 +376,11 @@ export default function AboutPage() {
                   aria-hidden
                 />
                 <span>
-                  <span style={{ color: "var(--cream)" }}>MS AI/ML</span> at CU
-                  Boulder (in progress, expected 2026); founder of Rohimaya Health
-                  AI.
+                  <span style={{ color: "var(--cream)" }}>
+                    MS in Artificial Intelligence and Machine Learning, CU
+                    Boulder (paused; plan to re-apply).
+                  </span>{" "}
+                  Founder of Rohimaya Health AI.
                 </span>
               </li>
               <li className="flex gap-3">
@@ -405,8 +391,8 @@ export default function AboutPage() {
                 />
                 <span>
                   <span style={{ color: "var(--cream)" }}>Hiring target:</span>{" "}
-                  AI Product Manager and/or AI product design roles; open to
-                  relocation. Full case studies on this site.
+                  AI product, AI automation, and AI operations roles. Remote or
+                  Chicago-based.
                 </span>
               </li>
             </ul>
@@ -657,10 +643,12 @@ export default function AboutPage() {
               className="mt-8 max-w-2xl font-body text-sm leading-relaxed sm:text-base"
               style={{ color: "rgba(244, 239, 230, 0.85)" }}
             >
-              I&apos;m focused on AI Product Manager and senior AI product design
-              roles (product designer or UX designer owning AI-native flows). I
-              also consider founding PM and Head of Product where scope includes
-              both strategy and hands-on AI UX. Open to relocation and hybrid.
+              I&apos;m focused on AI product and AI automation roles where I can
+              find where work breaks and build the systems that fix it: AI
+              Product Manager, AI Automation or Optimization Specialist, and AI
+              product design. I also consider founding PM and Head of Product
+              where scope includes both strategy and hands-on AI UX. Remote,
+              hybrid, or Chicago-based.
               If this sounds like a fit, use the{" "}
               <Link
                 href="/contact"
