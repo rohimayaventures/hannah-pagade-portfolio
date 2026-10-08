@@ -189,7 +189,7 @@ Meridian Oracle design system across all surfaces. PWA manifest and service work
 | Piece | Implementation |
 |-------|----------------|
 | Framework | Next.js 16 App Router |
-| AI | `claude-sonnet-4-20250514` (paid tiers); `claude-haiku-4-5-20251001` (Free) |
+| AI | Claude Sonnet for paid assessments; Claude Haiku for free assessments |
 | Temperature | 0.3 — hardcoded for clinical determinism |
 | Prompt | Urgency tier hierarchy, red flag criteria, differential ranking, refusal protocol, ABSENT vs UNKNOWN symptom documentation rule, section tokens for `parseAssessment` |
 | Output parser | `lib/parseAssessment.ts` — section token extraction, urgency with null fallback, red flag card layer, disclaimer with non-English resilience |

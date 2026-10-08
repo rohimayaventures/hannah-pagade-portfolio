@@ -77,7 +77,7 @@ pivots: [
   {
     title: "Sonnet for clinical text",
     lesson: "Model selection is a product safety decision in clinical contexts. Default to the model that gets the clinical output right.",
-    body: "The product uses claude-sonnet-4-20250514 for both translation and verification with no Haiku path and no model router. High-stakes plain language for patients making medical decisions is not generic chat. Retries fire on transport failures. Zod validates request bodies. Claude responses use manual validation.",
+    body: "The product uses Claude Sonnet for both translation and verification with no Haiku path and no model router. High-stakes plain language for patients making medical decisions is not generic chat. Retries fire on transport failures. Zod validates request bodies. Claude responses use manual validation.",
   },
 ],
 
@@ -97,7 +97,7 @@ shippedCards: [
       "3 reading levels: Simple, Clear, Complete",
       "Medical term explanation in every output",
       "Attribution language preventing misreading as diagnosis",
-      "Claude Sonnet (claude-sonnet-4-20250514)",
+      "Claude Sonnet",
     ],
   },
   {
@@ -117,7 +117,7 @@ shippedCards: [
     items: [
       "Next.js 15, App Router, TypeScript",
       "Tailwind CSS v4",
-      "Claude API (claude-sonnet-4-20250514), timeouts and retries on transport failures",
+      "Claude API (Claude Sonnet), timeouts and retries on transport failures",
       "Zod validation on API request bodies; manual validation on Claude responses",
       "Rate limiting on translate, verify, share (POST and GET), and parse routes",
       "Supabase (90-day expires_at, 410 on expiry, versioned SQL migrations)",
@@ -137,7 +137,7 @@ shippedCards: [
 ],
 
 stackHighlighted: [
-  "Claude API (claude-sonnet-4-20250514, two-pass with user-initiated verify)",
+  "Claude API (Claude Sonnet, two-pass with user-initiated verify)",
   "Next.js 15 (App Router)",
   "Supabase (90-day session expiry, versioned migrations)",
 ],
@@ -155,7 +155,7 @@ whatThisDemonstrates: [
 ],
 
 honestSummary: {
-  technical: `Claude Sonnet (claude-sonnet-4-20250514) runs both the translate and verify calls. No Haiku default or model router. Zod validates incoming API request bodies. Claude JSON responses use manual validation with retry logic on transport failures, not parse errors. Rate limiting is applied to translate, verify, share (POST and GET), and parse routes. Supabase sessions use 90-day expiry with versioned SQL migrations. Expired links return 410. Voice input uses the Web Speech API with browser support checks and inline fallback messaging. PDF and .txt only, no OCR.`,
+  technical: `Claude Sonnet runs both the translate and verify calls. No Haiku default or model router. Zod validates incoming API request bodies. Claude JSON responses use manual validation with retry logic on transport failures, not parse errors. Rate limiting is applied to translate, verify, share (POST and GET), and parse routes. Supabase sessions use 90-day expiry with versioned SQL migrations. Expired links return 410. Voice input uses the Web Speech API with browser support checks and inline fallback messaging. PDF and .txt only, no OCR.`,
   product: `Every design constraint came from a clinical observation. No login because discharged patients will not create an account. Urgent items first because safety-critical information must not be buried. Twelve languages at launch because deferring is a choice about whose needs wait. Verification user-initiated rather than automatic because doubling latency on a free tool prioritizes pipeline over patient experience. The four pivot stories each represent a real product decision with a real tradeoff. The honest gaps are PDF scanned document support and a production model router for cost optimization at scale.`,
   design: `The interface is built for a specific emotional state: worried, possibly unfamiliar with the language on the page, needing information immediately. Reading level labels are Simple, Clear, and Complete because grade framing adds shame to a moment that already carries enough. The side-by-side view was built for a secondary use case: a caregiver verifying accuracy before presenting to a patient. Accessibility patterns including skip link, keyboard navigation, focus-to-results, and prefers-reduced-motion are launch requirements, not roadmap items.`,
 },
@@ -186,7 +186,7 @@ impactQuote: `This project exists because discharge instructions written at a 12
     items: [
       "Next.js 15, App Router, TypeScript",
       "Tailwind CSS v4",
-      "Claude API (claude-sonnet-4-20250514), with timeouts and retries",
+      "Claude API (Claude Sonnet), with timeouts and retries",
       "Zod validation and payload bounds on all routes",
       "Rate limiting on translate, verify, share, parse",
       "Supabase (90-day expires_at, 410 on expiry, versioned migrations)",
@@ -206,7 +206,7 @@ impactQuote: `This project exists because discharge instructions written at a 12
 ],
 
 stackHighlighted: [
-  "Claude API (claude-sonnet-4-20250514, two-pass with user-initiated verify)",
+  "Claude API (Claude Sonnet, two-pass with user-initiated verify)",
   "Next.js 15 (App Router)",
   "Supabase (90-day session expiry, versioned migrations)",
 ],
@@ -228,7 +228,7 @@ whatThisDemonstrates: [
 ],
 
 honestSummary: {
-  technical: `The two-pass Claude architecture is the technical proof of this case study. A single API call (claude-sonnet-4-20250514) translates. The second call verifies against the source for omissions. When the verify pass detects a material omission, a targeted third call re-translates only the affected section and renders the correction in place. The reading level system is three separate instruction sets, not a vocabulary filter. Urgent item extraction is a structured output contract. Zod validates all route inputs. Rate limiting is on translate, verify, share, and parse. Session expiry is 90 days with 410 on expired links. Versioned SQL migrations manage the Supabase schema.`,
+  technical: `The two-pass Claude architecture is the technical proof of this case study. A single API call (Claude Sonnet) translates. The second call verifies against the source for omissions. When the verify pass detects a material omission, a targeted third call re-translates only the affected section and renders the correction in place. The reading level system is three separate instruction sets, not a vocabulary filter. Urgent item extraction is a structured output contract. Zod validates all route inputs. Rate limiting is on translate, verify, share, and parse. Session expiry is 90 days with 410 on expired links. Versioned SQL migrations manage the Supabase schema.`,
   product: `Every design constraint came from a clinical observation, not a user story. No login because patients who have just been discharged will not create an account. Urgent items first because the most safety-critical information must not be buried. Twelve languages at launch because deferring any language is a product decision about whose needs matter. Verification auto-correction because giving the patient a list of omissions to act on transfers work back to the person this product exists to help. The honest gaps are image OCR and provider-facing mode, both in the status matrix and on the roadmap.`,
   design: `The interface is built for a specific emotional state: someone who is worried, possibly unfamiliar with the language on the page, and needs information immediately. Reading level labels are Simple, Clear, and Complete because grade numbers shame patients under stress. Verification badges (THOROUGH / PARTIAL / QUICK CHECK) give patients a legible signal without requiring them to understand what omission detection means. The side-by-side view was built for caregivers and care coordinators who need to verify before presenting to a patient. Accessibility is a launch requirement for a product whose users are frequently on assistive technology or under cognitive load.`,
 },
@@ -253,7 +253,7 @@ impactQuote: `This project exists because discharge instructions written at a 12
 ```bash
 grep -r "Vanguard" --include="*.ts" --include="*.tsx" --include="*.md" .
 grep -r "Web Speech API" --include="*.ts" --include="*.tsx" .
-grep -r "claude-sonnet-4\"" --include="*.ts" --include="*.tsx" .
+grep -rE "claude-(sonnet|haiku)-[0-9]" --include="*.ts" --include="*.tsx" .
 ```
 
 Any remaining hits need to be resolved before the fields below are added.
@@ -276,7 +276,7 @@ processStepsInteractive: [
   },
   {
     title: "SSE Streaming Architecture",
-    body: "One Claude API call (claude-sonnet-4-6) streams over SSE. The client accumulates the text stream and extracts complete JSON sections as braces close. Intent bar and channel panels fill progressively as each block arrives. The streaming implementation matches the product argument: one utterance, three channels, unfolding simultaneously.",
+    body: "One Claude API call (Claude Sonnet) streams over SSE. The client accumulates the text stream and extracts complete JSON sections as braces close. Intent bar and channel panels fill progressively as each block arrives. The streaming implementation matches the product argument: one utterance, three channels, unfolding simultaneously.",
   },
   {
     title: "Sentiment Theming System",
@@ -402,7 +402,7 @@ shippedCards: [
     category: "Infrastructure",
     items: [
       "Next.js 16, React 19, TypeScript, Tailwind CSS",
-      "Claude API (claude-sonnet-4-6), structured JSON, SSE streaming",
+      "Claude API (Claude Sonnet), structured JSON, SSE streaming",
       "OpenAI Whisper, TTS, Realtime",
       "Vercel",
     ],
@@ -410,7 +410,7 @@ shippedCards: [
 ],
 
 stackHighlighted: [
-  "Claude API (claude-sonnet-4-6, SSE streaming, progressive panel fill)",
+  "Claude API (Claude Sonnet, SSE streaming, progressive panel fill)",
   "OpenAI (Whisper · TTS · Realtime)",
   "data-sentiment CSS token architecture (five emotional state themes)",
 ],
@@ -429,7 +429,7 @@ whatThisDemonstrates: [
 ],
 
 honestSummary: {
-  technical: `The Claude API call (claude-sonnet-4-6) streams over SSE. The client accumulates the text stream and extracts complete JSON sections as braces close, allowing progressive panel fill without blocking. There is no server-side JSON repair pass. A final JSON.parse on the accumulated stream fails silently with no user-facing error state. That is the honest current implementation and it is in the status matrix. Voice uses MediaRecorder and OpenAI Whisper server-side via /api/transcribe, not Web Speech API. IVR audio uses OpenAI TTS via /api/speak with a Blob URL and HTMLAudioElement specifically for iOS Safari reliability. OpenAI Realtime manages a persistent WebSocket session for Live Call mode, a distinct architecture from the standard transcribe-then-analyze path.`,
+  technical: `The Claude API call (Claude Sonnet) streams over SSE. The client accumulates the text stream and extracts complete JSON sections as braces close, allowing progressive panel fill without blocking. There is no server-side JSON repair pass. A final JSON.parse on the accumulated stream fails silently with no user-facing error state. That is the honest current implementation and it is in the status matrix. Voice uses MediaRecorder and OpenAI Whisper server-side via /api/transcribe, not Web Speech API. IVR audio uses OpenAI TTS via /api/speak with a Blob URL and HTMLAudioElement specifically for iOS Safari reliability. OpenAI Realtime manages a persistent WebSocket session for Live Call mode, a distinct architecture from the standard transcribe-then-analyze path.`,
   product: `This project is built from a product brief: an enterprise conversational channels team that needed a designer who understood IVR, chatbot, and agent assist as a unified system. The six pivot stories each represent a real product decision with a real tradeoff: empty state, SSE streaming, iOS audio path, full-environment sentiment theming, mobile craft, and Live Call promotion. The design artifact page at /design-artifact is a second deliverable produced from the same build, demonstrating that this designer thinks about conversation architecture as a documentation problem, not just an implementation problem.`,
   design: `The CSS token architecture is the design centerpiece. Five named sentiment states, each driving a complete color system through a single data-sentiment attribute on the root. IBM Plex Sans for interface text, IBM Plex Mono for financial data and classification output. Navy #1B2E4B, teal #0891B2 as the base palette. The panel layout hierarchy reflects practitioner reading order: IVR at 44%, Chatbot and Agent Assist stacked on the right, NLU collapsible below. Mobile is a drawer, not a collapsed state. 44px touch targets, 100dvh, backdrop scrolling.`,
 },
@@ -478,7 +478,7 @@ processStepsInteractive: [
   },
   {
     title: "The Output Contract",
-    body: "Claude Sonnet 4 (claude-sonnet-4-20250514) with a typed JSON output contract via lib/claudeJsonWithRetry.ts. Source anchors are prompt-required and surfaced when returned; the Zod schema treats supportingEvidence as optional, not a hard validation gate. One structured repair turn fires before error state surfaces.",
+    body: "Claude Sonnet with a typed JSON output contract via lib/claudeJsonWithRetry.ts. Source anchors are prompt-required and surfaced when returned; the Zod schema treats supportingEvidence as optional, not a hard validation gate. One structured repair turn fires before error state surfaces.",
   },
   {
     title: "Compare Mode Architecture",
@@ -567,7 +567,7 @@ shippedCards: [
     items: [
       "Next.js 16, React 19, TypeScript",
       "Tailwind CSS v4 (utility base) + custom .fl-* CSS classes",
-      "Claude Sonnet 4 (claude-sonnet-4-20250514) throughout",
+      "Claude Sonnet throughout",
       "Zod schema validation",
       "pdf-lib, pptxgenjs (owned presentation layer)",
       "scripts/optimize-assets.mjs (Sharp media pipeline)",
@@ -579,7 +579,7 @@ shippedCards: [
 ],
 
 stackHighlighted: [
-  "Claude API (claude-sonnet-4-20250514, Zod-validated six-section contract, lib/claudeJsonWithRetry)",
+  "Claude API (Claude Sonnet, Zod-validated six-section contract, lib/claudeJsonWithRetry)",
   "pptxgenjs + pdf-lib (owned presentation layer, no Canva OAuth dependency)",
   "Supabase (financelens_sessions, 30-day TTL, 410 on expiry)",
 ],
@@ -599,7 +599,7 @@ whatThisDemonstrates: [
 ],
 
 honestSummary: {
-  technical: `Claude Sonnet 4 (claude-sonnet-4-20250514) is used for all analyze, compare, and briefing calls. No Haiku routing is implemented. Source anchors are prompt-required; supportingEvidence is optional in the Zod schema, not a hard validation gate. claudeJsonWithRetry fires one structured repair turn before error state surfaces. Compare mode uses a diff-aware system prompt, architecturally distinct from standard analysis. Presentation layer: Claude deck outline, pptxgenjs PPTX (Calibri for Office compatibility), pdf-lib PDF (WSJ Editorial typography), custom deck viewer at 30-day Supabase URLs with 410 on expiry. Media pipeline: scripts/optimize-assets.mjs produces hero.webp, og-image.jpg, and rasterized icons. UI is mostly custom .fl-* CSS; Tailwind provides the reset and utility base. metadataBase from NEXT_PUBLIC_SITE_URL.`,
+  technical: `Claude Sonnet is used for all analyze, compare, and briefing calls. No Haiku routing is implemented. Source anchors are prompt-required; supportingEvidence is optional in the Zod schema, not a hard validation gate. claudeJsonWithRetry fires one structured repair turn before error state surfaces. Compare mode uses a diff-aware system prompt, architecturally distinct from standard analysis. Presentation layer: Claude deck outline, pptxgenjs PPTX (Calibri for Office compatibility), pdf-lib PDF (WSJ Editorial typography), custom deck viewer at 30-day Supabase URLs with 410 on expiry. Media pipeline: scripts/optimize-assets.mjs produces hero.webp, og-image.jpg, and rasterized icons. UI is mostly custom .fl-* CSS; Tailwind provides the reset and utility base. metadataBase from NEXT_PUBLIC_SITE_URL.`,
   product: `The product hypothesis is that structured intelligence and summarization are different products. Five pivot decisions are documented in the process section: Canva to owned presentation layer, design exports to build pipeline, attribution as shipping criteria, share URLs as the unit of sharing (30-day TTL), and compare accordion as information reveal design. The honest gaps: source anchors are prompt-required but schema-optional, no streaming on analyze, no rate limiting before public traffic, no observability before monetization.`,
   design: `WSJ Editorial light has three distinct typeface roles: Fraunces for landing and display headings, Georgia for app and report surfaces, IBM Plex Mono for financial data and labels. The compare accordion layout is a product design decision: claim shifts and new language expanded by default because those carry the most analytical signal. All other sections show a summary line and item count in the collapsed header. PPTX uses Calibri because it is the Office-safe default, not the brand choice. The deck viewer scroll and full-screen modes serve different use cases: scroll for reading, full-screen for presenting.`,
 },
@@ -612,7 +612,7 @@ impactQuote: `The intelligence is in the delta. What changed from last quarter. 
 - `status` — confirm `"live"`
 - `embedUrl` and `liveUrl` — confirm `https://financelens-ai.vercel.app`
 - Any `processSteps` or descriptions saying "permanent URL" — update to "30-day share URL"
-- Any model reference saying "Haiku" — remove, standardize to claude-sonnet-4-20250514
+- Any dated model ID. FinanceLens uses Claude Sonnet for analyze, compare, and briefing. The analyze model can be set with ANTHROPIC_ANALYZE_MODEL.
 - Any "required field in schema" for source anchors — soften to "prompt-required, surfaced when present"
 - `tagline` — confirm "Financial documents, in plain English." is still accurate
 

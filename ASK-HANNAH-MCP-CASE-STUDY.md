@@ -181,7 +181,7 @@ The lesson: a portfolio MCP is still a product surface. If the next step is fuzz
 | Data layer | `hannah-data.ts` (compile-time) | Stateless by design; no database needed for read-only professional data |
 | Code organization | `src/lib`, `src/tool-handlers` | Shared helpers and tool handlers separated from the server entrypoint for safer iteration |
 | Input validation | Zod | Schema enforcement on all tool inputs before handler execution |
-| AI generation | Anthropic Messages API (models via env; Sonnet-class defaults for documents, Haiku-class default for JD JSON extract) | Resume and cover letter: validated **document JSON**, **Phase 3** fact checks, **Phase 4** Markdown or ATS plain serialization; optional JOB SIGNALS pre-pass; profile-owned resume header; `documentJson`, `textFormat`, `atsMode` on success; schema, JSON, and fact-drift error codes; retries; `jd_extract` + `generation` telemetry including `atsMode` (no posting body in logs) |
+| AI generation | Anthropic Messages API (models via env; Sonnet-class default, automatic Haiku-class fallback; optional overrides for resume, cover letter, and JD extract) | Resume and cover letter: validated **document JSON**, **Phase 3** fact checks, **Phase 4** Markdown or ATS plain serialization; optional JOB SIGNALS pre-pass; profile-owned resume header; `documentJson`, `textFormat`, `atsMode` on success; schema, JSON, and fact-drift error codes; retries; `jd_extract` + `generation` telemetry including `atsMode` (no posting body in logs) |
 | Deployment | Railway | Auto-deploy on push; free tier sufficient for a low-traffic professional tool; public URL with HTTPS |
 | MCP framework | @modelcontextprotocol/sdk | Official SDK; most compatible with evolving Claude.ai connector spec |
 

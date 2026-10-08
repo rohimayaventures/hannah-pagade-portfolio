@@ -18,7 +18,7 @@
 | **Role** | Conversation design, NLU architecture, product design, full-stack build |
 | **Timeline** | March 2026 |
 | **Key outcome** | A live conversational design lab demonstrating simultaneous multi-channel output, NLU architecture, sentiment-driven UI theming across five emotional states, OpenAI Realtime live call, and voice input via Whisper across IVR, Chatbot, and Agent Assist |
-| **Stack** | Next.js 16 · React 19 · TypeScript · Tailwind CSS · Claude API (claude-sonnet-4-6) · OpenAI (Whisper · TTS · Realtime) · Vercel |
+| **Stack** | Next.js 16 · React 19 · TypeScript · Tailwind CSS · Claude API (Claude Sonnet) · OpenAI (Whisper · TTS · Realtime) · Vercel |
 
 ---
 
@@ -72,7 +72,7 @@ Showing a confidence score alongside a threshold bar signals that this designer 
 
 ### The Claude API prompt architecture and SSE streaming
 
-One Claude API call (claude-sonnet-4-6) with a structured JSON output contract produces all channel outputs simultaneously, streamed over SSE. The client accumulates the text stream and extracts complete JSON sections as braces close. The intent bar and channel panels fill progressively as each block arrives, rather than waiting for one full response.
+One Claude API call (Claude Sonnet) with a structured JSON output contract produces all channel outputs simultaneously, streamed over SSE. The client accumulates the text stream and extracts complete JSON sections as braces close. The intent bar and channel panels fill progressively as each block arrives, rather than waiting for one full response.
 
 This alignment between implementation and product argument matters. The thesis is one utterance, many channels at once. A single blocking response hides that structure. Streaming makes the parallel outputs visible and improves perceived performance in reviews and demos. The same reasoning surfaces across IVR, Chatbot, Agent Assist, and NLU, not as a sequential reveal, but as one response unfolding in real time.
 
@@ -202,7 +202,7 @@ CSS token architecture. `[data-sentiment]` attribute cascades through all color 
 
 ### Infrastructure
 - Next.js 16, React 19, TypeScript, Tailwind CSS
-- Claude API (claude-sonnet-4-6), structured JSON output contract, SSE streaming
+- Claude API (Claude Sonnet), structured JSON output contract, SSE streaming
 - OpenAI Whisper (`/api/transcribe`), TTS (`/api/speak`), Realtime (`/api/realtime-session`)
 - Deployed on Vercel at clearchannel-vestara.vercel.app
 
@@ -212,7 +212,7 @@ CSS token architecture. `[data-sentiment]` attribute cascades through all color 
 
 | Component | Decision | Rationale |
 |---|---|---|
-| Claude model | claude-sonnet-4-6 | Current production model at build time. |
+| Claude model | Claude Sonnet | Current production model at build time. |
 | Simultaneous channel rendering | One Claude API call, one JSON contract, SSE streaming, progressive panel fill | The product thesis is one utterance, three channels simultaneously. SSE makes that parallel structure visible as it arrives. |
 | Layout hierarchy | IVR 44% / right panel 56% (Chatbot + Agent Assist stacked) / NLU collapsible below | Reflects practitioner reading order. Channels are primary. Architecture is the supporting evidence. |
 | Sentiment theming | `[data-sentiment]` CSS token architecture, five states, smooth transitions | Emotional state handling is an architectural commitment. The CSS system and the prompt override logic change from the same trigger. |
@@ -282,7 +282,7 @@ Enterprise conversational AI is never one channel. An investor who calls about a
 
 ### Process steps
 1. **The brief** — An enterprise conversational channels team needed a designer who understood IVR, chatbot, and agent assist as a system. I read that requirement as a product spec and built the tool that would make a hiring team say "she already understands our system." The 11 utterances were chosen deliberately: the edge cases that define the quality of a conversational architecture.
-2. **The architecture** — One Claude API call (claude-sonnet-4-6) streams over SSE. The client extracts complete JSON sections progressively. Intent bar and panels fill as each block arrives. The streaming implementation matches the product argument: one utterance, three channels, unfolding simultaneously.
+2. **The architecture** — One Claude API call (Claude Sonnet) streams over SSE. The client extracts complete JSON sections progressively. Intent bar and panels fill as each block arrives. The streaming implementation matches the product argument: one utterance, three channels, unfolding simultaneously.
 3. **The emotional state design** — Bereavement, fraud, and panic-selling are not edge cases in financial services. They are the interactions that define brand trust. The system prompt defines **three critical overrides** that fire before general intent classification: bereavement, fraud, and barge-in. Panic-selling and market anxiety are handled through the **MARKET_ANXIETY** intent plus **emotional sensitivity rules** (behavioral coaching, concerned sentiment)—the same product outcome as a fourth “override,” but not a fourth numbered block in the prompt. The `data-sentiment` architecture means these classifications do not just change the text in the panels. They change the color of everything on the screen.
 
 ### Process steps interactive (sidebar anchors)
@@ -302,10 +302,10 @@ Enterprise conversational AI is never one channel. An investor who calls about a
 - **Voice and audio:** MediaRecorder + OpenAI Whisper. OpenAI TTS for IVR audio playback. OpenAI Realtime for Live Call mode.
 - **SSE streaming:** Progressive panel fill. Intent bar populates before full output.
 - **Design artifact page:** `/design-artifact` with full NLU documentation, intent taxonomy, entity schema, channel routing matrix, and sentiment state map.
-- **Infrastructure:** Next.js 16, React 19, Claude API (claude-sonnet-4-6), OpenAI (Whisper, TTS, Realtime), Vercel.
+- **Infrastructure:** Next.js 16, React 19, Claude API (Claude Sonnet), OpenAI (Whisper, TTS, Realtime), Vercel.
 
 ### Stack highlighted
-Claude API (claude-sonnet-4-6, SSE streaming), OpenAI (Whisper · TTS · Realtime), sentiment-driven CSS token system (`data-sentiment`)
+Claude API (Claude Sonnet, SSE streaming), OpenAI (Whisper · TTS · Realtime), sentiment-driven CSS token system (`data-sentiment`)
 
 ### Stack standard
 Next.js 16, React 19, TypeScript, Tailwind CSS, Vercel
@@ -316,7 +316,7 @@ The bereavement utterance is the one that matters. The system suppresses the acc
 ### Honest summary
 
 **Technical understanding:**
-The Claude API call (claude-sonnet-4-6) streams over SSE. The client accumulates the text stream and extracts complete JSON sections as braces close, allowing progressive panel fill without a blocking wait. There is no server-side JSON repair pass. The current implementation does a final `JSON.parse` on the accumulated stream, and partial or failed output has no user-facing error state. That is the honest current implementation and it is in the status matrix. Voice uses MediaRecorder in the browser and OpenAI Whisper server-side via `/api/transcribe`, not Web Speech API. IVR audio uses OpenAI TTS via `/api/speak` with a Blob URL and `HTMLAudioElement` specifically for iOS Safari reliability. OpenAI Realtime manages a persistent WebSocket session for Live Call mode, a distinct architecture from the standard transcribe-then-analyze path.
+The Claude API call (Claude Sonnet) streams over SSE. The client accumulates the text stream and extracts complete JSON sections as braces close, allowing progressive panel fill without a blocking wait. There is no server-side JSON repair pass. The current implementation does a final `JSON.parse` on the accumulated stream, and partial or failed output has no user-facing error state. That is the honest current implementation and it is in the status matrix. Voice uses MediaRecorder in the browser and OpenAI Whisper server-side via `/api/transcribe`, not Web Speech API. IVR audio uses OpenAI TTS via `/api/speak` with a Blob URL and `HTMLAudioElement` specifically for iOS Safari reliability. OpenAI Realtime manages a persistent WebSocket session for Live Call mode, a distinct architecture from the standard transcribe-then-analyze path.
 
 **Product understanding:**
 This project is built from a product brief: an enterprise conversational channels team that needed a designer who understood IVR, chatbot, and agent assist as a unified system. I read that as a product spec and built the artifact that demonstrated all competencies simultaneously. The six pivot stories in Section 3 each represent a real product decision with a real tradeoff. The empty state, the SSE streaming, the IVR audio path, the sentiment token architecture, the welcome flow, and the Live Call promotion are all decisions that made the product more honest about what it claims to demonstrate.
